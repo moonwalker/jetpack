@@ -7,7 +7,7 @@ Webpack for Moonwalkers.
 Install:
 
 ```shell
-$ yarn global add jetpack
+$ yarn global add @moonwalker/jetpack
 ```
 
 Create a new project:
