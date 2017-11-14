@@ -2,28 +2,34 @@
 
 Webpack for Moonwalkers.
 
-## Usage
+## Quick Start
 
-### Install
+Install:
 
 ```shell
 $ yarn global add jetpack
 ```
 
-### Create a new project
+Create a new project:
 
 ```shell
-$ jetpack create myproject [template]
+$ jetpack create pojectname
 ```
 
-### Start dev server
+Working on the project:
 
 ```shell
-$ jetpack start
+$ cd pojectname
 ```
 
-### Build app for production
+Run dev server:
 
 ```shell
-$ jetpack build
+$ yarn start
+```
+
+Build for production:
+
+```shell
+$ yarn build
 ```
