@@ -1,0 +1,40 @@
+<!doctype html>
+<html amp lang="en">
+
+<head>
+    <title>Basic Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3bbe21" />
+    <meta name="description" content="" />
+    <meta property="og:site_name" content="Basic Example" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta property="fb:app_id" content="" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" sizes="192x192" href="/icons/android-chrome-192x192.png">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        WebFontConfig = {
+            google: {
+                families: ['Roboto:400,700']
+            }
+        };
+
+        (function(d) {
+            var wf = d.createElement('script'),
+                s = d.scripts[0];
+            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+</body>
+
+</html>

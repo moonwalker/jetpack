@@ -1,0 +1,25 @@
+{
+    "name": "basic",
+    "short_name": "basic",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "icons": [{
+            "src": "favicon.ico",
+            "type": "image/png",
+            "sizes": "64x64"
+        },
+        {
+            "src": "/static/icons/android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/static/icons/android-chrome-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
