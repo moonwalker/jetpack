@@ -13,13 +13,13 @@ $ yarn global add @moonwalker/jetpack
 Create a new project:
 
 ```shell
-$ jetpack create projectame
+$ jetpack create projectname
 ```
 
 Working on the project:
 
 ```shell
-$ cd projectame
+$ cd projectname
 ```
 
 Run dev server:
