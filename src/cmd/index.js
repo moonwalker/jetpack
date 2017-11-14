@@ -35,6 +35,8 @@ const version = () => {
 
 const help = () => {
   return `
+${name} — Webpack for Moonwalkers
+
 Usage: ${name} <command>
 
 Commands:
