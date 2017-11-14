@@ -17,11 +17,11 @@ module.exports = {
 
     const useYarn = yarnInstalled()
     console.log(`=> Installing dependencies (using ${useYarn ? 'yarn' : 'npm'})...`)
-    execSync(
-      `cd ${name} && \
-       ${useYarn ? 'yarn' : 'npm install'}`
-    )
-    // ${useYarn ? 'yarn add @moonwalker/jetpack@latest' : 'npm install --save @moonwalker/jetpack@latest'}`
+    execSync(`cd ${name} && ${useYarn ? 'yarn' : 'npm install'}`)
+    // ${useYarn ? 'yarn add @moonwalker/jetpack@latest' : 'npm install --save @moonwalker/jetpack@latest'}
+
+    console.log('=> Initializing git repo...')
+    execSync(`cd ${name} && git init`)
 
     console.timeEnd(`=> Project "${name}" created`)
   }
