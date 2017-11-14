@@ -9,14 +9,14 @@ module.exports = {
     }
 
     console.time(`=> Project "${name}" created`)
-
+    console.log()
     console.log('=> Creating new jetpack project...')
+
     const dest = resolve(process.cwd(), name)
     await copy(resolve(__dirname, '..', '..', 'examples', template), dest)
 
     const useYarn = yarnInstalled()
     console.log(`=> Installing dependencies (using ${useYarn ? 'yarn' : 'npm'})...`)
-
     execSync(
       `cd ${name} && \
        ${useYarn ? 'yarn' : 'npm install'}`

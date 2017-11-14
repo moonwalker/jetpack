@@ -30,7 +30,7 @@ module.exports = {
 const version = () => {
   const pkgp = resolve(__dirname, '..', '..', 'package.json')
   const pkg = JSON.parse(readFileSync(pkgp))
-  return `${name} version ${pkg.version}\n`
+  return `${name} version ${pkg.version}`
 }
 
 const help = () => {
@@ -43,6 +43,5 @@ Commands:
   build    build app for production
 
 Options:
-  -v, --version   print version information
-`
+  -v, --version   print version information`
 }
