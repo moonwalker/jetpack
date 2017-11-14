@@ -7,6 +7,7 @@ const pwd = (...p) => path.resolve(process.cwd(), ...p);
 module.exports = {
   banner: `[filebase] @ ${rev}`,
   config: require(pwd('src/config')),
+  context: path.resolve(__dirname, '..', '..', 'node_modules'),
   paths: {
     root: pwd(),
     src: pwd('src'),

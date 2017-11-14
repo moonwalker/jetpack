@@ -1,0 +1,18 @@
+.page {
+    max-width: 80%;
+    margin: auto;
+}
+
+.page>h2 {
+    padding: 0 1.5em 2em;
+}
+
+#mainBase {
+    background: linear-gradient(to right, #f73131 0%, #921ebc 100%);
+    color: #FFF;
+    bottom: 0;
+    left: 0;
+    padding: 15px 0;
+    position: absolute;
+    width: 100%;
+}

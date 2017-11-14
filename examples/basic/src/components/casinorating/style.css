@@ -1,0 +1,29 @@
+.stars {
+  color: #e3dc19;
+  font-size: 18px;
+  justify-content: unset;
+  padding: 0;
+  margin: 10px auto;
+  white-space: nowrap;
+}
+.stars .star_icon {
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+}
+.stars .star_icon.full:before,
+.stars .star_icon.half:before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+}
+.stars .star_icon.half:before {
+  width: 50%;
+  overflow: hidden;
+}
+
+@media all and (min-width: 768px) and (max-width: 900px) {
+.stars {
+  font-size: 14px;
+}
+}

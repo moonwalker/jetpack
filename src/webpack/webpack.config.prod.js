@@ -9,7 +9,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const getRoutes = require('./getRoutes');
-const { config, paths, banner, minimize } = require('./defaults');
+const { context, config, paths, banner, minimize } = require('./defaults');
 
 const env = {
   ENV: 'production',
@@ -17,7 +17,7 @@ const env = {
 }
 
 const clientConfig = {
-  context: path.resolve(__dirname, '../node_modules'),
+  context: context,
   devtool: 'source-map',
   entry: {
     main: paths.entry.main
@@ -123,7 +123,7 @@ const clientConfig = {
 }
 
 const renderConfig = {
-  context: path.resolve(__dirname, '../node_modules'),
+  context: context,
   target: 'node',
   entry: {
     render: paths.entry.render,

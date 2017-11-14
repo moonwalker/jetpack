@@ -1,0 +1,8 @@
+.small_hidden {
+    display: none;
+}
+@media all and (min-width: 768px) {
+    .small_hidden {
+        display: flex;
+    }
+}

@@ -1,0 +1,31 @@
+@media all and (min-width: 768px) {
+  .features {
+    width: 35%;
+  } 
+  .features ul {
+    list-style: none;
+    text-align: left;
+  }
+  .features ul li {
+    font-size: 14px;
+    padding-left: 15px;
+  }
+  .features ul li:first-of-type {
+    font-weight: 700;
+  }
+  .features ul li:before {
+    content: "\2713";
+    color: #3bbe21;
+    display: inline-block;
+    font-weight: 400;
+    margin-left: -15px;
+    width: 15px;
+  }
+  /* .features ul li:last-of-type:before {
+    content: "\00a0";
+  } */
+  .features ul li a {
+    color: #3bbe21;
+    font-weight: 700;
+  }
+}

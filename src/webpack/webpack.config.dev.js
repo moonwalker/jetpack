@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { paths } = require('./defaults');
+const { context, paths } = require('./defaults');
 
 const env = {
   ENV: 'development',
@@ -14,7 +14,7 @@ const env = {
 }
 
 const devConfig = {
-  context: path.resolve(__dirname, '../node_modules'),
+  context: context,
   devtool: 'cheap-module-eval-source-mapp',
   entry: {
     main: paths.entry.main
@@ -29,8 +29,7 @@ const devConfig = {
     extensions: ['.js', '.json', '.css', '.less', '.styl']
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         include: paths.src,
         loader: 'babel-loader'
@@ -39,8 +38,7 @@ const devConfig = {
         test: /\.(css|less|styl)$/,
         include: paths.src,
         use: ExtractTextPlugin.extract({
-          use: [
-            {
+          use: [{
               loader: 'css-loader',
               options: {
                 modules: true,

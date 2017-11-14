@@ -1,0 +1,9 @@
+.main {
+    background-color: #eee;
+    color: #000;
+}
+
+.main p {
+    text-align: left;
+    margin: 0 0 20px 0;
+}

@@ -1,0 +1,43 @@
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    color: #fff;
+    text-transform: uppercase;
+    min-height: 56px;
+    background: linear-gradient(to right, #f73131 0%, #921ebc 100%);
+}
+
+.header h1 {
+    float: left;
+    margin: 0;
+    padding: 0 15px;
+    font-size: 24px;
+    line-height: 56px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.header .site_icon {
+    height: 78px;
+    width: 78px;
+    top: 8px;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header .luna {
+    position: absolute;
+    top: 56px;
+    height: 43px;
+    width: 150px;
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+}
