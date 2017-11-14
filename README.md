@@ -7,7 +7,7 @@ Webpack for Moonwalkers.
 Install:
 
 ```shell
-$ yarn global add @moonwalker/jetpack
+$ npm install -g @moonwalker/jetpack
 ```
 
 Create a new project:
@@ -25,11 +25,11 @@ $ cd projectname
 Run dev server:
 
 ```shell
-$ yarn start
+$ npm start
 ```
 
 Build for production:
 
 ```shell
-$ yarn build
+$ npm run build
 ```
