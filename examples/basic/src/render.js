@@ -4,9 +4,7 @@ import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { StaticRouter as Router, matchPath } from 'react-router';
 
 import { App } from './app';
-import { flushHead } from './core/head';
-import initApollo from './core/apolloClient';
-import store from './core/store';
+import { flushHead, initApollo, store } from '@moonwalker/lifesupport';
 import config from './config'
 import routes from './routes';
 import views from './views';

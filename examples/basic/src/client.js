@@ -2,11 +2,8 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { initApollo, regSvcWorker, store } from '@moonwalker/lifesupport';
 import config from './config';
-import store from './core/store';
-import initApollo from './core/apolloClient';
-import regSvcWorker from './core/svcworker-handler';
 
 const initState = window.__INIT_STATE__ || {}
 

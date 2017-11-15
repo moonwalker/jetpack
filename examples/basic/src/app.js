@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import Layout from './components/layout';
+import { fmtLocale } from '@moonwalker/lifesupport';
 
 import './styles/html5reset-1.6.1.css';
 import './styles/style.css';
@@ -8,8 +9,6 @@ import './styles/style.css';
 import config from './config'
 import routes from './routes';
 import views from './views';
-
-import { fmtLocale } from './core/utils';
 
 const routeMap = () => {
   return routes.map((route, idx) => {
