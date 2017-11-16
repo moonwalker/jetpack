@@ -10,11 +10,15 @@ const reducer = (acc, val) => {
 module.exports = (apiUrl, product) => {
   return () => {
     const query = encodeURIComponent(`{sitemap(product:"${product}",includeLocale:true){market,routes}}`)
+    console.log('>>> GET:', `${apiUrl}?query=${query}`)
     return fetch(`${apiUrl}?query=${query}`)
       .then(res => res.json())
       .then(json => json.data.sitemap)
       .then(sitemap => {
-        if (!sitemap) throw new Error('sitemap is empty!')
+        if (!sitemap) {
+          console.log('>>> RES:', JSON.stringify(json))
+          throw new Error('sitemap is empty!')
+        }
         return sitemap.reduce(reducer, [])
       })
   }

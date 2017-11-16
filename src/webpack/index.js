@@ -12,12 +12,22 @@ const start = () => {
 }
 
 const build = () => {
+  console.log('>>> ENV:', process.env.ENV)
+  console.log('>>> API:', queryApiUrl)
+
+  console.log('>>> CFG:', 'renderConfig')
   webpack(renderConfig).run((err, stats) => {
-    if (err) return console.error(err)
+    if (err) {
+      return console.log('>>> ERR:', err)
+    }
     printStats(stats)
 
+    console.log()
+    console.log('>>> CFG:', 'clientConfig')
     webpack(clientConfig).run((err, stats) => {
-      if (err) return console.error(err)
+      if (err) {
+        console.log('>>> ERR:', err)
+      }
       printStats(stats)
     })
   })
