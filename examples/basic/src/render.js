@@ -12,7 +12,9 @@ import views from './views';
 export default async ({ route, assets }) => {
   const preState = {
     market: route.market || config.defaultMarket,
-    siteSettingId: route.siteSettingId || config.defaultSiteSettingId
+    siteSettingId: route.siteSettingId || config.defaultSiteSettingId,
+    queryApiUrl:  config.queryApiUrl,
+    defaultLocale: config.defaultLocale
   }
 
   // store

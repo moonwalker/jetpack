@@ -2,10 +2,10 @@ import dynamic from '../core/dynamic';
 import loading from '../components/loading'
 
 export default {
-  homeView: dynamic({
-    chunkName: 'views/home',
-    clientLoad: () => import('./home' /* webpackChunkName: 'views/home' */),
-    serverLoad: () => require.resolveWeak('./home'),
+  blogEntryView: dynamic({
+    chunkName: 'views/blogEntry',
+    clientLoad: () => import('./blogEntry' /* webpackChunkName: 'views/blogEntry' */),
+    serverLoad: () => require.resolveWeak('./blogEntry'),
     loading: loading
   })
 }

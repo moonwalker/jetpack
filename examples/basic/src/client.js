@@ -9,7 +9,9 @@ const initState = window.__INIT_STATE__ || {}
 
 store.init(initState[config.appStateKey], {
   market: config.defaultMarket,
-  siteSettingId: config.defaultSiteSettingId
+  siteSettingId: config.defaultSiteSettingId,
+  queryApiUrl:  config.queryApiUrl,
+  defaultLocale: config.defaultLocale
 })
 
 const client = initApollo(initState[config.apolloStateKey])

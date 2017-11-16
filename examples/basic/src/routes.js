@@ -2,6 +2,9 @@
 module.exports = [
   {
     path: '/:lang?',
-    view: 'homeView'
+    view: 'blogEntryView',
+    params:{
+      pageSlug: "home"
+    }
   }
 ]
