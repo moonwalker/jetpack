@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const { resolve } = require('path')
 const { spawn } = require('child_process')
 
-const { context } = require('./defaults')
+const { context, config } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prod')
 
 const start = () => {
@@ -13,7 +13,7 @@ const start = () => {
 
 const build = () => {
   console.log('>>> ENV:', process.env.ENV)
-  console.log('>>> API:', queryApiUrl)
+  console.log('>>> API:', config.queryApiUrl)
 
   console.log('>>> CFG:', 'renderConfig')
   webpack(renderConfig).run((err, stats) => {
