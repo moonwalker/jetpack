@@ -12,14 +12,24 @@ module.exports = (apiUrl, product) => {
     const query = encodeURIComponent(`{sitemap(product:"${product}",includeLocale:true){market,routes}}`)
     console.log('>>> GET:', `${apiUrl}?query=${query}`)
     return fetch(`${apiUrl}?query=${query}`)
-      .then(res => res.json())
-      .then(json => json.data.sitemap)
-      .then(sitemap => {
-        if (!sitemap) {
-          console.log('>>> RES:', JSON.stringify(json))
-          throw new Error('sitemap is empty!')
+      .then(res => {
+        if (res.ok) {
+          return res.json()
         }
+        console.log('>>> ERR:', res.status, res.statusText)
+      })
+      .then(json => {
+        if (json && json.data && json.data.sitemap) {
+          return json.data.sitemap
+        }
+        console.log('>>> ERR:', json)
+        throw new Error('invalid response format')
+      })
+      .then(sitemap => {
         return sitemap.reduce(reducer, [])
+      })
+      .catch(err => {
+        console.log('>>> ERR:', err)
       })
   }
 }
