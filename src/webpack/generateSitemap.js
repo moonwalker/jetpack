@@ -9,6 +9,7 @@ module.exports = (apiUrl) => {
         return res.json()
       }
       console.log('>>> ERR:', res.status, res.statusText)
+      throw new Error('faulty response')
     })
     .then(json => {
       if (json && json.data && json.data.generatedSitemap) {
