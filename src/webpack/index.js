@@ -4,6 +4,7 @@ const { spawn } = require('child_process')
 
 const { context, config } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prod')
+const generateSitemap = require('./generateSitemap');
 
 const start = () => {
   const cmd = resolve(context, '.bin', 'webpack-dev-server')
@@ -29,6 +30,9 @@ const build = () => {
         console.log('>>> ERR:', err)
       }
       printStats(stats)
+
+      console.log('>>> GEN:', 'sitemap')
+      generateSitemap(config.queryApiUrl)
     })
   })
 }
