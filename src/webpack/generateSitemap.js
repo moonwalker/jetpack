@@ -1,7 +1,7 @@
 const fetch = require('isomorphic-fetch')
 
 module.exports = (apiUrl) => {
-  const query = encodeURIComponent(`query{{generateSitemap(market:"all"){sitemaps}}}`)
+  const query = encodeURIComponent(`{generateSitemap(market:"all"){sitemaps}}`)
   console.log('>>> GET:', `${apiUrl}?query=${query}`)
   return fetch(`${apiUrl}?query=${query}`)
     .then(res => {
