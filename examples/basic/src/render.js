@@ -92,7 +92,6 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#3bbe21" />
-        <meta name="robots" content="index, nofollow" />
         ${head.meta.join('\n')}
         <meta property="og:site_name" content="${head.siteName}" />
         <meta property="og:url" content="${head.url}" />
