@@ -12,14 +12,14 @@ module.exports = (apiUrl) => {
       throw new Error('faulty response')
     })
     .then(json => {
-      if (json && json.data && json.data.generatedSitemap) {
-        return json.data.generatedSitemap
+      if (json && json.data && json.data.generatedFiles) {
+        return json.data.generatedFiles
       }
       console.log('>>> ERR:', json)
       throw new Error('invalid response format')
     })
-    .then(generatedSitemap => {
-      return generatedSitemap
+    .then(generatedFiles => {
+      return generatedFiles
     })
     .catch(err => {
       console.log('>>> ERR:', err)
