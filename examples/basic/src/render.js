@@ -100,7 +100,6 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="icon" sizes="192x192" href="/icons/android-chrome-192x192.png">
-        <link rel="canonical" href="${head.url}" />
         <link rel="preload" as="script" href="${assets.manifest.js}">
         <link rel="preload" as="script" href="${assets.vendor.js}">
         <link rel="preload" as="script" href="${assets.main.js}">
