@@ -108,7 +108,9 @@ const clientConfig = {
       globDirectory: paths.output.path,
       globPatterns: ['**/*.{html,js,css}'],
       swDest: paths.output.swDest,
-      dontCacheBustUrlsMatching: /\.\w{8}\./
+      dontCacheBustUrlsMatching: /\.\w{5}\./,
+      clientsClaim: true,
+      skipWaiting: true
     }),
     new CopyWebpackPlugin([{
       from: paths.public.root,
