@@ -7,7 +7,8 @@ const common = {
   defaultSiteSettingId: '35UnSWWbR6IuywWEKYKMUw',
   appStateKey: 'app',
   apolloStateKey: 'apl',
-  webfonts: 'Roboto:400,700'
+  webfonts: 'Roboto:400,700',
+  segmentWriteKey: "MmMxX6y6VxGOJeP1qOKRa6q6Csinyhqo"
 }
 
 //Added due to limitations in url patterns when using ssl
