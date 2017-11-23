@@ -20,7 +20,8 @@ const clientConfig = {
   context: context,
   devtool: 'source-map',
   entry: {
-    main: paths.entry.main
+    main: paths.entry.main,
+    webfonts: paths.entry.webfonts
   },
   output: {
     path: paths.output.path,

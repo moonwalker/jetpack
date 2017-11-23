@@ -13,7 +13,8 @@ module.exports = {
     src: pwd('src'),
     entry: {
       main: pwd('src', 'client.js'),
-      render: pwd('src', 'render.js')
+      render: pwd('src', 'render.js'),
+      webfonts: pwd('src', 'scripts', 'webfonts.js')
     },
     output: {
       path: pwd('build'),
