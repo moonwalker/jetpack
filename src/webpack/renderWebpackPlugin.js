@@ -45,11 +45,12 @@ module.exports = class {
     let i = 0;
     for (let route of routes) {
       render({ route, assets }).then(html => {
-        this.addToCompilation(compilation, route.path,
-          this.options.minimize
-            ? minify(html, this.options.minimize)
-            : html
-        );
+        if (html)
+          this.addToCompilation(compilation, route.path,
+            this.options.minimize
+              ? minify(html, this.options.minimize)
+              : html
+          );
         i++;
         if (i === routes.length) {
           callback();
