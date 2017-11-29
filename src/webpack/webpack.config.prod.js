@@ -17,6 +17,7 @@ const env = {
 }
 
 const clientConfig = {
+  bail: true,
   context: context,
   devtool: 'source-map',
   entry: {
@@ -126,6 +127,7 @@ const clientConfig = {
 }
 
 const renderConfig = {
+  bail: true,
   context: context,
   target: 'node',
   entry: {
