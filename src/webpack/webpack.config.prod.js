@@ -102,7 +102,7 @@ const clientConfig = {
       filename: paths.output.cssFilename
     }),
     new RenderWebpackPlugin({
-      routes: getRoutes(config.queryApiUrl, 'dreamz'),
+      routes: getRoutes(config.queryApiUrl, config.productName),
       render: () => require(paths.render.file),
       minimize: minimize.enabled ? minimize.minifyOptions : false
     }),
