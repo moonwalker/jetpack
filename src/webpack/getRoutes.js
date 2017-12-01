@@ -10,8 +10,9 @@ const reducer = (acc, val) => {
 module.exports = (apiUrl, product) => {
   return () => {
     const query = encodeURIComponent(`{sitemap(product:"${product}",includeLocale:true){market,routes}}`)
-    console.log('>>> GET:', `${apiUrl}?query=${query}`)
-    return fetch(`${apiUrl}?query=${query}`)
+    const url = `${apiUrl}?query=${query}`;
+    console.log('>>> GET:', url)
+    return fetch(url)
       .then(res => {
         if (res.ok) {
           return res.json()
