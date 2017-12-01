@@ -1,4 +1,5 @@
 const path = require('path');
+const async = require('async');
 const { minify } = require('html-minifier');
 
 module.exports = class {
@@ -42,8 +43,7 @@ module.exports = class {
     const render = this.getRender();
     const assets = this.collectAssets(compilation);
 
-    let i = 0;
-    for (let route of routes) {
+    async.eachSeries(routes, (route, cb) => {
       render({ route, assets }).then(html => {
         if (html)
           this.addToCompilation(compilation, route.path,
@@ -51,12 +51,9 @@ module.exports = class {
               ? minify(html, this.options.minimize)
               : html
           );
-        i++;
-        if (i === routes.length) {
-          callback();
-        }
+        cb();
       })
-    }
+    }, callback)
   }
 
   collectAssets(compilation) {

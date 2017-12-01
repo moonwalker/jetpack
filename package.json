@@ -1,6 +1,6 @@
 {
   "name": "@moonwalker/jetpack",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": "bin/jetpack.js",
@@ -8,6 +8,7 @@
     "start": "bin/jetpack.js"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
