@@ -45,12 +45,14 @@ module.exports = class {
 
     async.eachSeries(routes, (route, cb) => {
       render({ route, assets }).then(html => {
-        if (html)
-          this.addToCompilation(compilation, route.path,
+        if (html) {
+          const path = `/${route.market.toLowerCase()}/${route.path}`
+          this.addToCompilation(compilation, path,
             this.options.minimize
               ? minify(html, this.options.minimize)
               : html
           );
+        }
         cb();
       })
     }, callback)
