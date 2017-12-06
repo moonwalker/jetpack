@@ -21,12 +21,16 @@ const envConfig = {
   development: {
     queryApiUrl: 'http://localhost:50050/graphql',
     subsApiUrl: 'ws://localhost:50050/subscriptions',
-    authToken: 'cpl_token-dev'
+    authToken: 'cpl_token-dev',
+    launchpadUrl: `http://localhost:50055`,
+    launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   },
   devdocker: {
     queryApiUrl: 'http://localhost:8000/graphql',
     subsApiUrl: 'ws://localhost:8000/subscriptions',
-    authToken: 'cpl_token-dev'
+    authToken: 'cpl_token-dev',
+    launchpadUrl: `http://localhost:50055`,
+    launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   },
   //staging: {
   //  queryApiUrl: `https://staging-${apiPath}/graphql`,
@@ -36,12 +40,16 @@ const envConfig = {
   staging: {
     queryApiUrl: `https://${apiPath}/graphql`,
     subsApiUrl: `wss://${apiPath}/subscriptions`,
-    authToken: 'cpl_token'
+    authToken: 'cpl_token',
+    launchpadUrl: `https://launchpad.staging-${common.productName}.zone`,
+    launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   },
   production: {
     queryApiUrl: `https://${apiPath}/graphql`,
     subsApiUrl: `wss://${apiPath}/subscriptions`,
-    authToken: 'cpl_token'
+    authToken: 'cpl_token',
+    launchpadUrl: `https://launchpad.production-${common.productName}.zone`,
+    launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   }
 }
 
