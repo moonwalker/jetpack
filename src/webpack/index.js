@@ -3,13 +3,15 @@ const { resolve } = require('path')
 const { spawn } = require('child_process')
 
 const { context, config } = require('./defaults')
-const { renderConfig, clientConfig } = require('./webpack.config.prod')
+const { renderConfig, clientConfig } = require('./webpack.config.prd')
 const getSitemaps = require('./getSitemaps');
 
 const start = () => {
-  const cmd = resolve(context, '.bin', 'webpack-dev-server')
-  const cfg = resolve(__dirname, 'webpack.config.dev')
-  spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
+  spawnWebPack('webpack.config.dev', 'webpack-dev-server')
+}
+
+const stage = () => {
+  spawnWebPack('webpack.config.stg')
 }
 
 const build = () => {
@@ -33,27 +35,27 @@ const build = () => {
 
       // Call launchpad to generate sitemaps
       getSitemaps(config.launchpadUrl, config.launchpadToken)
-      .then(sitemaps => {
-        var sitemapdir = resolve(process.cwd(), 'build', 'sitemap')
-        if (!fs.existsSync(sitemapdir)){
-          fs.mkdirSync(sitemapdir);
-      }
-        for (i = 0; i < sitemaps.length; i++) { 
-          sitemap = sitemaps[i]
-          
-          // Save sitemap to disk
-          fs.writeFile(sitemapdir + '/' + sitemap.filename, sitemap.content, (err) => {
-            if (err) {
-              return console.log('>>> ERR:', err)
-            }
-          })
-        }
-      })
+        .then(sitemaps => {
+          var sitemapdir = resolve(process.cwd(), 'build', 'sitemap')
+          if (!fs.existsSync(sitemapdir)) {
+            fs.mkdirSync(sitemapdir);
+          }
+          for (i = 0; i < sitemaps.length; i++) {
+            sitemap = sitemaps[i]
+
+            // Save sitemap to disk
+            fs.writeFile(sitemapdir + '/' + sitemap.filename, sitemap.content, (err) => {
+              if (err) {
+                return console.log('>>> ERR:', err)
+              }
+            })
+          }
+        })
     })
   })
 }
 
-const printStats = stats => {
+const printStats = (stats) => {
   process.stdout.write(stats.toString({
     colors: true,
     modules: false,
@@ -63,4 +65,10 @@ const printStats = stats => {
   }))
 }
 
-module.exports = { start, build }
+const spawnWebPack = (cfgFile, bin = 'webpack') => {
+  const cmd = resolve(context, '.bin', bin)
+  const cfg = resolve(__dirname, cfgFile)
+  spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
+}
+
+module.exports = { start, stage, build }

@@ -5,7 +5,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const getRoutes = require('./getRoutes');
@@ -117,12 +116,7 @@ const clientConfig = {
     new CopyWebpackPlugin([{
       from: paths.public.root,
       ignore: ['index.html']
-    }]),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: 'bundle-analysis.html',
-    })
+    }])
   ]
 }
 

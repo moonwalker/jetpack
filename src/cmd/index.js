@@ -15,6 +15,10 @@ module.exports = {
       return require('./start').run()
     }
 
+    if (cmd === 'stage') {
+      return require('./stage').run()
+    }
+
     if (cmd === 'build') {
       return require('./build').run()
     }
