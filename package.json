@@ -1,6 +1,6 @@
 {
   "name": "@moonwalker/jetpack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": "bin/jetpack.js",
@@ -22,7 +22,7 @@
     "css-loader": "^0.28.7",
     "extract-css-chunks-webpack-plugin": "^2.0.18",
     "extract-text-webpack-plugin": "^3.0.2",
-    "fs-extra": "^4.0.3",
+    "fs-extra": "^5.0.0",
     "html-minifier": "^3.5.7",
     "html-webpack-plugin": "^2.30.1",
     "isomorphic-fetch": "^2.2.1",
