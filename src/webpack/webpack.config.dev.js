@@ -113,6 +113,11 @@ const devConfig = {
     watchContentBase: true,
     watchOptions: {
       ignored: /node_modules/
+    },
+    historyApiFallback: {
+      rewrites: [
+        { from: /(.*)/, to: paths.output.publicPath }
+      ],
     }
   }
 }
