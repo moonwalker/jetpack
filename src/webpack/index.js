@@ -1,3 +1,4 @@
+const fs = require('fs')
 const webpack = require('webpack')
 const { resolve } = require('path')
 const { spawn } = require('child_process')
