@@ -42,11 +42,10 @@ module.exports = class {
   renderRoutes(routes, compilation, callback) {
     const render = this.getRender();
     const assets = this.collectAssets(compilation);
-
     async.eachSeries(routes, (route, cb) => {
       render({ route, assets }).then(html => {
         if (html) {
-          const path = `/${route.market.toLowerCase()}/${route.path}`
+          const path = `/${route.path}`
           this.addToCompilation(compilation, path,
             this.options.minimize
               ? minify(html, this.options.minimize)
