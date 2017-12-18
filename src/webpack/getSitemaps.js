@@ -1,19 +1,18 @@
-const fetch = require('isomorphic-fetch')		
-		
-module.exports = (launchpadUrl, launchpadToken) => {		
-  const endpoint = encodeURIComponent(`/sitemap/generate/all`)		
-  
-  const token = `BEARER:${launchpadToken}`
+const fetch = require('isomorphic-fetch')
+
+module.exports = (launchpadUrl, launchpadToken) => {
+  const url = `${launchpadUrl}/sitemap/generate/all`
 
   const config = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token,
+      'Authorization': `Bearer ${launchpadToken}`,
     }
   }
 
-  return fetch(`${launchpadUrl}${endpoint}`, config)
+  console.log('>>> GET:', url)
+  return fetch(url, config)
     .then(res => {
       if (res.ok) {
         return res.json()
