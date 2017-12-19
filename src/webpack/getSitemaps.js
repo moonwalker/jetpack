@@ -3,7 +3,7 @@ const fetch = require('isomorphic-fetch')
 module.exports = (launchpadUrl, launchpadToken) => {
   const url = `${launchpadUrl}/sitemap/generate/all`
 
-  const config = {
+  const params = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -11,8 +11,8 @@ module.exports = (launchpadUrl, launchpadToken) => {
     }
   }
 
-  console.log('>>> GET:', url)
-  return fetch(url, config)
+  console.log('>>>', params.method, url)
+  return fetch(url, params)
     .then(res => {
       if (res.ok) {
         return res.json()

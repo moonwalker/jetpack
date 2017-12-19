@@ -7,7 +7,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
-const getRoutes = require('./getRoutes');
 const { context, config, paths, banner, minimize } = require('./defaults');
 
 const env = {
@@ -15,7 +14,7 @@ const env = {
   NODE_ENV: 'production'
 }
 
-const clientConfig = {
+const clientConfig = (routes) => ({
   bail: true,
   context: context,
   devtool: 'source-map',
@@ -101,7 +100,7 @@ const clientConfig = {
       filename: paths.output.cssFilename
     }),
     new RenderWebpackPlugin({
-      routes: getRoutes(config.queryApiUrl, config.productName),
+      routes: routes,
       render: () => require(paths.render.file),
       minimize: minimize.enabled ? minimize.minifyOptions : false
     }),
@@ -118,7 +117,7 @@ const clientConfig = {
       ignore: ['index.html']
     }])
   ]
-}
+})
 
 const renderConfig = {
   bail: true,

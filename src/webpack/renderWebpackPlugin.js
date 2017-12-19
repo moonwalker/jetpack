@@ -25,17 +25,17 @@ module.exports = class {
 
   getRender() {
     const render = this.options.render();
-    return render.hasOwnProperty('default')
-      ? render.default
-      : render;
+    return render.hasOwnProperty('default') ?
+      render.default :
+      render;
   }
 
   getRoutes() {
     const routes = this.options.routes;
-    return routes.hasOwnProperty('then')
-      ? routes
-      : new Promise(resolve => {
-        resolve(routes())
+    return routes.hasOwnProperty('then') ?
+      routes :
+      new Promise(resolve => {
+        resolve(typeof routes === 'function' ? routes() : routes)
       })
   }
 
@@ -47,9 +47,9 @@ module.exports = class {
         if (html) {
           const path = `/${route.path}`
           this.addToCompilation(compilation, path,
-            this.options.minimize
-              ? minify(html, this.options.minimize)
-              : html
+            this.options.minimize ?
+            minify(html, this.options.minimize) :
+            html
           );
         }
         cb();
@@ -99,10 +99,10 @@ module.exports = class {
     const name = path.join(route, this.options.filename);
 
     compilation.assets[name] = {
-      source: function () {
+      source: function() {
         return source;
       },
-      size: function () {
+      size: function() {
         return source.length;
       }
     };
