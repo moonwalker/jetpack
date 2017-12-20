@@ -5,7 +5,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
@@ -117,14 +116,6 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: paths.public.root }
     ]),
-    new WorkboxPlugin({
-      globDirectory: paths.output.path,
-      globPatterns: ['**/*.{html,js,css}'],
-      swDest: paths.output.swDest,
-      dontCacheBustUrlsMatching: /\.\w{5}\./,
-      clientsClaim: true,
-      skipWaiting: true
-    }),
     new CopyWebpackPlugin([{
       from: paths.public.root,
       ignore: ['index.html']
