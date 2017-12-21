@@ -41,7 +41,7 @@ const build = () => {
         // call launchpad to generate sitemaps
         getSitemaps(config.launchpadUrl, config.launchpadToken)
           .then(sitemaps => {
-            var sitemapdir = resolve(process.cwd(), 'build', 'sitemap')
+            var sitemapdir = resolve(process.cwd(), 'build')
             if (!fs.existsSync(sitemapdir)) {
               fs.mkdirSync(sitemapdir);
             }
