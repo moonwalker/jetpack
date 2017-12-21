@@ -1,7 +1,7 @@
 const fetch = require('isomorphic-fetch')
 
 module.exports = (launchpadUrl, launchpadToken) => {
-  const url = `${launchpadUrl}/sitemap/generate/all`
+  const url = `${launchpadUrl}/sitemap/generate`
 
   const params = {
     method: 'GET',
