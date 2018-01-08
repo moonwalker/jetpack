@@ -1,10 +1,14 @@
+const async = require('async')
 const fetch = require('isomorphic-fetch')
 
-const reducer = (acc, val) => {
-  const routes = val.routes.map(r => {
-    return { path: r, market: val.market, domain: val.domain, title: val.title, description: val.description }
-  })
-  return acc.concat(routes)
+const getReducer = (pathLocales, localeRegexp) => {
+  return function (acc, val) {
+    const routes = val.routes.map(r => {
+      const path = r.match(localeRegexp)[3]
+      return { path: r, market: val.market, pathLocales: pathLocales[path], domain: val.domain, title: val.title, description: val.description }
+    })
+    return acc.concat(routes)
+  }
 }
 
 module.exports = (apiUrl, product) => {
@@ -38,6 +42,25 @@ module.exports = (apiUrl, product) => {
       throw new Error('invalid response format')
     })
     .then(sitemap => {
-      return sitemap.reduce(reducer, [])
+      return new Promise(resolve => {
+        const localeRegexp = new RegExp('^/([a-z]{2}(-[a-z]{2})?)(.*)');
+        const pathLocaleMap = {}
+        async.forEach(sitemap, (stm, sCb) => {
+          async.forEach(stm.routes, (route, rCb) => {
+            const localeMatch = route.match(localeRegexp)
+            if (!localeMatch || !localeMatch.length) return rCb()
+            const locale = localeMatch[1]
+            const path = localeMatch[3]
+            if (!pathLocaleMap[path])
+              pathLocaleMap[path] = []
+
+            if (pathLocaleMap[path].indexOf(locale) === -1)
+              pathLocaleMap[path].push(locale)
+            rCb()
+          }, sCb)
+        }, () => {
+          resolve(sitemap.reduce(getReducer(pathLocaleMap, localeRegexp), []))
+        })
+      })
     })
 }
