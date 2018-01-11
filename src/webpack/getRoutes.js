@@ -4,8 +4,11 @@ const fetch = require('isomorphic-fetch')
 const getReducer = (pathLocales, localeRegexp) => {
   return function (acc, val) {
     const routes = val.routes.map(r => {
-      const path = r.match(localeRegexp)[3]
-      return { path: r, market: val.market, pathLocales: pathLocales[path], domain: val.domain, title: val.title, description: val.description }
+      const localeMatch = r.match(localeRegexp)
+      const locale = localeMatch[1]
+      const path = localeMatch[3]
+      const locales = pathLocales[path].filter(l => (l !== locale))
+      return { path: r, market: val.market, pathLocales: locales, domain: val.domain, title: val.title, description: val.description }
     })
     return acc.concat(routes)
   }
