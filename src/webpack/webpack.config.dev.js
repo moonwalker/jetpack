@@ -1,11 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const createJavascriptConfig = require('./config/javascript');
+const createCssConfig = require('./config/css');
+const createResolveConfig = require('./config/resolve');
+const createStylusConfig = require('./config/stylus');
+const createLessConfig = require('./config/less');
 const { context, paths } = require('./defaults');
 
 const env = {
@@ -26,53 +30,6 @@ const devConfig = {
     chunkFilename: paths.output.filename,
     publicPath: paths.output.publicPath
   },
-  resolve: {
-    extensions: ['.js', '.json', '.css', '.less', '.styl']
-  },
-  module: {
-    rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.(css|less|styl)$/,
-        include: paths.src,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: () => {
-                  autoprefixer({ browsers: ['last 2 versions'] });
-                }
-              }
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'stylus-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
-      }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin(paths.output.path, {
       root: paths.root
@@ -91,10 +48,6 @@ const devConfig = {
       minChunks: ({ resource }) => {
         return resource && /webpack/.test(resource);
       }
-    }),
-    new ExtractTextPlugin({
-      filename: paths.output.cssFilenameDev,
-      allChunks: true
     }),
     new HtmlWebpackPlugin({
       template: paths.public.template
@@ -122,4 +75,11 @@ const devConfig = {
   }
 }
 
-module.exports = devConfig
+module.exports = webpackMerge(
+  devConfig,
+  createJavascriptConfig(paths),
+  createCssConfig(paths),
+  createStylusConfig(),
+  createLessConfig(),
+  createResolveConfig(),
+)
