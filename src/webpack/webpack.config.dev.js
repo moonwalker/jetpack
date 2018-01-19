@@ -8,6 +8,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const createJavascriptConfig = require('./config/javascript');
 const createCssConfig = require('./config/css');
 const createResolveConfig = require('./config/resolve');
+const createStylusConfig = require('./config/stylus');
+const createLessConfig = require('./config/less');
 const { context, paths } = require('./defaults');
 
 const env = {
@@ -75,7 +77,9 @@ const devConfig = {
 
 module.exports = webpackMerge(
   devConfig,
-  createJavascriptConfig(paths)
+  createJavascriptConfig(paths),
   createCssConfig(paths),
+  createStylusConfig(),
+  createLessConfig(),
   createResolveConfig(),
 )
