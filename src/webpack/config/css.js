@@ -6,13 +6,14 @@ const TEST = /\.(css|less|styl)$/
 module.exports = (paths) => ({
   module: {
     rules: [
-      // Delivery rule
+      // Delivery rule (running after post transformations)
       {
         test: TEST,
         enforce: 'post',
         include: paths.src,
         loader: ExtractTextPlugin.extract({
-          use: []
+          fallback: 'style-loader',
+          use: [],
         })
       },
 
@@ -41,7 +42,8 @@ module.exports = (paths) => ({
   plugins: [
     new ExtractTextPlugin({
       filename: paths.output.cssFilenameDev,
-      allChunks: true
+      allChunks: true,
+      disable: true
     })
   ]
 })
