@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const { context, config, paths, banner, minimize } = require('./defaults');
@@ -93,7 +94,7 @@ const clientConfig = (routes) => ({
         return resource && /webpack/.test(resource);
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       sourceMap: true
     }),
     new ExtractCssChunks({

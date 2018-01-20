@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const getRoutes = require('./getRoutes');
@@ -103,7 +104,7 @@ module.exports = {
         return resource && /webpack/.test(resource);
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       sourceMap: true
     }),
     new ExtractTextPlugin({
