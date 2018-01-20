@@ -1,11 +1,13 @@
 {
   "name": "@moonwalker/jetpack",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": "bin/jetpack.js",
   "scripts": {
-    "start": "bin/jetpack.js"
+    "start": "bin/jetpack.js",
+    "incver": "npm version patch -m ':package: release %s'",
+    "bump": "npm run incver && git push --follow-tags && npm publish"
   },
   "dependencies": {
     "async": "^2.6.0",
