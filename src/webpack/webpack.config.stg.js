@@ -1,13 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const {
+  createJavascriptConfig,
+  createResolveConfig,
+  createCssConfig,
+  createStylusConfig,
+  createLessConfig,
+} = require('./config');
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const getRoutes = require('./getRoutes');
 const { context, config, paths, banner, minimize } = require('./defaults');
@@ -17,7 +23,7 @@ const env = {
   NODE_ENV: 'production'
 }
 
-module.exports = {
+const stageConfig = {
   bail: true,
   context: context,
   devtool: 'source-map',
@@ -30,55 +36,6 @@ module.exports = {
     filename: paths.output.filename,
     chunkFilename: paths.output.chunkFilename,
     publicPath: paths.output.publicPath
-  },
-  resolve: {
-    extensions: ['.js', '.json', '.css', '.less', '.styl']
-  },
-  module: {
-    rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.(css|less|styl)$/,
-        include: paths.src,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: () => {
-                  autoprefixer({
-                    browsers: ['last 2 versions']
-                  });
-                }
-              }
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'stylus-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
-      }
-    ]
   },
   plugins: [
     new CleanWebpackPlugin(paths.output.path, {
@@ -104,13 +61,6 @@ module.exports = {
         return resource && /webpack/.test(resource);
       }
     }),
-    new UglifyJsPlugin({
-      sourceMap: true
-    }),
-    new ExtractTextPlugin({
-      filename: paths.output.cssFilenameDev,
-      allChunks: true
-    }),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
@@ -128,3 +78,17 @@ module.exports = {
     })
   ]
 }
+
+module.exports = webpackMerge(
+  stageConfig,
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }),
+  createCssConfig({
+    include: paths.src,
+    filename: paths.output.cssFilename
+  }, env),
+  createStylusConfig(),
+  createLessConfig(),
+)

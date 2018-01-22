@@ -22,7 +22,6 @@ module.exports = {
       chunkFilename: 'static/js/[name].[chunkhash:5].js',
       filenameDev: 'static/js/[name].js',
       cssFilename: 'static/css/[name].[contenthash:5].css',
-      cssFilenameDev: 'static/css/[name].css',
       publicPath: '/',
       swDest: pwd('build', 'sw.js')
     },

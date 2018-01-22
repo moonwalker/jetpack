@@ -1,14 +1,19 @@
-module.exports = () => ({
-  module: {
-    rules: [
-      {
-        test: /\.styl$/,
-        enforce: 'pre',
-        loader: 'stylus-loader',
-        options: {
-          sourceMap: true
+module.exports = (options = {}) => {
+  const { include = [] } = options;
+
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.styl$/,
+          include,
+          enforce: 'pre',
+          loader: 'stylus-loader',
+          options: {
+            sourceMap: true
+          }
         }
-      }
-    ]
+      ]
+    }
   }
-})
+}

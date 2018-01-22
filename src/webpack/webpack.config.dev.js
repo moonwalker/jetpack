@@ -5,11 +5,13 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const createJavascriptConfig = require('./config/javascript');
-const createCssConfig = require('./config/css');
-const createResolveConfig = require('./config/resolve');
-const createStylusConfig = require('./config/stylus');
-const createLessConfig = require('./config/less');
+const {
+  createJavascriptConfig,
+  createResolveConfig,
+  createCssConfig,
+  createStylusConfig,
+  createLessConfig,
+} = require('./config');
 const { context, paths } = require('./defaults');
 
 const env = {
@@ -77,9 +79,13 @@ const devConfig = {
 
 module.exports = webpackMerge(
   devConfig,
-  createJavascriptConfig(paths),
-  createCssConfig(paths),
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }),
+  createCssConfig({
+    include: paths.src
+  }, env),
   createStylusConfig(),
   createLessConfig(),
-  createResolveConfig(),
 )

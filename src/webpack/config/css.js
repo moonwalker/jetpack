@@ -1,49 +1,58 @@
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const TEST = /\.(css|less|styl)$/
+module.exports = (options, env) => {
+  const {
+    include = [],
+    filename
+  } = options;
+  const { NODE_ENV } = env;
+  const test = /\.(css|less|styl)$/
 
-module.exports = (paths) => ({
-  module: {
-    rules: [
-      // Delivery rule (running after post transformations)
-      {
-        test: TEST,
-        enforce: 'post',
-        include: paths.src,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [],
-        })
-      },
+  return {
+    module: {
+      rules: [
+        // Delivery rule (running after post transformations)
+        {
+          test,
+          include,
+          enforce: 'post',
+          loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [],
+          })
+        },
 
-      // Post transformation rules
-      {
-        test: TEST,
-        loader: 'css-loader',
-        options: {
-          modules: true,
-          sourceMap: true,
-          importLoaders: 2
-        }
-      },
-      {
-        test: TEST,
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: () => {
-            autoprefixer({ browsers: ['last 2 versions'] });
+        // Post transformation rules
+        {
+          test,
+          include,
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 2
+          }
+        },
+        {
+          test,
+          include,
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true,
+            plugins: () => {
+              autoprefixer({ browsers: ['last 2 versions'] });
+            }
           }
         }
-      }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin({
+        filename,
+        allChunks: true,
+        disable: !filename
+      })
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: paths.output.cssFilenameDev,
-      allChunks: true,
-      disable: true
-    })
-  ]
-})
+  }
+}
