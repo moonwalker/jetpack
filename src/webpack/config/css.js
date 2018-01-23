@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = (options, env) => {
   const {
     include = [],
+    minimize = false,
     filename
   } = options;
 
@@ -30,6 +31,7 @@ module.exports = (options, env) => {
           include,
           loader: 'css-loader',
           options: {
+            minimize,
             modules: true,
             sourceMap: true,
             localIdentName: isDevelopment ?

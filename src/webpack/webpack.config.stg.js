@@ -14,8 +14,6 @@ const {
   createStylusConfig,
   createLessConfig,
 } = require('./config');
-const RenderWebpackPlugin = require('./renderWebpackPlugin');
-const getRoutes = require('./getRoutes');
 const { context, config, paths, banner, minimize } = require('./defaults');
 
 const env = {
@@ -43,7 +41,6 @@ const stageConfig = {
     }),
     new webpack.EnvironmentPlugin(env),
     new webpack.BannerPlugin(banner),
-    new webpack.NamedModulesPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -64,13 +61,13 @@ const stageConfig = {
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
-    new CopyWebpackPlugin([
-      { from: paths.public.root }
-    ]),
     new CopyWebpackPlugin([{
       from: paths.public.root,
       ignore: ['index.html']
     }]),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
@@ -87,6 +84,7 @@ module.exports = webpackMerge(
   }),
   createCssConfig({
     include: paths.src,
+    minimize: true,
     filename: paths.output.cssFilename
   }, env),
   createStylusConfig(),
