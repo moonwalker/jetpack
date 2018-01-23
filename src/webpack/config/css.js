@@ -6,7 +6,8 @@ module.exports = (options, env) => {
     include = [],
     filename
   } = options;
-  const { NODE_ENV } = env;
+
+  const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|less|styl)$/
 
   return {
@@ -31,7 +32,9 @@ module.exports = (options, env) => {
           options: {
             modules: true,
             sourceMap: true,
-            importLoaders: 2
+            localIdentName: isDevelopment ?
+              '[path][name]__[local]' :
+              '[hash:base64:5]'
           }
         },
         {
