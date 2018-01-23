@@ -1,4 +1,7 @@
 const autoprefixer = require('autoprefixer')
+const mqpacker = require('css-mqpacker')
+const stylelint = require('stylelint')
+const postcssReporter = require('postcss-reporter')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = (options, env) => {
@@ -45,9 +48,14 @@ module.exports = (options, env) => {
           loader: 'postcss-loader',
           options: {
             sourceMap: true,
-            plugins: () => {
-              autoprefixer({ browsers: ['last 2 versions'] });
-            }
+            plugins: [
+              stylelint(),
+              mqpacker(),
+              autoprefixer(),
+              postcssReporter({
+                clearAllMessages: true
+              })
+            ]
           }
         }
       ]
