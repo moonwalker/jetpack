@@ -7,12 +7,15 @@
   "scripts": {
     "start": "bin/jetpack.js",
     "incver": "npm version patch -m ':package: release %s'",
-    "bump": "npm run incver && git push --follow-tags && npm publish"
+    "bump": "npm run incver && git push --follow-tags && npm publish",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "async": "^2.6.0",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -23,6 +26,12 @@
     "copy-webpack-plugin": "^4.3.1",
     "css-loader": "^0.28.8",
     "css-mqpacker": "^6.0.1",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "extract-css-chunks-webpack-plugin": "^2.0.18",
     "extract-text-webpack-plugin": "^3.0.2",
     "friendly-errors-webpack-plugin": "^1.6.1",

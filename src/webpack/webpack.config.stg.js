@@ -81,7 +81,7 @@ module.exports = webpackMerge(
   createResolveConfig(),
   createJavascriptConfig({
     include: paths.src
-  }),
+  }, env),
   createCssConfig({
     include: paths.src,
     minimize: true,
