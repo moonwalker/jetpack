@@ -1,15 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const createJavascriptConfig = require('./config/javascript');
-const createCssConfig = require('./config/css');
-const createResolveConfig = require('./config/resolve');
-const createStylusConfig = require('./config/stylus');
-const createLessConfig = require('./config/less');
+const {
+  createJavascriptConfig,
+  createResolveConfig,
+  createCssConfig,
+  createStylusConfig,
+  createLessConfig,
+} = require('./config');
 const { context, paths } = require('./defaults');
 
 const env = {
@@ -27,28 +28,13 @@ const devConfig = {
   output: {
     path: paths.output.path,
     filename: paths.output.filenameDev,
-    chunkFilename: paths.output.filename,
+    chunkFilename: paths.output.filenameDev,
     publicPath: paths.output.publicPath
   },
   plugins: [
-    new CleanWebpackPlugin(paths.output.path, {
-      root: paths.root
-    }),
     new webpack.EnvironmentPlugin(env),
     new webpack.NamedModulesPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: ({ resource }) => {
-        return resource && /node_modules/.test(resource);
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: ({ resource }) => {
-        return resource && /webpack/.test(resource);
-      }
-    }),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
@@ -62,7 +48,6 @@ const devConfig = {
     contentBase: paths.public.root,
     publicPath: paths.output.publicPath,
     hot: true,
-    compress: true,
     watchContentBase: true,
     watchOptions: {
       ignored: /node_modules/
@@ -77,9 +62,13 @@ const devConfig = {
 
 module.exports = webpackMerge(
   devConfig,
-  createJavascriptConfig(paths),
-  createCssConfig(paths),
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }, env),
+  createCssConfig({
+    include: paths.src
+  }, env),
   createStylusConfig(),
   createLessConfig(),
-  createResolveConfig(),
 )

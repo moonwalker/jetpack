@@ -1,14 +1,19 @@
-module.exports = () => ({
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        enforce: 'pre',
-        loader: 'css-loader',
-        options: {
-          sourceMap: true
+module.exports = (options = {}) => {
+  const { include = [] } = options;
+
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.less$/,
+          include,
+          enforce: 'pre',
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
+          }
         }
-      }
-    ]
+      ]
+    }
   }
-})
+}

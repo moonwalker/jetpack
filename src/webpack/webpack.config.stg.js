@@ -1,15 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const RenderWebpackPlugin = require('./renderWebpackPlugin');
-const getRoutes = require('./getRoutes');
+const {
+  createJavascriptConfig,
+  createResolveConfig,
+  createCssConfig,
+  createStylusConfig,
+  createLessConfig,
+} = require('./config');
 const { context, config, paths, banner, minimize } = require('./defaults');
 
 const env = {
@@ -17,7 +21,7 @@ const env = {
   NODE_ENV: 'production'
 }
 
-module.exports = {
+const stageConfig = {
   bail: true,
   context: context,
   devtool: 'source-map',
@@ -31,62 +35,12 @@ module.exports = {
     chunkFilename: paths.output.chunkFilename,
     publicPath: paths.output.publicPath
   },
-  resolve: {
-    extensions: ['.js', '.json', '.css', '.less', '.styl']
-  },
-  module: {
-    rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.(css|less|styl)$/,
-        include: paths.src,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                sourceMap: true,
-                importLoaders: 2
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: () => {
-                  autoprefixer({
-                    browsers: ['last 2 versions']
-                  });
-                }
-              }
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'stylus-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
-      }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin(paths.output.path, {
       root: paths.root
     }),
     new webpack.EnvironmentPlugin(env),
     new webpack.BannerPlugin(banner),
-    new webpack.NamedModulesPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -104,23 +58,16 @@ module.exports = {
         return resource && /webpack/.test(resource);
       }
     }),
-    new UglifyJsPlugin({
-      sourceMap: true
-    }),
-    new ExtractTextPlugin({
-      filename: paths.output.cssFilenameDev,
-      allChunks: true
-    }),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
-    new CopyWebpackPlugin([
-      { from: paths.public.root }
-    ]),
     new CopyWebpackPlugin([{
       from: paths.public.root,
       ignore: ['index.html']
     }]),
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
@@ -128,3 +75,18 @@ module.exports = {
     })
   ]
 }
+
+module.exports = webpackMerge(
+  stageConfig,
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }, env),
+  createCssConfig({
+    include: paths.src,
+    minimize: true,
+    filename: paths.output.cssFilename
+  }, env),
+  createStylusConfig(),
+  createLessConfig(),
+)

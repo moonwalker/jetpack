@@ -1,49 +1,71 @@
 const autoprefixer = require('autoprefixer')
+const mqpacker = require('css-mqpacker')
+const stylelint = require('stylelint')
+const postcssReporter = require('postcss-reporter')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const TEST = /\.(css|less|styl)$/
+module.exports = (options, env) => {
+  const {
+    include = [],
+    minimize = false,
+    filename
+  } = options;
 
-module.exports = (paths) => ({
-  module: {
-    rules: [
-      // Delivery rule (running after post transformations)
-      {
-        test: TEST,
-        enforce: 'post',
-        include: paths.src,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [],
-        })
-      },
+  const isDevelopment = env.NODE_ENV === 'development';
+  const test = /\.(css|less|styl)$/
 
-      // Post transformation rules
-      {
-        test: TEST,
-        loader: 'css-loader',
-        options: {
-          modules: true,
-          sourceMap: true,
-          importLoaders: 2
-        }
-      },
-      {
-        test: TEST,
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: () => {
-            autoprefixer({ browsers: ['last 2 versions'] });
+  return {
+    module: {
+      rules: [
+        // Delivery rule (running after post transformations)
+        {
+          test,
+          include,
+          enforce: 'post',
+          loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [],
+          })
+        },
+
+        // Post transformation rules
+        {
+          test,
+          include,
+          loader: 'css-loader',
+          options: {
+            minimize,
+            modules: true,
+            sourceMap: true,
+            localIdentName: isDevelopment ?
+              '[path][name]__[local]' :
+              '[hash:base64:5]'
+          }
+        },
+        {
+          test,
+          include,
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true,
+            plugins: [
+              stylelint(),
+              mqpacker(),
+              autoprefixer(),
+              postcssReporter({
+                clearAllMessages: true
+              })
+            ]
           }
         }
-      }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin({
+        filename,
+        allChunks: true,
+        disable: !filename
+      })
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: paths.output.cssFilenameDev,
-      allChunks: true,
-      disable: true
-    })
-  ]
-})
+  }
+}
