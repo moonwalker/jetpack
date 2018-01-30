@@ -14,7 +14,7 @@ const {
   createStylusConfig,
   createLessConfig,
 } = require('./config');
-const { context, config, paths, banner, minimize } = require('./defaults');
+const { config, paths, banner, minimize } = require('./defaults');
 
 const env = {
   ENV: 'staging',
@@ -23,7 +23,7 @@ const env = {
 
 const stageConfig = {
   bail: true,
-  context: context,
+  context: paths.src,
   devtool: 'source-map',
   entry: {
     main: paths.entry.main,
