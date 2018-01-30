@@ -9,8 +9,9 @@ module.exports = {
     }
   },
   rules: {
-    'react/prop-types': false,
-    'react/jsx-filename-extension': false,
-    'jsx-a11y/label-has-for': false
+    'react/prop-types': 0,
+    'react/jsx-filename-extension': 0,
+    'jsx-a11y/label-has-for': 0,
+    'comma-dangle': 0
   }
 }

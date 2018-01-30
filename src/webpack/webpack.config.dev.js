@@ -11,7 +11,7 @@ const {
   createStylusConfig,
   createLessConfig,
 } = require('./config');
-const { context, paths } = require('./defaults');
+const { paths } = require('./defaults');
 
 const env = {
   ENV: 'development',
@@ -19,7 +19,7 @@ const env = {
 }
 
 const devConfig = {
-  context: context,
+  context: paths.src,
   devtool: 'cheap-module-eval-source-mapp',
   entry: {
     main: paths.entry.main,
