@@ -9,7 +9,9 @@ module.exports = (options) => {
   const workboxPlugin = new WorkboxPlugin({
     globDirectory,
     swDest,
-    globPatterns: ['**/*.{html,js,css}'],
+    globPatterns: [
+      'static/js/{main,vendor}.*.js'
+    ],
     dontCacheBustUrlsMatching: /\.\w{5}\./,
     clientsClaim: true,
     skipWaiting: true
