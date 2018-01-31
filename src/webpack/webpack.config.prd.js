@@ -1,21 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const { context, config, paths, banner, minimize } = require('./defaults');
+const { createServiceWorkerConfig } = require('./config');
 
 const env = {
   ENV: 'production',
   NODE_ENV: 'production'
 }
 
-const clientConfig = (routes) => ({
+const clientConfig = (routes) => webpackMerge({
   bail: true,
   context: context,
   devtool: 'source-map',
@@ -34,21 +35,21 @@ const clientConfig = (routes) => ({
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader'
-      },
+      test: /\.js$/,
+      include: paths.src,
+      loader: 'babel-loader'
+    },
       {
         test: /\.(css|less|styl)$/,
         include: paths.src,
         use: ExtractCssChunks.extract({
           use: [{
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 2
-              }
-            },
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2
+            }
+          },
             {
               loader: 'postcss-loader',
               options: {
@@ -105,20 +106,17 @@ const clientConfig = (routes) => ({
       render: () => require(paths.render.file),
       minimize: minimize.enabled ? minimize.minifyOptions : false
     }),
-    new WorkboxPlugin({
-      globDirectory: paths.output.path,
-      globPatterns: ['**/*.{html,js,css}'],
-      swDest: paths.output.swDest,
-      dontCacheBustUrlsMatching: /\.\w{5}\./,
-      clientsClaim: true,
-      skipWaiting: true
-    }),
     new CopyWebpackPlugin([{
       from: paths.public.root,
       ignore: ['index.html']
     }])
   ]
-})
+},
+  createServiceWorkerConfig({
+    globDirectory: paths.output.path,
+    swDest: paths.output.swDest,
+  })
+)
 
 const renderConfig = {
   bail: true,
