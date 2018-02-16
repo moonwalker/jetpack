@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/build
+    docker:
+      - image: node:alpine
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache git curl py-pip
+            pip install awscli
+      - run:
+          name: Install packages
+          command: |
+            yarn
+      - run:
+          name: Build and deploy
+          command: |
+              # staging build ...
+              ENV=staging yarn stage
+              # ... copy to s3, staging bucket/branch folder
+              aws s3 sync build s3://${STAGING_DOMAIN}/${CIRCLE_BRANCH} --delete --acl public-read
+              # production build ...
+              if [ -n "${PROD_BUILD}" ]; then
+                ENV=production yarn build
+                # ... copy to s3, builds bucket/revision folder
+                revision=$(echo $CIRCLE_SHA1 | cut -c -7)
+                aws s3 sync build s3://${BUILDS_DOMAIN}/${revision} --acl public-read
+                echo $(date) | aws s3 cp - s3://${BUILDS_DOMAIN}/.index/${revision}
+              fi
+      - run:
+          name: Purge Fastly cache
+          command: |
+            curl -X POST "https://api.fastly.com/service/${FASTLY_SERVICE_ID}/purge_all" \
+              -H "Fastly-Key:${FASTLY_KEY}"
+      - run:
+          name: Purge Cloudflare cache
+          command: |
+            curl -X DELETE "https://api.cloudflare.com/client/v4/zones/${CFL_STAGING_ZONE}/purge_cache" \
+              -H "X-Auth-Email: ${CFL_API_USER}" \
+              -H "X-Auth-Key: ${CF_KEY}" \
+              -H "Content-Type: application/json" \
+              -d '{"purge_everything":true}'
+
+            curl -X DELETE "https://api.cloudflare.com/client/v4/zones/${CFL_BUILDS_ZONE}/purge_cache" \
+              -H "X-Auth-Email: ${CFL_API_USER}" \
+              -H "X-Auth-Key: ${CF_KEY}" \
+              -H "Content-Type: application/json" \
+              -d '{"purge_everything":true}'
+
+      - run:
+          name: Create CNAME records
+          command: |
+            # staging
+            curl -X POST "https://api.cloudflare.com/client/v4/zones/${CFL_STAGING_ZONE}/dns_records" \
+              -H "X-Auth-Email: ${CFL_API_USER}" \
+              -H "X-Auth-Key: ${CF_KEY}" \
+              -H "Content-Type: application/json" \
+              -d ''{\"type\":\"CNAME\",\"name\":\"${CIRCLE_BRANCH}.${STAGING_DOMAIN}\",\"content\":\"${STAGING_DOMAIN}.global.prod.fastly.net\",\"ttl\":1,\"proxied\":true}''
+            # production builds
+            if [ -n "${PROD_BUILD}" ]; then
+              curl -X POST "https://api.cloudflare.com/client/v4/zones/${CFL_BUILDS_ZONE}/dns_records" \
+                -H "X-Auth-Email: ${CFL_API_USER}" \
+                -H "X-Auth-Key: ${CF_KEY}" \
+                -H "Content-Type: application/json" \
+                -d ''{\"type\":\"CNAME\",\"name\":\"$(echo $CIRCLE_SHA1 | cut -c -7).${BUILDS_DOMAIN}\",\"content\":\"${BUILDS_DOMAIN}.global.prod.fastly.net\",\"ttl\":1,\"proxied\":true}''
+            fi
