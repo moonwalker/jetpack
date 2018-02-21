@@ -22,7 +22,8 @@ const clientConfig = (routes) => webpackMerge({
   devtool: 'source-map',
   entry: {
     main: paths.entry.main,
-    webfonts: paths.entry.webfonts
+    webfonts: paths.entry.webfonts,
+    analytics: paths.entry.analytics
   },
   output: {
     path: paths.output.path,
