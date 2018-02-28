@@ -15,7 +15,7 @@ module.exports = {
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js'),
       webfonts: pwd('src', 'scripts', 'webfonts.js'),
-      analytics: pwd('src', 'scripts', 'segment.js')
+      analytics: pwd('src', 'scripts', 'analytics.js')
     },
     output: {
       path: pwd('build'),

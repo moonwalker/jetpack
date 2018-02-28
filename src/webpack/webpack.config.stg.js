@@ -29,7 +29,7 @@ const stageConfig = {
   entry: {
     main: paths.entry.main,
     webfonts: paths.entry.webfonts,
-    analytics: paths.entry.analytics
+    segment: paths.entry.analytics
   },
   output: {
     path: paths.output.path,
