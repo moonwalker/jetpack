@@ -9,7 +9,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const { context, config, paths, banner, minimize } = require('./defaults');
-const { createServiceWorkerConfig } = require('./config');
+const {
+  createFileConfig,
+  createServiceWorkerConfig
+} = require('./config');
 
 const env = {
   ENV: 'production',
@@ -113,13 +116,14 @@ const clientConfig = (routes) => webpackMerge({
     }])
   ]
 },
+  createFileConfig({ context: paths.src }, env),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
   })
 )
 
-const renderConfig = {
+const renderConfig = webpackMerge({
   bail: true,
   context: context,
   target: 'node',
@@ -165,6 +169,7 @@ const renderConfig = {
       maxChunks: 1
     })
   ]
-}
+},
+createFileConfig({ context: paths.src, emitFile: false }, env));
 
 module.exports = { renderConfig, clientConfig }

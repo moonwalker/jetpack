@@ -10,6 +10,7 @@ const {
   createCssConfig,
   createStylusConfig,
   createLessConfig,
+  createFileConfig
 } = require('./config');
 const { paths } = require('./defaults');
 
@@ -72,4 +73,5 @@ module.exports = webpackMerge(
   }, env),
   createStylusConfig(),
   createLessConfig(),
+  createFileConfig({ context: paths.src }, env)
 )

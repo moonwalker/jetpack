@@ -4,3 +4,4 @@ module.exports.createResolveConfig = require('./resolve');
 module.exports.createStylusConfig = require('./stylus');
 module.exports.createLessConfig = require('./less');
 module.exports.createServiceWorkerConfig = require('./service-worker');
+module.exports.createFileConfig = require('./file');
