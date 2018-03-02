@@ -18,7 +18,7 @@ const getSitemapRoutes = (pathLocales, product) => {
 
 module.exports = (apiUrl, product) => {
   const payload = {
-    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true) { sitemaps { marketObj { code, defaultLanguage } localeRoutes } product { apiKeys } routeLocales { route, locales } } }`
+    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code, defaultLanguage } localeRoutes } product { apiKeys } routeLocales { route, locales } } }`
   }
 
   const params = {
