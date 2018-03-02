@@ -1,22 +1,24 @@
 const async = require('async')
 const fetch = require('isomorphic-fetch')
 
-const getReducer = (pathLocales, localeRegexp) => {
-  return function (acc, val) {
-    const routes = val.routes.map(r => {
-      const localeMatch = r.match(localeRegexp)
-      const locale = localeMatch[1]
-      const path = localeMatch[3]
-      const locales = pathLocales[path].filter(l => (l !== locale))
-      return { path: r, market: val.market, pathLocales: locales, domain: val.domain, title: val.title, description: val.description }
+const getSitemapRoutes = (pathLocales, product) => {
+  const localeRegexp = new RegExp('^/([a-z]{2}(-[a-z]{2})?)(.*)');
+  return function(sitemap, cb) {
+    async.map(sitemap.localeRoutes, (r, rCb) => {
+      const localeMatch = r.match(localeRegexp);
+      const locale = localeMatch[1];
+      const path = `/${localeMatch[3]}/`.replace(/\/\//g, '\/');
+      const locales = pathLocales[path].filter(l => (l !== locale));
+      rCb(null, { path: r, market: sitemap.marketObj, pathLocales: locales, domain: sitemap.domain, title: sitemap.title, description: sitemap.description, apiKeys: JSON.parse(product.apiKeys) });
+    }, (_, routes) => {
+      cb(null, routes);
     })
-    return acc.concat(routes)
   }
 }
 
 module.exports = (apiUrl, product) => {
   const payload = {
-    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true) { market, routes } }`
+    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true) { sitemaps { marketObj { code, defaultLanguage } localeRoutes } product { apiKeys } routeLocales { route, locales } } }`
   }
 
   const params = {
@@ -46,23 +48,14 @@ module.exports = (apiUrl, product) => {
     })
     .then(sitemap => {
       return new Promise(resolve => {
-        const localeRegexp = new RegExp('^/([a-z]{2}(-[a-z]{2})?)(.*)');
-        const pathLocaleMap = {}
-        async.forEach(sitemap, (stm, sCb) => {
-          async.forEach(stm.routes, (route, rCb) => {
-            const localeMatch = route.match(localeRegexp)
-            if (!localeMatch || !localeMatch.length) return rCb()
-            const locale = localeMatch[1]
-            const path = localeMatch[3]
-            if (!pathLocaleMap[path])
-              pathLocaleMap[path] = []
-
-            if (pathLocaleMap[path].indexOf(locale) === -1)
-              pathLocaleMap[path].push(locale)
-            rCb()
-          }, sCb)
+        const pathLocales = {};
+        async.forEach(sitemap.routeLocales, (r, rCb) => {
+          pathLocales[r.route] = r.locales;
+          rCb();
         }, () => {
-          resolve(sitemap.reduce(getReducer(pathLocaleMap, localeRegexp), []))
+          async.concat(sitemap.sitemaps, getSitemapRoutes(pathLocales, sitemap.product), (_, routes) => {
+            resolve(routes);
+          })
         })
       })
     })

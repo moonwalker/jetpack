@@ -30,7 +30,6 @@ const build = () => {
       }
       printStats(stats)
 
-      console.log()
       console.log('>>> CFG:', 'clientConfig')
       webpack(clientConfig(routes)).run((err, stats) => {
         if (err) {
@@ -74,6 +73,7 @@ const printStats = (stats) => {
     chunks: false,
     chunkModules: false
   }))
+  process.stdout.write('\n')
 }
 
 const spawnWebPack = (cfgFile, bin = 'webpack') => {
