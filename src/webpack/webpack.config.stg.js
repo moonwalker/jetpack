@@ -14,6 +14,7 @@ const {
   createStylusConfig,
   createLessConfig,
   createServiceWorkerConfig,
+  createFileConfig
 } = require('./config');
 const { config, paths, banner, minimize } = require('./defaults');
 
@@ -91,6 +92,7 @@ module.exports = webpackMerge(
   }, env),
   createStylusConfig(),
   createLessConfig(),
+  createFileConfig({ context: paths.src }, env),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
