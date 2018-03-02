@@ -1,34 +1,39 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { StaticRouter as Router, matchPath } from 'react-router';
 
 import { App } from './app';
-import { flushHead, initApollo, store } from '@moonwalker/lifesupport';
+import { ApolloProvider, fetchRoutes, flushHead, getDataFromTree, initApollo, store } from '@moonwalker/lifesupport';
 import config from './config'
-import routes from './routes';
 import views from './views';
 
 export default async ({ route, assets }) => {
   const preState = {
-    market: route.market || config.defaultMarket,
-    siteSettingId: route.siteSettingId || config.defaultSiteSettingId,
-    queryApiUrl:  config.queryApiUrl,
-    defaultLocale: config.defaultLocale
+    marketCode: route.market.code || config.defaultMarket,
+    queryApiUrl: config.queryApiUrl,
+    defaultLocale: route.market.defaultLanguage || config.defaultLocale,
+    pathLocales: route.pathLocales || config.pathLocales,
+    apiKeys: route.apiKeys || { webfontConfig: { google: { families: [`${config.webfonts}`] } } }
   }
 
   // store
   store.init(preState)
 
   // apollo
-  const client = initApollo();
+  const client = initApollo(preState);
+
+  //routes
+  const routes = await fetchRoutes(client, route.market.code);
+  store.set('routes', routes);
 
   // render
   const context = {};
+  process.stdout.clearLine()
+  process.stdout.write(`>>> render: ${route.path}\r`)
   const appMarkup = await renderToStringWithData(
     <ApolloProvider client={client}>
       <Router location={route.path} context={context}>
-        <App />
+        <App routes={routes} />
       </Router>
     </ApolloProvider>
   );
@@ -43,7 +48,9 @@ export default async ({ route, assets }) => {
   const head = flushHead();
 
   // assets
-  const view = getRouteView(route);
+  const view = getRouteView(routes, route);
+  if (!view || !views[view]) return null;
+
   const { chunkName } = views[view];
   const cssChunks = getCssChunks({ assets, chunkName });
 
@@ -61,13 +68,14 @@ const renderToStringWithData = (component) => {
   return getDataFromTree(component).then(() => renderToString(component))
 }
 
-const getRouteView = route => {
+const getRouteView = (routes, route) => {
   for (let r of routes) {
     const match = matchPath(route.path, {
-      path: r.path
+      path: r.path,
+      exact: true
     });
     if (match) {
-      return r.view || ''
+      return r.view
     }
   }
 }
@@ -110,6 +118,9 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
       <body>
         <div id="root">${appMarkup}</div>
         <script>
+        !function(){window.PostMessage=window.PostMessage||function(){(window.PostMessage.queue=window.PostMessage.queue||[]).push({message:{type:arguments[0],data:arguments[1]},origin:arguments[2]})},window.addEventListener("message",function(e){var s=function(e){try{var s=JSON.parse(e);if("object"==typeof s)return s}catch(e){}return!1}(e.data);s&&PostMessage(s.type,s.data,e.source)})}();
+        </script>
+        <script>
           window.__INIT_STATE__ = ${stringify(initState)}
           window.__CSS_CHUNKS__ = ${stringify(cssChunks)}
         </script>
@@ -117,7 +128,7 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
         <script defer src="${assets.vendor.js}"></script>
         <script defer src="${assets.main.js}"></script>
         <script defer src="${assets.webfonts.js}"></script>
-        <script defer src="${assets.analytics.js}"></script>
+        <script defer src="${assets.segment.js}"></script>
       </body>
     </html>`;
 }
