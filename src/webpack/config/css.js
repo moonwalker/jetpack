@@ -8,56 +8,60 @@ module.exports = (options, env) => {
   const {
     include = [],
     minimize = false,
-    filename
+    node = false,
+    filename,
   } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|less|styl)$/;
 
+  const deliveryRule = {
+    test,
+    include,
+    enforce: 'post',
+    loader: ExtractTextPlugin.extract({
+      fallback: node ? '' : 'style-loader',
+      use: [],
+    })
+  };
+
+  const transformCssRule = {
+    test,
+    include,
+    loader: node ? 'css-loader/locals' : 'css-loader',
+    options: {
+      minimize,
+      modules: true,
+      sourceMap: true,
+      localIdentName: isDevelopment ?
+        '[path][name]__[local]' :
+        '[hash:base64:5]'
+    }
+  };
+
+  const transfromPostCssRule = {
+    test,
+    include,
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true,
+      plugins: [
+        stylelint(),
+        mqpacker(),
+        autoprefixer(),
+        postcssReporter({
+          clearAllMessages: true
+        })
+      ]
+    }
+  };
+
   return {
     module: {
       rules: [
-        // Delivery rule (running after post transformations)
-        {
-          test,
-          include,
-          enforce: 'post',
-          loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [],
-          })
-        },
-
-        // Post transformation rules
-        {
-          test,
-          include,
-          loader: 'css-loader',
-          options: {
-            minimize,
-            modules: true,
-            sourceMap: true,
-            localIdentName: isDevelopment ?
-              '[path][name]__[local]' :
-              '[hash:base64:5]'
-          }
-        },
-        {
-          test,
-          include,
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true,
-            plugins: [
-              stylelint(),
-              mqpacker(),
-              autoprefixer(),
-              postcssReporter({
-                clearAllMessages: true
-              })
-            ]
-          }
-        }
+        deliveryRule,
+        transformCssRule,
+        transfromPostCssRule,
       ]
     },
     plugins: [

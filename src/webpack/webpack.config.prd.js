@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -15,6 +13,9 @@ const {
 } = require('./defaults');
 const {
   createFileConfig,
+  createCssConfig,
+  createStylusConfig,
+  createLessConfig,
   createServiceWorkerConfig
 } = require('./config');
 
@@ -43,41 +44,12 @@ const clientConfig = routes => webpackMerge(
       extensions: ['.js', '.json', '.css', '.less', '.styl']
     },
     module: {
-      rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader?cacheDirectory'
-      },
-      {
-        test: /\.(css|less|styl)$/,
-        include: paths.src,
-        use: ExtractCssChunks.extract({
-          use: [{
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => {
-                autoprefixer({
-                  browsers: ['last 2 versions']
-                });
-              }
-            }
-          },
-          {
-            loader: 'less-loader'
-          },
-          {
-            loader: 'stylus-loader'
-          }
-          ]
-        })
-      }
+      rules: [
+        {
+          test: /\.js$/,
+          include: paths.src,
+          loader: 'babel-loader?cacheDirectory'
+        },
       ]
     },
     plugins: [
@@ -105,9 +77,6 @@ const clientConfig = routes => webpackMerge(
         cache: true,
         parallel: true
       }),
-      new ExtractCssChunks({
-        filename: paths.output.cssFilename
-      }),
       new RenderWebpackPlugin({
         routes,
         render: () => require(paths.render.file), // eslint-disable-line
@@ -119,6 +88,13 @@ const clientConfig = routes => webpackMerge(
       }])
     ]
   },
+  createCssConfig({
+    include: paths.src,
+    minimize: true,
+    filename: paths.output.cssFilename
+  }, env),
+  createStylusConfig(),
+  createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
@@ -147,22 +123,7 @@ const renderConfig = webpackMerge(
         test: /\.js$/,
         include: paths.src,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.(css|less)$/,
-        include: paths.src,
-        use: [{
-          loader: 'css-loader/locals',
-          options: {
-            modules: true
-          }
-        },
-        {
-          loader: 'less-loader'
-        }
-        ]
-      }
-      ]
+      }]
     },
     plugins: [
       new CleanWebpackPlugin(paths.render.path, {
@@ -174,7 +135,16 @@ const renderConfig = webpackMerge(
       })
     ]
   },
-  createFileConfig({ context: paths.src, emitFile: false }, env)
+  createCssConfig({
+    include: paths.src,
+    node: true,
+  }, env),
+  createStylusConfig(),
+  createLessConfig(),
+  createFileConfig({
+    context: paths.src,
+    emitFile: false
+  }, env)
 );
 
 module.exports = { renderConfig, clientConfig };
