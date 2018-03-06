@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -17,7 +16,7 @@ const { paths } = require('./defaults');
 const env = {
   ENV: 'development',
   NODE_ENV: 'development'
-}
+};
 
 const devConfig = {
   context: paths.src,
@@ -60,7 +59,7 @@ const devConfig = {
       ],
     }
   }
-}
+};
 
 module.exports = webpackMerge(
   devConfig,
@@ -74,4 +73,4 @@ module.exports = webpackMerge(
   createStylusConfig(),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env)
-)
+);

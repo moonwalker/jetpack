@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
@@ -8,7 +7,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
-const { context, config, paths, banner, minimize } = require('./defaults');
+const {
+  context,
+  paths,
+  banner,
+  minimize
+} = require('./defaults');
 const {
   createFileConfig,
   createServiceWorkerConfig
@@ -17,11 +21,12 @@ const {
 const env = {
   ENV: 'production',
   NODE_ENV: 'production'
-}
+};
 
-const clientConfig = (routes) => webpackMerge({
+const clientConfig = routes => webpackMerge(
+  {
     bail: true,
-    context: context,
+    context,
     devtool: 'source-map',
     entry: {
       main: paths.entry.main,
@@ -39,40 +44,40 @@ const clientConfig = (routes) => webpackMerge({
     },
     module: {
       rules: [{
-          test: /\.js$/,
-          include: paths.src,
-          loader: 'babel-loader?cacheDirectory'
-        },
-        {
-          test: /\.(css|less|styl)$/,
-          include: paths.src,
-          use: ExtractCssChunks.extract({
-            use: [{
-                loader: 'css-loader',
-                options: {
-                  modules: true,
-                  importLoaders: 2
-                }
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  plugins: () => {
-                    autoprefixer({
-                      browsers: ['last 2 versions']
-                    });
-                  }
-                }
-              },
-              {
-                loader: 'less-loader'
-              },
-              {
-                loader: 'stylus-loader'
+        test: /\.js$/,
+        include: paths.src,
+        loader: 'babel-loader?cacheDirectory'
+      },
+      {
+        test: /\.(css|less|styl)$/,
+        include: paths.src,
+        use: ExtractCssChunks.extract({
+          use: [{
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                autoprefixer({
+                  browsers: ['last 2 versions']
+                });
               }
-            ]
-          })
-        }
+            }
+          },
+          {
+            loader: 'less-loader'
+          },
+          {
+            loader: 'stylus-loader'
+          }
+          ]
+        })
+      }
       ]
     },
     plugins: [
@@ -87,17 +92,13 @@ const clientConfig = (routes) => webpackMerge({
         name: 'vendor',
         minChunks: ({
           resource
-        }) => {
-          return resource && /node_modules/.test(resource);
-        }
+        }) => resource && /node_modules/.test(resource)
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'manifest',
         minChunks: ({
           resource
-        }) => {
-          return resource && /webpack/.test(resource);
-        }
+        }) => resource && /webpack/.test(resource)
       }),
       new UglifyJsPlugin({
         sourceMap: true,
@@ -108,8 +109,8 @@ const clientConfig = (routes) => webpackMerge({
         filename: paths.output.cssFilename
       }),
       new RenderWebpackPlugin({
-        routes: routes,
-        render: () => require(paths.render.file),
+        routes,
+        render: () => require(paths.render.file), // eslint-disable-line
         minimize: minimize.enabled ? minimize.minifyOptions : false
       }),
       new CopyWebpackPlugin([{
@@ -123,11 +124,12 @@ const clientConfig = (routes) => webpackMerge({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
   })
-)
+);
 
-const renderConfig = webpackMerge({
+const renderConfig = webpackMerge(
+  {
     bail: true,
-    context: context,
+    context,
     target: 'node',
     entry: {
       render: paths.entry.render,
@@ -142,24 +144,24 @@ const renderConfig = webpackMerge({
     },
     module: {
       rules: [{
-          test: /\.js$/,
-          include: paths.src,
-          loader: 'babel-loader'
+        test: /\.js$/,
+        include: paths.src,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(css|less)$/,
+        include: paths.src,
+        use: [{
+          loader: 'css-loader/locals',
+          options: {
+            modules: true
+          }
         },
         {
-          test: /\.(css|less)$/,
-          include: paths.src,
-          use: [{
-              loader: 'css-loader/locals',
-              options: {
-                modules: true
-              }
-            },
-            {
-              loader: 'less-loader'
-            }
-          ]
+          loader: 'less-loader'
         }
+        ]
+      }
       ]
     },
     plugins: [
@@ -172,6 +174,7 @@ const renderConfig = webpackMerge({
       })
     ]
   },
-  createFileConfig({ context: paths.src, emitFile: false }, env));
+  createFileConfig({ context: paths.src, emitFile: false }, env)
+);
 
-module.exports = { renderConfig, clientConfig }
+module.exports = { renderConfig, clientConfig };

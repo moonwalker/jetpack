@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -16,12 +15,15 @@ const {
   createServiceWorkerConfig,
   createFileConfig
 } = require('./config');
-const { config, paths, banner, minimize } = require('./defaults');
+const {
+  paths,
+  banner
+} = require('./defaults');
 
 const env = {
   ENV: 'staging',
   NODE_ENV: 'production'
-}
+};
 
 const stageConfig = {
   bail: true,
@@ -49,17 +51,13 @@ const stageConfig = {
       name: 'vendor',
       minChunks: ({
         resource
-      }) => {
-        return resource && /node_modules/.test(resource);
-      }
+      }) => resource && /node_modules/.test(resource)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: ({
         resource
-      }) => {
-        return resource && /webpack/.test(resource);
-      }
+      }) => resource && /webpack/.test(resource)
     }),
     new HtmlWebpackPlugin({
       template: paths.public.template
@@ -77,7 +75,7 @@ const stageConfig = {
       reportFilename: 'bundle-analysis.html',
     })
   ]
-}
+};
 
 module.exports = webpackMerge(
   stageConfig,

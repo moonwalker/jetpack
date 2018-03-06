@@ -1,8 +1,8 @@
-const autoprefixer = require('autoprefixer')
-const mqpacker = require('css-mqpacker')
-const stylelint = require('stylelint')
-const postcssReporter = require('postcss-reporter')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer');
+const mqpacker = require('css-mqpacker');
+const stylelint = require('stylelint');
+const postcssReporter = require('postcss-reporter');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (options, env) => {
   const {
@@ -12,7 +12,7 @@ module.exports = (options, env) => {
   } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
-  const test = /\.(css|less|styl)$/
+  const test = /\.(css|less|styl)$/;
 
   return {
     module: {
@@ -67,5 +67,5 @@ module.exports = (options, env) => {
         disable: !filename
       })
     ]
-  }
-}
+  };
+};
