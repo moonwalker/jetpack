@@ -11,7 +11,10 @@ module.exports = (options, env) => {
         {
           test,
           include,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
         },
         {
           test,

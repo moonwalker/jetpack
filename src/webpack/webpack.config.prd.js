@@ -12,6 +12,8 @@ const {
   minimize
 } = require('./defaults');
 const {
+  createJavascriptConfig,
+  createResolveConfig,
   createFileConfig,
   createCssConfig,
   createStylusConfig,
@@ -39,18 +41,6 @@ const clientConfig = routes => webpackMerge(
       filename: paths.output.filename,
       chunkFilename: paths.output.chunkFilename,
       publicPath: paths.output.publicPath
-    },
-    resolve: {
-      extensions: ['.js', '.json', '.css', '.less', '.styl']
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          include: paths.src,
-          loader: 'babel-loader?cacheDirectory'
-        },
-      ]
     },
     plugins: [
       new CleanWebpackPlugin(paths.output.path, {
@@ -88,6 +78,10 @@ const clientConfig = routes => webpackMerge(
       }])
     ]
   },
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }, env),
   createCssConfig({
     include: paths.src,
     minimize: true,
@@ -115,16 +109,6 @@ const renderConfig = webpackMerge(
       filename: paths.render.filename,
       libraryTarget: 'commonjs2'
     },
-    resolve: {
-      extensions: ['.js', '.json', '.css', '.less', '.styl']
-    },
-    module: {
-      rules: [{
-        test: /\.js$/,
-        include: paths.src,
-        loader: 'babel-loader'
-      }]
-    },
     plugins: [
       new CleanWebpackPlugin(paths.render.path, {
         root: paths.root
@@ -135,6 +119,10 @@ const renderConfig = webpackMerge(
       })
     ]
   },
+  createResolveConfig(),
+  createJavascriptConfig({
+    include: paths.src
+  }, env),
   createCssConfig({
     include: paths.src,
     node: true,
