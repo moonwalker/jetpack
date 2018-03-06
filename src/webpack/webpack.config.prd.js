@@ -87,7 +87,9 @@ const clientConfig = routes => webpackMerge(
     minimize: true,
     filename: paths.output.cssFilename
   }, env),
-  createStylusConfig(),
+  createStylusConfig({
+    include: paths.src
+  }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createServiceWorkerConfig({
@@ -127,7 +129,9 @@ const renderConfig = webpackMerge(
     include: paths.src,
     node: true,
   }, env),
-  createStylusConfig(),
+  createStylusConfig({
+    include: paths.src
+  }),
   createLessConfig(),
   createFileConfig({
     context: paths.src,

@@ -70,7 +70,9 @@ module.exports = webpackMerge(
   createCssConfig({
     include: paths.src
   }, env),
-  createStylusConfig(),
+  createStylusConfig({
+    include: paths.src
+  }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env)
 );

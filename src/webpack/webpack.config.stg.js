@@ -88,7 +88,9 @@ module.exports = webpackMerge(
     minimize: true,
     filename: paths.output.cssFilename
   }, env),
-  createStylusConfig(),
+  createStylusConfig({
+    include: paths.src
+  }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createServiceWorkerConfig({
