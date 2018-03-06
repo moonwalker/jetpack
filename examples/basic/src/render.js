@@ -94,7 +94,7 @@ const getCssChunks = ({ assets, chunkName }) => {
 const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) => {
   return `
     <!doctype html>
-    <html amp lang="${head.lang}">
+    <html lang="${head.lang}">
       <head>
         <title>${head.title}</title>
         <meta charset="utf-8">
