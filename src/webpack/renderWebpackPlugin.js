@@ -1,6 +1,7 @@
 const path = require('path');
 const async = require('async');
 const { minify } = require('html-minifier');
+const debug = require('debug')('jetpack:render');
 
 module.exports = class {
   constructor(options = {}) {
@@ -42,6 +43,9 @@ module.exports = class {
   renderRoutes(routes, compilation, callback) {
     const render = this.getRender();
     const assets = this.collectAssets(compilation);
+
+    debug(`Start rendering ${routes.length} routes ...`);
+
     async.eachSeries(routes, (route, cb) => {
       render({ route, assets }).then(html => {
         if (html) {
@@ -54,7 +58,10 @@ module.exports = class {
         }
         cb();
       })
-    }, callback)
+    }, () => {
+      debug('End');
+      callback();
+    })
   }
 
   collectAssets(compilation) {
