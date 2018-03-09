@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
 
 const mergeConfigs = require('./mergeConfigs');
-const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const settings = require('./defaults')
 const {
   createJavascriptConfig,
@@ -29,7 +29,7 @@ const {
   minimize
 } = settings;
 
-const clientConfig = routes => mergeConfigs([
+const clientConfig = mergeConfigs([
   {
     bail: true,
     context,
@@ -57,15 +57,13 @@ const clientConfig = routes => mergeConfigs([
         cache: true,
         parallel: true
       }),
-      new RenderWebpackPlugin({
-        routes,
-        render: () => require(paths.render.file), // eslint-disable-line
-        minimize: minimize.enabled ? minimize.minifyOptions : false
-      }),
       new CopyWebpackPlugin([{
         from: paths.public.root,
         ignore: ['index.html']
-      }])
+      }]),
+      new AssetsPlugin({
+        path: paths.render.path
+      })
     ]
   },
   createResolveConfig(),

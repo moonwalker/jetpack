@@ -1,14 +1,32 @@
+/* eslint-disable no-console */
 const fs = require('fs')
 const async = require('async')
 const webpack = require('webpack')
-const { resolve } = require('path')
+const path = require('path')
 const { spawn } = require('child_process')
 
-const { context, config } = require('./defaults')
+const { context, config, paths, minimize } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prd')
 
 const getRoutes = require('./getRoutes');
 const getSitemaps = require('./getSitemaps');
+const prerender = require('./prerender');
+
+const printStats = (mode, stats) => {
+  process.stdout.write('\n');
+  process.stdout.write(mode);
+  process.stdout.write('\n');
+
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  }));
+
+  process.stdout.write('\n');
+};
 
 const start = () => {
   spawnWebPack('webpack.config.dev', 'webpack-dev-server')
@@ -18,15 +36,48 @@ const stage = () => {
   spawnWebPack('webpack.config.stg')
 }
 
+const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
+  webpack(webpackConfig).run((err, stats) => {
+    if (err) {
+      reject(err);
+    }
+
+    resolve(stats);
+  }));
+
 const build = () => {
   console.log('>>> ENV:', process.env.ENV)
   console.log('>>> API:', config.queryApiUrl)
   console.log('>>> PRD:', config.productName)
 
-  async.parallel({
-    renderConfig: (cb) => {
-      console.log('>>> CFG:', 'renderConfig')
-      webpack(renderConfig).run(cb)
+  Promise.all([
+    getRoutes(config.queryApiUrl, config.productName),
+    compileWebpackConfig(clientConfig),
+    compileWebpackConfig(renderConfig)
+  ])
+    .then(([routes, clientStats, renderStats]) => {
+      console.log('Routes', routes.length);
+      printStats('Client', clientStats);
+      printStats('Render', renderStats);
+      return routes;
+    })
+    .then(prerender)
+    .catch(err =>
+      console.error(err)
+    );
+
+    /*
+    console.log('>>> CFG:', 'renderConfig')
+    webpack(renderConfig).run((err, stats) => {
+      if (err) {
+        return console.log('>>> ERR:', err)
+      }
+      printStats(stats)
+
+      console.log('>>> CFG:', 'clientConfig')
+      webpack(clientConfig(routes)).run((err, stats) => {
+        cb()
+      })
     },
     clientConfig: (cb) => {
       getRoutes(config.queryApiUrl, config.productName)
@@ -70,22 +121,12 @@ const build = () => {
       process.exit(0);
     });
   })
-}
-
-const printStats = (stats) => {
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }))
-  process.stdout.write('\n')
+  */
 }
 
 const spawnWebPack = (cfgFile, bin = 'webpack') => {
-  const cmd = resolve(context, '.bin', bin)
-  const cfg = resolve(__dirname, cfgFile)
+  const cmd = path.resolve(context, '.bin', bin)
+  const cfg = path.resolve(__dirname, cfgFile)
   spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
 }
 
