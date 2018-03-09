@@ -61,6 +61,7 @@
     "webpack-dev-server": "^2.11.0",
     "webpack-merge": "^4.1.1",
     "workbox-webpack-plugin": "^2.1.2",
-    "xmlbuilder": "^9.0.7"
+    "xmlbuilder": "^9.0.7",
+    "worker-farm": "^1.6.0"
   }
 }
