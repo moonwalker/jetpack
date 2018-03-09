@@ -2,7 +2,8 @@ const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker');
 const stylelint = require('stylelint');
 const postcssReporter = require('postcss-reporter');
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
+const ExtractCssPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (options, env) => {
   const {
@@ -10,6 +11,7 @@ module.exports = (options, env) => {
     minimize = false,
     node = false,
     lint = false,
+    extractChunks = false,
     filename,
   } = options;
 
@@ -47,41 +49,50 @@ module.exports = (options, env) => {
     }
   };
 
-  const deliveryExtractRule = {
+  const transformRules = [
+    transformCssRule,
+    transformPostCssRule
+  ];
+
+  const deliveryExtractChunksRule = {
     test,
     include,
-    use: ExtractCssChunks.extract({
+    use: ExtractCssChunksPlugin.extract({
       use: []
     })
   };
 
-  const deliveryInjectRule = {
+  const deliveryExtractRule = {
     test,
     include,
     enforce: 'post',
-    loader: 'style-loader'
+    use: ExtractCssPlugin.extract({
+      use: [],
+      fallback: 'style-loader'
+    })
   };
-
-  if (isDevelopment) {
-    return {
-      module: {
-        rules: [
-          deliveryInjectRule,
-          transformCssRule,
-          transformPostCssRule
-        ]
-      }
-    };
-  }
 
   if (node) {
     return {
       module: {
-        rules: [
-          transformCssRule,
-          transformPostCssRule
-        ]
+        rules: transformRules
       }
+    };
+  }
+
+  if (extractChunks) {
+    return {
+      module: {
+        rules: [
+          deliveryExtractChunksRule,
+          ...transformRules
+        ]
+      },
+      plugins: [
+        new ExtractCssChunksPlugin({
+          filename
+        })
+      ]
     };
   }
 
@@ -89,13 +100,14 @@ module.exports = (options, env) => {
     module: {
       rules: [
         deliveryExtractRule,
-        transformCssRule,
-        transformPostCssRule
+        ...transformRules
       ]
     },
     plugins: [
-      new ExtractCssChunks({
-        filename
+      new ExtractCssPlugin({
+        filename,
+        allChunks: true,
+        disable: isDevelopment
       })
     ]
   };

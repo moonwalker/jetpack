@@ -13,7 +13,8 @@ const {
   createStylusConfig,
   createLessConfig,
   createServiceWorkerConfig,
-  createFileConfig
+  createFileConfig,
+  createCommonChunks
 } = require('./config');
 const {
   paths,
@@ -47,18 +48,6 @@ const stageConfig = {
     new webpack.EnvironmentPlugin(env),
     new webpack.BannerPlugin(banner),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: ({
-        resource
-      }) => resource && /node_modules/.test(resource)
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: ({
-        resource
-      }) => resource && /webpack/.test(resource)
-    }),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
@@ -93,6 +82,7 @@ module.exports = webpackMerge(
   }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
+  createCommonChunks(),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,

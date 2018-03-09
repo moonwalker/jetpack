@@ -18,6 +18,7 @@ const {
   createCssConfig,
   createStylusConfig,
   createLessConfig,
+  createCommonChunks,
   createServiceWorkerConfig
 } = require('./config');
 
@@ -48,20 +49,7 @@ const clientConfig = routes => webpackMerge(
       }),
       new webpack.EnvironmentPlugin(env),
       new webpack.BannerPlugin(banner),
-      new webpack.NamedModulesPlugin(),
       new webpack.optimize.ModuleConcatenationPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: ({
-          resource
-        }) => resource && /node_modules/.test(resource)
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        minChunks: ({
-          resource
-        }) => resource && /webpack/.test(resource)
-      }),
       new UglifyJsPlugin({
         sourceMap: true,
         cache: true,
@@ -85,6 +73,7 @@ const clientConfig = routes => webpackMerge(
   createCssConfig({
     include: paths.src,
     minimize: true,
+    extractChunks: true,
     filename: paths.output.cssFilename
   }, env),
   createStylusConfig({
@@ -92,6 +81,7 @@ const clientConfig = routes => webpackMerge(
   }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
+  createCommonChunks(),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
