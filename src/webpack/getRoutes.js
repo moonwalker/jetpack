@@ -8,7 +8,7 @@ const getSitemapRoutes = ({ pathLocales, canonicalLocales }, product) => {
       const localeMatch = r.match(localeRegexp);
       const locale = localeMatch[1];
       const path = `/${localeMatch[3]}/`.replace(/\/\//g, '\/');
-      const locales = pathLocales[path].filter(l => (l !== locale && !canonicalLocales[l]));
+      const locales = pathLocales[path].filter(l => (!canonicalLocales[l]));
       const canonicalLocale = canonicalLocales[locale];
       rCb(null, { path: r, market: sitemap.marketObj, pathLocales: locales, domain: sitemap.domain, title: sitemap.title, description: sitemap.description, apiKeys: JSON.parse(product.apiKeys), canonicalLocale });
     }, (_, routes) => {
