@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const {
+  createEslintConfig,
   createJavascriptConfig,
   createResolveConfig,
   createCssConfig,
@@ -64,9 +65,11 @@ const devConfig = {
 module.exports = webpackMerge(
   devConfig,
   createResolveConfig(),
+  createEslintConfig({
+    include: paths.src
+  }),
   createJavascriptConfig({
     include: paths.src,
-    lint: true,
     cache: true
   }, env),
   createCssConfig({

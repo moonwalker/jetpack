@@ -1,3 +1,4 @@
+module.exports.createEslintConfig = require('./eslint');
 module.exports.createJavascriptConfig = require('./javascript');
 module.exports.createCssConfig = require('./css');
 module.exports.createResolveConfig = require('./resolve');
