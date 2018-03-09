@@ -2,28 +2,19 @@ const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker');
 const stylelint = require('stylelint');
 const postcssReporter = require('postcss-reporter');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 module.exports = (options, env) => {
   const {
     include = [],
     minimize = false,
     node = false,
+    lint = false,
     filename,
   } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|less|styl)$/;
-
-  const deliveryRule = {
-    test,
-    include,
-    enforce: 'post',
-    loader: ExtractTextPlugin.extract({
-      fallback: node ? '' : 'style-loader',
-      use: [],
-    })
-  };
 
   const transformCssRule = {
     test,
@@ -39,14 +30,14 @@ module.exports = (options, env) => {
     }
   };
 
-  const transfromPostCssRule = {
+  const transformPostCssRule = {
     test,
     include,
     loader: 'postcss-loader',
     options: {
       sourceMap: true,
       plugins: [
-        stylelint(),
+        ...(lint ? [stylelint()] : []),
         mqpacker(),
         autoprefixer(),
         postcssReporter({
@@ -56,19 +47,55 @@ module.exports = (options, env) => {
     }
   };
 
+  const deliveryExtractRule = {
+    test,
+    include,
+    use: ExtractCssChunks.extract({
+      use: []
+    })
+  };
+
+  const deliveryInjectRule = {
+    test,
+    include,
+    enforce: 'post',
+    loader: 'style-loader'
+  };
+
+  if (isDevelopment) {
+    return {
+      module: {
+        rules: [
+          deliveryInjectRule,
+          transformCssRule,
+          transformPostCssRule
+        ]
+      }
+    };
+  }
+
+  if (node) {
+    return {
+      module: {
+        rules: [
+          transformCssRule,
+          transformPostCssRule
+        ]
+      }
+    };
+  }
+
   return {
     module: {
       rules: [
-        deliveryRule,
+        deliveryExtractRule,
         transformCssRule,
-        transfromPostCssRule,
+        transformPostCssRule
       ]
     },
     plugins: [
-      new ExtractTextPlugin({
-        filename,
-        allChunks: true,
-        disable: !filename
+      new ExtractCssChunks({
+        filename
       })
     ]
   };

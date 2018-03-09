@@ -65,10 +65,13 @@ module.exports = webpackMerge(
   devConfig,
   createResolveConfig(),
   createJavascriptConfig({
-    include: paths.src
+    include: paths.src,
+    lint: true,
+    cache: true
   }, env),
   createCssConfig({
-    include: paths.src
+    include: paths.src,
+    lint: true
   }, env),
   createStylusConfig({
     include: paths.src
