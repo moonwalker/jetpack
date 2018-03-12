@@ -57,9 +57,9 @@ const build = () => {
           }
           async.forEach(sitemaps, (sitemap, sCb) => {
             // Save sitemap to disk
-            fs.writeFile(sitemapdir + '/' + sitemap.filename, sitemap.content, sCb)
+            fs.writeFile(`${sitemapdir}/${sitemap.filename}`, sitemap.content, sCb)
           }, cb)
-        }).catch(err)
+        }).catch(cb)
     }
   }, err => {
     console.log('>>> ERR:', err)
