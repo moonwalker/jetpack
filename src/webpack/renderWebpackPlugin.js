@@ -48,7 +48,8 @@ module.exports = class {
 
     debug(`Start rendering ${routes.length} routes ...`);
 
-    const tasks = routes.map(route => nextTask =>
+    const tasks = routes.map(route => nextTask => {
+      process.stdout.write(`>>> render: ${route.path}\r`)
       render({ route, assets }).then((html) => {
         if (html) {
           const assetPath = `/${route.path}`;
@@ -57,14 +58,14 @@ module.exports = class {
             compilation,
             assetPath,
             this.options.minimize ?
-              minify(html, this.options.minimize) :
-              html
+            minify(html, this.options.minimize) :
+            html
           );
         }
-
+        process.stdout.clearLine()
         nextTask();
       })
-    );
+    });
 
     async.parallelLimit(tasks, RENDER_PARALLEL_LIMIT, () => {
       debug('End');

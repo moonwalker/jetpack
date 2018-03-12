@@ -1,4 +1,5 @@
 const fs = require('fs')
+const async = require('async')
 const webpack = require('webpack')
 const { resolve } = require('path')
 const { spawn } = require('child_process')
@@ -21,45 +22,46 @@ const build = () => {
   console.log('>>> ENV:', process.env.ENV)
   console.log('>>> API:', config.queryApiUrl)
 
-  getRoutes(config.queryApiUrl, config.productName).then(routes => {
-
-    console.log('>>> CFG:', 'renderConfig')
-    webpack(renderConfig).run((err, stats) => {
-      if (err) {
-        return console.log('>>> ERR:', err)
-      }
-      printStats(stats)
-
-      console.log('>>> CFG:', 'clientConfig')
-      webpack(clientConfig(routes)).run((err, stats) => {
+  async.parallel({
+    renderConfig: (cb) => {
+      console.log('>>> CFG:', 'renderConfig')
+      webpack(renderConfig).run((err, stats) => {
+        console.log('>>> RES:', 'renderConfig')
         if (err) {
-          console.log('>>> ERR:', err)
+          return cb(err)
         }
         printStats(stats)
-
-        // call launchpad to generate sitemaps
-        getSitemaps(config.launchpadUrl, config.launchpadToken)
-          .then(sitemaps => {
-            var sitemapdir = resolve(process.cwd(), 'build')
-            if (!fs.existsSync(sitemapdir)) {
-              fs.mkdirSync(sitemapdir);
-            }
-            for (i = 0; i < sitemaps.length; i++) {
-              sitemap = sitemaps[i]
-
-              // Save sitemap to disk
-              fs.writeFile(sitemapdir + '/' + sitemap.filename, sitemap.content, (err) => {
-                if (err) {
-                  return console.log('>>> ERR:', err)
-                  process.exit(1)
-                }
-              })
-            }
-          })
+        cb()
       })
-    })
-  })
-  .catch(err => {
+    },
+    clientConfig: (cb) => {
+      getRoutes(config.queryApiUrl, config.productName).then(routes => {
+        console.log('>>> CFG:', 'clientConfig')
+        webpack(clientConfig(routes)).run((err, stats) => {
+          console.log('>>> RES:', 'clientConfig')
+          if (err) {
+            return cb(err)
+          }
+          printStats(stats)
+        })
+      }).catch(cb)
+    },
+    sitemap: (cb) => {
+      if (process.env.ENV === 'development') return cb()
+      // call launchpad to generate sitemaps
+      getSitemaps(config.launchpadUrl, config.launchpadToken)
+        .then(sitemaps => {
+          var sitemapdir = resolve(process.cwd(), 'build')
+          if (!fs.existsSync(sitemapdir)) {
+            fs.mkdirSync(sitemapdir);
+          }
+          async.forEach(sitemaps, (sitemap, sCb) => {
+            // Save sitemap to disk
+            fs.writeFile(sitemapdir + '/' + sitemap.filename, sitemap.content, sCb)
+          }, cb)
+        }).catch(err)
+    }
+  }, err => {
     console.log('>>> ERR:', err)
     process.exit(1)
   })
