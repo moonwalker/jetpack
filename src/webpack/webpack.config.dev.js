@@ -67,7 +67,7 @@ module.exports = webpackMerge(
   createResolveConfig(),
   createEslintConfig({
     include: paths.src
-  }),
+  }, env),
   createJavascriptConfig({
     include: paths.src,
     cache: true
