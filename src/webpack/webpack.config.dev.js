@@ -25,7 +25,8 @@ const devConfig = {
   entry: {
     main: paths.entry.main,
     webfonts: paths.entry.webfonts,
-    segment: paths.entry.analytics
+    segment: paths.entry.analytics,
+    messaging: paths.entry.messaging
   },
   output: {
     path: paths.output.path,
