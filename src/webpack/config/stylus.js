@@ -1,19 +1,16 @@
 module.exports = (options = {}) => {
   const { include = [] } = options;
 
-  return {
-    module: {
-      rules: [
-        {
-          test: /\.styl$/,
-          include,
-          enforce: 'pre',
-          loader: 'stylus-loader',
-          options: {
-            sourceMap: true
-          }
-        }
-      ]
+  const stylusRule = {
+    test: /\.styl$/,
+    include,
+    enforce: 'pre',
+    loader: 'stylus-loader',
+    options: {
+      paths: include,
+      sourceMap: true
     }
-  }
-}
+  };
+
+  return { module: { rules: [stylusRule] } };
+};

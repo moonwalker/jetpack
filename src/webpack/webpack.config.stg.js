@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -14,14 +13,18 @@ const {
   createStylusConfig,
   createLessConfig,
   createServiceWorkerConfig,
-  createFileConfig
+  createFileConfig,
+  createCommonChunks
 } = require('./config');
-const { config, paths, banner, minimize } = require('./defaults');
+const {
+  paths,
+  banner
+} = require('./defaults');
 
 const env = {
   ENV: 'staging',
   NODE_ENV: 'production'
-}
+};
 
 const stageConfig = {
   bail: true,
@@ -45,22 +48,6 @@ const stageConfig = {
     new webpack.EnvironmentPlugin(env),
     new webpack.BannerPlugin(banner),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: ({
-        resource
-      }) => {
-        return resource && /node_modules/.test(resource);
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: ({
-        resource
-      }) => {
-        return resource && /webpack/.test(resource);
-      }
-    }),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
@@ -77,7 +64,7 @@ const stageConfig = {
       reportFilename: 'bundle-analysis.html',
     })
   ]
-}
+};
 
 module.exports = webpackMerge(
   stageConfig,
@@ -90,9 +77,12 @@ module.exports = webpackMerge(
     minimize: true,
     filename: paths.output.cssFilename
   }, env),
-  createStylusConfig(),
+  createStylusConfig({
+    include: paths.src
+  }),
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
+  createCommonChunks(),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,

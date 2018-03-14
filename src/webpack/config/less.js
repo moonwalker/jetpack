@@ -1,19 +1,15 @@
 module.exports = (options = {}) => {
   const { include = [] } = options;
 
-  return {
-    module: {
-      rules: [
-        {
-          test: /\.less$/,
-          include,
-          enforce: 'pre',
-          loader: 'css-loader',
-          options: {
-            sourceMap: true
-          }
-        }
-      ]
+  const lessRule = {
+    test: /\.less$/,
+    include,
+    enforce: 'pre',
+    loader: 'less-loader',
+    options: {
+      sourceMap: true
     }
-  }
-}
+  };
+
+  return { module: { rules: [lessRule] } };
+};

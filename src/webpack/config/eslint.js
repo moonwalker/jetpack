@@ -1,26 +1,28 @@
 module.exports = (options, env) => {
   const {
     include = [],
-    cache = false,
+    cache = true,
   } = options;
   const { NODE_ENV } = env;
 
   const isDevelopment = NODE_ENV === 'development';
   const test = /\.jsx?$/;
 
-  const babelRule = {
+  const eslintRule = {
     test,
     include,
-    loader: 'babel-loader',
+    enforce: 'pre',
+    loader: 'eslint-loader',
     options: {
-      cacheDirectory: cache
+      cache,
+      emitWarning: isDevelopment
     }
   };
 
   return {
     module: {
       rules: [
-        babelRule
+        eslintRule
       ]
     }
   };
