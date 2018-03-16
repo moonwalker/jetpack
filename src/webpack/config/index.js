@@ -7,3 +7,4 @@ module.exports.createLessConfig = require('./less');
 module.exports.createServiceWorkerConfig = require('./service-worker');
 module.exports.createFileConfig = require('./file');
 module.exports.createCommonChunks = require('./common-chunks');
+module.exports.createBuildInfo = require('./build-info');

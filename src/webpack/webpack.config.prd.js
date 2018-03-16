@@ -8,7 +8,6 @@ const RenderWebpackPlugin = require('./renderWebpackPlugin');
 const {
   context,
   paths,
-  banner,
   minimize
 } = require('./defaults');
 const {
@@ -19,7 +18,8 @@ const {
   createStylusConfig,
   createLessConfig,
   createCommonChunks,
-  createServiceWorkerConfig
+  createServiceWorkerConfig,
+  createBuildInfo
 } = require('./config');
 
 const env = {
@@ -49,7 +49,6 @@ const clientConfig = routes => webpackMerge(
         root: paths.root
       }),
       new webpack.EnvironmentPlugin(env),
-      new webpack.BannerPlugin(banner),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new UglifyJsPlugin({
         sourceMap: true,
@@ -83,6 +82,9 @@ const clientConfig = routes => webpackMerge(
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createCommonChunks(),
+  createBuildInfo({
+    output: paths.output.buildInfo
+  }),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,

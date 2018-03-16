@@ -14,12 +14,10 @@ const {
   createLessConfig,
   createServiceWorkerConfig,
   createFileConfig,
-  createCommonChunks
+  createCommonChunks,
+  createBuildInfo
 } = require('./config');
-const {
-  paths,
-  banner
-} = require('./defaults');
+const { paths } = require('./defaults');
 
 const env = {
   ENV: 'staging',
@@ -47,7 +45,6 @@ const stageConfig = {
       root: paths.root
     }),
     new webpack.EnvironmentPlugin(env),
-    new webpack.BannerPlugin(banner),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template
@@ -84,6 +81,9 @@ module.exports = webpackMerge(
   createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createCommonChunks(),
+  createBuildInfo({
+    output: paths.output.buildInfo
+  }),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
