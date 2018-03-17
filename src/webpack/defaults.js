@@ -25,7 +25,8 @@ module.exports = {
       filenameDev: 'static/js/[name].js',
       cssFilename: 'static/css/[name].[contenthash:5].css',
       publicPath: '/',
-      swDest: pwd('build', 'sw.js')
+      swDest: pwd('build', 'sw.js'),
+      buildInfo: '_build-info.json'
     },
     public: {
       root: pwd('public'),
