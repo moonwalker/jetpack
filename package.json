@@ -47,7 +47,6 @@
     "less-loader": "^4.0.5",
     "postcss-loader": "^2.0.10",
     "postcss-reporter": "^5.0.0",
-    "shelljs": "^0.8.1",
     "style-loader": "^0.19.1",
     "stylelint": "^8.4.0",
     "stylelint-config-css-modules": "^1.1.0",
