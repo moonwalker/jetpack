@@ -18,41 +18,37 @@ module.exports = (options, env) => {
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|less|styl)$/;
 
-  const transformCssRule = {
+  const transformRule = {
     test,
     include,
-    loader: node ? 'css-loader/locals' : 'css-loader',
-    options: {
-      minimize,
-      modules: true,
-      sourceMap: true,
-      localIdentName: isDevelopment ?
-        '[path][name]__[local]' :
-        '[hash:base64:5]'
-    }
+    use: [
+      {
+        loader: node ? 'css-loader/locals' : 'css-loader',
+        options: {
+          minimize,
+          modules: true,
+          sourceMap: true,
+          localIdentName: isDevelopment ?
+            '[path][name]__[local]' :
+            '[hash:base64:5]'
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+          plugins: [
+            ...(lint ? [stylelint()] : []),
+            mqpacker(),
+            autoprefixer(),
+            postcssReporter({
+              clearAllMessages: true
+            })
+          ]
+        }
+      }
+    ]
   };
-
-  const transformPostCssRule = {
-    test,
-    include,
-    loader: 'postcss-loader',
-    options: {
-      sourceMap: true,
-      plugins: [
-        ...(lint ? [stylelint()] : []),
-        mqpacker(),
-        autoprefixer(),
-        postcssReporter({
-          clearAllMessages: true
-        })
-      ]
-    }
-  };
-
-  const transformRules = [
-    transformCssRule,
-    transformPostCssRule
-  ];
 
   const deliveryExtractChunksRule = {
     test,
@@ -75,7 +71,7 @@ module.exports = (options, env) => {
   if (node) {
     return {
       module: {
-        rules: transformRules
+        rules: [transformRule]
       }
     };
   }
@@ -85,7 +81,7 @@ module.exports = (options, env) => {
       module: {
         rules: [
           deliveryExtractChunksRule,
-          ...transformRules
+          transformRule
         ]
       },
       plugins: [
@@ -100,7 +96,7 @@ module.exports = (options, env) => {
     module: {
       rules: [
         deliveryExtractRule,
-        ...transformRules
+        transformRule
       ]
     },
     plugins: [
