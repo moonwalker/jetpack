@@ -1,11 +1,11 @@
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const mergeConfigs = require('./mergeConfigs');
 const {
   createJavascriptConfig,
   createResolveConfig,
@@ -64,8 +64,9 @@ const stageConfig = {
   ]
 };
 
-module.exports = webpackMerge(
+module.exports = mergeConfigs([
   stageConfig,
+
   createResolveConfig(),
   createJavascriptConfig({
     include: paths.src
@@ -79,7 +80,9 @@ module.exports = webpackMerge(
     include: paths.src
   }),
   createLessConfig(),
-  createFileConfig({ context: paths.src }, env),
+  createFileConfig({
+    context: paths.src
+  }, env),
   createCommonChunks(),
   createBuildInfo({
     output: paths.output.buildInfo
@@ -88,4 +91,4 @@ module.exports = webpackMerge(
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
   })
-);
+]);
