@@ -17,12 +17,14 @@ const {
   createCommonChunks,
   createBuildInfo
 } = require('./config');
-const { paths } = require('./defaults');
+const settings = require('./defaults');
 
 const env = {
   ENV: 'staging',
   NODE_ENV: 'production'
 };
+
+const { paths } = settings;
 
 const stageConfig = {
   bail: true,
@@ -91,4 +93,4 @@ module.exports = mergeConfigs([
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
   })
-]);
+], settings, env);

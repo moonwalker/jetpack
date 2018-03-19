@@ -12,12 +12,14 @@ const {
   createLessConfig,
   createFileConfig
 } = require('./config');
-const { paths } = require('./defaults');
+const settings = require('./defaults');
 
 const env = {
   ENV: 'development',
   NODE_ENV: 'development'
 };
+
+const { paths } = settings;
 
 const devConfig = {
   context: paths.src,
@@ -86,4 +88,4 @@ module.exports = mergeConfigs([
   createFileConfig({
     context: paths.src
   }, env)
-]);
+], settings, env);
