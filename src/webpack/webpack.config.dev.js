@@ -1,8 +1,8 @@
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const mergeConfigs = require('./mergeConfigs');
 const {
   createEslintConfig,
   createJavascriptConfig,
@@ -12,12 +12,14 @@ const {
   createLessConfig,
   createFileConfig
 } = require('./config');
-const { paths } = require('./defaults');
+const settings = require('./defaults');
 
 const env = {
   ENV: 'development',
   NODE_ENV: 'development'
 };
+
+const { paths } = settings;
 
 const devConfig = {
   context: paths.src,
@@ -63,8 +65,9 @@ const devConfig = {
   }
 };
 
-module.exports = webpackMerge(
+module.exports = mergeConfigs([
   devConfig,
+
   createResolveConfig(),
   createEslintConfig({
     include: paths.src
@@ -78,8 +81,11 @@ module.exports = webpackMerge(
     lint: true
   }, env),
   createStylusConfig({
-    include: paths.src
+    include: paths.src,
+    root: paths.root
   }),
   createLessConfig(),
-  createFileConfig({ context: paths.src }, env)
-);
+  createFileConfig({
+    context: paths.src
+  }, env)
+], settings, env);

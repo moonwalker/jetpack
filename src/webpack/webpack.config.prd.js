@@ -1,15 +1,11 @@
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const mergeConfigs = require('./mergeConfigs');
 const RenderWebpackPlugin = require('./renderWebpackPlugin');
-const {
-  context,
-  paths,
-  minimize
-} = require('./defaults');
+const settings = require('./defaults')
 const {
   createJavascriptConfig,
   createResolveConfig,
@@ -27,7 +23,13 @@ const env = {
   NODE_ENV: 'production'
 };
 
-const clientConfig = routes => webpackMerge(
+const {
+  context,
+  paths,
+  minimize
+} = settings;
+
+const clientConfig = routes => mergeConfigs([
   {
     bail: true,
     context,
@@ -89,9 +91,9 @@ const clientConfig = routes => webpackMerge(
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
   })
-);
+], settings, env);
 
-const renderConfig = webpackMerge(
+const renderConfig = mergeConfigs([
   {
     bail: true,
     context,
@@ -130,6 +132,6 @@ const renderConfig = webpackMerge(
     context: paths.src,
     emitFile: false
   }, env)
-);
+], settings, env);
 
 module.exports = { renderConfig, clientConfig };
