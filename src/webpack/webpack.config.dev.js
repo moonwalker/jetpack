@@ -39,7 +39,6 @@ const devConfig = {
   plugins: [
     new webpack.EnvironmentPlugin(env),
     new webpack.NamedModulesPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
