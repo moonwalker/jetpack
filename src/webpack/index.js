@@ -21,6 +21,9 @@ const stage = () => {
 const build = () => {
   console.log('>>> ENV:', process.env.ENV)
   console.log('>>> API:', config.queryApiUrl)
+  console.log('>>> LPD:', config.launchpadUrl)
+  console.log('>>> TKN:', config.launchpadToken)
+  console.log('>>> PRD:', config.productName)
 
   async.parallel({
     renderConfig: (cb) => {
@@ -49,7 +52,7 @@ const build = () => {
     sitemap: (cb) => {
       if (process.env.ENV === 'development') return cb()
       // call launchpad to generate sitemaps
-      getSitemaps(config.launchpadUrl, config.launchpadToken)
+      getSitemaps(config.launchpadUrl, config.launchpadToken, config.productName)
         .then(sitemaps => {
           var sitemapdir = resolve(process.cwd(), 'build')
           if (!fs.existsSync(sitemapdir)) {
