@@ -59,8 +59,10 @@ const build = () => {
             fs.mkdirSync(sitemapdir);
           }
           async.forEach(sitemaps, (sitemap, sCb) => {
-            // Save sitemap to disk
-            fs.writeFile(`${sitemapdir}/${sitemap.filename}`, sitemap.content, sCb)
+            process.nextTick(() => {
+              // Save sitemap to disk
+              fs.writeFile(`${sitemapdir}/${sitemap.filename}`, sitemap.content, sCb)
+            });
           }, cb)
         }).catch(cb)
     }
