@@ -50,21 +50,24 @@ module.exports = class {
 
     const tasks = routes.map(route => nextTask => {
       // process.stdout.write(`>>> render: ${route.path}\r`)
-      process.stdout.write('>');
-      render({ route, assets }).then((html) => {
-        if (html) {
-          const assetPath = `/${route.path}`;
+      process.nextTick(() => {
+        render({ route, assets }).then((html) => {
+          if (html) {
+            const assetPath = `/${route.path}`;
 
-          this.addToCompilation(
-            compilation,
-            assetPath,
-            this.options.minimize ?
-            minify(html, this.options.minimize) :
-            html
-          );
-        }
-        // process.stdout.clearLine()
-        nextTask();
+            this.addToCompilation(
+              compilation,
+              assetPath,
+              this.options.minimize ?
+              minify(html, this.options.minimize) :
+              html
+            );
+          }
+          // process.stdout.clearLine()
+          nextTask();
+        }).catch(err => {
+          console.log(`>>> ERR ${route.path}: ${err}`);
+        })
       })
     });
 
