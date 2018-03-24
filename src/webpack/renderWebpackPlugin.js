@@ -47,9 +47,9 @@ module.exports = class {
     const assets = this.collectAssets(compilation);
 
     debug(`Start rendering ${routes.length} routes ...`);
-
+    let done = 0;
+    const start = new Date();
     const tasks = routes.map(route => nextTask => {
-      // process.stdout.write(`>>> render: ${route.path}\r`)
       process.nextTick(() => {
         render({ route, assets }).then((html) => {
           if (html) {
@@ -63,7 +63,10 @@ module.exports = class {
               html
             );
           }
-          // process.stdout.clearLine()
+          if (done && (done % 1000) == 0) {
+            console.log(`>>> ${done} / ${routes.length} in ${((new Date())-start)/1000}s`);
+          }
+          done++;
           nextTask();
         }).catch(err => {
           console.log(`>>> ERR ${route.path}: ${err}`);
