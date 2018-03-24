@@ -45,7 +45,8 @@ const build = () => {
           if (err) {
             return cb(err)
           }
-          printStats(stats)
+          //printStats(stats)
+          cb()
         })
       }).catch(cb)
     },

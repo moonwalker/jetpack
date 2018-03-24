@@ -3,7 +3,7 @@ const async = require('async');
 const { minify } = require('html-minifier');
 const debug = require('debug')('jetpack:render');
 
-const RENDER_PARALLEL_LIMIT = 10;
+const RENDER_PARALLEL_LIMIT = 50;
 
 module.exports = class {
   constructor(options = {}) {
@@ -67,18 +67,23 @@ module.exports = class {
             const time = ((new Date()) - start) / 1000;
             const m = Math.floor(time / 60);
             const s = Math.floor(time - m * 60);
-            console.log(`>>> ${done} / ${routes.length} in ${m}m${s}s`);
+            console.log(`>>> ${done+1} / ${routes.length} in ${m}m${s}s`);
           }
           done++;
           nextTask();
         }).catch(err => {
           console.log(`>>> ERR ${route.path}: ${err}`);
+          nextTask();
         })
       })
     });
 
     async.parallelLimit(tasks, RENDER_PARALLEL_LIMIT, () => {
       debug('End');
+      const time = ((new Date()) - start) / 1000;
+      const m = Math.floor(time / 60);
+      const s = Math.floor(time - m * 60);
+      console.log(`>>> DONE: ${done+1} / ${routes.length} in ${m}m${s}s`);
       callback();
     });
   }
