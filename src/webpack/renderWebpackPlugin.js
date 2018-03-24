@@ -49,7 +49,8 @@ module.exports = class {
     debug(`Start rendering ${routes.length} routes ...`);
 
     const tasks = routes.map(route => nextTask => {
-      process.stdout.write(`>>> render: ${route.path}\r`)
+      // process.stdout.write(`>>> render: ${route.path}\r`)
+      process.stdout.write('>');
       render({ route, assets }).then((html) => {
         if (html) {
           const assetPath = `/${route.path}`;
@@ -62,7 +63,7 @@ module.exports = class {
             html
           );
         }
-        process.stdout.clearLine()
+        // process.stdout.clearLine()
         nextTask();
       })
     });
