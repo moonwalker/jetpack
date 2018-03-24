@@ -63,8 +63,11 @@ module.exports = class {
               html
             );
           }
-          if (done && (done % 1000) == 0) {
-            console.log(`>>> ${done} / ${routes.length} in ${((new Date())-start)/1000}s`);
+          if ((done % 1000) == 999) {
+            const time = ((new Date()) - start) / 1000;
+            const m = Math.floor(time / 60);
+            const s = Math.floor(time - m * 60);
+            console.log(`>>> ${done} / ${routes.length} in ${m}m${s}s`);
           }
           done++;
           nextTask();
