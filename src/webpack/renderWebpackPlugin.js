@@ -63,13 +63,12 @@ module.exports = class {
               html
             );
           }
-          if ((done % 1000) == 999) {
+          if ((done++ % 1000) == 1000) {
             const time = ((new Date()) - start) / 1000;
             const m = Math.floor(time / 60);
             const s = Math.floor(time - m * 60);
-            console.log(`>>> ${done+1} / ${routes.length} in ${m}m${s}s`);
+            console.log(`>>> ${done} / ${routes.length} in ${m}m${s}s`);
           }
-          done++;
           nextTask();
         }).catch(err => {
           console.log(`>>> ERR ${route.path}: ${err}`);
@@ -83,7 +82,7 @@ module.exports = class {
       const time = ((new Date()) - start) / 1000;
       const m = Math.floor(time / 60);
       const s = Math.floor(time - m * 60);
-      console.log(`>>> DONE: ${done+1} / ${routes.length} in ${m}m${s}s`);
+      console.log(`>>> DONE: ${done} / ${routes.length} in ${m}m${s}s`);
       callback();
     });
   }

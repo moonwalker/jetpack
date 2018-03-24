@@ -38,17 +38,18 @@ const build = () => {
       })
     },
     clientConfig: (cb) => {
-      getRoutes(config.queryApiUrl, config.productName).then(routes => {
-        console.log('>>> CFG:', 'clientConfig')
-        webpack(clientConfig(routes)).run((err, stats) => {
-          console.log('>>> RES:', 'clientConfig')
-          if (err) {
-            return cb(err)
-          }
-          //printStats(stats)
-          cb()
-        })
-      }).catch(cb)
+      getRoutes(config.queryApiUrl, config.productName)
+        .then(routes => {
+          console.log('>>> CFG:', 'clientConfig')
+          webpack(clientConfig(routes)).run((err, stats) => {
+            console.log('>>> RES:', 'clientConfig')
+            if (err) {
+              return cb(err)
+            }
+            //printStats(stats)
+            cb()
+          })
+        }).catch(cb)
     },
     sitemap: (cb) => {
       if (process.env.ENV === 'development') return cb()
@@ -68,8 +69,11 @@ const build = () => {
         }).catch(cb)
     }
   }, err => {
-    console.log('>>> ERR:', err)
-    process.exit(1)
+    if (err) {
+      console.log('>>> ERR:', err)
+      return process.exit(1)
+    }
+    process.exit(0)
   })
 }
 
