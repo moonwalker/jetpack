@@ -5,7 +5,7 @@ const debug = require('debug');
 const workerFarm = require('worker-farm');
 
 const CHUNK_SIZE = 100;
-const PARALLEL_LIMIT = Math.min(os.cpus().length - 1, 4);
+const PARALLEL_LIMIT = Math.min(os.cpus().length - 1, 8);
 
 module.exports = routes => new Promise((resolve) => {
   const worker = workerFarm(require.resolve('./worker')); // eslint-disable-line
