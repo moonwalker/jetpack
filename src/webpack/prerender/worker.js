@@ -12,7 +12,7 @@ const {
 const render = require(paths.render.file).default; // eslint-disable-line
 const assets = require(path.join(paths.render.path, 'webpack-assets.json')); // eslint-disable-line
 
-const PARALLEL_LIMIT = 50;
+const PARALLEL_LIMIT = 20;
 
 const writeHtml = (routePath) => {
   const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
