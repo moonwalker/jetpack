@@ -64,7 +64,8 @@ module.exports = class {
               html
             );
           }
-          if ((done++ % 1000) == 1000) {
+          done++;
+          if ((done % 1000) == 1000) {
             const time = ((new Date()) - start) / 1000;
             const m = Math.floor(time / 60);
             const s = Math.floor(time - m * 60);
