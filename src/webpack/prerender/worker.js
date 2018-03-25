@@ -10,7 +10,6 @@ const {
 } = require('../defaults');
 
 const render = require(paths.render.file).default; // eslint-disable-line
-const assets = require(path.join(paths.render.path, 'webpack-assets.json')); // eslint-disable-line
 
 const PARALLEL_LIMIT = 20;
 
@@ -27,7 +26,8 @@ module.exports = (options, done) => {
   const {
     routes,
     id,
-    workersCount
+    workersCount,
+    assets
   } = options;
 
   const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);

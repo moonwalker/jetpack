@@ -59,7 +59,7 @@ const build = () => {
       console.log('Routes', routes.length);
       printStats('Client', clientStats);
       printStats('Render', renderStats);
-      return routes;
+      return routes.filter(_ => _.path.match(/$\sv$/));
     })
     .then(prerender)
     .catch(err =>

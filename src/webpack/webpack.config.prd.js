@@ -62,7 +62,7 @@ const clientConfig = mergeConfigs([
         ignore: ['index.html']
       }]),
       new AssetsPlugin({
-        path: paths.render.path
+        ...paths.assets
       })
     ]
   },
