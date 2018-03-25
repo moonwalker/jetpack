@@ -47,6 +47,7 @@ module.exports = class {
     const assets = this.collectAssets(compilation);
 
     debug(`Start rendering ${routes.length} routes ...`);
+
     let done = 0;
     const start = new Date();
     const tasks = routes.map(route => nextTask => {
@@ -76,6 +77,8 @@ module.exports = class {
         })
       })
     });
+
+    console.log(`>>> START: ${routes.length}`);
 
     async.parallelLimit(tasks, RENDER_PARALLEL_LIMIT, () => {
       debug('End');
