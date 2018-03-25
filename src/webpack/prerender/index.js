@@ -4,7 +4,7 @@ const async = require('async');
 const debug = require('debug');
 const workerFarm = require('worker-farm');
 
-const CHUNK_SIZE = 100;
+const CHUNK_SIZE = 500;
 const PARALLEL_LIMIT = Math.min(os.cpus().length - 1, 8);
 
 module.exports = routes => new Promise((resolve) => {

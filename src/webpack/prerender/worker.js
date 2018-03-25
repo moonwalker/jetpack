@@ -30,7 +30,7 @@ module.exports = (options, done) => {
     workersCount
   } = options;
 
-  const log = debug(`jetpack:prerender:${id}/${workersCount}`);
+  const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);
 
   log(`Start prerendering ${routes.length} routes (pid: ${process.pid})...`);
 
