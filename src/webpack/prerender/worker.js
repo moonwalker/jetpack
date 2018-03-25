@@ -12,7 +12,7 @@ const {
 const render = require(paths.render.file).default; // eslint-disable-line
 const assets = require(path.join(paths.render.path, 'webpack-assets.json')); // eslint-disable-line
 
-const PARALLEL_LIMIT = 10;
+const PARALLEL_LIMIT = 50;
 
 const writeHtml = (routePath) => {
   const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
@@ -24,8 +24,13 @@ const writeHtml = (routePath) => {
 };
 
 module.exports = (options, done) => {
-  const { routes, id } = options;
-  const log = debug(`jetpack:prerender:${id}`);
+  const {
+    routes,
+    id,
+    workersCount
+  } = options;
+
+  const log = debug(`jetpack:prerender:${id}/${workersCount}`);
 
   log(`Start prerendering ${routes.length} routes (pid: ${process.pid})...`);
 
@@ -34,7 +39,7 @@ module.exports = (options, done) => {
       .then(writeHtml(route.path))
       .then(nextTask)
       .catch((err) => {
-        console.error(err); // eslint-disable-line no-console
+        console.error('Render error', err.message); // eslint-disable-line no-console
         nextTask();
       }));
 
