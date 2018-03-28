@@ -52,6 +52,7 @@ module.exports = class {
     const start = new Date();
     const tasks = routes.map(route => nextTask => {
       process.nextTick(() => {
+        // process.stdout.write(`>>> render: ${route.path}\r`);
         render({ route, assets }).then((html) => {
           if (html) {
             const assetPath = `/${route.path}`;
@@ -63,14 +64,17 @@ module.exports = class {
               minify(html, this.options.minimize) :
               html
             );
+          } else {
+            console.log(`>>> ERR ${route.path}: No HTML returned by render.`);
           }
-          done++;
-          if ((done % 1000) == 0) {
+          if (done && (done % 1000) == 0) {
             const time = ((new Date()) - start) / 1000;
             const m = Math.floor(time / 60);
             const s = Math.floor(time - m * 60);
             console.log(`>>> ${done} / ${routes.length} in ${m}m${s}s`);
           }
+          done++;
+          // process.stdout.clearLine();
           nextTask();
         }).catch(err => {
           console.log(`>>> ERR ${route.path}: ${err}`);
