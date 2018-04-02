@@ -37,24 +37,24 @@ const build = () => {
         cb()
       })
     },
-    clientConfig: (cb) => {
-      getRoutes(config.queryApiUrl, config.productName)
-        .then(routes => {
-          console.log('>>> CFG:', 'clientConfig')
-          webpack(clientConfig(routes)).run((err, stats) => {
-            console.log('>>> RES:', 'clientConfig')
-            if (err) {
-              return cb(err)
-            }
-            //printStats(stats)
-            cb()
-          })
-        }).catch(cb)
-    },
+    // clientConfig: (cb) => {
+    //   getRoutes(config.queryApiUrl, config.productName)
+    //     .then(routes => {
+    //       console.log('>>> CFG:', 'clientConfig')
+    //       webpack(clientConfig(routes)).run((err, stats) => {
+    //         console.log('>>> RES:', 'clientConfig')
+    //         if (err) {
+    //           return cb(err)
+    //         }
+    //         //printStats(stats)
+    //         cb()
+    //       })
+    //     }).catch(cb)
+    // },
     sitemap: (cb) => {
-      if (process.env.ENV === 'development') return cb()
+      // if (process.env.ENV === 'development') return cb()
       // call launchpad to generate sitemaps
-      getSitemaps(config.launchpadUrl, config.launchpadToken, config.productName)
+      getSitemaps(config.queryApiUrl, config.productName)
         .then(sitemaps => {
           var sitemapdir = resolve(process.cwd(), 'build')
           if (!fs.existsSync(sitemapdir)) {

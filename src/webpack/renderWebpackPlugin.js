@@ -52,7 +52,7 @@ module.exports = class {
     const start = new Date();
     const tasks = routes.map(route => nextTask => {
       process.nextTick(() => {
-        // process.stdout.write(`>>> render: ${route.path}\r`);
+        process.stdout.write(`>>> render: ${route.path}\r`);
         render({ route, assets }).then((html) => {
           if (html) {
             const assetPath = `/${route.path}`;
@@ -74,7 +74,7 @@ module.exports = class {
             console.log(`>>> ${done} / ${routes.length} in ${m}m${s}s`);
           }
           done++;
-          // process.stdout.clearLine();
+          process.stdout.clearLine();
           nextTask();
         }).catch(err => {
           console.log(`>>> ERR ${route.path}: ${err}`);
