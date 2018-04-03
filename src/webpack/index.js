@@ -52,7 +52,7 @@ const build = () => {
     console.log('>>> RES:', 'renderConfig')
     printStats(res.renderConfig);
     console.log('>>> RES:', 'clientConfig')
-    //printStats(res.clientConfig);
+    printStats(res.clientConfig);
 
     if (!res.sitemaps) return process.exit(0);
 
