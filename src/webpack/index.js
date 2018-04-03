@@ -28,53 +28,50 @@ const build = () => {
   async.parallel({
     renderConfig: (cb) => {
       console.log('>>> CFG:', 'renderConfig')
-      webpack(renderConfig).run((err, stats) => {
-        console.log('>>> RES:', 'renderConfig')
-        if (err) {
-          return cb(err)
-        }
-        printStats(stats)
-        cb()
-      })
+      webpack(renderConfig).run(cb)
     },
     clientConfig: (cb) => {
       getRoutes(config.queryApiUrl, config.productName)
         .then(routes => {
           console.log('>>> CFG:', 'clientConfig')
-          webpack(clientConfig(routes)).run((err, stats) => {
-            console.log('>>> RES:', 'clientConfig')
-            if (err) {
-              return cb(err)
-            }
-            //printStats(stats)
-            cb()
-          })
+          webpack(clientConfig(routes)).run(cb)
         }).catch(cb)
     },
-    sitemap: (cb) => {
-      if (process.env.ENV === 'development') return cb()
+    sitemaps: (cb) => {
+      // if (process.env.ENV === 'development') return cb()
       getSitemaps(config.queryApiUrl, config.productName)
         .then(sitemaps => {
-          var sitemapdir = resolve(process.cwd(), 'build')
-          if (!fs.existsSync(sitemapdir)) {
-            fs.mkdirSync(sitemapdir);
-          }
-          async.forEach(sitemaps, (sitemap, sCb) => {
-            process.nextTick(() => {
-              const sitemapPath = `${sitemapdir}/${sitemap.filename}`;
-              console.log('>>> creating', sitemapPath, `${Math.round(sitemap.content.length / 100000) / 10}MB`)
-              // Save sitemap to disk
-              fs.writeFile(sitemapPath, sitemap.content, sCb)
-            });
-          }, cb)
+          cb(null, sitemaps);
         }).catch(cb)
     }
-  }, err => {
+  }, (err, res) => {
     if (err) {
       console.log('>>> ERR:', err)
       return process.exit(1)
     }
-    process.exit(0)
+    console.log('>>> RES:', 'renderConfig')
+    printStats(res.renderConfig);
+    console.log('>>> RES:', 'clientConfig')
+    //printStats(res.clientConfig);
+
+    if (!res.sitemaps) return process.exit(0);
+
+    var sitemapdir = resolve(process.cwd(), 'build');
+    if (!fs.existsSync(sitemapdir)) {
+      fs.mkdirSync(sitemapdir);
+    }
+    async.forEach(res.sitemaps, (sitemap, sCb) => {
+      const sitemapPath = `${sitemapdir}/${sitemap.filename}`;
+      console.log('>>> creating', sitemapPath, `${Math.round(sitemap.content.length / 100000) / 10}MB`)
+      // Save sitemap to disk
+      fs.writeFile(sitemapPath, sitemap.content, sCb)
+    }, err => {
+      if (err) {
+        console.log('>>> ERR:', err)
+        return process.exit(1)
+      }
+      process.exit(0);
+    });
   })
 }
 
