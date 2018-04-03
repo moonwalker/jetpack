@@ -36,7 +36,6 @@ const build = () => {
         }).catch(cb)
     },
     sitemaps: (cb) => {
-      // if (process.env.ENV === 'development') return cb()
       getSitemaps(config.queryApiUrl, config.productName)
         .then(sitemaps => {
           cb(null, sitemaps);
@@ -50,7 +49,7 @@ const build = () => {
     console.log('>>> RES:', 'renderConfig')
     printStats(res.renderConfig);
     console.log('>>> RES:', 'clientConfig')
-    printStats(res.clientConfig);
+    //printStats(res.clientConfig);
 
     if (!res.sitemaps) return process.exit(0);
 
@@ -60,7 +59,7 @@ const build = () => {
     }
     async.forEach(res.sitemaps, (sitemap, sCb) => {
       const sitemapPath = `${sitemapdir}/${sitemap.filename}`;
-      console.log('>>> creating', sitemapPath, `${Math.round(sitemap.content.length / 100000) / 10}MB`)
+      console.log('>>> creating', sitemapPath, `${(sitemap.content.length / 1048576).toFixed(1)}MB`)
       // Save sitemap to disk
       fs.writeFile(sitemapPath, sitemap.content, sCb)
     }, err => {
