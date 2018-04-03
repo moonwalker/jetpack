@@ -61,7 +61,7 @@ const build = () => {
           }
           async.forEach(sitemaps, (sitemap, sCb) => {
             process.nextTick(() => {
-              console.log('>>> creating', sitemap.filename)
+              console.log('>>> creating', sitemap.filename, `${Math.round(sitemap.content.length / 100000) / 10}MB`)
               // Save sitemap to disk
               fs.writeFile(`${sitemapdir}/${sitemap.filename}`, sitemap.content, sCb)
             });
