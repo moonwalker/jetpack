@@ -21,8 +21,6 @@ const stage = () => {
 const build = () => {
   console.log('>>> ENV:', process.env.ENV)
   console.log('>>> API:', config.queryApiUrl)
-  console.log('>>> LPD:', config.launchpadUrl)
-  console.log('>>> TKN:', config.launchpadToken)
   console.log('>>> PRD:', config.productName)
 
   async.parallel({
