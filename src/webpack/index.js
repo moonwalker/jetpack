@@ -53,7 +53,6 @@ const build = () => {
     },
     sitemap: (cb) => {
       if (process.env.ENV === 'development') return cb()
-      // call launchpad to generate sitemaps
       getSitemaps(config.queryApiUrl, config.productName)
         .then(sitemaps => {
           var sitemapdir = resolve(process.cwd(), 'build')
@@ -62,6 +61,7 @@ const build = () => {
           }
           async.forEach(sitemaps, (sitemap, sCb) => {
             process.nextTick(() => {
+              console.log('>>> creating', sitemap.filename)
               // Save sitemap to disk
               fs.writeFile(`${sitemapdir}/${sitemap.filename}`, sitemap.content, sCb)
             });
