@@ -14,7 +14,7 @@ module.exports = (sitemaps) => {
   return Promise.all(sitemaps.map((sitemap) => {
     const sitemapPath = resolve(sitemapdir, sitemap.filename);
 
-    log('creating', sitemapPath, `${Math.round(sitemap.content.length / 100000) / 10}MB`);
+    log('creating', sitemapPath, `${(sitemap.content.length / 1048576).toFixed(1)}MB`);
 
     return fs.outputFile(sitemapPath, sitemap.content);
   }));
