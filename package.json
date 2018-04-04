@@ -12,6 +12,7 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "async": "^2.6.0",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
@@ -45,6 +46,7 @@
     "isomorphic-fetch": "^2.2.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "lodash": "^4.17.5",
     "postcss-loader": "^2.0.10",
     "postcss-reporter": "^5.0.0",
     "style-loader": "^0.19.1",
@@ -59,6 +61,7 @@
     "webpack-dev-server": "^2.11.0",
     "webpack-merge": "^4.1.1",
     "workbox-webpack-plugin": "^2.1.2",
-    "xmlbuilder": "^9.0.7"
+    "xmlbuilder": "^9.0.7",
+    "worker-farm": "^1.6.0"
   }
 }

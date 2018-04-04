@@ -35,6 +35,10 @@ module.exports = {
     render: {
       path: pwd('node_modules', '.build'),
       file: pwd('node_modules', '.build', 'render.js')
+    },
+    assets: {
+      path: pwd('build'),
+      filename: '.webpack-assets.json'
     }
   },
   minimize: {
