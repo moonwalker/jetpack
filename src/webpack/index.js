@@ -10,7 +10,8 @@ const { renderConfig, clientConfig } = require('./webpack.config.prd')
 
 const getRoutes = require('./getRoutes');
 const prerender = require('./prerender');
-const sitemap = require('./sitemap');
+const getSitemaps = require('./getSitemaps');
+const writeSitemaps = require('./writeSitemaps');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -50,25 +51,38 @@ const build = () => {
   console.log('>>> API:', config.queryApiUrl)
   console.log('>>> PRD:', config.productName)
 
+  const buildApp = Promise.all([
+    getRoutes(config.queryApiUrl, config.productName),
+    compileWebpackConfig(clientConfig),
+    compileWebpackConfig(renderConfig)
+  ])
+    .then(([routes, clientStats, renderStats]) => {
+      console.log('Routes', routes.length);
+
+      printStats('Client', clientStats);
+      printStats('Render', renderStats);
+
+      // @TODO REMOVE
+      return routes.filter(r => r.path.match(/^\/(sv|en)$/));
+
+      return routes;
+    })
+    .then(prerender);
+
+  const buildSitemap = getSitemaps(config.queryApiUrl, config.productName)
+    .then(writeSitemaps);
+
   Promise.all([
-    // build
-    Promise.all([
-      getRoutes(config.queryApiUrl, config.productName),
-      compileWebpackConfig(clientConfig),
-      compileWebpackConfig(renderConfig)
-    ])
-      .then(([routes, clientStats, renderStats]) => {
-        console.log('Routes', routes.length);
-        printStats('Client', clientStats);
-        printStats('Render', renderStats);
-
-        return routes;
-      })
-      .then(prerender),
-
-    // sitemap
-    sitemap(config)
-  ]).catch(err => console.error(err));
+    buildApp,
+    buildSitemap
+  ])
+    .then(() => {
+      process.exit();
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
 };
 
 const spawnWebPack = (cfgFile, bin = 'webpack') => {
