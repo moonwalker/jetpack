@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-const fs = require('fs')
-const async = require('async')
 const webpack = require('webpack')
 const path = require('path')
 const { spawn } = require('child_process')
+const debug = require('debug');
 
 const { context, config, paths, minimize } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prd')
@@ -47,9 +46,10 @@ const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
   }));
 
 const build = () => {
-  console.log('>>> ENV:', process.env.ENV)
-  console.log('>>> API:', config.queryApiUrl)
-  console.log('>>> PRD:', config.productName)
+  const log = debug('jetpack:build');
+  log('ENV:', process.env.ENV);
+  log('API:', config.queryApiUrl);
+  log('PRD:', config.productName);
 
   const buildApp = Promise.all([
     getRoutes(config.queryApiUrl, config.productName),
@@ -57,13 +57,10 @@ const build = () => {
     compileWebpackConfig(renderConfig)
   ])
     .then(([routes, clientStats, renderStats]) => {
-      console.log('Routes', routes.length);
+      log('Routes', routes.length);
 
       printStats('Client', clientStats);
       printStats('Render', renderStats);
-
-      // @TODO REMOVE
-      return routes.filter(r => r.path.match(/^\/(sv|en)$/));
 
       return routes;
     })
