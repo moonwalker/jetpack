@@ -39,41 +39,69 @@ module.exports = (apiUrl, product) => {
     })
 }
 
-const smGenerate = (sitemap, callback) => {
+const smGenerate = (sitemap, resolve) => {
 
   if (!(sitemap.sitemaps && sitemap.sitemaps.length)) return;
 
-  const domain = sitemap.sitemaps[0].domain;
-  const topLoc = `https://${domain}/`;
+  let mainXml = xmlbuilder.create('sitemapindex', { version: '1.0', encoding: 'utf-8' })
+    .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
+    .att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
+  const lastmod = new Date().toISOString().replace('Z', '+00:00');
+
+  const routeLocales = {};
+  async.forEach(sitemap.routeLocales, (rl, rlCb) => {
+    routeLocales[rl.route] = rl.locales;
+    rlCb();
+  }, () => {
+    async.map(sitemap.sitemaps, (market, mCb) => {
+      // append to main xml
+      mainXml.ele('sitemap')
+        .ele('loc', `https://${market.domain}/sitemap-${market.market}.xml`).up()
+        .ele('lastmod', lastmod).up()
+        .up();
+      //generate market xml
+      generateMarket(market, routeLocales, mCb);
+    }, (_, xmls) => {
+      // add main to results
+      xmls.push({
+        filename: `sitemap.xml`,
+        content: mainXml.end({ pretty: true })
+      });
+      resolve(xmls);
+    })
+  })
+}
+const generateMarket = (sitemap, routeLocales, callback) => {
+  const topLoc = `https://${sitemap.domain}/`;
 
   let xml = xmlbuilder.create('urlset', { version: '1.0', encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
-    .att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml')
-    .ele('url')
-    .ele('loc', topLoc).up()
-    .up();
+    .att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
 
-  async.forEach(sitemap.routeLocales, addRoute(xml, topLoc), () => {
-    callback([{
-      filename: `sitemap.xml`,
+  async.forEach(sitemap.locales, addLocale(xml, topLoc, sitemap.routes, routeLocales), () => {
+    callback(null, {
+      filename: `sitemap-${sitemap.market}.xml`,
       content: xml.end({ pretty: true })
-    }]);
+    });
   });
 }
 
-const addRoute = (xml, topLoc) => {
-  return (rl, rlCb) => {
-    async.forEach(rl.locales, addUrl(xml, topLoc, rl), rlCb);
+// add all routes per locale and alternates from routelocale
+const addLocale = (xml, topLoc, routes, routeLocales) => {
+  return (l, lCb) => {
+    process.nextTick(() => {
+      async.forEach(routes, addUrls(xml, topLoc, l, routeLocales), lCb);
+    });
   }
 }
-const addUrl = (xml, topLoc, rl) => {
-  return (locale, locCb) => {
-    const loc = `${topLoc}${locale}${rl.route}`
+const addUrls = (xml, topLoc, locale, routeLocales) => {
+  return (route, rCb) => {
+    const loc = `${topLoc}${locale}${route}`;
     const url = xml.ele('url')
       .ele('loc', loc).up();
-    async.forEach(rl.locales, addLink(url, topLoc, rl.route), () => {
+    async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
       url.up();
-      locCb();
+      rCb();
     });
   };
 }
