@@ -52,27 +52,21 @@ const build = () => {
   log('PRD:', config.productName);
 
   const buildApp = Promise.all([
-    getRoutes(config.queryApiUrl, config.productName),
-    compileWebpackConfig(clientConfig),
-    compileWebpackConfig(renderConfig)
-  ])
-    .then(([routes, clientStats, renderStats]) => {
+      getRoutes(config.queryApiUrl, config.productName),
+      getSitemaps(config.queryApiUrl, config.productName),
+      compileWebpackConfig(clientConfig),
+      compileWebpackConfig(renderConfig)
+    ])
+    .then(([routes, sitemaps, clientStats, renderStats]) => {
       log('Routes', routes.length);
 
       printStats('Client', clientStats);
       printStats('Render', renderStats);
 
+      writeSitemaps(sitemaps);
       return routes;
     })
-    .then(prerender);
-
-  const buildSitemap = getSitemaps(config.queryApiUrl, config.productName)
-    .then(writeSitemaps);
-
-  Promise.all([
-    buildApp,
-    buildSitemap
-  ])
+    .then(prerender)
     .then(() => {
       process.exit();
     })
