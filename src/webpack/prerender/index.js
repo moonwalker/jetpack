@@ -9,7 +9,8 @@ const workerFarm = require('worker-farm');
 const { paths } = require('../defaults');
 
 const CHUNK_SIZE = 500;
-const PARALLEL_LIMIT = Math.min(os.cpus().length - 1, 8);
+const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||
+  Math.min(os.cpus().length - 1, 8);
 
 const getAssetSource = (filepath) => {
   const stylesheetFilepath = path.join(paths.output.path, filepath);
@@ -40,7 +41,7 @@ module.exports = routes => new Promise((resolve) => {
 
   const assets = resolveAssets();
 
-  log(`Start prerendering ${routes.length} routes`);
+  log(`Start prerendering ${routes.length} routes (${WORKER_COUNT} workers)`);
 
   async.parallelLimit(
     routeChunks.map((routeChunk, chunkId) => nextTask =>
@@ -50,7 +51,7 @@ module.exports = routes => new Promise((resolve) => {
         workersCount,
         assets
       }, nextTask)),
-    PARALLEL_LIMIT,
+    WORKER_COUNT,
     () => {
       log('Done prerendering');
       workerFarm.end(worker);
