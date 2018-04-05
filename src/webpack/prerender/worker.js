@@ -31,17 +31,21 @@ module.exports = (options, done) => {
   } = options;
 
   const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);
+  const logRoute = debug('jetpack:prerender:route');
 
   log(`Start prerendering ${routes.length} routes - ${CONCURENT_CONNECTIONS} concurent connections (pid: ${process.pid})...`);
 
-  const tasks = routes.map(route => nextTask =>
-    render({ route, assets })
+  const tasks = routes.map(route => nextTask => {
+    logRoute(route.path);
+
+    return render({ route, assets })
       .then(writeHtml(route.path))
       .then(nextTask)
       .catch((err) => {
         console.error('Render error', err.message); // eslint-disable-line no-console
         nextTask();
-      }));
+      });
+    });
 
   async.parallelLimit(tasks, CONCURENT_CONNECTIONS, () => {
     log('Done');
