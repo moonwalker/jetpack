@@ -10,10 +10,7 @@ const {
   minimize
 } = require('../defaults');
 
-const render = require(paths.render.file).default; // eslint-disable-line
 const DEBUG_SEGMENTS = ['prerender', 'worker'];
-
-// Override global fetch
 
 const writeHtml = (routePath) => {
   const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
@@ -26,6 +23,7 @@ const writeHtml = (routePath) => {
 
 module.exports = (options, done) => {
   const {
+    renderFilepath,
     routes,
     id,
     workersCount,
@@ -37,6 +35,9 @@ module.exports = (options, done) => {
 
   log(`${id}/${workersCount} (pid: ${process.pid})`);
   log(`Routes: ${routes.length}`);
+
+  // eslint-disable-next-line import/no-dynamic-require, global-require
+  const render = require(renderFilepath).default;
 
   const tasks = routes.map(route => (nextTask) => {
     const logRoute = debug(...DEBUG_SEGMENTS, `worker_${id}`, 'route', route.path);

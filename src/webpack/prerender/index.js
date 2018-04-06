@@ -25,11 +25,11 @@ const processChunk = files => ({
   ...(files.css ? { style: getAssetSource(files.css) } : {})
 });
 
-const resolveAssets = () => {
+const processAssets = (assetsFilepath) => {
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const assets = require(path.join(paths.assets.path, paths.assets.filename));
+  const assetsData = require(assetsFilepath);
 
-  return Object.entries(assets).reduce((aggregated, [name, files]) => ({
+  return Object.entries(assetsData).reduce((aggregated, [name, files]) => ({
     ...aggregated,
     [name]: processChunk(files)
   }), {});
@@ -42,7 +42,27 @@ const filterRoutes = (routes, filter) => {
   return routes.filter(isMatching);
 };
 
+const checkBuildArtifacts = (...filepaths) => {
+  let artifacts = [];
+
+  try {
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    artifacts = filepaths.map(filepath => require.resolve(filepath));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Build artifacts are requird, run `jetpack build` before!\n', err);
+    process.exit(1);
+  }
+
+  return artifacts;
+};
+
 module.exports = allRoutes => new Promise((resolve) => {
+  const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
+    path.join(paths.assets.path, paths.assets.filename),
+    paths.render.file
+  );
+
   const routes = ROUTES_FILTER ?
     filterRoutes(allRoutes, ROUTES_FILTER) :
     allRoutes;
@@ -56,11 +76,12 @@ module.exports = allRoutes => new Promise((resolve) => {
   const routeChunks = chunk(routes, CHUNK_SIZE);
   const workersCount = Math.ceil(routes.length / CHUNK_SIZE);
 
-  const assets = resolveAssets();
+  const assets = processAssets(assetsFilepath);
 
   async.parallelLimit(
     routeChunks.map((routeChunk, chunkId) => nextTask =>
       worker({
+        renderFilepath,
         routes: routeChunk,
         id: chunkId + 1,
         concurrentConnections: CONCURRENT_CONNECTIONS,

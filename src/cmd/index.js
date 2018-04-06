@@ -23,6 +23,10 @@ module.exports = {
       return require('./build').run()
     }
 
+    if (cmd === 'prerender') {
+      return require('./prerender').run()
+    }
+
     if (cmd === 'create') {
       return require('./create').run(process.argv[3], process.argv[4])
     }
@@ -44,9 +48,10 @@ ${name} — Webpack for Moonwalkers
 Usage: ${name} <command>
 
 Commands:
-  create   create a new project
-  start    start development server
-  build    build app for production
+  create    create a new project
+  start     start development server
+  build     build app for production
+  prerender generate static files
 
 Options:
   -v, --version   print version information`
