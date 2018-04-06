@@ -10,10 +10,14 @@ const {
   minimize
 } = require('../defaults');
 
-const DEBUG_SEGMENTS = ['prerender', 'worker'];
+const writeHtml = htmlFilepath => (html) => {
+  const data = minimize.enabled ? htmlMinifier.minify(html) : html;
 
-const writeHtml = htmlFilepath => html =>
-  fse.outputFile(htmlFilepath, minimize.enabled ? htmlMinifier.minify(html) : html);
+  return fse.outputFile(htmlFilepath, data)
+    .then(() => ({
+      contentSize: data.length
+    }));
+};
 
 module.exports = (options, done) => {
   const {
@@ -25,7 +29,8 @@ module.exports = (options, done) => {
     assets
   } = options;
 
-  const log = debug(...DEBUG_SEGMENTS, `worker_${id}`);
+  const workerNamespace = `prerender:worker:worker_${id}`;
+  const log = debug(workerNamespace);
 
   log(`${id}/${workersCount} (pid: ${process.pid})`);
   log(`Routes: ${routes.length}`);
@@ -33,8 +38,10 @@ module.exports = (options, done) => {
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const render = require(renderFilepath).default;
 
-  const tasks = routes.map(route => (nextTask) => {
-    const logRoute = debug(...DEBUG_SEGMENTS, `worker_${id}`, 'route', route.path);
+  const tasks = routes.map(route => (nextRoute) => {
+    const routeNamespace = `${workerNamespace}:route:${route.path}`;
+
+    const logRoute = debug(routeNamespace);
     logRoute('Start');
 
     const url = path.join(route.path, 'index.html');
@@ -42,16 +49,17 @@ module.exports = (options, done) => {
 
     return render({ route, assets })
       .then(writeHtml(htmlFilepath))
-      .then(() => {
+      .then((res) => {
         logRoute('End');
-        nextTask(null, {
-          [route.path]: url
+
+        nextRoute(null, {
+          [route.path]: {
+            url,
+            contentSize: res.contentSize
+          }
         });
       })
-      .catch((err) => {
-        console.error('Render error', err.message); // eslint-disable-line no-console
-        nextTask(err);
-      });
+      .catch(nextRoute);
   });
 
   return async.parallelLimit(tasks, concurrentConnections, (err, stats) => {

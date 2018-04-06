@@ -9,8 +9,9 @@ module.exports = (stats) => {
   const outputFilepath = path.join(paths.artifacts.path, paths.artifacts.prerender);
   const data = flatten(stats);
 
-  return fse.outputFile(
+  return fse.outputJSON(
     outputFilepath,
-    JSON.stringify(data, null, 2)
+    data,
+    { spaces: 2 }
   ).then(() => log('Prerender stats saved to %s', outputFilepath));
 };
