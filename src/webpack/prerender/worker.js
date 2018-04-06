@@ -12,14 +12,8 @@ const {
 
 const DEBUG_SEGMENTS = ['prerender', 'worker'];
 
-const writeHtml = (routePath) => {
-  const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
-
-  return html => fse.outputFile(
-    outputFilepath,
-    minimize.enabled ? htmlMinifier.minify(html) : html
-  );
-};
+const writeHtml = htmlFilepath => html =>
+  fse.outputFile(htmlFilepath, minimize.enabled ? htmlMinifier.minify(html) : html);
 
 module.exports = (options, done) => {
   const {
@@ -43,20 +37,25 @@ module.exports = (options, done) => {
     const logRoute = debug(...DEBUG_SEGMENTS, `worker_${id}`, 'route', route.path);
     logRoute('Start');
 
+    const url = path.join(route.path, 'index.html');
+    const htmlFilepath = path.join(paths.output.path, url);
+
     return render({ route, assets })
-      .then(writeHtml(route.path))
+      .then(writeHtml(htmlFilepath))
       .then(() => {
         logRoute('End');
-        nextTask();
+        nextTask(null, {
+          [route.path]: url
+        });
       })
       .catch((err) => {
         console.error('Render error', err.message); // eslint-disable-line no-console
-        nextTask();
+        nextTask(err);
       });
   });
 
-  async.parallelLimit(tasks, concurrentConnections, () => {
+  return async.parallelLimit(tasks, concurrentConnections, (err, stats) => {
     log('Done');
-    done();
+    done(err, stats);
   });
 };

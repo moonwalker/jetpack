@@ -39,6 +39,10 @@ module.exports = {
     assets: {
       path: pwd('build'),
       filename: '.webpack-assets.json'
+    },
+    artifacts: {
+      path: pwd('artifacts'),
+      prerender: 'prerender.json'
     }
   },
   minimize: {

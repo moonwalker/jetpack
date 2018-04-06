@@ -12,6 +12,7 @@ const getRoutes = require('./getRoutes');
 const runPrerender = require('./prerender');
 const getSitemaps = require('./getSitemaps');
 const writeSitemaps = require('./writeSitemaps');
+const writePrerenderStats = require('./prerender/writeStats');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -81,6 +82,7 @@ const prerender = () => {
 
   return getRoutes(config.queryApiUrl, config.productName)
     .then(runPrerender)
+    .then(writePrerenderStats)
     .then(() => {
       process.exit();
     })

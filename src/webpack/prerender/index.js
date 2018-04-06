@@ -8,7 +8,7 @@ const workerFarm = require('worker-farm');
 const debug = require('../debug');
 const { paths } = require('../defaults');
 
-const CHUNK_SIZE = 500;
+const CHUNK_SIZE = process.env.JETPACK_PRERENDER_CHUNK_SIZE || 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||
   Math.min(os.cpus().length - 1, 8);
 const CONCURRENT_CONNECTIONS = process.env.JETPACK_PRERENDER_CONCURRENT_CONNECTIONS || 20;
@@ -57,7 +57,7 @@ const checkBuildArtifacts = (...filepaths) => {
   return artifacts;
 };
 
-module.exports = allRoutes => new Promise((resolve) => {
+module.exports = allRoutes => new Promise((resolve, reject) => {
   const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
     path.join(paths.assets.path, paths.assets.filename),
     paths.render.file
@@ -89,10 +89,15 @@ module.exports = allRoutes => new Promise((resolve) => {
         assets
       }, nextTask)),
     WORKER_COUNT,
-    () => {
+    (err, stats) => {
       log('Done prerendering');
       workerFarm.end(worker);
-      resolve();
+
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(stats);
     }
   );
 });
