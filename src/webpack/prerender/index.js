@@ -4,6 +4,7 @@ const fs = require('fs');
 const { chunk } = require('lodash');
 const async = require('async');
 const workerFarm = require('worker-farm');
+const { performance } = require('perf_hooks');
 
 const debug = require('../debug');
 const { paths } = require('../defaults');

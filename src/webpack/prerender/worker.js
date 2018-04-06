@@ -65,7 +65,7 @@ module.exports = (options, done) => {
           }
         });
       })
-      .catch(nextRoute);
+      .catch(err => nextRoute(err));
   });
 
   return async.parallelLimit(tasks, concurrentConnections, (err, stats) => {
