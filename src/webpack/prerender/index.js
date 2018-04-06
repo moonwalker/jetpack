@@ -11,6 +11,7 @@ const { paths } = require('../defaults');
 const CHUNK_SIZE = 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||
   Math.min(os.cpus().length - 1, 8);
+const CONCURRENT_CONNECTIONS = process.env.JETPACK_PRERENDER_CONCURRENT_CONNECTIONS || 20;
 
 const getAssetSource = (filepath) => {
   const stylesheetFilepath = path.join(paths.output.path, filepath);
@@ -34,20 +35,24 @@ const resolveAssets = () => {
 };
 
 module.exports = routes => new Promise((resolve) => {
+  const log = debug('jetpack:prerender');
+
+  log('Start prerendering %s routes', routes.length);
+  log('Worker count %d', WORKER_COUNT);
+  log('Concurrent connections %d', CONCURRENT_CONNECTIONS);
+
   const worker = workerFarm(require.resolve('./worker')); // eslint-disable-line
   const routeChunks = chunk(routes, CHUNK_SIZE);
-  const log = debug('jetpack:prerender:all');
   const workersCount = Math.ceil(routes.length / CHUNK_SIZE);
 
   const assets = resolveAssets();
-
-  log(`Start prerendering ${routes.length} routes (${WORKER_COUNT} workers)`);
 
   async.parallelLimit(
     routeChunks.map((routeChunk, chunkId) => nextTask =>
       worker({
         routes: routeChunk,
         id: chunkId,
+        concurrentConnections: CONCURRENT_CONNECTIONS,
         workersCount,
         assets
       }, nextTask)),

@@ -11,8 +11,6 @@ const {
 
 const render = require(paths.render.file).default; // eslint-disable-line
 
-const CONCURRENT_CONNECTIONS = process.env.JETPACK_PRERENDER_CONCURRENT_CONNECTIONS || 20;
-
 const writeHtml = (routePath) => {
   const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
 
@@ -27,13 +25,14 @@ module.exports = (options, done) => {
     routes,
     id,
     workersCount,
+    concurrentConnections,
     assets
   } = options;
 
   const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);
   const logRoute = debug('jetpack:prerender:route');
 
-  log(`Start prerendering ${routes.length} routes - ${CONCURRENT_CONNECTIONS} concurent connections (pid: ${process.pid})...`);
+  log(`Start prerendering ${routes.length} routes - ${concurrentConnections} concurrent connections (pid: ${process.pid})...`);
 
   const tasks = routes.map(route => (nextTask) => {
     logRoute(route.path);
@@ -47,7 +46,7 @@ module.exports = (options, done) => {
       });
   });
 
-  async.parallelLimit(tasks, CONCURRENT_CONNECTIONS, () => {
+  async.parallelLimit(tasks, concurrentConnections, () => {
     log('Done');
     done();
   });
