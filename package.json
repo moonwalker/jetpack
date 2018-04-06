@@ -48,6 +48,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "lodash": "^4.17.5",
+    "node-fetch": "^2.1.2",
     "postcss-loader": "^2.0.10",
     "postcss-reporter": "^5.0.0",
     "style-loader": "^0.19.1",

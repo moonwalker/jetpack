@@ -4,12 +4,15 @@ const fse = require('fs-extra');
 const htmlMinifier = require('html-minifier');
 const debug = require('debug');
 
+require('./debug-fetch');
 const {
   paths,
   minimize
 } = require('../defaults');
 
 const render = require(paths.render.file).default; // eslint-disable-line
+
+// Override global fetch
 
 const writeHtml = (routePath) => {
   const outputFilepath = path.join(paths.output.path, routePath, 'index.html');
@@ -30,16 +33,19 @@ module.exports = (options, done) => {
   } = options;
 
   const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);
-  const logRoute = debug('jetpack:prerender:route');
 
   log(`Start prerendering ${routes.length} routes - ${concurrentConnections} concurrent connections (pid: ${process.pid})...`);
 
   const tasks = routes.map(route => (nextTask) => {
-    logRoute(route.path);
+    const logRoute = debug(`jetpack:prerender:route:${route.path}`);
+    logRoute('Start');
 
     return render({ route, assets })
       .then(writeHtml(route.path))
-      .then(nextTask)
+      .then(() => {
+        logRoute('End');
+        nextTask();
+      })
       .catch((err) => {
         console.error('Render error', err.message); // eslint-disable-line no-console
         nextTask();
