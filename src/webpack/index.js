@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+require('dotenv').config();
+
 const webpack = require('webpack')
 const path = require('path')
 const { spawn } = require('child_process')
