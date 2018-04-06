@@ -2,9 +2,10 @@ const path = require('path');
 const async = require('async');
 const fse = require('fs-extra');
 const htmlMinifier = require('html-minifier');
-const debug = require('debug');
 
 require('./debug-fetch');
+const debug = require('../debug');
+
 const {
   paths,
   minimize
@@ -32,12 +33,12 @@ module.exports = (options, done) => {
     assets
   } = options;
 
-  const log = debug(`jetpack:prerender:${id + 1}/${workersCount}`);
+  const log = debug('prerender', `${id + 1}/${workersCount}`);
 
   log(`Start prerendering ${routes.length} routes - ${concurrentConnections} concurrent connections (pid: ${process.pid})...`);
 
   const tasks = routes.map(route => (nextTask) => {
-    const logRoute = debug(`jetpack:prerender:route:${route.path}`);
+    const logRoute = debug('prerender', 'route', route.path);
     logRoute('Start');
 
     return render({ route, assets })

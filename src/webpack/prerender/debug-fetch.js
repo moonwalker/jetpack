@@ -1,9 +1,10 @@
 const nodeFetch = require('node-fetch');
 const { merge, omit } = require('lodash');
-const debug = require('debug');
+
+const debug = require('../debug');
 
 const USER_AGENT = 'node-fetch/1.0 (jetpack/prerender;+https://github.com/bitinn/node-fetch)';
-const DEBUG_PREFIX = 'jetpack:prerender:route:fetch';
+const DEBUG_PREFIX = ['prerender', 'route', 'fetch'];
 
 const loggedFetch = (url, options) => {
   const body = JSON.parse(options.body);
@@ -14,7 +15,7 @@ const loggedFetch = (url, options) => {
     }
   });
 
-  const log = debug(`${DEBUG_PREFIX}:${body.operationName}`);
+  const log = debug(...DEBUG_PREFIX, body.operationName);
   log('Start %o', omit(body, 'query'));
 
   return nodeFetch(url, fetchOptions)

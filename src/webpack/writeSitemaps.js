@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 const fs = require('fs-extra');
-const log = require('debug')('jetpack:build:sitemap');
+
+const log = require('./debug')('build', 'sitemap');
 
 const { paths } = require('./defaults');
 

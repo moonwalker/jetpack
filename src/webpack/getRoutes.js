@@ -1,6 +1,7 @@
 const async = require('async')
 const fetch = require('isomorphic-fetch')
-const log = require('debug')('jetpack:build:app');
+
+const log = require('./debug')('build', 'app');
 
 const getSitemapRoutes = ({ pathLocales, canonicalLocales }, product) => {
   const localeRegexp = new RegExp('^/([a-z]{2}(-[a-z]{2})?)(.*)');

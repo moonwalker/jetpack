@@ -4,11 +4,10 @@ require('dotenv').config();
 const webpack = require('webpack')
 const path = require('path')
 const { spawn } = require('child_process')
-const debug = require('debug');
 
 const { context, config, paths, minimize } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prd')
-
+const debug = require('./debug');
 const getRoutes = require('./getRoutes');
 const prerender = require('./prerender');
 const getSitemaps = require('./getSitemaps');
@@ -48,7 +47,7 @@ const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
   }));
 
 const build = () => {
-  const log = debug('jetpack:build');
+  const log = debug('build');
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);

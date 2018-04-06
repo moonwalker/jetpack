@@ -1,7 +1,8 @@
 const async = require('async')
 const fetch = require('isomorphic-fetch')
 const xmlbuilder = require('xmlbuilder')
-const log = require('debug')('jetpack:build:sitemap');
+
+const log = require('./debug')('build', 'sitemap');
 
 module.exports = (apiUrl, product) => {
   const payload = {

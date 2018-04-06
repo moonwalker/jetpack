@@ -3,9 +3,9 @@ const os = require('os');
 const fs = require('fs');
 const { chunk } = require('lodash');
 const async = require('async');
-const debug = require('debug');
 const workerFarm = require('worker-farm');
 
+const debug = require('../debug');
 const { paths } = require('../defaults');
 
 const CHUNK_SIZE = 500;
@@ -35,7 +35,7 @@ const resolveAssets = () => {
 };
 
 module.exports = routes => new Promise((resolve) => {
-  const log = debug('jetpack:prerender');
+  const log = debug('prerender');
 
   log('Start prerendering %s routes', routes.length);
   log('Worker count %d', WORKER_COUNT);
