@@ -9,6 +9,7 @@ const {
   paths,
   minimize
 } = require('../defaults');
+const perf = require('../perf');
 
 const writeHtml = htmlFilepath => (html) => {
   const data = minimize.enabled ? htmlMinifier.minify(html) : html;
@@ -32,6 +33,8 @@ module.exports = (options, done) => {
   const workerNamespace = `prerender:worker:worker_${id}`;
   const log = debug(workerNamespace);
 
+  perf.start(workerNamespace);
+
   log(`${id}/${workersCount} (pid: ${process.pid})`);
   log(`Routes: ${routes.length}`);
 
@@ -40,8 +43,10 @@ module.exports = (options, done) => {
 
   const tasks = routes.map(route => (nextRoute) => {
     const routeNamespace = `${workerNamespace}:route:${route.path}`;
-
     const logRoute = debug(routeNamespace);
+
+    perf.start(routeNamespace);
+
     logRoute('Start');
 
     const url = path.join(route.path, 'index.html');
@@ -55,7 +60,8 @@ module.exports = (options, done) => {
         nextRoute(null, {
           [route.path]: {
             url,
-            contentSize: res.contentSize
+            contentSize: res.contentSize,
+            duration: perf.end(routeNamespace)
           }
         });
       })
@@ -64,6 +70,11 @@ module.exports = (options, done) => {
 
   return async.parallelLimit(tasks, concurrentConnections, (err, stats) => {
     log('Done');
-    done(err, stats);
+
+    done(err, {
+      id,
+      duration: perf.end(workerNamespace),
+      routes: stats
+    });
   });
 };

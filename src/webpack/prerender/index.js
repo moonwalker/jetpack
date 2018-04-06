@@ -7,12 +7,15 @@ const workerFarm = require('worker-farm');
 
 const debug = require('../debug');
 const { paths } = require('../defaults');
+const perf = require('../perf');
 
 const CHUNK_SIZE = process.env.JETPACK_PRERENDER_CHUNK_SIZE || 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||
   Math.min(os.cpus().length - 1, 8);
 const CONCURRENT_CONNECTIONS = process.env.JETPACK_PRERENDER_CONCURRENT_CONNECTIONS || 20;
 const ROUTES_FILTER = process.env.JETPACK_PRERENDER_ROUTES_FILTER;
+
+const NAMESPACE = 'prerender';
 
 const getAssetSource = (filepath) => {
   const stylesheetFilepath = path.join(paths.output.path, filepath);
@@ -67,10 +70,12 @@ module.exports = allRoutes => new Promise((resolve, reject) => {
     filterRoutes(allRoutes, ROUTES_FILTER) :
     allRoutes;
 
-  const log = debug('prerender');
+  const log = debug(NAMESPACE);
   log('Start prerendering %s/%s routes%s', routes.length, allRoutes.length, ` (${ROUTES_FILTER})`);
   log('Worker count %d', WORKER_COUNT);
   log('Concurrent connections %d', CONCURRENT_CONNECTIONS);
+
+  perf.start(NAMESPACE);
 
   const worker = workerFarm(require.resolve('./worker')); // eslint-disable-line
   const routeChunks = chunk(routes, CHUNK_SIZE);
@@ -91,13 +96,19 @@ module.exports = allRoutes => new Promise((resolve, reject) => {
     WORKER_COUNT,
     (err, stats) => {
       log('Done prerendering');
+
       workerFarm.end(worker);
+
+      const result = {
+        duration: perf.end(NAMESPACE),
+        workers: stats,
+      };
 
       if (err) {
         return reject(err);
       }
 
-      return resolve(stats);
+      return resolve(result);
     }
   );
 });
