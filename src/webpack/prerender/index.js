@@ -12,6 +12,7 @@ const CHUNK_SIZE = 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||
   Math.min(os.cpus().length - 1, 8);
 const CONCURRENT_CONNECTIONS = process.env.JETPACK_PRERENDER_CONCURRENT_CONNECTIONS || 20;
+const ROUTES_FILTER = process.env.JETPACK_PRERENDER_ROUTES_FILTER;
 
 const getAssetSource = (filepath) => {
   const stylesheetFilepath = path.join(paths.output.path, filepath);
@@ -34,10 +35,21 @@ const resolveAssets = () => {
   }), {});
 };
 
-module.exports = routes => new Promise((resolve) => {
+const filterRoutes = (routes, filter) => {
+  const pattern = new RegExp(filter);
+  const isMatching = route => pattern.test(route.path);
+
+  return routes.filter(isMatching);
+};
+
+module.exports = allRoutes => new Promise((resolve) => {
   const log = debug('prerender');
 
-  log('Start prerendering %s routes', routes.length);
+  const routes = ROUTES_FILTER ?
+    filterRoutes(allRoutes, ROUTES_FILTER) :
+    allRoutes;
+
+  log('Start prerendering %s/%s routes%s', routes.length, allRoutes.length, ` (${ROUTES_FILTER})`);
   log('Worker count %d', WORKER_COUNT);
   log('Concurrent connections %d', CONCURRENT_CONNECTIONS);
 
