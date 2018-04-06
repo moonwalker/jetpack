@@ -5,13 +5,13 @@ const htmlMinifier = require('html-minifier');
 
 require('./debug-fetch');
 const debug = require('../debug');
-
 const {
   paths,
   minimize
 } = require('../defaults');
 
 const render = require(paths.render.file).default; // eslint-disable-line
+const DEBUG_SEGMENTS = ['prerender', 'worker'];
 
 // Override global fetch
 
@@ -33,12 +33,13 @@ module.exports = (options, done) => {
     assets
   } = options;
 
-  const log = debug('prerender', `${id + 1}/${workersCount}`);
+  const log = debug(...DEBUG_SEGMENTS, `worker_${id}`);
 
-  log(`Start prerendering ${routes.length} routes - ${concurrentConnections} concurrent connections (pid: ${process.pid})...`);
+  log(`${id}/${workersCount} (pid: ${process.pid})`);
+  log(`Routes: ${routes.length}`);
 
   const tasks = routes.map(route => (nextTask) => {
-    const logRoute = debug('prerender', 'route', route.path);
+    const logRoute = debug(...DEBUG_SEGMENTS, `worker_${id}`, 'route', route.path);
     logRoute('Start');
 
     return render({ route, assets })

@@ -43,12 +43,11 @@ const filterRoutes = (routes, filter) => {
 };
 
 module.exports = allRoutes => new Promise((resolve) => {
-  const log = debug('prerender');
-
   const routes = ROUTES_FILTER ?
     filterRoutes(allRoutes, ROUTES_FILTER) :
     allRoutes;
 
+  const log = debug('prerender');
   log('Start prerendering %s/%s routes%s', routes.length, allRoutes.length, ` (${ROUTES_FILTER})`);
   log('Worker count %d', WORKER_COUNT);
   log('Concurrent connections %d', CONCURRENT_CONNECTIONS);
@@ -63,7 +62,7 @@ module.exports = allRoutes => new Promise((resolve) => {
     routeChunks.map((routeChunk, chunkId) => nextTask =>
       worker({
         routes: routeChunk,
-        id: chunkId,
+        id: chunkId + 1,
         concurrentConnections: CONCURRENT_CONNECTIONS,
         workersCount,
         assets
