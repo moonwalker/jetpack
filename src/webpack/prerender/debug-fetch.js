@@ -1,5 +1,7 @@
 const nodeFetch = require('node-fetch');
 const { merge, omit } = require('lodash');
+const Cache = require('node-cache');
+const fetchCached = require('fetch-cached').default;
 
 const debug = require('../debug');
 
@@ -7,6 +9,8 @@ const USER_AGENT = 'node-fetch/1.0 (jetpack/prerender;+https://github.com/bitinn
 const DEBUG_PREFIX = ['prerender', 'route', 'fetch'];
 
 global.workerFetchCount = 0;
+
+const cache = new Cache();
 
 const loggedFetch = (url, options) => {
   const body = JSON.parse(options.body);
@@ -30,6 +34,10 @@ const loggedFetch = (url, options) => {
     });
 };
 
-if (debug(DEBUG_PREFIX).enabled) {
-  global.fetch = loggedFetch;
-}
+global.fetch = fetchCached({
+  fetch: loggedFetch,
+  cache: {
+    get: k => cache.get(k),
+    set: (k, v) => cache.set(k, v),
+  }
+});
