@@ -21,6 +21,7 @@ const write = (stats) => {
 const display = (stats) => {
   const workersStats = stats.workers.map(workerStats => ({
     id: workerStats.id,
+    fetchCount: workerStats.fetchCount,
     duration: workerStats.duration,
     routes: workerStats.routes.length,
     avgPerRoute: workerStats.duration / workerStats.routes.length
@@ -28,23 +29,26 @@ const display = (stats) => {
 
   workersStats.forEach(({
     id,
+    fetchCount,
     duration,
     routes,
     avgPerRoute
   }) => log(
-    'Worker %d: duration: %d, routes: %d, avg per route: %d',
+    'Worker %d: duration: %d, routes: %d, fetch count: %d, avg per route: %d',
     id,
     round(duration),
     routes,
+    fetchCount,
     round(avgPerRoute)
   ));
 
   const totalRoutes = sumBy(workersStats, 'routes');
 
   log(
-    'TOTAL: duration: %d, routes: %d, avg per route: %d',
+    'TOTAL: duration: %d, routes: %d, fetchCount: %d, avg per route: %d',
     round(stats.duration),
     totalRoutes,
+    sumBy(workersStats, 'fetchCount'),
     round(stats.duration / totalRoutes)
   );
 

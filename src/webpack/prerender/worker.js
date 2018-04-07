@@ -74,6 +74,7 @@ module.exports = (options, done) => {
     done(err, {
       id,
       duration: perf.end(workerNamespace),
+      fetchCount: global.workerFetchCount,
       routes: stats
     });
   });
