@@ -16,7 +16,8 @@ const loggedFetch = (url, options) => {
   const fetchOptions = merge({}, options, {
     headers: {
       'User-Agent': USER_AGENT
-    }
+    },
+    timeout: 10000
   });
 
   const log = debug(...DEBUG_PREFIX, body.operationName);
