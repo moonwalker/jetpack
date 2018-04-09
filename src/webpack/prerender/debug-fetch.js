@@ -6,8 +6,6 @@ const debug = require('../debug');
 const USER_AGENT = 'node-fetch/1.0 (jetpack/prerender;+https://github.com/bitinn/node-fetch)';
 const DEBUG_PREFIX = ['prerender', 'route', 'fetch'];
 
-global.workerFetchCount = 0;
-
 const loggedFetch = (url, options) => {
   const body = JSON.parse(options.body);
 

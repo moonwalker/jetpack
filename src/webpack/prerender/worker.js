@@ -30,6 +30,8 @@ module.exports = (options, done) => {
     assets
   } = options;
 
+  global.workerFetchCount = 0;
+
   const workerNamespace = `prerender:worker:worker_${id}`;
   const log = debug(workerNamespace);
 
