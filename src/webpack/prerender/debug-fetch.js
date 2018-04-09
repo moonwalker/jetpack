@@ -25,6 +25,10 @@ const loggedFetch = (url, options) => {
     .then((res) => {
       log('Done');
       return res;
+    })
+    .catch((err) => {
+      console.error('Error on %s %O', url, body);
+      throw err;
     });
 };
 
