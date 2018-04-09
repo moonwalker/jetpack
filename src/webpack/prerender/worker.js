@@ -70,14 +70,23 @@ module.exports = (options, done) => {
       .catch(err => nextRoute(err));
   });
 
-  return async.parallelLimit(tasks, concurrentConnections, (err, stats) => {
+  // Render the first route to prime the cache, then start processing the other routes in parallel
+  const [primeCacheTask, ...restTasks] = tasks;
+
+  return async.series([
+    primeCacheTask,
+    nextTask => async.parallelLimit(restTasks, concurrentConnections, nextTask)
+  ], (err, [primeCacheRoute, otherRoutes]) => {
     log('Done');
 
     done(err, {
       id,
       duration: perf.end(workerNamespace),
       fetchCount: global.workerFetchCount,
-      routes: stats
+      routes: [
+        primeCacheRoute,
+        ...otherRoutes
+      ]
     });
   });
 };
