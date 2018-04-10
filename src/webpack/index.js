@@ -9,13 +9,8 @@ const { context, config, paths, minimize } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prd')
 const debug = require('./debug');
 const getRoutes = require('./getRoutes');
-const runPrerender = require('./prerender');
 const getSitemaps = require('./getSitemaps');
 const writeSitemaps = require('./writeSitemaps');
-const {
-  write: writePrerenderStats,
-  display: displayPrerenderStats,
-} = require('./prerender/stats');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -77,26 +72,10 @@ const build = () => {
     });
 };
 
-const prerender = () => {
-  const log = debug('prerender');
-  log('ENV:', process.env.ENV);
-  log('API:', config.queryApiUrl);
-  log('PRD:', config.productName);
-
-  return getRoutes(config.queryApiUrl, config.productName)
-    .then(runPrerender)
-    .then(writePrerenderStats)
-    .then(displayPrerenderStats)
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
-};
-
 const spawnWebPack = (cfgFile, bin = 'webpack') => {
   const cmd = path.resolve(context, '.bin', bin)
   const cfg = path.resolve(__dirname, cfgFile)
   spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
 }
 
-module.exports = { start, stage, build, prerender }
+module.exports = { start, stage, build }

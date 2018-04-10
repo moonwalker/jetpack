@@ -4,11 +4,10 @@ const fs = require('fs');
 const { chunk } = require('lodash');
 const async = require('async');
 const workerFarm = require('worker-farm');
-const { performance } = require('perf_hooks');
 
-const debug = require('../debug');
-const { paths } = require('../defaults');
-const perf = require('../perf');
+const debug = require('../webpack/debug');
+const { paths } = require('../webpack/defaults');
+const perf = require('../webpack/perf');
 
 const CHUNK_SIZE = process.env.JETPACK_PRERENDER_CHUNK_SIZE || 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||

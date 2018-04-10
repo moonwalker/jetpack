@@ -1,4 +1,4 @@
-const { prerender } = require('../webpack')
+const { prerender } = require('../prerender')
 
 module.exports = {
   run: () => {

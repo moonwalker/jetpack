@@ -4,12 +4,12 @@ const fse = require('fs-extra');
 const htmlMinifier = require('html-minifier');
 
 require('./debug-fetch');
-const debug = require('../debug');
+const debug = require('../webpack/debug');
 const {
   paths,
   minimize
-} = require('../defaults');
-const perf = require('../perf');
+} = require('../webpack/defaults');
+const perf = require('../webpack/perf');
 
 const writeHtml = htmlFilepath => (html) => {
   const data = minimize.enabled ? htmlMinifier.minify(html) : html;
