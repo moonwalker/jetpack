@@ -1,7 +1,5 @@
-const { prerender } = require('../prerender')
+const { prerender } = require('../prerender');
 
 module.exports = {
-  run: () => {
-    return prerender()
-  }
-}
+  run: () => prerender()
+};

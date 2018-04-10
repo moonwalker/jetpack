@@ -1,14 +1,15 @@
-/* eslint-disable no-console */
 require('dotenv').config();
 
-const webpack = require('webpack')
-const path = require('path')
-const { spawn } = require('child_process')
+const webpack = require('webpack');
+const path = require('path');
+const { spawn } = require('child_process');
 
-const { context, config, paths, minimize } = require('./defaults')
-const { renderConfig, clientConfig } = require('./webpack.config.prd')
+const {
+  context,
+  config
+} = require('./defaults');
+const { renderConfig, clientConfig } = require('./webpack.config.prd');
 const { debug } = require('../utils');
-const getRoutes = require('./getRoutes');
 const getSitemaps = require('./getSitemaps');
 const writeSitemaps = require('./writeSitemaps');
 
@@ -28,13 +29,19 @@ const printStats = (mode, stats) => {
   process.stdout.write('\n');
 };
 
+const spawnWebPack = (cfgFile, bin = 'webpack') => {
+  const cmd = path.resolve(context, '.bin', bin);
+  const cfg = path.resolve(__dirname, cfgFile);
+  spawn(cmd, ['--config', cfg], { stdio: 'inherit' });
+};
+
 const start = () => {
-  spawnWebPack('webpack.config.dev', 'webpack-dev-server')
-}
+  spawnWebPack('webpack.config.dev', 'webpack-dev-server');
+};
 
 const stage = () => {
-  spawnWebPack('webpack.config.stg')
-}
+  spawnWebPack('webpack.config.stg');
+};
 
 const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
   webpack(webpackConfig).run((err, stats) => {
@@ -67,15 +74,9 @@ const build = () => {
       process.exit();
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
     });
 };
 
-const spawnWebPack = (cfgFile, bin = 'webpack') => {
-  const cmd = path.resolve(context, '.bin', bin)
-  const cfg = path.resolve(__dirname, cfgFile)
-  spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
-}
-
-module.exports = { start, stage, build }
+module.exports = { start, stage, build };

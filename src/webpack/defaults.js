@@ -46,7 +46,7 @@ module.exports = {
     }
   },
   minimize: {
-    enabled: process.env.ENV ? true : false,
+    enabled: !!process.env.ENV,
     minifyOptions: {
       removeComments: true,
       collapseWhitespace: true,
@@ -60,4 +60,4 @@ module.exports = {
       minifyURLs: true
     }
   }
-}
+};
