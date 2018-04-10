@@ -2,7 +2,9 @@ const async = require('async')
 const fetch = require('isomorphic-fetch')
 const xmlbuilder = require('xmlbuilder')
 
-const log = require('./debug')('build', 'sitemap');
+const { debug } = require('../utils');
+
+const log = debug('build', 'sitemap');
 
 module.exports = (apiUrl, product) => {
   const payload = {

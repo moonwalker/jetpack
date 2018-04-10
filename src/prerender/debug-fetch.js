@@ -1,7 +1,7 @@
 const nodeFetch = require('node-fetch');
 const { merge, omit } = require('lodash');
 
-const debug = require('../webpack/debug');
+const { debug } = require('../utils');
 
 const USER_AGENT = 'node-fetch/1.0 (jetpack/prerender;+https://github.com/bitinn/node-fetch)';
 const DEBUG_PREFIX = ['prerender', 'route', 'fetch'];

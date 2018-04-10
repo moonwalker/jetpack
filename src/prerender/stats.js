@@ -3,7 +3,9 @@ const fse = require('fs-extra');
 const { round, sumBy } = require('lodash');
 
 const { paths } = require('../webpack/defaults');
-const log = require('../webpack/debug')('prerender', 'stats');
+const { debug } = require('../utils');
+
+const log = debug('prerender', 'stats');
 
 const write = (stats) => {
   const outputFilepath = path.join(paths.artifacts.path, paths.artifacts.prerender);

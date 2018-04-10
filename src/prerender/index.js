@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const { config } = require('../webpack/defaults');
 const getRoutes = require('../webpack/getRoutes');
-const debug = require('../webpack/debug');
+const { debug } = require('../utils');
 const run = require('./run');
 const {
   write: writeStats,

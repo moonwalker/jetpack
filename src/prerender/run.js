@@ -5,9 +5,11 @@ const { chunk } = require('lodash');
 const async = require('async');
 const workerFarm = require('worker-farm');
 
-const debug = require('../webpack/debug');
+const {
+  debug,
+  perf
+} = require('../utils');
 const { paths } = require('../webpack/defaults');
-const perf = require('../webpack/perf');
 
 const CHUNK_SIZE = process.env.JETPACK_PRERENDER_CHUNK_SIZE || 500;
 const WORKER_COUNT = process.env.JETPACK_PRERENDER_WORKER_COUNT ||

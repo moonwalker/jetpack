@@ -7,7 +7,7 @@ const { spawn } = require('child_process')
 
 const { context, config, paths, minimize } = require('./defaults')
 const { renderConfig, clientConfig } = require('./webpack.config.prd')
-const debug = require('./debug');
+const { debug } = require('../utils');
 const getRoutes = require('./getRoutes');
 const getSitemaps = require('./getSitemaps');
 const writeSitemaps = require('./writeSitemaps');

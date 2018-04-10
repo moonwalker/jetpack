@@ -1,7 +1,9 @@
 const { resolve } = require('path');
 const fs = require('fs-extra');
 
-const log = require('./debug')('build', 'sitemap');
+const { debug } = require('../utils');
+
+const log = debug('build', 'sitemap');
 
 const { paths } = require('./defaults');
 
