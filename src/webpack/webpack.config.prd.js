@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 
 const mergeConfigs = require('./mergeConfigs');
-const settings = require('./defaults')
+const settings = require('./defaults');
 const {
   createJavascriptConfig,
   createResolveConfig,

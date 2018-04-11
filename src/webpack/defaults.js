@@ -39,10 +39,14 @@ module.exports = {
     assets: {
       path: pwd('build'),
       filename: '.webpack-assets.json'
+    },
+    artifacts: {
+      path: pwd('artifacts'),
+      prerender: 'prerender.json'
     }
   },
   minimize: {
-    enabled: process.env.ENV ? true : false,
+    enabled: !!process.env.ENV,
     minifyOptions: {
       removeComments: true,
       collapseWhitespace: true,
@@ -56,4 +60,4 @@ module.exports = {
       minifyURLs: true
     }
   }
-}
+};

@@ -1,14 +1,15 @@
-/* eslint-disable no-console */
-const webpack = require('webpack')
-const path = require('path')
-const { spawn } = require('child_process')
-const debug = require('debug');
+require('dotenv').config();
 
-const { context, config, paths, minimize } = require('./defaults')
-const { renderConfig, clientConfig } = require('./webpack.config.prd')
+const webpack = require('webpack');
+const path = require('path');
+const { spawn } = require('child_process');
 
-const getRoutes = require('./getRoutes');
-const prerender = require('./prerender');
+const {
+  context,
+  config
+} = require('./defaults');
+const { renderConfig, clientConfig } = require('./webpack.config.prd');
+const { debug } = require('../utils');
 const getSitemaps = require('./getSitemaps');
 const writeSitemaps = require('./writeSitemaps');
 
@@ -28,13 +29,19 @@ const printStats = (mode, stats) => {
   process.stdout.write('\n');
 };
 
+const spawnWebPack = (cfgFile, bin = 'webpack') => {
+  const cmd = path.resolve(context, '.bin', bin);
+  const cfg = path.resolve(__dirname, cfgFile);
+  spawn(cmd, ['--config', cfg], { stdio: 'inherit' });
+};
+
 const start = () => {
-  spawnWebPack('webpack.config.dev', 'webpack-dev-server')
-}
+  spawnWebPack('webpack.config.dev', 'webpack-dev-server');
+};
 
 const stage = () => {
-  spawnWebPack('webpack.config.stg')
-}
+  spawnWebPack('webpack.config.stg');
+};
 
 const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
   webpack(webpackConfig).run((err, stats) => {
@@ -46,40 +53,30 @@ const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
   }));
 
 const build = () => {
-  const log = debug('jetpack:build');
+  const log = debug('build');
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);
 
-  const buildApp = Promise.all([
-      getRoutes(config.queryApiUrl, config.productName),
-      getSitemaps(config.queryApiUrl, config.productName),
-      compileWebpackConfig(clientConfig),
-      compileWebpackConfig(renderConfig)
-    ])
-    .then(([routes, sitemaps, clientStats, renderStats]) => {
-      log('Routes', routes.length);
-
+  return Promise.all([
+    getSitemaps(config.queryApiUrl, config.productName),
+    compileWebpackConfig(clientConfig),
+    compileWebpackConfig(renderConfig)
+  ])
+    .then(([sitemaps, clientStats, renderStats]) => {
       printStats('Client', clientStats);
       printStats('Render', renderStats);
 
-      writeSitemaps(sitemaps);
-      return routes;
+      return sitemaps;
     })
-    .then(prerender)
+    .then(writeSitemaps)
     .then(() => {
       process.exit();
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
     });
 };
 
-const spawnWebPack = (cfgFile, bin = 'webpack') => {
-  const cmd = path.resolve(context, '.bin', bin)
-  const cfg = path.resolve(__dirname, cfgFile)
-  spawn(cmd, ['--config', cfg], { stdio: 'inherit' })
-}
-
-module.exports = { start, stage, build }
+module.exports = { start, stage, build };

@@ -1,7 +1,5 @@
-const { build } = require('../webpack')
+const { build } = require('../webpack');
 
 module.exports = {
-  run: () => {
-    return build()
-  }
-}
+  run: () => build()
+};

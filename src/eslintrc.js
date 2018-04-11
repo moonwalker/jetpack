@@ -14,4 +14,4 @@ module.exports = {
     'jsx-a11y/label-has-for': 0,
     'comma-dangle': 0
   }
-}
+};

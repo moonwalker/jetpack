@@ -1,7 +1,5 @@
-const { stage } = require('../webpack')
+const { stage } = require('../webpack');
 
 module.exports = {
-  run: () => {
-    return stage()
-  }
-}
+  run: () => stage()
+};
