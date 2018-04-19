@@ -7,7 +7,7 @@ const log = debug('fetch', 'routes');
 
 const getSitemapRoutes = ({ pathLocales, canonicalLocales }, product) => {
   const localeRegexp = new RegExp('^/([a-z]{2}(-[a-z]{2})?)(.*)');
-  return function (sitemap, cb) {
+  return function(sitemap, cb) {
     async.map(sitemap.localeRoutes, (r, rCb) => {
       const localeMatch = r.match(localeRegexp);
       const locale = localeMatch[1];
@@ -15,7 +15,15 @@ const getSitemapRoutes = ({ pathLocales, canonicalLocales }, product) => {
       const locales = pathLocales[path].filter(l => (!canonicalLocales[l]));
       const canonicalLocale = canonicalLocales[locale];
       rCb(null, {
-        path: r, market: sitemap.marketObj, pathLocales: locales, domain: sitemap.domain, title: sitemap.title, description: sitemap.description, apiKeys: JSON.parse(product.apiKeys), canonicalLocale
+        path: r,
+        locale,
+        market: sitemap.marketObj,
+        pathLocales: locales,
+        domain: sitemap.domain,
+        title: sitemap.title,
+        description: sitemap.description,
+        apiKeys: JSON.parse(product.apiKeys),
+        canonicalLocale
       });
     }, (_, routes) => {
       cb(null, routes);
