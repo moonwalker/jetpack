@@ -42,7 +42,7 @@ const reduceAsync = (items, key, value) => (cb) => {
 
 module.exports = (apiUrl, product) => {
   const payload = {
-    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code, defaultLocale } localeRoutes } product { apiKeys } routeLocales { route, locales } canonicalLocales { locale, canonicalLocale } } }`
+    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code defaultLanguage defaultCurrency { currencyCode } } localeRoutes } product { apiKeys } routeLocales { route, locales } canonicalLocales { locale, canonicalLocale } } }`
   };
 
   const params = {

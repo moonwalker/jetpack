@@ -79,6 +79,7 @@ module.exports = (options, done) => {
     primeCacheTask,
     nextTask => async.parallelLimit(restTasks, concurrentConnections, nextTask)
   ], (err, [primeCacheRoute, otherRoutes]) => {
+    if (err) console.log(err)
     log('Done');
 
     done(err, {
