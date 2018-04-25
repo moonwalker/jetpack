@@ -79,16 +79,15 @@ module.exports = (options, done) => {
     primeCacheTask,
     nextTask => async.parallelLimit(restTasks, concurrentConnections, nextTask)
   ], (err, [primeCacheRoute, otherRoutes]) => {
-    if (err) console.log(err)
     log('Done');
 
-    done(err, {
+    done(err && err.stack, {
       id,
       duration: perf.end(workerNamespace),
       fetchCount: global.workerFetchCount,
       routes: [
         primeCacheRoute,
-        ...otherRoutes
+        ...(otherRoutes || [])
       ]
     });
   });
