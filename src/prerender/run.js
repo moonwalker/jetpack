@@ -101,16 +101,18 @@ module.exports = allRoutes => new Promise((resolve, reject) => {
 
       workerFarm.end(worker);
 
-      const result = {
-        duration: perf.end(NAMESPACE),
-        workers: stats,
-      };
+      perf.end(NAMESPACE).then((duration) => {
+        const result = {
+          duration,
+          workers: stats,
+        };
 
-      if (err) {
-        return reject(err);
-      }
+        if (err) {
+          return reject(err);
+        }
 
-      return resolve(result);
+        return resolve(result);
+      });
     }
   );
 });

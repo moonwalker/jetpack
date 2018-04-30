@@ -61,13 +61,14 @@ module.exports = (options, done) => {
       .then((res) => {
         logRoute('End');
 
-        nextRoute(null, {
-          [route.path]: {
-            url,
-            contentSize: res.contentSize,
-            duration: perf.end(routeNamespace)
-          }
-        });
+        return perf.end(routeNamespace).then(duration =>
+          nextRoute(null, {
+            [route.path]: {
+              url,
+              duration,
+              contentSize: res.contentSize,
+            }
+          }));
       })
       .catch(err => nextRoute(err));
   });
@@ -81,14 +82,16 @@ module.exports = (options, done) => {
   ], (err, [primeCacheRoute, otherRoutes]) => {
     log('Done');
 
-    done(err && err.stack, {
-      id,
-      duration: perf.end(workerNamespace),
-      fetchCount: global.workerFetchCount,
-      routes: [
-        primeCacheRoute,
-        ...(otherRoutes || [])
-      ]
+    perf.end(workerNamespace).then((duration) => {
+      done(err && err.stack, {
+        id,
+        duration,
+        fetchCount: global.workerFetchCount,
+        routes: [
+          primeCacheRoute,
+          ...(otherRoutes || [])
+        ]
+      });
     });
   });
 };
