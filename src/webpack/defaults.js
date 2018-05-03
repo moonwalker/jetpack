@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 
 const rev = execSync('git rev-parse --short HEAD').toString().trim();
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
+const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib', ...p);
 
 module.exports = {
   banner: `[filebase] @ ${rev}`,
@@ -14,9 +15,9 @@ module.exports = {
     entry: {
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js'),
-      webfonts: pwd('src', 'scripts', 'webfonts.js'),
-      analytics: pwd('src', 'scripts', 'analytics.js'),
-      messaging: pwd('src', 'scripts', 'messaging.js')
+      webfonts: lsp('scripts', 'webfonts.js'),
+      analytics: lsp('scripts', 'analytics.js'),
+      messaging: lsp('scripts', 'messaging.js')
     },
     output: {
       path: pwd('build'),
