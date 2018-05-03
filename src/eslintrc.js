@@ -11,6 +11,7 @@ module.exports = {
   rules: {
     'react/prop-types': 0,
     'react/jsx-filename-extension': 0,
+    'react/react-in-jsx-scope': 0,
     'jsx-a11y/label-has-for': 0,
     'comma-dangle': 0
   }
