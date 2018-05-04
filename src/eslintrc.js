@@ -9,6 +9,7 @@ module.exports = {
     }
   },
   rules: {
+    'import/prefer-default-export': 0,
     'react/prop-types': 0,
     'react/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
