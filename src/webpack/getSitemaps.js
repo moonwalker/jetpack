@@ -57,7 +57,7 @@ const smGenerate = (sitemap, resolve) => {
     async.map(sitemap.sitemaps, (market, mCb) => {
       // append to main xml
       mainXml.ele('sitemap')
-        .ele('loc', `https://${market.domain}/sitemap-${market.market}.xml`).up()
+        .ele('loc', `https://${market.domain.toLowerCase()}/sitemap-${market.market.toLowerCase()}.xml`).up()
         .ele('lastmod', lastmod)
         .up()
         .up();
@@ -74,7 +74,7 @@ const smGenerate = (sitemap, resolve) => {
   });
 };
 const generateMarket = (sitemap, routeLocales, callback) => {
-  const topLoc = `https://${sitemap.domain}/`;
+  const topLoc = `https://${sitemap.domain.toLowerCase()}/`;
 
   const xml = xmlbuilder.create('urlset', { version: '1.0', encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -82,7 +82,7 @@ const generateMarket = (sitemap, routeLocales, callback) => {
 
   async.forEach(sitemap.locales, addLocale(xml, topLoc, sitemap.routes, routeLocales), () => {
     callback(null, {
-      filename: `sitemap-${sitemap.market}.xml`,
+      filename: `sitemap-${sitemap.market.toLowerCase()}.xml`,
       content: xml.end({ pretty: true })
     });
   });
@@ -91,11 +91,11 @@ const generateMarket = (sitemap, routeLocales, callback) => {
 // add all routes per locale and alternates from routelocale
 const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
   process.nextTick(() => {
-    async.forEach(routes, addUrls(xml, topLoc, l, routeLocales), lCb);
+    async.forEach(routes, addUrls(xml, topLoc, l.toLowerCase(), routeLocales), lCb);
   });
 };
 const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
-  const loc = `${topLoc}${locale}${route}`;
+  const loc = `${topLoc}${locale}${route.toLowerCase()}`;
   const url = xml.ele('url')
     .ele('loc', loc).up();
   async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
@@ -104,7 +104,7 @@ const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
   });
 };
 const addLink = (url, topLoc, route) => (l, lCb) => {
-  const altLoc = `${topLoc}${l}${route}`;
+  const altLoc = `${topLoc}${l.toLowerCase()}${route.toLowerCase()}`;
   url.ele('xhtml:link')
     .att('rel', 'alternate')
     .att('hreflang', l)
