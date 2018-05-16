@@ -1,5 +1,5 @@
 module.exports = () => ({
   resolve: {
-    extensions: ['.js', '.json', '.css', '.less', '.styl']
+    extensions: ['.js', '.jsx', '.json', '.css', '.less', '.styl']
   }
 });
