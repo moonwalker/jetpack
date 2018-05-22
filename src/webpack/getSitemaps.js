@@ -55,14 +55,16 @@ const smGenerate = (sitemap, resolve) => {
     rlCb();
   }, () => {
     async.map(sitemap.sitemaps, (market, mCb) => {
-      // append to main xml
-      mainXml.ele('sitemap')
-        .ele('loc', `https://${market.domain.toLowerCase()}/sitemap-${market.market.toLowerCase()}.xml`).up()
-        .ele('lastmod', lastmod)
-        .up()
-        .up();
-      // generate market xml
-      generateMarket(market, routeLocales, mCb);
+      if (market && market.domain) {
+        // append to main xml if it has an external domain
+        mainXml.ele('sitemap')
+          .ele('loc', `https://${market.domain.toLowerCase()}/sitemap-${market.market.toLowerCase()}.xml`).up()
+          .ele('lastmod', lastmod)
+          .up()
+          .up();
+        // generate market xml
+        generateMarket(market, routeLocales, mCb);
+      }
     }, (_, xmls) => {
       // add main to results
       xmls.push({
