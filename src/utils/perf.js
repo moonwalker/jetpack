@@ -24,7 +24,8 @@ const end = name => new Promise((resolve) => {
 
   performance.mark(endName);
   performance.measure(name, startName, endName);
-  performance.clearMarks([startName, endName]);
+  performance.clearMarks(startName);
+  performance.clearMarks(endName);
 });
 
 module.exports = {
