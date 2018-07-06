@@ -15,6 +15,7 @@ const {
 const settings = require('./defaults');
 
 const env = {
+  CLIENT: true,
   ENV: 'development',
   NODE_ENV: 'development'
 };
