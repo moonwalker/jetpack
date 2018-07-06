@@ -20,6 +20,7 @@ const {
 const settings = require('./defaults');
 
 const env = {
+  CLIENT: true,
   ENV: 'staging',
   NODE_ENV: 'production'
 };

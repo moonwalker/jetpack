@@ -19,6 +19,7 @@ const {
 } = require('./config');
 
 const env = {
+  CLIENT: true,
   ENV: 'production',
   NODE_ENV: 'production'
 };
@@ -108,7 +109,10 @@ const renderConfig = mergeConfigs([
       new CleanWebpackPlugin(paths.render.path, {
         root: paths.root
       }),
-      new webpack.EnvironmentPlugin(env),
+      new webpack.EnvironmentPlugin({
+        ...env,
+        CLIENT: false
+      }),
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1
       })
