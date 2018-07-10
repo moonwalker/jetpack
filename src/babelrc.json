@@ -15,5 +15,19 @@
       "polyfill": false,
       "regenerator": true
     }]
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "env",
+        "stage-2",
+        "react"
+      ],
+      "plugins": [
+        "react-require",
+        "transform-class-properties",
+        "transform-decorators-legacy"
+      ]
+    }
+  }
 }
