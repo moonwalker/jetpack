@@ -8,6 +8,7 @@ module.exports = {
       jsx: true
     }
   },
+  plugins: ['jest'],
   rules: {
     'import/prefer-default-export': 0,
     'react/prop-types': 0,
