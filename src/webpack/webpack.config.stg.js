@@ -54,7 +54,7 @@ const stageConfig = {
     }),
     new CopyWebpackPlugin([{
       from: paths.public.root,
-      ignore: ['index.html']
+      ignore: ['!**/*/index.html']
     }]),
     new UglifyJsPlugin({
       sourceMap: true
