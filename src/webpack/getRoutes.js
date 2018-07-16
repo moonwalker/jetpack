@@ -23,6 +23,7 @@ const getSitemapRoutes = ({ pathLocales, canonicalLocales }, product) => {
         title: sitemap.title,
         description: sitemap.description,
         apiKeys: JSON.parse(product.apiKeys),
+        olark: JSON.parse(product.olark),
         canonicalLocale
       });
     }, (_, routes) => {

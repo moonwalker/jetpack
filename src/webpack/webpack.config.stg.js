@@ -35,7 +35,8 @@ const stageConfig = {
     main: paths.entry.main,
     webfonts: paths.entry.webfonts,
     segment: paths.entry.analytics,
-    messaging: paths.entry.messaging
+    messaging: paths.entry.messaging,
+    messaging: paths.entry.support
   },
   output: {
     path: paths.output.path,
