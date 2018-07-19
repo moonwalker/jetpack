@@ -17,7 +17,8 @@ module.exports = {
       render: pwd('src', 'render.js'),
       webfonts: lsp('scripts', 'webfonts.js'),
       analytics: lsp('scripts', 'analytics.js'),
-      messaging: lsp('scripts', 'messaging.js')
+      messaging: lsp('scripts', 'messaging.js'),
+      support: lsp('scripts', 'support.js')
     },
     output: {
       path: pwd('build'),
