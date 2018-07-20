@@ -79,4 +79,15 @@ const build = () => {
     });
 };
 
-module.exports = { start, stage, build };
+const buildRender = () => {
+  const log = debug('build:render');
+  log('ENV:', process.env.ENV);
+  log('API:', config.queryApiUrl);
+  log('PRD:', config.productName);
+
+  return compileWebpackConfig(renderConfig).then(renderStats => {
+    printStats('Render', renderStats);
+  });
+}
+
+module.exports = { start, stage, build, buildRender };
