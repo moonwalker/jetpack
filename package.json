@@ -56,6 +56,7 @@
     "node-fetch": "^2.1.2",
     "postcss-loader": "^2.0.10",
     "postcss-reporter": "^5.0.0",
+    "react-svg-loader": "^2.1.0",
     "style-loader": "^0.19.1",
     "stylelint": "^8.4.0",
     "stylelint-config-css-modules": "^1.1.0",
