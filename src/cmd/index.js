@@ -23,6 +23,10 @@ module.exports = {
       return require('./build').run();
     }
 
+    if (cmd === 'build-render') {
+      return require('./build-render').run();
+    }
+
     if (cmd === 'prerender') {
       return require('./prerender').run();
     }
@@ -50,6 +54,7 @@ Commands:
   create    create a new project
   start     start development server
   build     build app for production
+  build-render build render bundle
   prerender generate static files
 
 Options:

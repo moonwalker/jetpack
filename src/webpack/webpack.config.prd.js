@@ -138,3 +138,4 @@ const renderConfig = mergeConfigs([
 ], settings, env);
 
 module.exports = { renderConfig, clientConfig };
+module.exports.renderConfig = renderConfig;

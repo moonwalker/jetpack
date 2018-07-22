@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const mergeConfigs = require('./mergeConfigs');
@@ -15,7 +14,8 @@ const {
   createServiceWorkerConfig,
   createFileConfig,
   createCommonChunks,
-  createBuildInfo
+  createBuildInfo,
+  createStatsConfig
 } = require('./config');
 const settings = require('./defaults');
 
@@ -59,11 +59,6 @@ const stageConfig = {
     }]),
     new UglifyJsPlugin({
       sourceMap: true
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: 'bundle-analysis.html',
     })
   ]
 };
@@ -88,6 +83,7 @@ module.exports = mergeConfigs([
     context: paths.src
   }, env),
   createCommonChunks(),
+  createStatsConfig(),
   createBuildInfo({
     output: paths.output.buildInfo
   }),
