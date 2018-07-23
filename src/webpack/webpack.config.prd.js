@@ -60,8 +60,7 @@ const clientConfig = mergeConfigs([
         parallel: true
       }),
       new CopyWebpackPlugin([{
-        from: paths.public.root,
-        ignore: ['!**/*/index.html']
+        from: paths.public.root
       }]),
       new AssetsPlugin({
         ...paths.assets
