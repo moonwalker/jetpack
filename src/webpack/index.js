@@ -29,14 +29,14 @@ const printStats = (mode, stats) => {
   process.stdout.write('\n');
 };
 
-const spawnWebPack = (cfgFile, bin = 'webpack') => {
+const spawnWebPack = (cfgFile, bin = 'webpack', args = []) => {
   const cmd = path.resolve(context, '.bin', bin);
   const cfg = path.resolve(__dirname, cfgFile);
-  spawn(cmd, ['--config', cfg], { stdio: 'inherit' });
+  spawn(cmd, ['--config', cfg, ...args], { stdio: 'inherit' });
 };
 
 const start = () => {
-  spawnWebPack('webpack.config.dev', 'webpack-dev-server');
+  spawnWebPack('webpack.config.dev', 'webpack-dev-server', ['--host', '0.0.0.0']);
 };
 
 const stage = () => {
