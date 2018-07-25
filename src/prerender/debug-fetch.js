@@ -1,3 +1,4 @@
+require('dns-cache')(10000);
 const nodeFetch = require('node-fetch');
 const { merge, omit } = require('lodash');
 
