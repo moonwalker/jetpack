@@ -70,7 +70,10 @@ module.exports = (options, done) => {
             }
           }));
       })
-      .catch(err => nextRoute(err));
+      .catch(err => {
+        logRoute('Error')
+        nextRoute(err)
+      });
   });
 
   // Render the first route to prime the cache, then start processing the other routes in parallel
