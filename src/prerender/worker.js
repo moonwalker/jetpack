@@ -2,6 +2,8 @@ const path = require('path');
 const async = require('async');
 const fse = require('fs-extra');
 const htmlMinifier = require('html-minifier');
+const promiseRetry = require('promise-retry');
+const safeStringify = require('json-stringify-safe');
 
 require('./debug-fetch');
 const {
@@ -12,6 +14,8 @@ const {
   paths,
   minimize
 } = require('../webpack/defaults');
+
+const RETRY_COUNT = 3;
 
 const writeHtml = htmlFilepath => (html) => {
   const data = minimize.enabled ? htmlMinifier.minify(html) : html;
@@ -51,29 +55,60 @@ module.exports = (options, done) => {
 
     perf.start(routeNamespace);
 
-    logRoute('Start');
-
     const url = path.join(route.path, 'index.html');
     const htmlFilepath = path.join(paths.output.path, url);
 
-    return render({ route, assets })
-      .then(writeHtml(htmlFilepath))
-      .then((res) => {
-        logRoute('End');
+    return promiseRetry((retry, number) => {
+      logRoute(`Start (try #${number})`);
 
-        return perf.end(routeNamespace).then(duration =>
-          nextRoute(null, {
-            [route.path]: {
-              url,
-              duration,
-              contentSize: res.contentSize,
+      return render({ route, assets })
+        .then((html) => {
+          const res = writeHtml(htmlFilepath)(html);
+
+          return {
+            ...res,
+            retryCount: number
+          };
+        })
+        .catch((err) => {
+          console.error(`Error on ${route.path} (try ${number})`, err);
+
+          if (number < RETRY_COUNT) {
+            return retry(err);
+          }
+
+          throw err;
+        });
+    }).then((res) => {
+      logRoute('End');
+
+      return perf.end(routeNamespace).then(duration =>
+        nextRoute(null, {
+          [route.path]: {
+            url,
+            duration,
+            contentSize: res.contentSize,
+            retryCount: res.retryCount
+          }
+        }));
+    }).catch((err) => {
+      const nextError = {
+        ...err,
+        routePath: route.path
+      };
+
+      return perf.end(routeNamespace).then(duration =>
+        nextRoute(nextError, {
+          [route.path]: {
+            url,
+            duration,
+            lastError: {
+              message: err.message,
+              stack: err.stack
             }
-          }));
-      })
-      .catch(err => {
-        logRoute('Error')
-        nextRoute(err)
-      });
+          }
+        }));
+    });
   });
 
   // Render the first route to prime the cache, then start processing the other routes in parallel
@@ -85,8 +120,10 @@ module.exports = (options, done) => {
   ], (err, [primeCacheRoute, otherRoutes]) => {
     log('Done');
 
+    const strigifiedError = err && safeStringify(err);
+
     perf.end(workerNamespace).then((duration) => {
-      done(err && err.stack, {
+      done(strigifiedError, {
         id,
         duration,
         fetchCount: global.workerFetchCount,
