@@ -15,7 +15,8 @@ const {
   createLessConfig,
   createCommonChunks,
   createServiceWorkerConfig,
-  createBuildInfo
+  createBuildInfo,
+  createStatsConfig
 } = require('./config');
 
 const env = {
@@ -86,6 +87,7 @@ const clientConfig = mergeConfigs([
   createBuildInfo({
     output: paths.output.buildInfo
   }),
+  createStatsConfig(),
   createServiceWorkerConfig({
     globDirectory: paths.output.path,
     swDest: paths.output.swDest,
