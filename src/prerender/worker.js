@@ -62,7 +62,14 @@ module.exports = (options, done) => {
       logRoute(`Start (try #${number})`);
 
       return render({ route, assets })
-        .then(writeHtml(htmlFilepath))
+        .then((html) => {
+          const res = writeHtml(htmlFilepath)(html);
+
+          return {
+            ...res,
+            retryCount: number
+          };
+        })
         .catch((err) => {
           console.error(`Error on ${route.path} (try ${number})`, err);
 
@@ -81,13 +88,26 @@ module.exports = (options, done) => {
             url,
             duration,
             contentSize: res.contentSize,
+            retryCount: res.retryCount
           }
         }));
     }).catch((err) => {
-      nextRoute({
+      const nextError = {
         ...err,
         routePath: route.path
-      });
+      };
+
+      return perf.end(routeNamespace).then(duration =>
+        nextRoute(nextError, {
+          [route.path]: {
+            url,
+            duration,
+            lastError: {
+              message: err.message,
+              stack: err.stack
+            }
+          }
+        }));
     });
   });
 

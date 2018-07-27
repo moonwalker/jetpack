@@ -17,8 +17,12 @@ const prerender = () => {
 
   return getRoutes(config.queryApiUrl, config.productName)
     .then(run)
-    .then(writeStats)
-    .then(displayStats)
+    .then(({ err, result }) =>
+      writeStats(result).then(displayStats).then(() => {
+        if (err) {
+          throw err;
+        }
+      }))
     .catch((err) => {
       console.error(err); // eslint-disable-line no-console
       process.exit(1);

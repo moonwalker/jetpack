@@ -62,7 +62,7 @@ const checkBuildArtifacts = (...filepaths) => {
   return artifacts;
 };
 
-module.exports = allRoutes => new Promise((resolve, reject) => {
+module.exports = allRoutes => new Promise((resolve) => {
   const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
     path.join(paths.assets.path, paths.assets.filename),
     paths.render.file
@@ -107,11 +107,10 @@ module.exports = allRoutes => new Promise((resolve, reject) => {
           workers: stats,
         };
 
-        if (err) {
-          return reject(err);
-        }
-
-        return resolve(result);
+        return resolve({
+          err,
+          result
+        });
       });
     }
   );
