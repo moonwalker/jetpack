@@ -48,6 +48,7 @@ const stageConfig = {
     }),
     new webpack.EnvironmentPlugin(env),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),

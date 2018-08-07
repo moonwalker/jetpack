@@ -53,6 +53,7 @@ const clientConfig = mergeConfigs([
       }),
       new webpack.EnvironmentPlugin(env),
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new webpack.HashedModuleIdsPlugin(),
       new UglifyJsPlugin({
         sourceMap: true,
         cache: true,
