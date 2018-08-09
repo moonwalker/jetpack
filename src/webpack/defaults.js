@@ -16,8 +16,6 @@ module.exports = {
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js'),
       webfonts: lsp('scripts', 'webfonts.js'),
-      analytics: lsp('scripts', 'analytics.js'),
-      messaging: lsp('scripts', 'messaging.js'),
       support: lsp('scripts', 'support.js')
     },
     output: {
