@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const { getCommitId } = require('../utils');
 const mergeConfigs = require('./mergeConfigs');
 const {
   createJavascriptConfig,
@@ -21,6 +22,7 @@ const settings = require('./defaults');
 
 const env = {
   CLIENT: true,
+  COMMIT_ID: getCommitId(),
   ENV: 'staging',
   NODE_ENV: 'production'
 };

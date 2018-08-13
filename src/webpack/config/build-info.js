@@ -1,7 +1,6 @@
-const { execSync } = require('child_process');
 const GenerateJSONPlugin = require('generate-json-webpack-plugin');
 
-const getCommitId = () => execSync('git rev-parse HEAD').toString().trim();
+const { getCommitId } = require('../../utils');
 
 module.exports = ({ output }) => ({
   plugins: [
