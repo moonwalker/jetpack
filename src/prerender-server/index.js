@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const http = require('http');
 const path = require('path');
+const router = require('find-my-way')();
 
 const { debug } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
@@ -26,39 +27,40 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath);
 const render = require(renderFilepath).default;
 
+const getPrerenderRouteHandler = routes => (req, res) => {
+  const { url } = req;
+  const route = routes.find(item => item.path === url);
+
+  const routeNamespace = `${NAMESPACE}:${url}`;
+  const routeLog = debug(routeNamespace);
+
+  routeLog('Start');
+
+  if (!route) {
+    routeLog('Done', 'Page not found');
+    res.statusCode = 404;
+    res.end('Page not found.');
+    return;
+  }
+
+  render({ route, assets })
+    .then((data) => {
+      routeLog('Done');
+
+      res.end(data);
+    });
+};
+
+
 module.exports.prerenderServer = async () => {
   log('Starting');
 
   const routes = await getRoutes(config.queryApiUrl, config.productName);
 
+  router.on('GET', '*', getPrerenderRouteHandler(routes));
+
   const server = http.createServer((req, res) => {
-    const { url } = req;
-    const route = routes.find(item => item.path === url);
-
-    const routeNamespace = `${NAMESPACE}:${url}`;
-    const routeLog = debug(routeNamespace);
-
-    routeLog('Start');
-
-    if (!route) {
-      routeLog('Done', 'Page not found');
-      res.statusCode = 404;
-      res.end('Page not found.');
-      return;
-    }
-
-    render({ route, assets })
-      .then((data) => {
-        routeLog('Done');
-        res.end(data);
-      })
-      .catch((err) => {
-        routeLog('Err', err.message);
-        console.error(err);
-
-        res.statusCode = 500;
-        res.end('Error');
-      });
+    router.lookup(req, res);
   });
 
   server.on('clientError', (err, socket) => {
