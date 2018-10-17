@@ -31,6 +31,10 @@ module.exports = {
       return require('./prerender').run();
     }
 
+    if (cmd === 'prerender-server') {
+      return require('./prerender-server').run();
+    }
+
     if (cmd === 'create') {
       return require('./create').run(process.argv[3], process.argv[4]);
     }

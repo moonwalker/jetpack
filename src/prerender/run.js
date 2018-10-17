@@ -115,3 +115,6 @@ module.exports = allRoutes => new Promise((resolve) => {
     }
   );
 });
+
+module.exports.checkBuildArtifacts = checkBuildArtifacts;
+module.exports.processAssets = processAssets;
