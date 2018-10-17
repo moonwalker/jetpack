@@ -55,11 +55,12 @@ ${name} — Webpack for Moonwalkers
 Usage: ${name} <command>
 
 Commands:
-  create    create a new project
-  start     start development server
-  build     build app for production
-  build-render build render bundle
-  prerender generate static files
+  create              Create a new project
+  start               Start development server
+  build               Build app for production
+  build-render        Build render bundle
+  prerender           Generate static files
+  prerender-server    Start static file generator service
 
 Options:
   -v, --version   print version information`;
