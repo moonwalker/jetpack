@@ -5,7 +5,7 @@ const path = require('path');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
 
-const { debug } = require('../utils');
+const { debug, stripTrailingSlash } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
 const { paths, config } = require('../webpack/defaults');
 const getRoutes = require('../webpack/getRoutes');
@@ -61,11 +61,7 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 };
 
 const getPrerenderRouteHandler = routes => (req, reply) => {
-  let { url } = req.raw;
-  if (url.substr(-1) == '/' && url.length > 1) {
-    url = url.slice(0, -1);
-  }
-
+  let url = stripTrailingSlash(req.raw.url);
   const route = routes.find(item => item.path === url);
   if (!route) {
     reply
