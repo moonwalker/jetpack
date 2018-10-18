@@ -35,7 +35,7 @@ module.exports = {
       return require('./prerender').run();
     }
 
-    if (cmd === 'prerender-server') {
+    if (cmd === 'serve') {
       return require('./prerender-server').run();
     }
 
