@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const http = require('http');
 const path = require('path');
-const router = require('find-my-way')();
+const fastify = require('fastify');
 
 const { debug } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
@@ -28,7 +28,7 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath);
 const render = require(renderFilepath).default;
 
-const getSitemapHandler = sitemap => (req, res) => {
+const getSitemapHandler = sitemap => (req, reply) => {
   const routeNamespace = `sitemap:${req.url}`;
   const routeLog = debug(routeNamespace);
   routeLog('Start');
@@ -37,39 +37,47 @@ const getSitemapHandler = sitemap => (req, res) => {
 
   routeLog('Done');
 
-  res.setHeader('Content-Type', 'application/xml');
-  res.end(data);
+  reply
+    .header('Content-Type', 'application/xml')
+    .send(data);
 };
 
-const getSitemapMarketHandler = sitemap => (req, res, params) => {
+const getSitemapMarketHandler = sitemap => (req, reply) => {
   const routeNamespace = `sitemap:${req.url}`;
   const routeLog = debug(routeNamespace);
   routeLog('Start');
 
-  const marketId = params.market.toUpperCase();
+  const marketId = req.params.market.toUpperCase();
   const market = sitemap.sitemaps.find(entry => entry.market === marketId);
 
   if (!market || !market.domain) {
     // @TODO log + tracking
-    res.statusCode = 404;
-    return res.end('Page not found');
+    reply
+      .code(404)
+      .send('Page not found');
   }
 
   generateMarketSitemap(market, sitemap.routeLocales, (err, data) => {
     routeLog('Done');
 
     if (err) {
-      res.statusCode = 500;
-      return res.end(err.message);
+      reply
+        .code(500)
+        .send(err.message);
     }
 
-    res.setHeader('Content-Type', 'application/xml');
-    return res.end(data);
+    reply
+      .header('Content-Type', 'application/xml')
+      .send(data);
   });
 };
 
-const getPrerenderRouteHandler = routes => (req, res) => {
-  const { url } = req;
+const getPrerenderRouteHandler = routes => (req, reply) => {
+  let { url } = req.raw;
+  if (url.substr(-1) == '/' && url.length > 1) {
+    url = url.slice(0, -1);
+  }
+
   const route = routes.find(item => item.path === url);
 
   const routeNamespace = `${NAMESPACE}:${url}`;
@@ -79,16 +87,18 @@ const getPrerenderRouteHandler = routes => (req, res) => {
 
   if (!route) {
     routeLog('Done', 'Page not found');
-    res.statusCode = 404;
-    res.end('Page not found.');
+    reply
+      .code(404)
+      .send('Page not found.');
     return;
   }
 
   render({ route, assets })
     .then((data) => {
       routeLog('Done');
-      res.setHeader('Content-Type', 'text/html');
-      res.end(data);
+      reply
+        .header('Content-Type', 'text/html')
+        .send(data);
     });
 };
 
@@ -102,19 +112,22 @@ module.exports.serve = async ({ worker }) => {
   ]);
   log('Done fetching data.');
 
-  router.on('GET', '/sitemap.xml', getSitemapHandler(sitemap));
-  router.on('GET', '/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
-  router.on('GET', '*', getPrerenderRouteHandler(routes));
-
-  const server = http.createServer((req, res) => {
-    router.lookup(req, res);
+  const server = fastify({
+    logger: true,
+    ignoreTrailingSlash: true,
+    caseSensitive: false
   });
 
-  server.on('clientError', (err, socket) => {
-    socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
+  server.register(require('fastify-static'), {
+    root: path.join(process.cwd(), 'build', 'static'),
+    prefix: '/static/'
   });
 
-  server.listen(PORT, () => {
-    log('Listening on port ', PORT);
+  server.get('/sitemap.xml', getSitemapHandler(sitemap));
+  server.get('/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
+  server.get('*', getPrerenderRouteHandler(routes));
+
+  server.listen(PORT, (err, address) => {
+    if (err) throw err;
   });
 };
