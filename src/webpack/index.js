@@ -10,8 +10,6 @@ const {
 } = require('./defaults');
 const { renderConfig, clientConfig } = require('./webpack.config.prd');
 const { debug } = require('../utils');
-const getSitemaps = require('./getSitemaps');
-const writeSitemaps = require('./writeSitemaps');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -59,17 +57,13 @@ const build = () => {
   log('PRD:', config.productName);
 
   return Promise.all([
-    getSitemaps(config.queryApiUrl, config.productName),
     compileWebpackConfig(clientConfig),
     compileWebpackConfig(renderConfig)
   ])
-    .then(([sitemaps, clientStats, renderStats]) => {
+    .then(([clientStats, renderStats]) => {
       printStats('Client', clientStats);
       printStats('Render', renderStats);
-
-      return sitemaps;
     })
-    .then(writeSitemaps)
     .then(() => {
       process.exit();
     })
