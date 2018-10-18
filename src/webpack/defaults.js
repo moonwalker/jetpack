@@ -1,7 +1,7 @@
 const path = require('path');
 const { execSync } = require('child_process');
 
-const rev = execSync('git rev-parse --short HEAD').toString().trim();
+const rev = process.env.COMMIT || execSync('git rev-parse --short HEAD').toString().trim();
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
 const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib', ...p);
 
