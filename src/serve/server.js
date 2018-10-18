@@ -3,6 +3,7 @@ require('dotenv').config();
 const http = require('http');
 const path = require('path');
 const fastify = require('fastify');
+const serveStatic = require('serve-static');
 
 const { debug } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
@@ -11,6 +12,7 @@ const getRoutes = require('../webpack/getRoutes');
 const { getSitemaps, generateMarketSitemap, generateMainSitemap } = require('../sitemap');
 
 const PORT = process.env.JETPACK_PRERENDER_PORT || 9002;
+const DEFAULT_PATH = '/en';
 const NAMESPACE = 'serve';
 
 const log = debug(NAMESPACE);
@@ -29,37 +31,23 @@ const assets = processAssets(assetsFilepath);
 const render = require(renderFilepath).default;
 
 const getSitemapHandler = sitemap => (req, reply) => {
-  const routeNamespace = `sitemap:${req.url}`;
-  const routeLog = debug(routeNamespace);
-  routeLog('Start');
-
   const data = generateMainSitemap(sitemap);
-
-  routeLog('Done');
-
   reply
     .header('Content-Type', 'application/xml')
     .send(data);
 };
 
 const getSitemapMarketHandler = sitemap => (req, reply) => {
-  const routeNamespace = `sitemap:${req.url}`;
-  const routeLog = debug(routeNamespace);
-  routeLog('Start');
-
   const marketId = req.params.market.toUpperCase();
   const market = sitemap.sitemaps.find(entry => entry.market === marketId);
 
   if (!market || !market.domain) {
-    // @TODO log + tracking
     reply
       .code(404)
       .send('Page not found');
   }
 
   generateMarketSitemap(market, sitemap.routeLocales, (err, data) => {
-    routeLog('Done');
-
     if (err) {
       reply
         .code(500)
@@ -79,14 +67,7 @@ const getPrerenderRouteHandler = routes => (req, reply) => {
   }
 
   const route = routes.find(item => item.path === url);
-
-  const routeNamespace = `${NAMESPACE}:${url}`;
-  const routeLog = debug(routeNamespace);
-
-  routeLog('Start');
-
   if (!route) {
-    routeLog('Done', 'Page not found');
     reply
       .code(404)
       .send('Page not found.');
@@ -95,7 +76,6 @@ const getPrerenderRouteHandler = routes => (req, reply) => {
 
   render({ route, assets })
     .then((data) => {
-      routeLog('Done');
       reply
         .header('Content-Type', 'text/html')
         .send(data);
@@ -114,17 +94,13 @@ module.exports.serve = async ({ worker }) => {
 
   const server = fastify({
     logger: true,
-    ignoreTrailingSlash: true,
-    caseSensitive: false
+    ignoreTrailingSlash: true
   });
 
-  server.register(require('fastify-static'), {
-    root: path.join(process.cwd(), 'build', 'static'),
-    prefix: '/static/'
-  });
-
+  server.use('/static', serveStatic(path.join(process.cwd(), 'build', 'static')))
   server.get('/sitemap.xml', getSitemapHandler(sitemap));
   server.get('/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
+  server.get('/', (_, reply) => { reply.redirect(301, DEFAULT_PATH) })
   server.get('*', getPrerenderRouteHandler(routes));
 
   server.listen(PORT, (err, address) => {
