@@ -11,7 +11,7 @@ const getRoutes = require('../webpack/getRoutes');
 const { getSitemaps, generateMarketSitemap, generateMainSitemap } = require('../sitemap');
 
 const PORT = process.env.JETPACK_PRERENDER_PORT || 9002;
-const NAMESPACE = 'prerender-server';
+const NAMESPACE = 'serve';
 
 const log = debug(NAMESPACE);
 

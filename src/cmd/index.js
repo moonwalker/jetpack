@@ -36,7 +36,7 @@ module.exports = {
     }
 
     if (cmd === 'serve') {
-      return require('./prerender-server').run();
+      return require('./serve').run();
     }
 
     if (cmd === 'create') {
@@ -65,7 +65,7 @@ Commands:
   build-client        Build app production bundle
   build-render        Build render bundle
   prerender           Generate static files
-  prerender-server    Start static file generator service
+  serve               Start web server
 
 Options:
   -v, --version   print version information`;
