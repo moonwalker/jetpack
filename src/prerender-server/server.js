@@ -92,7 +92,7 @@ const getPrerenderRouteHandler = routes => (req, res) => {
     });
 };
 
-module.exports.serve = async () => {
+module.exports.serve = async ({ worker }) => {
   log('Starting');
 
   log('Start fetching data.');
