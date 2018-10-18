@@ -4,7 +4,7 @@ const xmlbuilder = require('xmlbuilder');
 
 const { debug } = require('../utils');
 
-const log = debug('build', 'sitemap');
+const log = debug('sitemap');
 
 // add all routes per locale and alternates from routelocale
 const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
