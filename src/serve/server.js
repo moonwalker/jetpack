@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const http = require('http');
+const os = require('os');
 const path = require('path');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
@@ -78,6 +78,31 @@ const getPrerenderRouteHandler = routes => (req, reply) => {
     });
 };
 
+const healthzHandler = (worker) => {
+  const started = new Date().toISOString()
+  const service = process.env.SVCNAME || 'jetpack-server'
+  const version = (process.env.COMMIT || 'dev').substring(0, 7)
+  const built = process.env.BUILT || 'n/a'
+  const runtime = `node${process.versions.node}`
+  const platform = `${os.platform()}/${os.arch()}`
+  const host = os.hostname()
+
+  return (_, reply) => {
+    const status = 'healthy'
+    reply.send({
+      service,
+      version,
+      built,
+      runtime,
+      platform,
+      host,
+      status,
+      started,
+      worker
+    })
+  }
+}
+
 module.exports.serve = async ({ worker }) => {
   log('Starting');
 
@@ -96,6 +121,7 @@ module.exports.serve = async ({ worker }) => {
   server.use('/static', serveStatic(path.join(process.cwd(), 'build', 'static')))
   server.get('/sitemap.xml', getSitemapHandler(sitemap));
   server.get('/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
+  server.get('/healthz', healthzHandler(worker));
   server.get('/', (_, reply) => { reply.redirect(301, DEFAULT_PATH) })
   server.get('*', getPrerenderRouteHandler(routes));
 
