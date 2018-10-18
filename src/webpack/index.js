@@ -50,27 +50,13 @@ const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
     resolve(stats);
   }));
 
-const build = () => {
-  const log = debug('build');
+const buildClient = () => {
+  const log = debug('build:client');
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);
 
-  return Promise.all([
-    compileWebpackConfig(clientConfig),
-    compileWebpackConfig(renderConfig)
-  ])
-    .then(([clientStats, renderStats]) => {
-      printStats('Client', clientStats);
-      printStats('Render', renderStats);
-    })
-    .then(() => {
-      process.exit();
-    })
-    .catch((err) => {
-      console.error(err); // eslint-disable-line no-console
-      process.exit(1);
-    });
+  compileWebpackConfig(clientConfig).then(stats => printStats('Client', stats));
 };
 
 const buildRender = () => {
@@ -79,9 +65,18 @@ const buildRender = () => {
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);
 
-  return compileWebpackConfig(renderConfig).then(renderStats => {
-    printStats('Render', renderStats);
-  });
-}
+  return compileWebpackConfig(renderConfig).then(renderStats => printStats('Render', renderStats));
+};
 
-module.exports = { start, stage, build, buildRender };
+const build = () => Promise.all([
+  buildClient(),
+  buildRender()
+]);
+
+module.exports = {
+  start,
+  stage,
+  build,
+  buildClient,
+  buildRender
+};

@@ -119,7 +119,8 @@ const renderConfig = mergeConfigs([
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1
       })
-    ]
+    ],
+    devtool: false
   },
   createResolveConfig(),
   createJavascriptConfig({

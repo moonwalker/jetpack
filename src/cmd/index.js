@@ -23,6 +23,10 @@ module.exports = {
       return require('./build').run();
     }
 
+    if (cmd === 'build-client') {
+      return require('./build-client').run();
+    }
+
     if (cmd === 'build-render') {
       return require('./build-render').run();
     }
@@ -57,7 +61,8 @@ Usage: ${name} <command>
 Commands:
   create              Create a new project
   start               Start development server
-  build               Build app for production
+  build               Run build-client and build-render in parallel
+  build-client        Build app production bundle
   build-render        Build render bundle
   prerender           Generate static files
   prerender-server    Start static file generator service
