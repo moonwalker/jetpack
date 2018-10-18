@@ -2,12 +2,11 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { getCommitId } = require('../utils');
 
-const rev = getCommitId();
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
 const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib', ...p);
 
 module.exports = {
-  banner: `[filebase] @ ${rev}`,
+  banner: `[filebase] @ ${getCommitId()}`,
   config: require(pwd('src/config')),
   context: path.resolve(__dirname, '..', '..', 'node_modules'),
   paths: {
