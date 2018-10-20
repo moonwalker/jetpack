@@ -125,7 +125,7 @@ module.exports.serve = async ({ worker }) => {
   server.get('/', (_, reply) => { reply.redirect(301, DEFAULT_PATH) })
   server.get('*', getPrerenderRouteHandler(routes));
 
-  server.listen(PORT, (err, address) => {
+  server.listen(PORT, '0.0.0.0', (err, address) => {
     if (err) throw err;
   });
 };
