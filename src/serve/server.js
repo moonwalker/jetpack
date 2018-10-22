@@ -1,11 +1,12 @@
 require('dotenv').config();
 
 const os = require('os');
+const url = require('url');
 const path = require('path');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
 
-const { debug, stripTrailingSlash } = require('../utils');
+const { debug } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
 const { paths, config } = require('../webpack/defaults');
 const getRoutes = require('../webpack/getRoutes');
@@ -61,8 +62,10 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 };
 
 const getPrerenderRouteHandler = routes => (req, reply) => {
-  let url = stripTrailingSlash(req.raw.url);
-  const route = routes.find(item => item.path === url);
+  const { pathname, query } = url.parse(req.raw.url, true);
+  console.log('>>>', query);
+
+  const route = routes.find(item => item.path === pathname);
   if (!route) {
     reply
       .code(404)
