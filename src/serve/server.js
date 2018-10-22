@@ -4,6 +4,7 @@ const os = require('os');
 const path = require('path');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
+const parseUrl = require('parseurl');
 
 const { debug, stripTrailingSlash } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
@@ -61,7 +62,9 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 };
 
 const getPrerenderRouteHandler = routes => (req, reply) => {
-  let url = stripTrailingSlash(req.raw.url);
+  const { pathname } = parseUrl(req.raw);
+
+  let url = stripTrailingSlash(pathname);
   const route = routes.find(item => item.path === url);
   if (!route) {
     reply
