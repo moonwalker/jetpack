@@ -118,7 +118,7 @@ module.exports.serve = async ({ worker }) => {
     ignoreTrailingSlash: true
   });
 
-  server.use('/static', serveStatic(path.join(process.cwd(), 'build', 'static')))
+  server.use(serveStatic(path.join(process.cwd(), 'build')))
   server.get('/sitemap.xml', getSitemapHandler(sitemap));
   server.get('/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
   server.get('/healthz', healthzHandler(worker));
