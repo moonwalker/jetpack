@@ -7,7 +7,7 @@ const fastify = require('fastify');
 const serveStatic = require('serve-static');
 const parseUrl = require('parseurl');
 
-const { debug } = require('../utils');
+const { debug, stripTrailingSlash } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
 const { paths, config } = require('../webpack/defaults');
 const getRoutes = require('../webpack/getRoutes');
@@ -65,7 +65,7 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 const getPrerenderRouteHandler = routes => (req, reply) => {
   const { pathname, query } = parseUrl(req.raw);
 
-  const route = routes.find(item => item.path === pathname);
+  const route = routes.find(item => item.path === stripTrailingSlash(pathname));
   if (!route) {
     reply
       .code(404)
