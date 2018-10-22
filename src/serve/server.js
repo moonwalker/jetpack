@@ -63,8 +63,7 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 };
 
 const getPrerenderRouteHandler = routes => (req, reply) => {
-  const { pathname, query } = parseUrl(req.raw);
-
+  const { path, pathname } = parseUrl(req.raw);
   const route = routes.find(item => item.path === stripTrailingSlash(pathname));
   if (!route) {
     reply
@@ -73,7 +72,7 @@ const getPrerenderRouteHandler = routes => (req, reply) => {
     return;
   }
 
-  render({ route, assets })
+  render({ route, path, assets })
     .then((data) => {
       reply
         .header('Content-Type', 'text/html')
