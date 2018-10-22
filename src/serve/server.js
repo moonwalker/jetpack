@@ -5,6 +5,7 @@ const url = require('url');
 const path = require('path');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
+const parseUrl = require('parseurl');
 
 const { debug } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
@@ -62,8 +63,7 @@ const getSitemapMarketHandler = sitemap => (req, reply) => {
 };
 
 const getPrerenderRouteHandler = routes => (req, reply) => {
-  const { pathname, query } = url.parse(req.raw.url, true);
-  console.log('>>>', query);
+  const { pathname, query } = parseUrl(req.raw);
 
   const route = routes.find(item => item.path === pathname);
   if (!route) {
