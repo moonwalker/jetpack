@@ -14,7 +14,6 @@ const {
   paths,
   minimize
 } = require('../webpack/defaults');
-const RedisStorage = require('./redis');
 
 const RETRY_COUNT = 3;
 
@@ -43,9 +42,6 @@ module.exports = (options, done) => {
   const log = debug(workerNamespace);
 
   perf.start(workerNamespace);
-
-  // App cache storage
-  global.JETPACK_CLIENT_CACHE_STORAGE = new RedisStorage();
 
   log(`${id}/${workersCount} (pid: ${process.pid})`);
   log(`Routes: ${routes.length}`);
