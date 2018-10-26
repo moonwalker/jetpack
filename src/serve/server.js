@@ -90,7 +90,10 @@ const healthzHandler = (worker) => {
 }
 
 const permanentRedirect = to => (_, reply) => {
-  reply.redirect(301, to)
+  reply
+    .header('Cache-Control', 'no-store, no-cache, must-revalidate')
+    .header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT')
+    .redirect(301, to)
 }
 
 const rerenderRouteHandler = routes => (req, reply) => {
