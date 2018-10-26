@@ -1,84 +1,66 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const os = require('os');
-const url = require('url');
-const path = require('path');
-const fastify = require('fastify');
-const serveStatic = require('serve-static');
-const parseUrl = require('parseurl');
+const os = require('os')
+const path = require('path')
+const fastify = require('fastify')
+const serveStatic = require('serve-static')
+const parseUrl = require('parseurl')
 
-const { debug, stripTrailingSlash } = require('../utils');
-const { checkBuildArtifacts, processAssets } = require('../prerender/run');
-const { paths, config } = require('../webpack/defaults');
-const getRoutes = require('../webpack/getRoutes');
-const { getSitemaps, generateMarketSitemap, generateMainSitemap } = require('../sitemap');
+const { debug, hasTrailingSlash, stripTrailingSlash } = require('../utils')
+const { checkBuildArtifacts, processAssets } = require('../prerender/run')
+const { paths, config } = require('../webpack/defaults')
+const getRoutes = require('../webpack/getRoutes')
+const { getSitemaps, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
 
-const PORT = process.env.JETPACK_PRERENDER_PORT || 9002;
-const DEFAULT_PATH = '/en';
-const NAMESPACE = 'serve';
+const PORT = process.env.JETPACK_PRERENDER_PORT || 9002
+const NAMESPACE = 'serve'
+const BUILD_DIR = 'build'
+const DEFAULT_PATH = '/en/'
 
-const log = debug(NAMESPACE);
+const log = debug(NAMESPACE)
 
 // @TODO: extract
-log('ENV:', process.env.ENV);
-log('API:', config.queryApiUrl);
-log('PRD:', config.productName);
+log('ENV:', process.env.ENV)
+log('API:', config.queryApiUrl)
+log('PRD:', config.productName)
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
   paths.render.file
-);
+)
 
-const assets = processAssets(assetsFilepath);
-const render = require(renderFilepath).default;
+const assets = processAssets(assetsFilepath)
+const render = require(renderFilepath).default
 
-const getSitemapHandler = sitemap => (req, reply) => {
-  const data = generateMainSitemap(sitemap);
+const sitemapHandler = sitemap => (req, reply) => {
+  const data = generateMainSitemap(sitemap)
   reply
     .header('Content-Type', 'application/xml')
-    .send(data);
-};
+    .send(data)
+}
 
-const getSitemapMarketHandler = sitemap => (req, reply) => {
-  const marketId = req.params.market.toUpperCase();
-  const market = sitemap.sitemaps.find(entry => entry.market === marketId);
+const sitemapMarketHandler = sitemap => (req, reply) => {
+  const marketId = req.params.market.toUpperCase()
+  const market = sitemap.sitemaps.find(entry => entry.market === marketId)
 
   if (!market || !market.domain) {
     reply
       .code(404)
-      .send('Page not found');
+      .send('Page not found')
   }
 
   generateMarketSitemap(market, sitemap.routeLocales, (err, data) => {
     if (err) {
       reply
         .code(500)
-        .send(err.message);
+        .send(err.message)
     }
 
     reply
       .header('Content-Type', 'application/xml')
-      .send(data);
-  });
-};
-
-const getPrerenderRouteHandler = routes => (req, reply) => {
-  const { path, pathname } = parseUrl(req.raw);
-  const route = routes.find(item => item.path === stripTrailingSlash(pathname));
-  if (!route) {
-    reply
-      .code(404)
-      .send('Page not found.');
-    return;
-  }
-
-  render({ route, path, assets })
-    .then((data) => {
-      reply
-        .header('Content-Type', 'text/html')
-        .send(data);
-    });
-};
+      .send(data)
+  })
+}
 
 const healthzHandler = (worker) => {
   const started = new Date().toISOString()
@@ -105,29 +87,50 @@ const healthzHandler = (worker) => {
   }
 }
 
-module.exports.serve = async ({ worker }) => {
-  log('Starting');
+const permanentRedirect = to => (_, reply) => {
+  reply.redirect(301, to)
+}
 
-  log('Start fetching data.');
+const rerenderRouteHandler = routes => (req, reply) => {
+  const { path, pathname } = parseUrl(req.raw)
+  const route = routes.find(item => item.path === stripTrailingSlash(pathname))
+  if (!route) {
+    reply
+      .code(404)
+      .send('Page not found.')
+    return
+  }
+
+  render({ route, path, assets })
+    .then((data) => {
+      reply
+        .header('Content-Type', 'text/html')
+        .send(data)
+    })
+}
+
+module.exports.serve = async ({ worker }) => {
+  log('Starting')
+
+  log('Start fetching data.')
   const [routes, sitemap] = await Promise.all([
     getRoutes(config.queryApiUrl, config.productName),
     getSitemaps(config.queryApiUrl, config.productName)
-  ]);
-  log('Done fetching data.');
+  ])
+  log('Done fetching data.')
 
   const server = fastify({
-    logger: true,
-    ignoreTrailingSlash: true
-  });
+    logger: true
+  })
 
-  server.use(serveStatic(path.join(process.cwd(), 'build')))
-  server.get('/sitemap.xml', getSitemapHandler(sitemap));
-  server.get('/sitemap-:market([a-z]{2,3}).xml', getSitemapMarketHandler(sitemap));
-  server.get('/healthz', healthzHandler(worker));
-  server.get('/', (_, reply) => { reply.redirect(301, DEFAULT_PATH) })
-  server.get('*', getPrerenderRouteHandler(routes));
+  server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
+  server.get('/sitemap.xml', sitemapHandler(sitemap))
+  server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler(sitemap))
+  server.get('/healthz', healthzHandler(worker))
+  server.get('/', permanentRedirect(DEFAULT_PATH))
+  server.get('*', rerenderRouteHandler(routes))
 
   server.listen(PORT, '0.0.0.0', (err, address) => {
-    if (err) throw err;
-  });
-};
+    if (err) throw err
+  })
+}

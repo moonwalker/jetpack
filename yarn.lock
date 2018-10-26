@@ -2642,11 +2642,6 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-dns-cache@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/dns-cache/-/dns-cache-2.0.0.tgz#18a1ae164aebc31d7dc7ce0f3e713eef8e440346"
-  integrity sha1-GKGuFkrrwx19x84PPnE+745EA0Y=
-
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
