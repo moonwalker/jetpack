@@ -67,6 +67,7 @@ const healthzHandler = (worker) => {
   const service = process.env.SVCNAME || 'jetpack-server'
   const version = (process.env.COMMIT || 'dev').substring(0, 7)
   const built = process.env.BUILT || 'n/a'
+  const namespace = process.env.NAMESPACE || 'default'
   const runtime = `node${process.versions.node}`
   const platform = `${os.platform()}/${os.arch()}`
   const host = os.hostname()
@@ -77,6 +78,7 @@ const healthzHandler = (worker) => {
       service,
       version,
       built,
+      namespace,
       runtime,
       platform,
       host,
