@@ -114,6 +114,16 @@ const rerenderRouteHandler = routes => (req, reply) => {
     })
 }
 
+const getEnvHandler = () => (_, reply) => {
+  reply
+    .header('Content-Type', 'application/javascript')
+    .send(`
+      window.APP_CONFIG = {
+        ENV: "${process.env.ENV || process.env.env || ''}"
+      }
+    `);
+};
+
 module.exports.serve = async ({ worker }) => {
   log('Starting')
 
@@ -130,6 +140,7 @@ module.exports.serve = async ({ worker }) => {
   server.get('/sitemap.xml', sitemapHandler(sitemap))
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler(sitemap))
   server.get('/healthz', healthzHandler(worker))
+  server.get('/env.js', getEnvHandler());
   server.get('/', permanentRedirect(DEFAULT_PATH))
   server.get('*', rerenderRouteHandler(routes))
 
