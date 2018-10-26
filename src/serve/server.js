@@ -1,10 +1,10 @@
 require('dotenv').config()
 
 const os = require('os')
+const url = require('url')
 const path = require('path')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
-const parseUrl = require('parseurl')
 
 const { debug, hasTrailingSlash, stripTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
@@ -32,7 +32,7 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath)
 const render = require(renderFilepath).default
 
-const sitemapHandler = sitemap => (req, reply) => {
+const sitemapHandler = sitemap => (_, reply) => {
   const data = generateMainSitemap(sitemap)
   reply
     .header('Content-Type', 'application/xml')
@@ -92,16 +92,21 @@ const permanentRedirect = to => (_, reply) => {
 }
 
 const rerenderRouteHandler = routes => (req, reply) => {
-  const { path, pathname } = parseUrl(req.raw)
-  const route = routes.find(item => item.path === stripTrailingSlash(pathname))
+  const u = url.parse(req.raw.url)
+
+  if (!hasTrailingSlash(u.pathname)) {
+    permanentRedirect(`${u.pathname}/${u.search}`)(req, reply)
+  }
+
+  const pathname = stripTrailingSlash(u.pathname)
+  const route = routes.find(item => item.path === pathname)
   if (!route) {
     reply
       .code(404)
       .send('Page not found.')
-    return
   }
 
-  render({ route, path, assets })
+  render({ route, path: u.path, assets })
     .then((data) => {
       reply
         .header('Content-Type', 'text/html')
@@ -119,9 +124,7 @@ module.exports.serve = async ({ worker }) => {
   ])
   log('Done fetching data.')
 
-  const server = fastify({
-    logger: true
-  })
+  const server = fastify({ logger: true })
 
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
   server.get('/sitemap.xml', sitemapHandler(sitemap))
@@ -130,7 +133,7 @@ module.exports.serve = async ({ worker }) => {
   server.get('/', permanentRedirect(DEFAULT_PATH))
   server.get('*', rerenderRouteHandler(routes))
 
-  server.listen(PORT, '0.0.0.0', (err, address) => {
+  server.listen(PORT, '0.0.0.0', (err) => {
     if (err) throw err
   })
 }
