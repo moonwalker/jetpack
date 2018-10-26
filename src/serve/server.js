@@ -44,14 +44,14 @@ const sitemapMarketHandler = sitemap => (req, reply) => {
   const market = sitemap.sitemaps.find(entry => entry.market === marketId)
 
   if (!market || !market.domain) {
-    reply
+    return reply
       .code(404)
       .send('Page not found')
   }
 
   generateMarketSitemap(market, sitemap.routeLocales, (err, data) => {
     if (err) {
-      reply
+      return reply
         .code(500)
         .send(err.message)
     }
@@ -95,13 +95,13 @@ const rerenderRouteHandler = routes => (req, reply) => {
   const u = url.parse(req.raw.url)
 
   if (!hasTrailingSlash(u.pathname)) {
-    permanentRedirect(`${u.pathname}/${u.search}`)(req, reply)
+    return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
   const pathname = stripTrailingSlash(u.pathname)
   const route = routes.find(item => item.path === pathname)
   if (!route) {
-    reply
+    return reply
       .code(404)
       .send('Page not found.')
   }
