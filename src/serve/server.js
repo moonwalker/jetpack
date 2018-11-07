@@ -124,7 +124,8 @@ const getEnvHandler = () => (_, reply) => {
     .header('Content-Type', 'application/javascript; charset=utf-8')
     .send(`
       window.APP_CONFIG = {
-        ENV: "${process.env.ENV || process.env.env || ''}"
+        ENV: "${process.env.ENV || process.env.env || ''}",
+        NAMESPACE: "${process.env.NAMESPACE || 'default'}"
       }
     `);
 };
