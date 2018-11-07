@@ -106,7 +106,8 @@ const renderConfig = mergeConfigs([
     output: {
       path: paths.render.path,
       filename: paths.render.filename,
-      libraryTarget: 'commonjs2'
+      libraryTarget: 'commonjs2',
+      publicPath: paths.output.publicPath
     },
     plugins: [
       new CleanWebpackPlugin(paths.render.path, {
