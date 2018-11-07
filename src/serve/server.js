@@ -121,7 +121,7 @@ const rerenderRouteHandler = routes => (req, reply) => {
 
 const getEnvHandler = () => (_, reply) => {
   reply
-    .header('Content-Type', 'application/javascript')
+    .header('Content-Type', 'application/javascript; charset=utf-8')
     .send(`
       window.APP_CONFIG = {
         ENV: "${process.env.ENV || process.env.env || ''}"
