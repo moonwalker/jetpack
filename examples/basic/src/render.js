@@ -23,7 +23,7 @@ export default async ({ route, assets }) => {
   const client = initApollo(preState);
 
   //routes
-  const routes = await fetchRoutes(client, route.market.code);
+  const routes = await fetchRoutes(client, route.market.code, route.locale || route.market.defaultLanguage);
   store.set('routes', routes);
 
   // render

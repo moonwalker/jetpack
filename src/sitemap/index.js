@@ -6,30 +6,24 @@ const { debug } = require('../utils');
 
 const log = debug('sitemap');
 
-// add all routes per locale and alternates from routelocale
-const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
-  process.nextTick(() => {
-    async.forEach(routes, addUrls(xml, topLoc, l.toLowerCase(), routeLocales), lCb);
-  });
-};
 
-const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
-  const loc = `${topLoc}${locale}${route.toLowerCase()}`;
+const addUrls = (xml, topLoc) => (route, rCb) => {
+  const loc = `${topLoc}${route.locale.toLowerCase()}${route.path.toLowerCase()}`;
   const url = xml.ele('url')
     .ele('loc', loc).up();
-  async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
+  async.forEach((route.alternates || []), addLink(url, topLoc), () => {
     url.up();
     rCb();
   });
 };
 
-const addLink = (url, topLoc, route) => (l, lCb) => {
-  const altLoc = `${topLoc}${l.toLowerCase()}${route.toLowerCase()}`;
+const addLink = (url, topLoc) => (a, aCb) => {
+  const altLoc = `${topLoc}${a.locale.toLowerCase()}${a.path.toLowerCase()}`;
   url.ele('xhtml:link')
     .att('rel', 'alternate')
-    .att('hreflang', l)
+    .att('hreflang', a.locale)
     .att('href', altLoc);
-  lCb();
+  aCb();
 };
 
 const getSitemaps = (apiUrl, product) => {
@@ -37,14 +31,20 @@ const getSitemaps = (apiUrl, product) => {
     query: `{
       sitemap(product: "${product}") {
         sitemaps {
-          market,
-          domain,
-          routes,
-          locales
-        }
-        routeLocales {
-          route,
-          locales
+          market {
+            code
+            localizedSiteSetting {
+              domain
+            }
+          }
+          routes {
+            path
+            locale
+            alternates {
+              path
+              locale
+            }
+          }
         }
       }
     }`
@@ -77,17 +77,17 @@ const getSitemaps = (apiUrl, product) => {
     });
 };
 
-const generateMainSitemap = (sitemap) => {
-  if (!(sitemap.sitemaps && sitemap.sitemaps.length)) return '';
+const generateMainSitemap = (productSitemap) => {
+  if (!(productSitemap.sitemaps && productSitemap.sitemaps.length)) return '';
 
   const mainXml = xmlbuilder.create('sitemapindex', { version: '1.0', encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     .att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
   const lastmod = new Date().toISOString().replace('Z', '+00:00');
 
-  sitemap.sitemaps.forEach((market) => {
+  productSitemap.sitemaps.forEach(({ market }) => {
     mainXml.ele('sitemap')
-      .ele('loc', `https://${market.domain.toLowerCase()}/sitemap-${market.market.toLowerCase()}.xml`).up()
+      .ele('loc', `https://${market.localizedSiteSetting.domain.toLowerCase()}/sitemap-${market.code.toLowerCase()}.xml`).up()
       .ele('lastmod', lastmod)
       .up()
       .up();
@@ -96,20 +96,15 @@ const generateMainSitemap = (sitemap) => {
   return mainXml.end({ pretty: true });
 };
 
-const generateMarketSitemap = (market, sitemapRouteLocales, callback) => {
-  const routeLocales = {};
-
-  sitemapRouteLocales.forEach((rl) => {
-    routeLocales[rl.route] = rl.locales;
-  });
-
-  const topLoc = `https://${market.domain.toLowerCase()}/`;
+const generateMarketSitemap = (marketSitemap, callback) => {
+  const { market, routes } = marketSitemap;
+  const topLoc = `https://${market.localizedSiteSetting.domain.toLowerCase()}/`;
 
   const xml = xmlbuilder.create('urlset', { version: '1.0', encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     .att('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
 
-  async.forEach(market.locales, addLocale(xml, topLoc, market.routes, routeLocales), () => {
+  async.forEach(routes, addUrls(xml, topLoc), () => {
     callback(null, xml.end({ pretty: true }));
   });
 };

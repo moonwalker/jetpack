@@ -41,15 +41,15 @@ const sitemapHandler = sitemap => (_, reply) => {
 
 const sitemapMarketHandler = sitemap => (req, reply) => {
   const marketId = req.params.market.toUpperCase()
-  const market = sitemap.sitemaps.find(entry => entry.market === marketId)
+  const marketSitemap = sitemap.sitemaps.find(entry => entry.market.code.toUpperCase() === marketId)
 
-  if (!market || !market.domain) {
+  if (!marketSitemap || !marketSitemap.market.localizedSiteSetting || !marketSitemap.market.localizedSiteSetting.domain) {
     return reply
       .code(404)
       .send('Page not found')
   }
 
-  generateMarketSitemap(market, sitemap.routeLocales, (err, data) => {
+  generateMarketSitemap(marketSitemap, (err, data) => {
     if (err) {
       return reply
         .code(500)
@@ -103,8 +103,8 @@ const rerenderRouteHandler = routes => (req, reply) => {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
-  const pathname = stripTrailingSlash(u.pathname)
-  const route = routes.find(item => item.path === pathname)
+  // const pathname = stripTrailingSlash(u.pathname)
+  const route = routes.find(item => item.path === u.pathname)
   if (!route) {
     return reply
       .code(404)
