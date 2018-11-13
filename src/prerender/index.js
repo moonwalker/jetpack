@@ -15,7 +15,7 @@ const prerender = () => {
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);
 
-  return getRoutes(config.queryApiUrl, config.productName)
+  return getRoutes(config)
     .then(run)
     .then(({ err, result }) =>
       writeStats(result).then(displayStats).then(() => {

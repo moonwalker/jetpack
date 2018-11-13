@@ -40,9 +40,9 @@ const reduceAsync = (items, key, value) => (cb) => {
   });
 };
 
-module.exports = (apiUrl, product) => {
+module.exports = ({ queryApiUrl, productName }) => {
   const payload = {
-    query: `{ sitemap(product: "${product}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code defaultCurrency } localeObjs { code codeAlias } localeRoutes } product { apiKeys } routeLocales { route, locales } canonicalLocales { locale, canonicalLocale } } }`
+    query: `{ sitemap(product: "${productName}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code defaultCurrency } localeObjs { code codeAlias } localeRoutes } product { apiKeys } routeLocales { route, locales } canonicalLocales { locale, canonicalLocale } } }`
   };
 
   const params = {
@@ -55,7 +55,7 @@ module.exports = (apiUrl, product) => {
 
   log(params.method, params.body);
 
-  return fetch(apiUrl, params)
+  return fetch(queryApiUrl, params)
     .then((res) => {
       if (res.ok) {
         return res.json();

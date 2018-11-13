@@ -6,36 +6,15 @@ const { debug } = require('../utils');
 
 const log = debug('sitemap');
 
-// add all routes per locale and alternates from routelocale
-const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
-  process.nextTick(() => {
-    async.forEach(routes, addUrls(xml, topLoc, l.toLowerCase(), routeLocales), lCb);
-  });
-};
+const getSitemapRpc = () => {
+  const contentSvc = process.env.CONTENT_SVC || '127.0.0.1:50051'
+  // ...
+}
 
-const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
-  const loc = `${topLoc}${locale}${route.toLowerCase()}`;
-  const url = xml.ele('url')
-    .ele('loc', loc).up();
-  async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
-    url.up();
-    rCb();
-  });
-};
-
-const addLink = (url, topLoc, route) => (l, lCb) => {
-  const altLoc = `${topLoc}${l.toLowerCase()}${route.toLowerCase()}`;
-  url.ele('xhtml:link')
-    .att('rel', 'alternate')
-    .att('hreflang', l)
-    .att('href', altLoc);
-  lCb();
-};
-
-const getSitemaps = (apiUrl, product) => {
+const getSitemap = ({ queryApiUrl, productName }) => {
   const payload = {
     query: `{
-      sitemap(product: "${product}") {
+      sitemap(product: "${productName}") {
         sitemaps {
           market,
           domain,
@@ -60,7 +39,7 @@ const getSitemaps = (apiUrl, product) => {
 
   log(params.method, params.body);
 
-  return fetch(apiUrl, params)
+  return fetch(queryApiUrl, params)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -114,8 +93,35 @@ const generateMarketSitemap = (market, sitemapRouteLocales, callback) => {
   });
 };
 
+// add all routes per locale and alternates from routelocale
+const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
+  process.nextTick(() => {
+    async.forEach(routes, addUrls(xml, topLoc, l.toLowerCase(), routeLocales), lCb);
+  });
+};
+
+const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
+  const loc = `${topLoc}${locale}${route.toLowerCase()}`;
+  const url = xml.ele('url')
+    .ele('loc', loc).up();
+  async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
+    url.up();
+    rCb();
+  });
+};
+
+const addLink = (url, topLoc, route) => (l, lCb) => {
+  const altLoc = `${topLoc}${l.toLowerCase()}${route.toLowerCase()}`;
+  url.ele('xhtml:link')
+    .att('rel', 'alternate')
+    .att('hreflang', l)
+    .att('href', altLoc);
+  lCb();
+};
+
 module.exports = {
-  getSitemaps,
+  getSitemap,
+  getSitemapRpc,
   generateMainSitemap,
   generateMarketSitemap
 };

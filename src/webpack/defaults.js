@@ -1,5 +1,4 @@
 const path = require('path');
-const { execSync } = require('child_process');
 const { getCommitId } = require('../utils');
 
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
