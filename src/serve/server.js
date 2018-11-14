@@ -6,7 +6,7 @@ const path = require('path')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { debug,hasTrailingSlash, stripTrailingSlash } = require('../utils')
+const { hasTrailingSlash, stripTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths, config } = require('../webpack/defaults')
 
@@ -15,14 +15,10 @@ const { getSitemap, generateMarketSitemap, generateMainSitemap } = require('../s
 
 const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
 const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
+const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:50051'
+
 const BUILD_DIR = 'build'
 const DEFAULT_PATH = '/en/'
-
-const log = debug('serve')
-
-// @TODO: extract
-log('ENV:', process.env.ENV)
-log('PRD:', config.productName)
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -32,7 +28,9 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath)
 const render = require(renderFilepath).default
 
-const sitemapHandler = sitemap => (_, reply) => {
+const sitemapHandler = sitemap => (req, reply) => {
+  // req.pipe(request(`http://${CONTENT_SVC}`)).pipe(reply)
+
   const data = generateMainSitemap(sitemap)
   reply
     .header('Content-Type', 'application/xml')

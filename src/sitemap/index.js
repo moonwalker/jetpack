@@ -6,11 +6,6 @@ const { debug } = require('../utils');
 
 const log = debug('sitemap');
 
-const getSitemapRpc = () => {
-  const contentSvc = process.env.CONTENT_SVC || '127.0.0.1:50051'
-  // ...
-}
-
 const getSitemap = ({ queryApiUrl, productName }) => {
   const payload = {
     query: `{
