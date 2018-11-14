@@ -6,23 +6,19 @@ const path = require('path')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { debug, hasTrailingSlash, stripTrailingSlash } = require('../utils')
+const { hasTrailingSlash, stripTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths, config } = require('../webpack/defaults')
-const getRoutes = require('../webpack/getRoutes')
-const { getSitemaps, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
 
-const PORT = process.env.JETPACK_PRERENDER_PORT || 9002
-const NAMESPACE = 'serve'
+const getRoutes = require('../webpack/getRoutes')
+const { getSitemap, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
+
+const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
+const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
+const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:50051'
+
 const BUILD_DIR = 'build'
 const DEFAULT_PATH = '/en/'
-
-const log = debug(NAMESPACE)
-
-// @TODO: extract
-log('ENV:', process.env.ENV)
-log('API:', config.queryApiUrl)
-log('PRD:', config.productName)
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -32,7 +28,9 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath)
 const render = require(renderFilepath).default
 
-const sitemapHandler = sitemap => (_, reply) => {
+const sitemapHandler = sitemap => (req, reply) => {
+  // req.pipe(request(`http://${CONTENT_SVC}`)).pipe(reply)
+
   const data = generateMainSitemap(sitemap)
   reply
     .header('Content-Type', 'application/xml')
@@ -62,30 +60,24 @@ const sitemapMarketHandler = sitemap => (req, reply) => {
   })
 }
 
-const healthzHandler = (worker) => {
-  const started = new Date().toISOString()
-  const service = process.env.SVCNAME || 'jetpack-server'
-  const version = (process.env.COMMIT || 'dev').substring(0, 7)
-  const built = process.env.BUILT || 'n/a'
-  const namespace = process.env.NAMESPACE || 'default'
-  const runtime = `node${process.versions.node}`
-  const platform = `${os.platform()}/${os.arch()}`
-  const host = os.hostname()
+const healthzHandler = (worker, started) => {
+  const data = {
+    service: process.env.SVCNAME || 'jetpack-server',
+    version: (process.env.COMMIT || 'dev').substring(0, 7),
+    built: process.env.BUILT || 'n/a',
+    namespace: process.env.NAMESPACE || 'default',
+    runtime: `node${process.versions.node}`,
+    platform: `${os.platform()}/${os.arch()}`,
+    host: os.hostname(),
+    status: 'healthy',
+    started,
+    worker
+  }
 
   return (_, reply) => {
-    const status = 'healthy'
-    reply.send({
-      service,
-      version,
-      built,
-      namespace,
-      runtime,
-      platform,
-      host,
-      status,
-      started,
-      worker
-    })
+    reply
+      .header('Content-Type', 'application/json')
+      .send(data)
   }
 }
 
@@ -119,38 +111,36 @@ const rerenderRouteHandler = routes => (req, reply) => {
     })
 }
 
-const getEnvHandler = () => (_, reply) => {
+const envHandler = () => (_, reply) => {
   reply
-    .header('Content-Type', 'application/javascript; charset=utf-8')
+    .header('Cache-Control', 'no-store, no-cache, must-revalidate')
+    .header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT')
+    .header('Content-Type', 'application/javascript')
     .send(`
-      window.APP_CONFIG = {
-        ENV: "${process.env.ENV || process.env.env || ''}",
-        NAMESPACE: "${process.env.NAMESPACE || 'default'}"
-      }
-    `);
-};
+window.APP_CONFIG = {
+  ENV: "${process.env.ENV || process.env.env || ''}",
+  NAMESPACE: "${process.env.NAMESPACE || 'default'}"
+}`)
+}
 
 module.exports.serve = async ({ worker }) => {
-  log('Starting')
-
-  log('Start fetching data.')
   const [routes, sitemap] = await Promise.all([
-    getRoutes(config.queryApiUrl, config.productName),
-    getSitemaps(config.queryApiUrl, config.productName)
+    getRoutes(config),
+    getSitemap(config)
   ])
-  log('Done fetching data.')
 
+  const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
   server.get('/sitemap.xml', sitemapHandler(sitemap))
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler(sitemap))
-  server.get('/healthz', healthzHandler(worker))
-  server.get('/env.js', getEnvHandler());
+  server.get('/healthz', healthzHandler(worker, started))
+  server.get('/env.js', envHandler())
   server.get('/', permanentRedirect(DEFAULT_PATH))
   server.get('*', rerenderRouteHandler(routes))
 
-  server.listen(PORT, '0.0.0.0', (err) => {
+  server.listen(PORT, HOST, (err) => {
     if (err) throw err
   })
 }

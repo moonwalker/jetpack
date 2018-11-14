@@ -22,9 +22,9 @@ const getSitemapRoutes = (product) => {
   };
 };
 
-module.exports = (apiUrl, product) => {
+module.exports = ({ queryApiUrl, productName }) => {
   const payload = {
-    query: `{ sitemap(product: "${product}", includeNotfound: true, includeExcluded: true) { sitemaps { market { code defaultCurrency defaultLocale localizedSiteSetting { title description domain } } routes { path locale canonical alternates { path locale } } } product { apiKeys } } }`
+    query: `{ sitemap(product: "${productName}", includeLocale: true, includeNotfound: true, includeExcluded: true) { sitemaps { marketObj { code defaultCurrency } localeObjs { code codeAlias } localeRoutes } product { apiKeys } routeLocales { route, locales } canonicalLocales { locale, canonicalLocale } } }`
   };
 
   const params = {
@@ -37,7 +37,7 @@ module.exports = (apiUrl, product) => {
 
   log(params.method, params.body);
 
-  return fetch(apiUrl, params)
+  return fetch(queryApiUrl, params)
     .then((res) => {
       if (res.ok) {
         return res.json();

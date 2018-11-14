@@ -6,30 +6,10 @@ const { debug } = require('../utils');
 
 const log = debug('sitemap');
 
-
-const addUrls = (xml, topLoc) => (route, rCb) => {
-  const loc = `${topLoc}${route.locale.toLowerCase()}${route.path.toLowerCase()}`;
-  const url = xml.ele('url')
-    .ele('loc', loc).up();
-  async.forEach((route.alternates || []), addLink(url, topLoc), () => {
-    url.up();
-    rCb();
-  });
-};
-
-const addLink = (url, topLoc) => (a, aCb) => {
-  const altLoc = `${topLoc}${a.locale.toLowerCase()}${a.path.toLowerCase()}`;
-  url.ele('xhtml:link')
-    .att('rel', 'alternate')
-    .att('hreflang', a.locale)
-    .att('href', altLoc);
-  aCb();
-};
-
-const getSitemaps = (apiUrl, product) => {
+const getSitemap = ({ queryApiUrl, productName }) => {
   const payload = {
     query: `{
-      sitemap(product: "${product}") {
+      sitemap(product: "${productName}") {
         sitemaps {
           market {
             code
@@ -60,7 +40,7 @@ const getSitemaps = (apiUrl, product) => {
 
   log(params.method, params.body);
 
-  return fetch(apiUrl, params)
+  return fetch(queryApiUrl, params)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -109,8 +89,35 @@ const generateMarketSitemap = (marketSitemap, callback) => {
   });
 };
 
+// add all routes per locale and alternates from routelocale
+const addLocale = (xml, topLoc, routes, routeLocales) => (l, lCb) => {
+  process.nextTick(() => {
+    async.forEach(routes, addUrls(xml, topLoc, l.toLowerCase(), routeLocales), lCb);
+  });
+};
+
+const addUrls = (xml, topLoc, locale, routeLocales) => (route, rCb) => {
+  const loc = `${topLoc}${locale}${route.toLowerCase()}`;
+  const url = xml.ele('url')
+    .ele('loc', loc).up();
+  async.forEach((routeLocales[route] || []), addLink(url, topLoc, route), () => {
+    url.up();
+    rCb();
+  });
+};
+
+const addLink = (url, topLoc, route) => (l, lCb) => {
+  const altLoc = `${topLoc}${l.toLowerCase()}${route.toLowerCase()}`;
+  url.ele('xhtml:link')
+    .att('rel', 'alternate')
+    .att('hreflang', l)
+    .att('href', altLoc);
+  lCb();
+};
+
 module.exports = {
-  getSitemaps,
+  getSitemap,
+  getSitemapRpc,
   generateMainSitemap,
   generateMarketSitemap
 };
