@@ -117,7 +117,6 @@ const addLink = (url, topLoc, route) => (l, lCb) => {
 
 module.exports = {
   getSitemap,
-  getSitemapRpc,
   generateMainSitemap,
   generateMarketSitemap
 };
