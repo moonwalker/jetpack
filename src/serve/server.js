@@ -7,12 +7,11 @@ const request = require('request')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { hasTrailingSlash, stripTrailingSlash } = require('../utils')
+const { hasTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths, config } = require('../webpack/defaults')
 
 const getRoutes = require('../webpack/getRoutes')
-// const { getSitemap, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
 
 const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
 const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
@@ -28,36 +27,6 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 
 const assets = processAssets(assetsFilepath)
 const render = require(renderFilepath).default
-
-// const sitemapHandler = sitemap => (req, reply) => {
-//   const data = generateMainSitemap(sitemap)
-//   reply
-//     .header('Content-Type', 'application/xml')
-//     .send(data)
-// }
-
-// const sitemapMarketHandler = sitemap => (req, reply) => {
-//   const marketId = req.params.market.toUpperCase()
-//   const marketSitemap = sitemap.sitemaps.find(entry => entry.market.code.toUpperCase() === marketId)
-
-//   if (!marketSitemap || !marketSitemap.market.localizedSiteSetting || !marketSitemap.market.localizedSiteSetting.domain) {
-//     return reply
-//       .code(404)
-//       .send('Page not found')
-//   }
-
-//   generateMarketSitemap(marketSitemap, (err, data) => {
-//     if (err) {
-//       return reply
-//         .code(500)
-//         .send(err.message)
-//     }
-
-//     reply
-//       .header('Content-Type', 'application/xml')
-//       .send(data)
-//   })
-// }
 
 const sitemapHandler = () => (_, reply) => {
   request(`http://${CONTENT_SVC}/sitemap.xml`)
@@ -115,7 +84,6 @@ const rerenderRouteHandler = routes => (req, reply) => {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
-  // const pathname = stripTrailingSlash(u.pathname)
   const route = routes.find(item => item.path === u.pathname)
   if (!route) {
     return reply
