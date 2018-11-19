@@ -3,6 +3,7 @@ require('dotenv').config()
 const os = require('os')
 const url = require('url')
 const path = require('path')
+const request = require('request')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
@@ -11,7 +12,7 @@ const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths, config } = require('../webpack/defaults')
 
 const getRoutes = require('../webpack/getRoutes')
-const { getSitemap, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
+// const { getSitemap, generateMarketSitemap, generateMainSitemap } = require('../sitemap')
 
 const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
 const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
@@ -28,36 +29,43 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 const assets = processAssets(assetsFilepath)
 const render = require(renderFilepath).default
 
-const sitemapHandler = sitemap => (req, reply) => {
-  // req.pipe(request(`http://${CONTENT_SVC}`)).pipe(reply)
+// const sitemapHandler = sitemap => (req, reply) => {
+//   const data = generateMainSitemap(sitemap)
+//   reply
+//     .header('Content-Type', 'application/xml')
+//     .send(data)
+// }
 
-  const data = generateMainSitemap(sitemap)
-  reply
-    .header('Content-Type', 'application/xml')
-    .send(data)
+// const sitemapMarketHandler = sitemap => (req, reply) => {
+//   const marketId = req.params.market.toUpperCase()
+//   const marketSitemap = sitemap.sitemaps.find(entry => entry.market.code.toUpperCase() === marketId)
+
+//   if (!marketSitemap || !marketSitemap.market.localizedSiteSetting || !marketSitemap.market.localizedSiteSetting.domain) {
+//     return reply
+//       .code(404)
+//       .send('Page not found')
+//   }
+
+//   generateMarketSitemap(marketSitemap, (err, data) => {
+//     if (err) {
+//       return reply
+//         .code(500)
+//         .send(err.message)
+//     }
+
+//     reply
+//       .header('Content-Type', 'application/xml')
+//       .send(data)
+//   })
+// }
+
+const sitemapHandler = () => (req, reply) => {
+  req.pipe(request(`http://${CONTENT_SVC}/sitemap.xml`)).pipe(reply)
 }
 
 const sitemapMarketHandler = sitemap => (req, reply) => {
-  const marketId = req.params.market.toUpperCase()
-  const marketSitemap = sitemap.sitemaps.find(entry => entry.market.code.toUpperCase() === marketId)
-
-  if (!marketSitemap || !marketSitemap.market.localizedSiteSetting || !marketSitemap.market.localizedSiteSetting.domain) {
-    return reply
-      .code(404)
-      .send('Page not found')
-  }
-
-  generateMarketSitemap(marketSitemap, (err, data) => {
-    if (err) {
-      return reply
-        .code(500)
-        .send(err.message)
-    }
-
-    reply
-      .header('Content-Type', 'application/xml')
-      .send(data)
-  })
+  const market = req.params.market.toUpperCase()
+  req.pipe(request(`http://${CONTENT_SVC}/sitemap-${market}.xml`)).pipe(reply)
 }
 
 const healthzHandler = (worker, started) => {
@@ -124,17 +132,16 @@ window.APP_CONFIG = {
 }
 
 module.exports.serve = async ({ worker }) => {
-  const [routes, sitemap] = await Promise.all([
-    getRoutes(config),
-    getSitemap(config)
+  const [routes] = await Promise.all([
+    getRoutes(config)
   ])
 
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
-  server.get('/sitemap.xml', sitemapHandler(sitemap))
-  server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler(sitemap))
+  server.get('/sitemap.xml', sitemapHandler())
+  server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
   server.get('/env.js', envHandler())
   server.get('/', permanentRedirect(DEFAULT_PATH))

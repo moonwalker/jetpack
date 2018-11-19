@@ -61,6 +61,7 @@
     "postcss-reporter": "^5.0.0",
     "promise-retry": "^1.1.1",
     "react-svg-loader": "^2.1.0",
+    "request": "^2.88.0",
     "stats-webpack-plugin": "^0.6.2",
     "style-loader": "^0.19.1",
     "stylelint": "^8.4.0",
