@@ -16,7 +16,7 @@ const getRoutes = require('../webpack/getRoutes')
 
 const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
 const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
-const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:50051'
+const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051'
 
 const BUILD_DIR = 'build'
 const DEFAULT_PATH = '/en/'
@@ -59,13 +59,25 @@ const render = require(renderFilepath).default
 //   })
 // }
 
-const sitemapHandler = () => ({ req }, { res }) => {
-  req.pipe(request(`http://${CONTENT_SVC}/sitemap.xml`)).pipe(res)
+const sitemapHandler = () => (_, reply) => {
+  request(`http://${CONTENT_SVC}/sitemap.xml`)
+    .on('error', err => {
+      return reply
+        .code(404)
+        .send('sitemap.xml not found')
+    })
+    .pipe(reply.res)
 }
 
-const sitemapMarketHandler = sitemap => ({ req }, { res }) => {
-  const market = req.params.market.toUpperCase()
-  req.pipe(request(`http://${CONTENT_SVC}/sitemap-${market}.xml`)).pipe(res)
+const sitemapMarketHandler = () => (req, reply) => {
+  const market = req.params.market
+  request(`http://${CONTENT_SVC}/sitemap-${market}.xml`)
+    .on('error', err => {
+      return reply
+        .code(404)
+        .send('sitemap-${market}.xml not found')
+    })
+    .pipe(reply.res)
 }
 
 const healthzHandler = (worker, started) => {
@@ -140,6 +152,7 @@ module.exports.serve = async ({ worker }) => {
   const server = fastify({ logger: true })
 
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
+
   server.get('/sitemap.xml', sitemapHandler())
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
