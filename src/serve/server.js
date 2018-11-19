@@ -59,13 +59,13 @@ const render = require(renderFilepath).default
 //   })
 // }
 
-const sitemapHandler = () => (req, reply) => {
-  req.pipe(request(`http://${CONTENT_SVC}/sitemap.xml`)).pipe(reply)
+const sitemapHandler = () => ({ req }, { res }) => {
+  req.pipe(request(`http://${CONTENT_SVC}/sitemap.xml`)).pipe(res)
 }
 
-const sitemapMarketHandler = sitemap => (req, reply) => {
+const sitemapMarketHandler = sitemap => ({ req }, { res }) => {
   const market = req.params.market.toUpperCase()
-  req.pipe(request(`http://${CONTENT_SVC}/sitemap-${market}.xml`)).pipe(reply)
+  req.pipe(request(`http://${CONTENT_SVC}/sitemap-${market}.xml`)).pipe(res)
 }
 
 const healthzHandler = (worker, started) => {
