@@ -9,9 +9,7 @@ const serveStatic = require('serve-static')
 
 const { hasTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
-const { paths, config } = require('../webpack/defaults')
-
-const getRoutes = require('../webpack/getRoutes')
+const { paths } = require('../webpack/defaults')
 
 const PORT = parseInt(process.env.JETPACK_SERVER_PORT) || 9002
 const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
@@ -111,16 +109,11 @@ window.APP_CONFIG = {
 }`)
 }
 
-module.exports.serve = async ({ worker }) => {
-  const [routes] = await Promise.all([
-    getRoutes(config)
-  ])
-
+module.exports.serve = async ({ worker, routes }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
-
   server.get('/sitemap.xml', sitemapHandler())
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
