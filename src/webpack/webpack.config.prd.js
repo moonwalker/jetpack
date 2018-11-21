@@ -36,6 +36,7 @@ const {
 const clientConfig = mergeConfigs([
   {
     bail: true,
+    mode: 'production',
     context,
     devtool: 'source-map',
     entry: {
@@ -56,11 +57,13 @@ const clientConfig = mergeConfigs([
       new webpack.EnvironmentPlugin(env),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.HashedModuleIdsPlugin(),
+      /*
       new UglifyJsPlugin({
         sourceMap: true,
         cache: true,
         parallel: true
       }),
+      */
       new CopyWebpackPlugin([{
         from: paths.public.root
       }]),
@@ -98,6 +101,7 @@ const clientConfig = mergeConfigs([
 const renderConfig = mergeConfigs([
   {
     bail: true,
+    mode: 'production',
     context,
     target: 'node',
     entry: {
@@ -121,7 +125,10 @@ const renderConfig = mergeConfigs([
         maxChunks: 1
       })
     ],
-    devtool: false
+    devtool: false,
+    optimization: {
+      minimize: false
+    }
   },
   createResolveConfig(),
   createJavascriptConfig({

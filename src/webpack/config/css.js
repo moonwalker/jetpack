@@ -2,8 +2,7 @@ const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker');
 const stylelint = require('stylelint');
 const postcssReporter = require('postcss-reporter');
-const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
-const ExtractCssPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (options, env) => {
   const {
@@ -11,8 +10,7 @@ module.exports = (options, env) => {
     minimize = false,
     node = false,
     lint = false,
-    extractChunks = false,
-    filename,
+    filename = '[name].css',
   } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
@@ -50,22 +48,11 @@ module.exports = (options, env) => {
     ]
   };
 
-  const deliveryExtractChunksRule = {
-    test,
-    include,
-    use: ExtractCssChunksPlugin.extract({
-      use: []
-    })
-  };
-
   const deliveryExtractRule = {
     test,
     include,
     enforce: 'post',
-    use: ExtractCssPlugin.extract({
-      use: [],
-      fallback: 'style-loader'
-    })
+    use: isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader
   };
 
   if (node) {
@@ -73,22 +60,6 @@ module.exports = (options, env) => {
       module: {
         rules: [transformRule]
       }
-    };
-  }
-
-  if (extractChunks) {
-    return {
-      module: {
-        rules: [
-          deliveryExtractChunksRule,
-          transformRule
-        ]
-      },
-      plugins: [
-        new ExtractCssChunksPlugin({
-          filename
-        })
-      ]
     };
   }
 
@@ -100,11 +71,7 @@ module.exports = (options, env) => {
       ]
     },
     plugins: [
-      new ExtractCssPlugin({
-        filename,
-        allChunks: true,
-        disable: isDevelopment
-      })
+      new MiniCssExtractPlugin({ filename })
     ]
   };
 };
