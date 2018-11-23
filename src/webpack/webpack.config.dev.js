@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const { getEnvMiddleware } = require('../utils');
 const mergeConfigs = require('./mergeConfigs');
 const {
   createEslintConfig,
@@ -49,17 +50,16 @@ const devConfig = {
   ],
   devServer: {
     port: 9000,
-    contentBase: paths.public.root,
+    contentBase: paths.output.path,
     publicPath: paths.output.publicPath,
     hot: true,
     watchContentBase: true,
     watchOptions: {
       ignored: /node_modules/
     },
-    historyApiFallback: {
-      rewrites: [
-        { from: /(.*)/, to: paths.output.publicPath }
-      ],
+    historyApiFallback: true,
+    before: (app) => {
+      app.get('/env.js', getEnvMiddleware());
     }
   }
 };

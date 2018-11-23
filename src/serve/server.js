@@ -7,7 +7,7 @@ const request = require('request')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { hasTrailingSlash } = require('../utils')
+const { getEnvMiddleware, hasTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths } = require('../webpack/defaults')
 
@@ -97,18 +97,6 @@ const rerenderRouteHandler = routes => (req, reply) => {
     })
 }
 
-const envHandler = () => (_, reply) => {
-  reply
-    .header('Cache-Control', 'no-store, no-cache, must-revalidate')
-    .header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT')
-    .header('Content-Type', 'application/javascript')
-    .send(`
-window.APP_CONFIG = {
-  ENV: "${process.env.ENV || process.env.env || ''}",
-  NAMESPACE: "${process.env.NAMESPACE || 'default'}"
-}`)
-}
-
 module.exports.serve = async ({ worker, routes }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
@@ -117,7 +105,7 @@ module.exports.serve = async ({ worker, routes }) => {
   server.get('/sitemap.xml', sitemapHandler())
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
-  server.get('/env.js', envHandler())
+  server.get('/env.js', getEnvMiddleware())
   server.get('/', permanentRedirect(DEFAULT_PATH))
   server.get('*', rerenderRouteHandler(routes))
 

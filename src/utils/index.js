@@ -15,9 +15,23 @@ const stripTrailingSlash = pathname => {
   return pathname
 }
 
+const getEnvMiddleware = () => (_, reply) => {
+  const config = {
+    ENV: process.env.ENV || process.env.env || '',
+    NAMESPACE: process.env.NAMESPACE || 'default'
+  };
+
+  reply
+    .header('Cache-Control', 'no-store, no-cache, must-revalidate')
+    .header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT')
+    .header('Content-Type', 'application/javascript')
+    .send(`window.APP_CONFIG = ${JSON.stringify(config)}`);
+};
+
 module.exports = {
   debug,
   perf,
+  getEnvMiddleware,
   getCommitId,
   hasTrailingSlash,
   stripTrailingSlash
