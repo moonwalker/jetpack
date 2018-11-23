@@ -52,18 +52,18 @@ const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
 
 const buildClient = () => {
   const log = debug('build:client');
+  log('PRD:', config.productName);
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
-  log('PRD:', config.productName);
 
-  compileWebpackConfig(clientConfig).then(stats => printStats('Client', stats));
+  return compileWebpackConfig(clientConfig).then(stats => printStats('Client', stats));
 };
 
 const buildRender = () => {
   const log = debug('build:render');
+  log('PRD:', config.productName);
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
-  log('PRD:', config.productName);
 
   return compileWebpackConfig(renderConfig).then(renderStats => printStats('Render', renderStats));
 };

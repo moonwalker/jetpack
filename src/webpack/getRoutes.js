@@ -35,7 +35,10 @@ module.exports = ({ queryApiUrl, productName }) => {
     }
   };
 
-  log(queryApiUrl, params.method, params.body);
+  log('PRD:', productName);
+  log('ENV:', process.env.ENV);
+  log('API:', queryApiUrl);
+  log('REQ:', params.method, params.body);
 
   return fetch(queryApiUrl, params)
     .then((res) => {
