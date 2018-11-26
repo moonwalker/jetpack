@@ -36,7 +36,7 @@ module.exports = ({ queryApiUrl, productName }) => {
   };
 
   log('PRD:', productName);
-  log('ENV:', process.env.ENV);
+  log('ENV:', process.env.ENV || process.env.env || process.env.NODE_ENV || 'development');
   log('API:', queryApiUrl);
   log('REQ:', params.method, params.body);
 
