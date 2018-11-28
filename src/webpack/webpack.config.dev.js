@@ -24,6 +24,7 @@ const env = {
 const { paths } = settings;
 
 const devConfig = {
+  mode: 'development',
   context: paths.src,
   devtool: 'cheap-module-eval-source-mapp',
   entry: {

@@ -19,8 +19,8 @@ module.exports = {
     },
     output: {
       path: pwd('build'),
-      filename: 'static/js/[name].[chunkhash:5].js',
-      chunkFilename: 'static/js/[name].[chunkhash:5].js',
+      filename: 'static/js/[name].[contenthash:5].js',
+      chunkFilename: 'static/js/[name].[contenthash:5].js',
       filenameDev: 'static/js/[name].js',
       cssFilename: 'static/css/[name].[contenthash:5].css',
       publicPath: '/',
