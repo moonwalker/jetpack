@@ -1,4 +1,4 @@
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = (options) => {
   const {
@@ -6,7 +6,7 @@ module.exports = (options) => {
     swDest,
   } = options;
 
-  const workboxPlugin = new WorkboxPlugin({
+  const workboxPlugin = new GenerateSW({
     globDirectory,
     swDest,
     globPatterns: [
