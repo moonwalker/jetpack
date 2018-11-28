@@ -60,8 +60,7 @@ module.exports = (options, done) => {
 
     return promiseRetry((retry, number) => {
       logRoute(`Start (try #${number})`);
-
-      return render({ route, assets })
+      return render({ route, path: route.path, assets })
         .then((html) => {
           const res = writeHtml(htmlFilepath)(html);
 
