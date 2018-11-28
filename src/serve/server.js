@@ -75,7 +75,7 @@ const permanentRedirect = to => (_, reply) => {
     .redirect(301, to)
 }
 
-const rerenderRouteHandler = routes => (req, reply) => {
+const renderRouteHandler = routes => (req, reply) => {
   const u = url.parse(req.raw.url)
 
   if (!hasTrailingSlash(u.pathname)) {
@@ -107,7 +107,7 @@ module.exports.serve = async ({ worker, routes }) => {
   server.get('/healthz', healthzHandler(worker, started))
   server.get('/env.js', getEnvMiddleware())
   server.get('/', permanentRedirect(DEFAULT_PATH))
-  server.get('*', rerenderRouteHandler(routes))
+  server.get('*', renderRouteHandler(routes))
 
   server.listen(PORT, HOST, (err) => {
     if (err) throw err
