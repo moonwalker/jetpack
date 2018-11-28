@@ -11,7 +11,8 @@ const {
 
 const prerender = () => {
   const log = debug('prerender');
-  log('ENV:', process.env.ENV);
+
+  log('ENV:', process.env.ENV || process.env.env || process.env.NODE_ENV || 'development');
   log('API:', config.queryApiUrl);
   log('PRD:', config.productName);
 
