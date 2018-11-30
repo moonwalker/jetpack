@@ -1,6 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker');
 const stylelint = require('stylelint');
+const cssnano = require('cssnano');
 const postcssReporter = require('postcss-reporter');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -39,6 +40,12 @@ module.exports = (options, env) => {
             ...(lint ? [stylelint()] : []),
             mqpacker(),
             autoprefixer(),
+            ...(isDevelopment ? [] : [cssnano({
+              // Avoid removing the relative (`./`) notation, webpack needs it
+              preset: ['default', {
+                normalizeUrl: false
+              }]
+            })]),
             postcssReporter({
               clearAllMessages: true
             })
