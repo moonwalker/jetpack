@@ -939,6 +939,15 @@ ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
 
+ajv@6.5.5, ajv@^6.5.3, ajv@^6.5.5:
+  version "6.5.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.5.tgz#cf97cdade71c6399a92c6d6c4177381291b781a1"
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
 ajv@^5.1.0:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
@@ -965,15 +974,6 @@ ajv@^6.1.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.1"
-
-ajv@^6.5.3, ajv@^6.5.5:
-  version "6.5.5"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.5.tgz#cf97cdade71c6399a92c6d6c4177381291b781a1"
-  dependencies:
-    fast-deep-equal "^2.0.1"
-    fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
-    uri-js "^4.2.2"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
@@ -3315,13 +3315,13 @@ fastify-static@0.14.0:
     readable-stream "^3.0.0"
     send "^0.16.0"
 
-fastify@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-1.13.0.tgz#1e68bd7bc69257afa989f6ae94c885255087a403"
+fastify@1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-1.13.1.tgz#9e16a8d05133a405d9ba88e96e9cb246f70f9f99"
   dependencies:
     "@types/pino" "^4.16.0"
     abstract-logging "^1.0.0"
-    ajv "^6.5.4"
+    ajv "6.5.5"
     avvio "^5.8.0"
     end-of-stream "^1.4.1"
     fast-json-stringify "^1.8.0"
@@ -3331,7 +3331,7 @@ fastify@1.13.0:
     middie "^3.1.0"
     pino "^4.17.3"
     proxy-addr "^2.0.3"
-    tiny-lru "^1.6.1"
+    tiny-lru "^2.0.0"
 
 fastparse@^1.1.1:
   version "1.1.1"
@@ -7964,9 +7964,9 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tiny-lru@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/tiny-lru/-/tiny-lru-1.6.1.tgz#addb5c043311d1f07cd3a81d706ae739b8efebb1"
+tiny-lru@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tiny-lru/-/tiny-lru-2.0.0.tgz#1491ae2bd82d658246290fe48334039836cc6146"
 
 tmp@^0.0.33:
   version "0.0.33"
