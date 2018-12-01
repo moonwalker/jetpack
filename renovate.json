@@ -2,6 +2,6 @@
   "extends": [
     "config:base"
   ],
-  "schedule": "before 5am on every tuesday",
+  "schedule": "before 5am on tuesday",
   "timezone": "CET"
 }
