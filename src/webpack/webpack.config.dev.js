@@ -62,6 +62,9 @@ const devConfig = {
     before: (app) => {
       app.get('/env.js', getEnvMiddleware());
     }
+  },
+  optimization: {
+    splitChunks: false
   }
 };
 
