@@ -75,21 +75,14 @@ const permanentRedirect = to => (_, reply) => {
     .redirect(301, to)
 }
 
-const renderRouteHandler = routes => (req, reply) => {
+const renderRouteHandler = () => (req, reply) => {
   const u = url.parse(req.raw.url)
 
   if (!hasTrailingSlash(u.pathname)) {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
-  const route = routes.find(item => item.path === u.pathname)
-  if (!route) {
-    return reply
-      .code(404)
-      .send('Page not found.')
-  }
-
-  render({ route, path: u.path, assets })
+  render({ path: u.path, assets })
     .then((data) => {
       reply
         .header('Content-Type', 'text/html')
@@ -97,7 +90,7 @@ const renderRouteHandler = routes => (req, reply) => {
     })
 }
 
-module.exports.serve = async ({ worker, routes }) => {
+module.exports.serve = async ({ worker }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
@@ -107,7 +100,7 @@ module.exports.serve = async ({ worker, routes }) => {
   server.get('/healthz', healthzHandler(worker, started))
   server.get('/env.js', getEnvMiddleware())
   server.get('/', permanentRedirect(DEFAULT_PATH))
-  server.get('*', renderRouteHandler(routes))
+  server.get('*', renderRouteHandler())
 
   server.listen(PORT, HOST, (err) => {
     if (err) throw err

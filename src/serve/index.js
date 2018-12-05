@@ -1,23 +1,21 @@
 const { cpus } = require('os')
 const cluster = require('cluster')
 const { serve } = require('./server')
-const { config } = require('../webpack/defaults')
-const getRoutes = require('../webpack/getRoutes')
 
 const maxWorkers = parseInt(process.env['MAX_WORKERS']) || cpus().length
 
-const start = routes => {
+const start = () => {
   if (process.env.CLUSTERING != 'true') {
-    serve({ worker: 1, routes })
+    serve({ worker: 1 })
   } else {
     if (cluster.isMaster) {
       for (let i = 0; i < maxWorkers; i += 1) {
         cluster.fork()
       }
     } else {
-      serve({ worker: cluster.worker.id, routes })
+      serve({ worker: cluster.worker.id })
     }
   }
 }
 
-getRoutes(config).then(start)
+start()
