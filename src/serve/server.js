@@ -82,7 +82,7 @@ const renderRouteHandler = () => (req, reply) => {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
-  render({ path: u.path, assets })
+  render({ path: u.pathname, assets })
     .then((data) => {
       reply
         .header('Content-Type', 'text/html')
