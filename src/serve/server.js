@@ -42,7 +42,7 @@ const sitemapMarketHandler = () => (req, reply) => {
     .on('error', err => {
       return reply
         .code(404)
-        .send('sitemap-${market}.xml not found')
+        .send(`sitemap-${market}.xml not found`)
     })
     .pipe(reply.res)
 }
