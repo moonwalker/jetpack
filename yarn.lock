@@ -3480,12 +3480,12 @@ fastify-plugin@^1.2.0:
   dependencies:
     semver "^5.5.0"
 
-fastify-static@0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-0.14.0.tgz#e8f914cce72a8d6e40abfeb896c07458d4eaa3fe"
+fastify-static@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-1.0.0.tgz#3dfa804936d6098d85c77490303e9bafd154274a"
   dependencies:
     fastify-plugin "^1.2.0"
-    readable-stream "^3.0.0"
+    readable-stream "^3.0.2"
     send "^0.16.0"
 
 fastify@1.13.1:
@@ -7292,7 +7292,7 @@ readable-stream@1.0:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^3.0.0:
+readable-stream@^3.0.0, readable-stream@^3.0.2:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.0.6.tgz#351302e4c68b5abd6a2ed55376a7f9a25be3057a"
   dependencies:
