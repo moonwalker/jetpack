@@ -1,5 +1,9 @@
 # Jetpack
 
+[![renovatebot](https://badges.renovateapi.com/github/moonwalker/jetpack)](https://renovatebot.com/dashboard#github/moonwalker/jetpack)
+
+
+
 Webpack for Moonwalkers.
 
 ## Quick Start
