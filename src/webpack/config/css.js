@@ -8,7 +8,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (options, env) => {
   const {
     include = [],
-    minimize = false,
     node = false,
     lint = false,
     filename = '[name].css',
@@ -22,14 +21,12 @@ module.exports = (options, env) => {
     include,
     use: [
       {
-        loader: node ? 'css-loader/locals' : 'css-loader',
+        loader: 'css-loader',
         options: {
-          minimize,
           modules: true,
           sourceMap: true,
-          localIdentName: isDevelopment ?
-            '[path][name]__[local]' :
-            '[hash:base64:5]'
+          exportOnlyLocals: node,
+          localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
         }
       },
       {

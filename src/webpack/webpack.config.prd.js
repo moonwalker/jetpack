@@ -29,8 +29,7 @@ const env = {
 
 const {
   context,
-  paths,
-  minimize
+  paths
 } = settings;
 
 const clientConfig = mergeConfigs([
