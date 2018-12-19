@@ -2,7 +2,7 @@ const path = require('path');
 const { getCommitId } = require('../utils');
 
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
-const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib', ...p);
+const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib-esm', ...p);
 
 module.exports = {
   banner: `[filebase] @ ${getCommitId()}`,
