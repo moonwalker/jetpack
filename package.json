@@ -51,7 +51,7 @@
     "fastify": "1.13.3",
     "fastify-static": "1.0.0",
     "fetch-cached": "2.0.3",
-    "file-loader": "2.0.0",
+    "file-loader": "3.0.1",
     "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "7.0.1",
     "generate-json-webpack-plugin": "0.3.1",
