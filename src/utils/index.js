@@ -8,6 +8,10 @@ const hasTrailingSlash = pathname => {
   return pathname.length > 1 && pathname.substr(-1) == '/'
 }
 
+const hasLocale = path => {
+  return /^\/[a-z]{2}(?:-[a-z]{2})?\/.*/i.test(path);
+}
+
 const stripTrailingSlash = pathname => {
   if (hasTrailingSlash(pathname)) {
     pathname = pathname.slice(0, -1)
@@ -33,6 +37,7 @@ module.exports = {
   perf,
   getEnvMiddleware,
   getCommitId,
+  hasLocale,
   hasTrailingSlash,
   stripTrailingSlash
 }

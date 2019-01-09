@@ -7,7 +7,7 @@ const request = require('request')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { getEnvMiddleware, hasTrailingSlash } = require('../utils')
+const { getEnvMiddleware, hasLocale, hasTrailingSlash } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths } = require('../webpack/defaults')
 
@@ -80,6 +80,10 @@ const renderRouteHandler = () => (req, reply) => {
 
   if (!hasTrailingSlash(u.pathname)) {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
+  }
+
+  if (!hasLocale(u.pathname)) {
+    return permanentRedirect(`/en${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
   render({ path: u.pathname, assets })
