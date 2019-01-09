@@ -83,7 +83,7 @@ const renderRouteHandler = () => (req, reply) => {
   }
 
   if (!hasLocale(u.pathname)) {
-    return permanentRedirect(`/en${u.pathname}/${u.search || ''}`)(req, reply)
+    return permanentRedirect(`/en${u.path}`)(req, reply)
   }
 
   render({ path: u.pathname, assets })
