@@ -23,7 +23,7 @@ const getEnvMiddleware = () => (_, reply) => {
   const config = {
     ENV: process.env.ENV || process.env.env || '',
     NAMESPACE: process.env.NAMESPACE || 'default',
-    RELEASE: process.env.COMMIT_ID || ''
+    RELEASE: process.env.COMMIT || ''
   };
 
   reply

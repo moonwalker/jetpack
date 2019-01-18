@@ -3,7 +3,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 
-const { getCommitId } = require('../utils');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
@@ -21,7 +20,6 @@ const {
 
 const env = {
   CLIENT: true,
-  COMMIT_ID: getCommitId(),
   ENV: 'production',
   NODE_ENV: 'production'
 };
