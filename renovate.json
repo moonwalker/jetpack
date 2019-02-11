@@ -2,6 +2,7 @@
   "extends": [
     "config:base"
   ],
-  "prHourlyLimit": 0,
-  "timezone": "CET"
+  "timezone": "CET",
+  "schedule": ["after 1am and before 6am on tuesday"],
+  "prHourlyLimit": 20
 }
