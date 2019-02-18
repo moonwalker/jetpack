@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
@@ -53,20 +54,21 @@ const clientConfig = mergeConfigs([
       new webpack.EnvironmentPlugin(env),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.HashedModuleIdsPlugin(),
-      /*
-      new UglifyJsPlugin({
-        sourceMap: true,
-        cache: true,
-        parallel: true
-      }),
-      */
       new CopyWebpackPlugin([{
         from: paths.public.root
       }]),
       new AssetsPlugin({
         ...paths.assets
       })
-    ]
+    ],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          sourceMap: true
+        })
+      ]
+    }
   },
   createResolveConfig(),
   createJavascriptConfig({
