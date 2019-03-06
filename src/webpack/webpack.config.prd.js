@@ -48,9 +48,7 @@ const clientConfig = mergeConfigs([
       publicPath: paths.output.publicPath
     },
     plugins: [
-      new CleanWebpackPlugin(paths.output.path, {
-        root: paths.root
-      }),
+      new CleanWebpackPlugin(),
       new webpack.EnvironmentPlugin(env),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.HashedModuleIdsPlugin(),
@@ -112,9 +110,7 @@ const renderConfig = mergeConfigs([
       publicPath: paths.output.publicPath
     },
     plugins: [
-      new CleanWebpackPlugin(paths.render.path, {
-        root: paths.root
-      }),
+      new CleanWebpackPlugin(),
       new webpack.EnvironmentPlugin({
         ...env,
         CLIENT: false
