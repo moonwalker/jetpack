@@ -1171,6 +1171,15 @@ ajv@^6.9.1:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+ajv@^6.9.2:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.10.0.tgz#90d0d54439da587cd7e843bfb7045f50bd22bdf1"
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
 alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
@@ -1412,9 +1421,9 @@ autoprefixer@^9.0.0:
     postcss "^7.0.5"
     postcss-value-parser "^3.3.1"
 
-avvio@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/avvio/-/avvio-6.0.1.tgz#bafd79c9cfa45a227eaac210093c8bf8cf0e1e75"
+avvio@^6.1.0:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/avvio/-/avvio-6.1.1.tgz#3f7f4686efb4fed7136acc865e3e18d949898ba9"
   dependencies:
     debug "^4.0.0"
     fastq "^1.6.0"
@@ -3715,9 +3724,9 @@ fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
-fast-json-stringify@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/fast-json-stringify/-/fast-json-stringify-1.11.0.tgz#de7f5147e044b937bc5748b913140efc47c162b7"
+fast-json-stringify@^1.11.2:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/fast-json-stringify/-/fast-json-stringify-1.11.3.tgz#31baddf2d66d946b25b9f119c6b3953d5b235394"
   dependencies:
     ajv "^6.8.1"
     deepmerge "^3.0.0"
@@ -3749,15 +3758,15 @@ fastify-static@2.3.4:
     readable-stream "^3.1.1"
     send "^0.16.0"
 
-fastify@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-2.0.0.tgz#5f4c58671d2b71c474ab66efd9de65fb32d835b5"
+fastify@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-2.0.1.tgz#429b739a18fc14f8a0d036364ca8d2e57f3389e3"
   dependencies:
     abstract-logging "^1.0.0"
-    ajv "^6.9.1"
-    avvio "^6.0.1"
+    ajv "^6.9.2"
+    avvio "^6.1.0"
     bourne "^1.1.2"
-    fast-json-stringify "^1.11.0"
+    fast-json-stringify "^1.11.2"
     find-my-way "^2.0.0"
     flatstr "^1.0.9"
     light-my-request "^3.2.0"
