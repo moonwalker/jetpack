@@ -47,7 +47,6 @@
     "eslint-plugin-jest": "22.3.0",
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
-    "extract-css-chunks-webpack-plugin": "3.3.3",
     "fastify": "2.0.1",
     "fastify-static": "2.3.4",
     "fetch-cached": "2.0.3",
