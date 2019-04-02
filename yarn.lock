@@ -3986,9 +3986,10 @@ fastify-plugin@^1.5.0:
   dependencies:
     semver "^5.5.0"
 
-fastify-static@2.3.4:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-2.3.4.tgz#722c4f8a8b5156f894b636603f57cc9db60d96fe"
+fastify-static@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-2.4.0.tgz#7d3937897a8feaa66a920a915f72a11e795c3351"
+  integrity sha512-JgpxLsy6ask3UUXrHd76Vi0TvBZ6VtFgHaBIBV8hZ02Mn7YY5Vq0n2QOmcyJqSAF4RWc7UjubRE+wTSDXYUYQg==
   dependencies:
     fastify-plugin "^1.5.0"
     glob "^7.1.3"
