@@ -4088,22 +4088,6 @@ fast-safe-stringify@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz#04b26106cc56681f51a044cfc0d76cf0008ac2c2"
 
-fastify-plugin@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-1.5.0.tgz#4bea12c54112f4749c17f3a1f17356cbdfa661af"
-  dependencies:
-    semver "^5.5.0"
-
-fastify-static@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/fastify-static/-/fastify-static-2.4.0.tgz#7d3937897a8feaa66a920a915f72a11e795c3351"
-  integrity sha512-JgpxLsy6ask3UUXrHd76Vi0TvBZ6VtFgHaBIBV8hZ02Mn7YY5Vq0n2QOmcyJqSAF4RWc7UjubRE+wTSDXYUYQg==
-  dependencies:
-    fastify-plugin "^1.5.0"
-    glob "^7.1.3"
-    readable-stream "^3.1.1"
-    send "^0.16.0"
-
 fastify@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/fastify/-/fastify-2.1.0.tgz#2f1659479f0aead139594ee9c2e7e07bd6629b22"
@@ -8383,7 +8367,7 @@ semver@^5.5.1, semver@^5.6.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
-send@0.16.2, send@^0.16.0:
+send@0.16.2:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/send/-/send-0.16.2.tgz#6ecca1e0f8c156d141597559848df64730a6bbc1"
   dependencies:
