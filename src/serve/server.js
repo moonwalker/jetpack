@@ -17,6 +17,7 @@ const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051'
 
 const BUILD_DIR = 'build'
 const DEFAULT_PATH = '/en/'
+const STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -77,6 +78,10 @@ const permanentRedirect = to => (_, reply) => {
 
 const renderRouteHandler = () => (req, reply) => {
   const u = url.parse(req.raw.url)
+
+  if (STATIC_FILE_PATTERN.test(u.pathname)) {
+    return reply.callNotFound();
+  }
 
   if (!hasTrailingSlash(u.pathname)) {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
