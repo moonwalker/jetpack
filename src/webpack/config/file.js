@@ -14,9 +14,9 @@ module.exports = (options, env) => {
     loader: 'file-loader',
     options: {
       context,
-      name: isDevelopment ?
-        '[path][name].[ext]' :
-        '[path][name].[hash:5].[ext]',
+      name: isDevelopment
+        ? 'static/[path][name].[ext]'
+        : 'static/[path][name].[hash:5].[ext]',
       emitFile,
       ...restOptions
     }

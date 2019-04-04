@@ -103,7 +103,14 @@ module.exports.serve = async ({ worker }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
+  // Versioned static files
+  server.use('/static', serveStatic(path.join(process.cwd(), BUILD_DIR, 'static'), {
+    fallthrough: false,
+    maxAge: '1y'
+  }))
+  // Standard static files (favicons, etc)
   server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
+
   server.get('/sitemap.xml', sitemapHandler())
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
