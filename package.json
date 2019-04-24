@@ -71,7 +71,7 @@
     "serve-static": "1.13.2",
     "stats-webpack-plugin": "0.7.0",
     "style-loader": "0.23.1",
-    "stylelint": "9.10.1",
+    "stylelint": "10.0.1",
     "stylelint-config-css-modules": "1.4.0",
     "stylelint-config-recommended": "2.2.0",
     "stylus": "0.54.5",
