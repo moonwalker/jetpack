@@ -38,8 +38,7 @@ const clientConfig = mergeConfigs([
     devtool: 'source-map',
     entry: {
       main: paths.entry.main,
-      webfonts: paths.entry.webfonts,
-      support: paths.entry.support
+      webfonts: paths.entry.webfonts
     },
     output: {
       path: paths.output.path,
