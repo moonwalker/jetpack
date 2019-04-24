@@ -14,8 +14,7 @@ module.exports = {
     entry: {
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js'),
-      webfonts: lsp('scripts', 'webfonts.js'),
-      support: lsp('scripts', 'support.js')
+      webfonts: lsp('scripts', 'webfonts.js')
     },
     output: {
       path: pwd('build'),
