@@ -12,6 +12,12 @@ const hasLocale = path => {
   return /^\/[a-z]{2}(?:-[a-z]{2})?\/.*/i.test(path);
 }
 
+const stripUndefined = path => {
+  const ms = path.match(/^(.*)\/undefined\//i);
+  if (!!ms) return ms[1];
+  return null;
+}
+
 const stripTrailingSlash = pathname => {
   if (hasTrailingSlash(pathname)) {
     pathname = pathname.slice(0, -1)
@@ -40,5 +46,6 @@ module.exports = {
   getCommitId,
   hasLocale,
   hasTrailingSlash,
-  stripTrailingSlash
+  stripTrailingSlash,
+  stripUndefined
 }

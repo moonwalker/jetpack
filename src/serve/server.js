@@ -7,7 +7,7 @@ const request = require('request')
 const fastify = require('fastify')
 const serveStatic = require('serve-static')
 
-const { getEnvMiddleware, hasLocale, hasTrailingSlash } = require('../utils')
+const { getEnvMiddleware, hasLocale, hasTrailingSlash, stripUndefined } = require('../utils')
 const { checkBuildArtifacts, processAssets } = require('../prerender/run')
 const { paths } = require('../webpack/defaults')
 
@@ -16,7 +16,8 @@ const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
 const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051'
 
 const BUILD_DIR = 'build'
-const DEFAULT_PATH = '/en/'
+const DEFAULT_LOCALE = 'en'
+const DEFAULT_PATH = `/${DEFAULT_LOCALE}/`
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -83,7 +84,13 @@ const renderRouteHandler = () => (req, reply) => {
   }
 
   if (!hasLocale(u.pathname)) {
-    return permanentRedirect(`/en${u.path}`)(req, reply)
+    return permanentRedirect(`/${DEFAULT_LOCALE}${u.path}`)(req, reply)
+  }
+
+  const undef = stripUndefined(u.pathname)
+
+  if (!!undef) {
+    return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply)
   }
 
   render({ path: u.pathname, assets })
