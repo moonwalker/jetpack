@@ -37,9 +37,7 @@ const clientConfig = mergeConfigs([
     context,
     devtool: 'source-map',
     entry: {
-      main: paths.entry.main,
-      webfonts: paths.entry.webfonts,
-      support: paths.entry.support
+      main: paths.entry.main
     },
     output: {
       path: paths.output.path,
@@ -48,9 +46,7 @@ const clientConfig = mergeConfigs([
       publicPath: paths.output.publicPath
     },
     plugins: [
-      new CleanWebpackPlugin(paths.output.path, {
-        root: paths.root
-      }),
+      new CleanWebpackPlugin(),
       new webpack.EnvironmentPlugin(env),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.HashedModuleIdsPlugin(),
@@ -112,9 +108,7 @@ const renderConfig = mergeConfigs([
       publicPath: paths.output.publicPath
     },
     plugins: [
-      new CleanWebpackPlugin(paths.render.path, {
-        root: paths.root
-      }),
+      new CleanWebpackPlugin(),
       new webpack.EnvironmentPlugin({
         ...env,
         CLIENT: false

@@ -28,9 +28,7 @@ const devConfig = {
   context: paths.src,
   devtool: 'cheap-module-eval-source-mapp',
   entry: {
-    main: paths.entry.main,
-    webfonts: paths.entry.webfonts,
-    support: paths.entry.support
+    main: paths.entry.main
   },
   output: {
     path: paths.output.path,

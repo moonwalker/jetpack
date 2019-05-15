@@ -18,6 +18,12 @@ const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051'
 const BUILD_DIR = 'build'
 const DEFAULT_LOCALE = 'en'
 const DEFAULT_PATH = `/${DEFAULT_LOCALE}/`
+const STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;
+
+const HEADER_CACHE_TAG = 'Cache-Tag'
+const CACHE_TAG_STATIC = 'static'
+const CACHE_TAG_STATIC_VERSIONED = 'static-versioned'
+const CACHE_TAG_CONTENT = 'content'
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -79,6 +85,10 @@ const permanentRedirect = to => (_, reply) => {
 const renderRouteHandler = () => (req, reply) => {
   const u = url.parse(req.raw.url)
 
+  if (STATIC_FILE_PATTERN.test(u.pathname)) {
+    return reply.callNotFound();
+  }
+
   if (!hasTrailingSlash(u.pathname)) {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
@@ -97,6 +107,7 @@ const renderRouteHandler = () => (req, reply) => {
     .then((data) => {
       reply
         .header('Content-Type', 'text/html')
+        .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
         .send(data)
     })
 }
@@ -105,7 +116,21 @@ module.exports.serve = async ({ worker }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
 
-  server.use(serveStatic(path.join(process.cwd(), BUILD_DIR)))
+  // Versioned static files
+  server.use('/static', serveStatic(path.join(process.cwd(), BUILD_DIR, 'static'), {
+    fallthrough: false,
+    maxAge: '1y',
+    setHeaders: (res) => {
+      res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC_VERSIONED)
+    }
+  }))
+  // Standard static files (favicons, etc)
+  server.use(serveStatic(path.join(process.cwd(), BUILD_DIR), {
+    setHeaders: (res) => {
+      res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC)
+    }
+  }))
+
   server.get('/sitemap.xml', sitemapHandler())
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
