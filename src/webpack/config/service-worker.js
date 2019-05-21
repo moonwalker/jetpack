@@ -1,23 +1,33 @@
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = (options) => {
-  const {
-    globDirectory,
-    swDest,
-  } = options;
+  const { swDest } = options;
 
-  const workboxPlugin = new WorkboxPlugin({
-    globDirectory,
+  const generateSWPlugin = new GenerateSW({
+    importWorkboxFrom: 'local',
     swDest,
-    globPatterns: [
-      'static/js/{main,vendor}.*.js'
+
+    /* Precache all the initial js files (main, vendors, manifest) */
+    chunks: ['manifest', 'main', 'vendor'],
+    include: [/\.js$/],
+
+    /* Cache any css/js chunks based on navigation */
+    runtimeCaching: [
+      {
+        urlPattern: /static\/js\/views\/.*\.js/,
+        handler: 'CacheFirst'
+      },
+      {
+        urlPattern: /static\/css\/.*\.css/,
+        handler: 'CacheFirst'
+      }
     ],
-    dontCacheBustUrlsMatching: /\.\w{5}\./,
+    cleanupOutdatedCaches: true,
     clientsClaim: true,
     skipWaiting: true
   });
 
   return {
-    plugins: [workboxPlugin]
+    plugins: [generateSWPlugin]
   };
 };

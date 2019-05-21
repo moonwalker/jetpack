@@ -87,8 +87,7 @@ const clientConfig = mergeConfigs([
   }),
   createStatsConfig(),
   createServiceWorkerConfig({
-    globDirectory: paths.output.path,
-    swDest: paths.output.swDest,
+    swDest: paths.output.swDest
   })
 ], settings, env);
 
