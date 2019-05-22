@@ -43,7 +43,8 @@ const clientConfig = mergeConfigs([
       path: paths.output.path,
       filename: paths.output.filename,
       chunkFilename: paths.output.chunkFilename,
-      publicPath: paths.output.publicPath
+      publicPath: paths.output.publicPath,
+      hashDigestLength: 8
     },
     plugins: [
       new CleanWebpackPlugin(),
