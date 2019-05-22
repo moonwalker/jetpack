@@ -28,7 +28,7 @@ module.exports = () => ({
           chunks: 'initial',
           name: 'vendor',
           // manually setting the filename and avoid the webpack generated filename
-          filename: 'static/js/vendor.[contenthash:5].js',
+          filename: 'static/js/vendor.[contenthash].js',
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
           enforce: true

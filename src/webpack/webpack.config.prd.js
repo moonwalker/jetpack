@@ -43,7 +43,8 @@ const clientConfig = mergeConfigs([
       path: paths.output.path,
       filename: paths.output.filename,
       chunkFilename: paths.output.chunkFilename,
-      publicPath: paths.output.publicPath
+      publicPath: paths.output.publicPath,
+      hashDigestLength: 8
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -87,8 +88,7 @@ const clientConfig = mergeConfigs([
   }),
   createStatsConfig(),
   createServiceWorkerConfig({
-    globDirectory: paths.output.path,
-    swDest: paths.output.swDest,
+    swDest: paths.output.swDest
   })
 ], settings, env);
 

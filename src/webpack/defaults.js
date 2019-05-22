@@ -17,10 +17,10 @@ module.exports = {
     },
     output: {
       path: pwd('build'),
-      filename: 'static/js/[name].[contenthash:5].js',
-      chunkFilename: 'static/js/[name].[contenthash:5].js',
+      filename: 'static/js/[name].[contenthash].js',
+      chunkFilename: 'static/js/[name].[contenthash].js',
       filenameDev: 'static/js/[name].js',
-      cssFilename: 'static/css/[name].[contenthash:5].css',
+      cssFilename: 'static/css/[name].[contenthash].css',
       publicPath: '/',
       swDest: pwd('build', 'sw.js'),
       buildInfo: '_build-info.json'
