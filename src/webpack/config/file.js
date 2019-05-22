@@ -16,7 +16,7 @@ module.exports = (options, env) => {
       context,
       name: isDevelopment
         ? 'static/[path][name].[ext]'
-        : 'static/[path][name].[hash].[ext]',
+        : 'static/[path][name].[hash:8].[ext]',
       emitFile,
       ...restOptions
     }
