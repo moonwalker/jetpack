@@ -1,5 +1,4 @@
 const autoprefixer = require('autoprefixer');
-const mqpacker = require('css-mqpacker');
 const stylelint = require('stylelint');
 const cssnano = require('cssnano');
 const postcssReporter = require('postcss-reporter');
@@ -35,7 +34,6 @@ module.exports = (options, env) => {
           sourceMap: true,
           plugins: [
             ...(lint ? [stylelint()] : []),
-            mqpacker(),
             autoprefixer(),
             ...(isDevelopment ? [] : [cssnano({
               // Avoid removing the relative (`./`) notation, webpack needs it
