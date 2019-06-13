@@ -8,3 +8,4 @@ module.exports.createFileConfig = require('./file');
 module.exports.createCommonChunks = require('./common-chunks');
 module.exports.createBuildInfo = require('./build-info');
 module.exports.createStatsConfig = require('./stats');
+module.exports.createSvgConfig = require('./svg');

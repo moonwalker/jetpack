@@ -15,7 +15,8 @@ const {
   createCommonChunks,
   createServiceWorkerConfig,
   createBuildInfo,
-  createStatsConfig
+  createStatsConfig,
+  createSvgConfig
 } = require('./config');
 
 const env = {
@@ -80,6 +81,7 @@ const clientConfig = mergeConfigs([
     include: paths.src
   }),
   createFileConfig({ context: paths.src }, env),
+  createSvgConfig({ context: paths.src }),
   createCommonChunks(),
   createBuildInfo({
     output: paths.output.buildInfo
@@ -134,7 +136,10 @@ const renderConfig = mergeConfigs([
   createFileConfig({
     context: paths.src,
     emitFile: false
-  }, env)
+  }, env),
+  createSvgConfig({
+    context: paths.src
+  })
 ], settings, env);
 
 module.exports = { renderConfig, clientConfig };
