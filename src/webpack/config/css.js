@@ -15,7 +15,7 @@ module.exports = (options, env) => {
   } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
-  const test = /\.(css|less|styl)$/;
+  const test = /\.(css|styl)$/;
 
   const transformRule = {
     test,

@@ -10,7 +10,6 @@ const {
   createResolveConfig,
   createCssConfig,
   createStylusConfig,
-  createLessConfig,
   createFileConfig
 } = require('./config');
 const settings = require('./defaults');
@@ -85,7 +84,6 @@ module.exports = mergeConfigs([
     include: paths.src,
     root: paths.root
   }),
-  createLessConfig(),
   createFileConfig({
     context: paths.src
   }, env)

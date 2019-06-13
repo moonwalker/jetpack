@@ -12,7 +12,6 @@ const {
   createFileConfig,
   createCssConfig,
   createStylusConfig,
-  createLessConfig,
   createCommonChunks,
   createServiceWorkerConfig,
   createBuildInfo,
@@ -80,7 +79,6 @@ const clientConfig = mergeConfigs([
   createStylusConfig({
     include: paths.src
   }),
-  createLessConfig(),
   createFileConfig({ context: paths.src }, env),
   createCommonChunks(),
   createBuildInfo({
@@ -133,7 +131,6 @@ const renderConfig = mergeConfigs([
   createStylusConfig({
     include: paths.src
   }),
-  createLessConfig(),
   createFileConfig({
     context: paths.src,
     emitFile: false
