@@ -12,6 +12,7 @@ const ARTIFACTS_REL_DIR = path.relative(
 
 const STATS = {
   context: paths.src,
+  excludeAssets: [/artifacts/],
   assets: true,
   modules: true,
   chunks: true,
@@ -22,9 +23,6 @@ const STATS = {
 };
 
 module.exports = () => ({
-  stats: {
-    source: false
-  },
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
