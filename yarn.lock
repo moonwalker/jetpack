@@ -1009,15 +1009,15 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.1.0.tgz#ca89cdfbdfa5187a4ba3aba5cd8615f972c9622f"
-  integrity sha512-GuVJn7Lg2vCVZxghLDW2QOpaZJCNS0NwlffZdvVdGPJ/Z9CDm6USoTs3GOIeBQhXp6NsCn7lYZq2foX5asfjdA==
+"@bundle-stats/html-templates@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.1.2.tgz#d2bcf2b4400f712312c1bc72147902f25f213239"
+  integrity sha512-CDhy9xTdgDgjH8bwZm52RuPCe7kwbxFNaGSwV6H6CaLW4es3WlB6lCh40hpXuSgdR+1ZrVfU1laQUMSYtQHM4Q==
 
-"@bundle-stats/utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.0.0.tgz#1a86d72c3d2bb1e3f1f94b842605347483caa722"
-  integrity sha512-B7RmnsFMsH523jGtuLwos2dLtu0L0lvOFSSNlk1HRyl7mT0LhROxpP3REs1xxd5WZXWL+APKf8ibChe3Vx/ayw==
+"@bundle-stats/utils@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.1.2.tgz#c4bcf679ad7adaaf0b80dbd1a5d838cffd5a2295"
+  integrity sha512-gBvSdyW4v+iz884GoQahb+H0yBkyUR/0R1157kzMQ42ahl7Kes1V5iP+HgA8WDPLmpVvQFvkXuWLSXXfAwyLEA==
   dependencies:
     convert-units "^2.3.4"
 
@@ -2271,13 +2271,13 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.1.0.tgz#96eef6e348d2555839b67edc1e123fa3aa65b8c8"
-  integrity sha512-l1JgZt+Tf728FuX9vkOM5greMKB/cUMoani20AytlmIKdNulpU94H4NxZm+Mn8yQcthI+f7S3bFXXzfoHekeqw==
+bundle-stats@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.1.2.tgz#cb001bec93ae0c86825301d35645397f780046ef"
+  integrity sha512-tXnMCg2dQiMlJFj+joE3O9dcVSXst/uE0e+Rj00lFebNFbTNHEj46W7NL+kw2CGiOSCItxSHZyKglOVQ3kNNng==
   dependencies:
-    "@bundle-stats/html-templates" "^1.1.0"
-    "@bundle-stats/utils" "^1.0.0"
+    "@bundle-stats/html-templates" "^1.1.2"
+    "@bundle-stats/utils" "^1.1.2"
     fs-extra "8.0.1"
     listr "^0.14.3"
     lodash "4.17.11"
