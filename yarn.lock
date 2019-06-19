@@ -2270,7 +2270,7 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@^1.1.0:
+bundle-stats@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.1.0.tgz#96eef6e348d2555839b67edc1e123fa3aa65b8c8"
   integrity sha512-l1JgZt+Tf728FuX9vkOM5greMKB/cUMoani20AytlmIKdNulpU94H4NxZm+Mn8yQcthI+f7S3bFXXzfoHekeqw==
