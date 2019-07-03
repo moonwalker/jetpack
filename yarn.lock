@@ -1016,15 +1016,15 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.1.3.tgz#53dab4bd41fd36ee84080d465caccc128b4aef98"
-  integrity sha512-DPfqsf7nL4Kmr0i8TGU/IDOLazNyn5Q060TRUHZ2Wxy2AI9nBvS6jKbyrr3OZ4I5VswBqgmfi9y3iU2pnbrGHQ==
+"@bundle-stats/html-templates@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.1.4.tgz#d18f5433cf009ce808737b59cfbfa86c5d0a4b04"
+  integrity sha512-3/j+yW5dq0HHzZGRczxy9zl5YaSPsr+g8BfF/1DhJ6mcpovX7RNaD+gcwUW3cA2MgcDS2QQFFWiUPxdE5Q2ZXw==
 
-"@bundle-stats/utils@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.1.3.tgz#b95ad50f73f6753f20e7313018e82175fcd3d340"
-  integrity sha512-8FrkKzUG+03cVAVWThsquyckuKTMjznKU5oG1GIx/QsB2LyeN3pOQL2/akUkjHmoBfoEZa/Pg0pPHGkTL7W31A==
+"@bundle-stats/utils@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.1.4.tgz#a5d2b2e3fc6a14cd7ae0f93b03d4dd2d0137ab79"
+  integrity sha512-Y0gsI34O8xYCHQys7dKteP3fQjg6P+ena0niv6hYpjOLrgMn1eDjxyPZ2IrjZ7/KvjDmSwUYTx5r1yk7UHSKQg==
   dependencies:
     convert-units "^2.3.4"
 
@@ -2279,14 +2279,14 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.1.3.tgz#1c5cd5b89d6f2751fe404b9155b8623bf8c6fecb"
-  integrity sha512-VvvmquSVQDdFRz4pqmlUYK7R/cY1rIa1lsBMOTe7XJkJc/L9VDZzGCuB4qN7J9sU1Zs/ZLjKnGwYSDmSdsZnCQ==
+bundle-stats@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.1.4.tgz#23e076821704072e47a405429e27aedcb9c9318d"
+  integrity sha512-K4x9cgSgiqotzRnqLD7SqCKk5RWjqeFLeJwzfaxQ0kalBLBOVaVz4+QGQq44bufKt3dxUS2Wp6smbLqVG/iiPg==
   dependencies:
-    "@bundle-stats/html-templates" "^1.1.3"
-    "@bundle-stats/utils" "^1.1.3"
-    fs-extra "8.0.1"
+    "@bundle-stats/html-templates" "^1.1.4"
+    "@bundle-stats/utils" "^1.1.4"
+    fs-extra "8.1.0"
     listr "^0.14.3"
     lodash "4.17.11"
     yargs "13.2.4"
@@ -4412,15 +4412,6 @@ from2@^2.1.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
-
-fs-extra@8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.0.1.tgz#90294081f978b1f182f347a440a209154344285b"
-  integrity sha512-W+XLrggcDzlle47X/XnS7FXrXu9sDo+Ze9zpndeBxdgv88FHLm1HtmkhEwavruS6koanBjp098rUpHs65EmG7A==
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
 
 fs-extra@8.1.0:
   version "8.1.0"
