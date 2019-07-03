@@ -41,7 +41,7 @@
     "debug": "4.1.1",
     "dotenv": "8.0.0",
     "eslint": "5.16.0",
-    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-airbnb": "17.1.1",
     "eslint-loader": "2.1.2",
     "eslint-plugin-import": "2.18.0",
     "eslint-plugin-jest": "22.7.1",
