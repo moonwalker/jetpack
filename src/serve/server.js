@@ -16,9 +16,9 @@ const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0'
 const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051'
 
 const BUILD_DIR = 'build'
-const DEFAULT_LOCALE = 'en'
-const DEFAULT_PATH = `/${DEFAULT_LOCALE}/`
 const STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;
+
+const DEFAULT_LOCALES = ['en', 'sv', 'fi', 'no', 'de', 'en-gb', 'en-se', 'en-eu', 'en-ca', 'en-nz']
 
 const HEADER_CACHE_TAG = 'Cache-Tag'
 const CACHE_TAG_STATIC = 'static'
@@ -82,7 +82,7 @@ const permanentRedirect = to => (_, reply) => {
     .redirect(301, to)
 }
 
-const renderRouteHandler = () => (req, reply) => {
+const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
   const u = url.parse(req.raw.url)
 
   if (STATIC_FILE_PATTERN.test(u.pathname)) {
@@ -93,8 +93,8 @@ const renderRouteHandler = () => (req, reply) => {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply)
   }
 
-  if (!hasLocale(u.pathname)) {
-    return permanentRedirect(`/${DEFAULT_LOCALE}${u.path}`)(req, reply)
+  if (!hasLocale(u.pathname, localesRegex)) {
+    return permanentRedirect(`/${defaultLocale}${u.path}`)(req, reply)
   }
 
   const undef = stripUndefined(u.pathname)
@@ -112,9 +112,36 @@ const renderRouteHandler = () => (req, reply) => {
     })
 }
 
+const getSpaceLocales = () => {
+  return new Promise((resolve) => {
+    request(`http://${CONTENT_SVC}/space`, (error, response, body) => {
+      var defaultLocaleCode;
+      var localeCodes;
+      if (!error && response.statusCode == 200) {
+        const space = JSON.parse(body);
+        if (space && space.locales && space.locales.length) {
+          const defaultLocale = space.locales.find(l => (l.default));
+          localeCodes = space.locales.map(l => (l.code));
+          if (defaultLocale){
+            defaultLocaleCode = defaultLocale.code;
+          }else{
+            defaultLocaleCode = localeCodes[0];
+          }
+        } else {
+          defaultLocaleCode = DEFAULT_LOCALES[0];
+          localeCodes = DEFAULT_LOCALES;
+        }
+      }
+      resolve({ localesRegex: new RegExp(`^/(${localeCodes.join('|')})/.*`, 'i'), defaultLocale: defaultLocaleCode });
+    })
+  })
+}
+
 module.exports.serve = async ({ worker }) => {
   const started = new Date().toISOString()
   const server = fastify({ logger: true })
+
+  const { localesRegex, defaultLocale } = await getSpaceLocales();
 
   // Versioned static files
   server.use('/static', serveStatic(path.join(process.cwd(), BUILD_DIR, 'static'), {
@@ -135,8 +162,8 @@ module.exports.serve = async ({ worker }) => {
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler())
   server.get('/healthz', healthzHandler(worker, started))
   server.get('/env.js', getEnvMiddleware())
-  server.get('/', permanentRedirect(DEFAULT_PATH))
-  server.get('*', renderRouteHandler())
+  server.get('/', permanentRedirect(`/${defaultLocale}/`))
+  server.get('*', renderRouteHandler(localesRegex, defaultLocale))
 
   server.listen(PORT, HOST, (err) => {
     if (err) throw err
