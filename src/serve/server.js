@@ -115,21 +115,18 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
 const getSpaceLocales = () => {
   return new Promise((resolve) => {
     request(`http://${CONTENT_SVC}/space`, (error, response, body) => {
-      var defaultLocaleCode;
-      var localeCodes;
+      var defaultLocaleCode = DEFAULT_LOCALES[0];
+      var localeCodes = DEFAULT_LOCALES;
       if (!error && response.statusCode == 200) {
         const space = JSON.parse(body);
         if (space && space.locales && space.locales.length) {
           const defaultLocale = space.locales.find(l => (l.default));
           localeCodes = space.locales.map(l => (l.code));
-          if (defaultLocale){
+          if (defaultLocale) {
             defaultLocaleCode = defaultLocale.code;
-          }else{
+          } else {
             defaultLocaleCode = localeCodes[0];
           }
-        } else {
-          defaultLocaleCode = DEFAULT_LOCALES[0];
-          localeCodes = DEFAULT_LOCALES;
         }
       }
       resolve({ localesRegex: new RegExp(`^/(${localeCodes.join('|')})/.*`, 'i'), defaultLocale: defaultLocaleCode });
