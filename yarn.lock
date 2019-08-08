@@ -1130,15 +1130,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.3.1.tgz#badc7ed6a96b5d3a781402108636c25a4106bc24"
-  integrity sha512-zWczvAkvc5nP0hbZwz2bQXQqz73RzUqI/47eaDeotqsuvKC2Rmox6j7Bb1BiFeyMWIOIxpfQZuYNqoczEjwEOg==
+"@bundle-stats/html-templates@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.4.0.tgz#a454b7e6e0c616cfcf68b8cb2ad8926499babc57"
+  integrity sha512-VqzMEoXmI0Q5vUAmb0YDSDlK1W49HEME2fpEnO/GKIvW2+f5bhwk5l2MHcdfiXGsFVz9AjczmZsbwjEmFzdrXQ==
 
-"@bundle-stats/utils@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.3.1.tgz#70692e437f63bacc4edcc0e929c24d1fa4523f01"
-  integrity sha512-qfAalPQx9lN06lKLfynqw0LaOprTt89fZyGv/XAUr34CqcWwFhVunvA8gDiu43P0Klc4YQA0nOKVTojA51O9aQ==
+"@bundle-stats/utils@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.4.0.tgz#074652e7024a2eff8f7079e6a7fbe0dddc6ec71e"
+  integrity sha512-90dTftBQJKoZaTEvk9fMfR9mohbzpP5cVnvYPux++KwIJlzxpk+e4/DpflP6hi4yo8nQC/25HdHcGOtG1GrCAA==
   dependencies:
     convert-units "^2.3.4"
     core-js "^3.1.4"
@@ -2463,13 +2463,13 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.3.1.tgz#0b682dedaa0763e25ae73ddacaf2ff8f60ec3e19"
-  integrity sha512-9DtzUjKzgFv/qDbiHRertlGkjp9Im6T5YNoEkr7VVStDifLSlf5HljM0O9ImkA1gthcVvneNG7Tf2ZH5NZnMzA==
+bundle-stats@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.4.0.tgz#128d8414ff317729c4f4483cb2cef5c0a93f9d80"
+  integrity sha512-WT9nBTj7EHmeGS5Xuua1HEkDTSe8LKoNTA2arTGYtPBIhyNDVnE3TDYkelp61PnfAAlzer6n2XlPzeeDPxNAaw==
   dependencies:
-    "@bundle-stats/html-templates" "^1.3.1"
-    "@bundle-stats/utils" "^1.3.1"
+    "@bundle-stats/html-templates" "^1.4.0"
+    "@bundle-stats/utils" "^1.4.0"
     core-js "^3.1.4"
     fs-extra "8.1.0"
     listr "^0.14.3"
