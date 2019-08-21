@@ -1130,15 +1130,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.4.0.tgz#a454b7e6e0c616cfcf68b8cb2ad8926499babc57"
-  integrity sha512-VqzMEoXmI0Q5vUAmb0YDSDlK1W49HEME2fpEnO/GKIvW2+f5bhwk5l2MHcdfiXGsFVz9AjczmZsbwjEmFzdrXQ==
+"@bundle-stats/html-templates@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.5.2.tgz#a49f617adef7e26ff75726ff30529d1d878128bc"
+  integrity sha512-r1EKR9vKiJDigYPK+DPTggRCn/S/z9FFqE8zhx84gk90wcCXXaKlfdJOVU4ZK8w9bbAGm9v/7zeIzoGMVLiPFA==
 
-"@bundle-stats/utils@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.4.0.tgz#074652e7024a2eff8f7079e6a7fbe0dddc6ec71e"
-  integrity sha512-90dTftBQJKoZaTEvk9fMfR9mohbzpP5cVnvYPux++KwIJlzxpk+e4/DpflP6hi4yo8nQC/25HdHcGOtG1GrCAA==
+"@bundle-stats/utils@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.5.2.tgz#373231ea5ebf6b0638714a603ec0d735ad67807f"
+  integrity sha512-VWFHZ+jBNfzSwOgCjQvdWP6+jDP8E8Yn0Bk7BktsH3yE0a7aVcdVHQbPYmRXVF4NibYKhg2EKIMeAYBXSmZCcA==
   dependencies:
     convert-units "^2.3.4"
     core-js "^3.1.4"
@@ -2453,19 +2453,20 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.4.0.tgz#128d8414ff317729c4f4483cb2cef5c0a93f9d80"
-  integrity sha512-WT9nBTj7EHmeGS5Xuua1HEkDTSe8LKoNTA2arTGYtPBIhyNDVnE3TDYkelp61PnfAAlzer6n2XlPzeeDPxNAaw==
+bundle-stats@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.5.2.tgz#85062be4f4d367c5eb26e2ff2a650ac37dbc35a1"
+  integrity sha512-f3n7F0Q9XtikiihjSk7cIznP/221f794pz7HFsDxQPU6yxgM/d8PgROsWXhhmP7ju29bqVak4a9nwuLXDwUEHQ==
   dependencies:
-    "@bundle-stats/html-templates" "^1.4.0"
-    "@bundle-stats/utils" "^1.4.0"
+    "@bundle-stats/html-templates" "^1.5.2"
+    "@bundle-stats/utils" "^1.5.2"
     core-js "^3.1.4"
+    find-cache-dir "3.0.0"
     fs-extra "8.1.0"
     listr "^0.14.3"
     lodash "4.17.15"
     update-notifier "3.0.1"
-    yargs "13.3.0"
+    yargs "14.0.0"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -4537,6 +4538,15 @@ finalhandler@~1.1.2:
     statuses "~1.5.0"
     unpipe "~1.0.0"
 
+find-cache-dir@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-3.0.0.tgz#cd4b7dd97b7185b7e17dbfe2d6e4115ee3eeb8fc"
+  integrity sha512-t7ulV1fmbxh5G9l/492O1p5+EBbr3uwpt6odhFTMc+nWyhmbloe+ja9BZ8pIBtqFWhOmCWVjx+pTW4zDkFoclw==
+  dependencies:
+    commondir "^1.0.1"
+    make-dir "^3.0.0"
+    pkg-dir "^4.1.0"
+
 find-cache-dir@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-0.1.1.tgz#c8defae57c8a52a8a784f9e31c57c742e993a0b9"
@@ -4588,6 +4598,14 @@ find-up@^3.0.0:
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-3.0.0.tgz#49169f1d7993430646da61ecc5ae355c21c97b73"
   dependencies:
     locate-path "^3.0.0"
+
+find-up@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
+  integrity sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==
+  dependencies:
+    locate-path "^5.0.0"
+    path-exists "^4.0.0"
 
 findup-sync@3.0.0:
   version "3.0.0"
@@ -6570,6 +6588,13 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
+locate-path@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-5.0.0.tgz#1afba396afd676a6d42504d0a67a3a7eb9f62aa0"
+  integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
+  dependencies:
+    p-locate "^4.1.0"
+
 lodash._basebind@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/lodash._basebind/-/lodash._basebind-2.3.0.tgz#2b5bc452a0e106143b21869f233bdb587417d248"
@@ -6862,6 +6887,13 @@ make-dir@^2.0.0:
   dependencies:
     pify "^4.0.1"
     semver "^5.6.0"
+
+make-dir@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.0.0.tgz#1b5f39f6b9270ed33f9f054c5c0f84304989f801"
+  integrity sha512-grNJDhb8b1Jm1qeqW5R/O63wUo4UXo2v2HMic6YT9i/HBlF93S8jkMgH7yugvY9ABDShH4VZMn8I+U8+fCNegw==
+  dependencies:
+    semver "^6.0.0"
 
 makeerror@1.0.x:
   version "1.0.11"
@@ -7716,6 +7748,13 @@ p-locate@^3.0.0:
   dependencies:
     p-limit "^2.0.0"
 
+p-locate@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-4.1.0.tgz#a3428bb7088b3a60292f66919278b7c297ad4f07"
+  integrity sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==
+  dependencies:
+    p-limit "^2.2.0"
+
 p-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/p-map/-/p-map-2.0.0.tgz#be18c5a5adeb8e156460651421aceca56c213a50"
@@ -7859,6 +7898,11 @@ path-exists@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
 
+path-exists@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-4.0.0.tgz#513bdbe2d3b95d7762e8c1137efa195c6c61b5b3"
+  integrity sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
@@ -7979,6 +8023,13 @@ pkg-dir@^3.0.0:
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-3.0.0.tgz#2749020f239ed990881b1f71210d51eb6523bea3"
   dependencies:
     find-up "^3.0.0"
+
+pkg-dir@^4.1.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-4.2.0.tgz#f099133df7ede422e81d1d8448270eeb3e4261f3"
+  integrity sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
+  dependencies:
+    find-up "^4.0.0"
 
 pn@^1.1.0:
   version "1.1.0"
@@ -9279,6 +9330,11 @@ semver@^5.5.1, semver@^5.6.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
+semver@^6.0.0, semver@^6.2.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
+  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+
 semver@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.0.tgz#e95dc415d45ecf03f2f9f83b264a6b11f49c0cca"
@@ -9288,11 +9344,6 @@ semver@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.1.tgz#53f53da9b30b2103cd4f15eab3a18ecbcb210c9b"
   integrity sha512-rWYq2e5iYW+fFe/oPPtYJxYgjBm8sC4rmoGdUOgBB7VnwKt6HrL793l2voH1UlsyYZpJ4g0wfjnTEO1s1NP2eQ==
-
-semver@^6.2.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
 send@0.16.2:
   version "0.16.2"
@@ -11139,12 +11190,13 @@ yargs@13.2.4:
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
 
-yargs@13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
-  integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
+yargs@14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.0.0.tgz#ba4cacc802b3c0b3e36a9e791723763d57a85066"
+  integrity sha512-ssa5JuRjMeZEUjg7bEL99AwpitxU/zWGAGpdj0di41pOEmJti8NR6kyUIJBkR78DTYNPZOU08luUo0GTHuB+ow==
   dependencies:
     cliui "^5.0.0"
+    decamelize "^1.2.0"
     find-up "^3.0.0"
     get-caller-file "^2.0.1"
     require-directory "^2.1.1"
