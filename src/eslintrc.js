@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:prettier/recommended'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
@@ -9,6 +9,9 @@ module.exports = {
     }
   },
   plugins: ['jest'],
+  env: {
+    'jest/globals': true
+  },
   globals: {
     __STORYBOOK__: true,
     APP_CONFIG: true
