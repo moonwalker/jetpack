@@ -21,10 +21,10 @@ module.exports = {
     'arrow-parens': 'warn',
     // syntax enforcement, just warn
     camelcase: 'warn',
-    // we don't use comma dangle (ye)
+    // we don't use comma dangle (yet)
     'comma-dangle': 'off',
-    // syntax enforcement, just warn
-    'implicit-arrow-linebreak': 'warn',
+    // not used - coliding with prettier
+    'implicit-arrow-linebreak': 'off',
     // syntax enforcement, just warn
     'lines-between-class-members': 'warn',
     // syntax enforcement, just warn
