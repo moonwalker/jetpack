@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { getEnvMiddleware } = require('../utils');
 const mergeConfigs = require('./mergeConfigs');
 const {
-  createEslintConfig,
   createJavascriptConfig,
   createResolveConfig,
   createCssConfig,
@@ -70,9 +69,6 @@ module.exports = mergeConfigs([
   devConfig,
 
   createResolveConfig(),
-  createEslintConfig({
-    include: paths.src
-  }, env),
   createJavascriptConfig({
     include: paths.src,
     cache: true
