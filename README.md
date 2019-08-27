@@ -2,8 +2,6 @@
 
 [![renovatebot](https://badges.renovateapi.com/github/moonwalker/jetpack)](https://renovatebot.com/dashboard#github/moonwalker/jetpack)
 
-
-
 Webpack for Moonwalkers.
 
 ## Quick Start
@@ -40,9 +38,12 @@ $ npm run build
 
 ## Eslint + Prettier config
 
-[Prettier](https://www.npmjs.com/package/prettier) is automatically formatting the code on commit based on the existing eslint rules.
+The idea is to automate the code formatting, while relying on Eslint to report code errors (undefined variables, not found modules, etc.). 
 
-To skip the check, you can use `git commit --no-verify`.
+### How is working
+[lint-staged](https://www.npmjs.com/package/lint-staged) is running [Prettier](https://www.npmjs.com/package/prettier) and [Eslint](https://www.npmjs.com/package/eslint) before commiting. If there are eslint errors, the commit will stop.
+
+To skip the check entirely, you can use `git commit --no-verify`.
 
 ### Setup
 
