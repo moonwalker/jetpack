@@ -60,7 +60,11 @@ module.exports = {
     // we do not use .jsx
     'react/jsx-filename-extension': 'off',
     // helpful, but not required
-    'react/jsx-props-no-spreading': 'warn',
+    'react/jsx-props-no-spreading': ['warn', {
+      html: 'ignore',
+      custom: 'enfore',
+      exceptions: ['BaseComponent']
+    }],
     // helpful, but not required
     'react/jsx-fragments': 'warn',
     // helpful, but not required
