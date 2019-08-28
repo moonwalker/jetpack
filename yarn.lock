@@ -1341,6 +1341,30 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@moonwalker/pre-flight-check@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.1.tgz#43a5313dccbc62976b6c05297fc1f829603d834c"
+  integrity sha512-PfGl0z/jWCO/MexzCQZUuTumGwhp8yltJQi3r8emmtuT1RZvtkzIlJhdUaNYks+aCejGGhgieI6UoyhH46E4mA==
+  dependencies:
+    babel-eslint "10.0.3"
+    eslint "6.2.2"
+    eslint-config-airbnb "18.0.1"
+    eslint-config-prettier "6.1.0"
+    eslint-import-resolver-node "0.3.2"
+    eslint-import-resolver-webpack "0.11.1"
+    eslint-loader "3.0.0"
+    eslint-plugin-import "2.18.2"
+    eslint-plugin-jest "22.15.2"
+    eslint-plugin-jsx-a11y "6.2.3"
+    eslint-plugin-prettier "3.1.0"
+    eslint-plugin-react "7.14.3"
+    eslint-plugin-react-hooks "2.0.1"
+    husky "3.0.4"
+    lint-staged "9.2.5"
+    prettier "1.18.2"
+    stylelint-config-css-modules "1.4.0"
+    stylelint-config-recommended "2.2.0"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -6789,10 +6813,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@9.2.4:
-  version "9.2.4"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.2.4.tgz#7a35839c9c6103ec98eabf43e35657c209509345"
-  integrity sha512-RAt5ogbLRiKy9+T3dKbbPKP6tN2I9VjEtTXQFxdkauUdMjIBsS70ikwwSgsBR8xVVCUSX7sVDyWCyem5xB8YDw==
+lint-staged@9.2.5:
+  version "9.2.5"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.2.5.tgz#5a3e1e0a539a403bd7f88542bc3d34ce52efdbb3"
+  integrity sha512-d99gTBFMJ29159+9iRvaMEQstmNcPAbQbhHSYw6D/1FncvFdIj8lWHztaq3Uq+tbZPABHXQ/fyN7Rp1QwF8HIw==
   dependencies:
     chalk "^2.4.2"
     commander "^2.20.0"
