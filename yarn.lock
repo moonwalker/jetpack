@@ -1341,7 +1341,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@^1.0.1":
+"@moonwalker/pre-flight-check@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.1.tgz#43a5313dccbc62976b6c05297fc1f829603d834c"
   integrity sha512-PfGl0z/jWCO/MexzCQZUuTumGwhp8yltJQi3r8emmtuT1RZvtkzIlJhdUaNYks+aCejGGhgieI6UoyhH46E4mA==
