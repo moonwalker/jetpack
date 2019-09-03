@@ -7,9 +7,10 @@
   "scripts": {
     "start": "bin/jetpack.js",
     "incver": "npm version patch -m ':package: release %s'",
-    "bump": "npm run incver && git push --follow-tags && npm publish",
+    "bump": "./scripts/bump.sh",
     "lint": "eslint src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "release": "./scripts/release.sh"
   },
   "dependencies": {
     "@babel/core": "7.5.5",
@@ -38,7 +39,7 @@
     "css-loader": "3.2.0",
     "cssnano": "4.1.10",
     "debug": "4.1.1",
-    "dotenv": "8.1.0",
+    "dotenv": "^8.1.0",
     "fastify": "2.8.0",
     "fetch-cached": "2.0.3",
     "file-loader": "4.2.0",
@@ -73,5 +74,9 @@
     "workbox-webpack-plugin": "4.3.1",
     "worker-farm": "1.7.0",
     "xmlbuilder": "13.0.2"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^1.1.0",
+    "release-it": "^12.3.6"
   }
 }

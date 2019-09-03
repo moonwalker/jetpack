@@ -36,16 +36,16 @@ Build for production:
 $ npm run build
 ```
 
-## Eslint + Prettier config
+### Eslint + Prettier config
 
 The idea is to automate the code formatting, while relying on Eslint to report code errors (undefined variables, not found modules, etc.). 
 
-### How is working
+#### How is working
 [lint-staged](https://www.npmjs.com/package/lint-staged) is running [Prettier](https://www.npmjs.com/package/prettier) and [Eslint](https://www.npmjs.com/package/eslint) before commiting. If there are eslint errors, the commit will stop.
 
 To skip the check entirely, you can use `git commit --no-verify`.
 
-### Setup
+#### Setup
 
 ```js
 // .eslintrc.js
@@ -64,3 +64,18 @@ module.exports = require('./node_modules/@moonwalker/jetpack/src/prettier.config
 // lint-staged.config.js
 module.exports = require('./node_modules/@moonwalker/jetpack/src/lint-staged.config.js');
 ```
+
+## Development
+
+```shell
+yarn
+```
+
+### Publishing
+
+
+```shell
+yarn bump
+```
+
+`GITHUB_TOKEN` environmental variable is required (`.env`).
