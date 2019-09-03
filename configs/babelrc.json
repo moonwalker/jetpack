@@ -1,17 +1,23 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "modules": false
-    }],
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ],
     "@babel/preset-react"
   ],
   "plugins": [
-    ["@babel/plugin-transform-runtime", {
-      "corejs": false,
-      "helpers": true,
-      "regenerator": true,
-      "useESModules": false
-    }],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ],
     "react-require",
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
@@ -25,10 +31,7 @@
   ],
   "env": {
     "test": {
-      "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react"
-      ],
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
       "plugins": [
         "react-require",
         "@babel/plugin-proposal-class-properties",

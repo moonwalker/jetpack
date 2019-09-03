@@ -10,18 +10,14 @@ const log = debug('prerender', 'stats');
 const write = (stats) => {
   const outputFilepath = path.join(paths.artifacts.path, paths.artifacts.prerender);
 
-  return fse.outputJSON(
-    outputFilepath,
-    stats,
-    { spaces: 2 }
-  ).then(() => {
+  return fse.outputJSON(outputFilepath, stats, { spaces: 2 }).then(() => {
     log('Prerender stats saved to %s', outputFilepath);
     return stats;
   });
 };
 
 const display = (stats) => {
-  const workersStats = stats.workers.map(workerStats => ({
+  const workersStats = stats.workers.map((workerStats) => ({
     id: workerStats.id,
     fetchCount: workerStats.fetchCount,
     duration: workerStats.duration,
@@ -29,20 +25,16 @@ const display = (stats) => {
     avgPerRoute: workerStats.duration / workerStats.routes.length
   }));
 
-  workersStats.forEach(({
-    id,
-    fetchCount,
-    duration,
-    routes,
-    avgPerRoute
-  }) => log(
-    'Worker %d: duration: %d, routes: %d, fetch count: %d, avg per route: %d',
-    id,
-    round(duration),
-    routes,
-    fetchCount,
-    round(avgPerRoute)
-  ));
+  workersStats.forEach(({ id, fetchCount, duration, routes, avgPerRoute }) =>
+    log(
+      'Worker %d: duration: %d, routes: %d, fetch count: %d, avg per route: %d',
+      id,
+      round(duration),
+      routes,
+      fetchCount,
+      round(avgPerRoute)
+    )
+  );
 
   const totalRoutes = sumBy(workersStats, 'routes');
 

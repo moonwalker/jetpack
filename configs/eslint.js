@@ -10,5 +10,5 @@ module.exports = {
   globals: {
     __STORYBOOK__: true,
     APP_CONFIG: true
-  },
+  }
 };

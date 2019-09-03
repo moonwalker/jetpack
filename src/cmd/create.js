@@ -2,10 +2,25 @@ const { resolve } = require('path');
 const { execSync } = require('child_process');
 const { copy } = require('fs-extra');
 
+const invalid = () => `
+error: Name is required.
+example: jetpack create myproject
+`;
+
+function yarnInstalled() {
+  try {
+    execSync('yarnpkg --version', { stdio: 'ignore' });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 module.exports = {
   run: async (name, template = 'basic') => {
     if (!name) {
-      return console.error(invalid());
+      console.error(invalid());
+      return;
     }
 
     console.time(`=> Project "${name}" created`);
@@ -26,17 +41,3 @@ module.exports = {
     console.timeEnd(`=> Project "${name}" created`);
   }
 };
-
-const invalid = () => `
-error: Name is required.
-example: jetpack create myproject
-`;
-
-function yarnInstalled() {
-  try {
-    execSync('yarnpkg --version', { stdio: 'ignore' });
-    return true;
-  } catch (e) {
-    return false;
-  }
-}

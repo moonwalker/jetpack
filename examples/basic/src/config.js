@@ -8,12 +8,12 @@ const common = {
   appStateKey: 'app',
   apolloStateKey: 'apl',
   webfonts: 'Roboto:400,700',
-  segmentWriteKey: "MmMxX6y6VxGOJeP1qOKRa6q6Csinyhqo"
-}
+  segmentWriteKey: 'MmMxX6y6VxGOJeP1qOKRa6q6Csinyhqo'
+};
 
-//Added due to limitations in url patterns when using ssl
-//Pattern is ${productName}-api.mw.zone
-//and        staging-${productName}-api.mw.zone
+// Added due to limitations in url patterns when using ssl
+// Pattern is ${productName}-api.mw.zone
+// and        staging-${productName}-api.mw.zone
 
 const apiPath = `${common.productName}-api.${common.baseDomain}`;
 
@@ -32,11 +32,11 @@ const envConfig = {
     launchpadUrl: `http://localhost:50055`,
     launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   },
-  //staging: {
+  // staging: {
   //  queryApiUrl: `https://staging-${apiPath}/graphql`,
   //  subsApiUrl: `wss://staging-${apiPath}/subscriptions`,
   //  authToken: 'cpl_token-stg'
-  //},
+  // },
   staging: {
     queryApiUrl: `https://${apiPath}/graphql`,
     subsApiUrl: `wss://${apiPath}/subscriptions`,
@@ -51,7 +51,7 @@ const envConfig = {
     launchpadUrl: `https://launchpad.production-${common.productName}.zone`,
     launchpadToken: `5bfdccc1c05e1217bd96b56ddd7fa3b6`
   }
-}
+};
 
 const env = process.env.ENV || process.env.NODE_ENV || 'development';
 module.exports = { ...common, ...envConfig[env] };

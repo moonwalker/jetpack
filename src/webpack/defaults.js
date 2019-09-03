@@ -2,10 +2,10 @@ const path = require('path');
 const { getCommitId } = require('../utils');
 
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
-const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib-esm', ...p);
 
 module.exports = {
   banner: `[filebase] @ ${getCommitId()}`,
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   config: require(pwd('src/config')),
   context: path.resolve(__dirname, '..', '..', 'node_modules'),
   paths: {
@@ -13,7 +13,7 @@ module.exports = {
     src: pwd('src'),
     entry: {
       main: pwd('src', 'client.js'),
-      render: pwd('src', 'render.js'),
+      render: pwd('src', 'render.js')
     },
     output: {
       path: pwd('build'),

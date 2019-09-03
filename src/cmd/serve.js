@@ -1,3 +1,3 @@
 module.exports = {
-  run: () => require('../serve')
+  run: () => require('../serve') // eslint-disable-line global-require
 };

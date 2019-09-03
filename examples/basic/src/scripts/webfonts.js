@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '../config';
 
 (function(d) {
   if (config.webfonts) {
@@ -7,7 +7,7 @@ import config from '../config'
         families: [`${config.webfonts}`]
       }
     };
-    var wf = d.createElement('script');
+    const wf = d.createElement('script');
     wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
     wf.async = true;
     d.body.appendChild(wf);

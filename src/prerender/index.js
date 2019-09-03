@@ -4,10 +4,7 @@ const { config } = require('../webpack/defaults');
 const getRoutes = require('../webpack/getRoutes');
 const { debug } = require('../utils');
 const run = require('./run');
-const {
-  write: writeStats,
-  display: displayStats,
-} = require('./stats');
+const { write: writeStats, display: displayStats } = require('./stats');
 
 const prerender = () => {
   const log = debug('prerender');
@@ -19,11 +16,14 @@ const prerender = () => {
   return getRoutes(config)
     .then(run)
     .then(({ err, result }) =>
-      writeStats(result).then(displayStats).then(() => {
-        if (err) {
-          throw err;
-        }
-      }))
+      writeStats(result)
+        .then(displayStats)
+        .then(() => {
+          if (err) {
+            throw err;
+          }
+        })
+    )
     .catch((err) => {
       console.error(err); // eslint-disable-line no-console
       process.exit(1);

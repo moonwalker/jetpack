@@ -1,9 +1,9 @@
-import config from '../config'
+import config from '../config';
 
 (function(d) {
   if (config.segmentWriteKey) {
     // Create a queue, but don't obliterate an existing one!
-    var analytics = window.analytics = window.analytics || [];
+    const analytics = (window.analytics = window.analytics || []);
 
     // If the real analytics.js is already on the page return.
     if (analytics.initialize) return;
@@ -46,7 +46,7 @@ import config from '../config'
     // stored as the first argument, so we can replay the data.
     analytics.factory = function(method) {
       return function() {
-        var args = Array.prototype.slice.call(arguments);
+        const args = Array.prototype.slice.call(arguments);
         args.unshift(method);
         analytics.push(args);
         return analytics;
@@ -57,21 +57,20 @@ import config from '../config'
     // and that will be sure to only ever load it once.
     analytics.load = function(key) {
       // Create an async script element based on your key.
-      var script = d.createElement('script');
+      const script = d.createElement('script');
       script.type = 'text/javascript';
       script.async = true;
-      script.src = ('https:' === d.location.protocol ?
-          'https://' : 'http://') +
-        'cdn.segment.com/analytics.js/v1/' +
-        key + '/analytics.min.js';
+      script.src = `${
+        d.location.protocol === 'https:' ? 'https://' : 'http://'
+      }cdn.segment.com/analytics.js/v1/${key}/analytics.min.js`;
 
       // Append our script at the end of body.
       d.body.appendChild(script);
     };
 
     // For each of our methods, generate a queueing stub.
-    for (var i = 0; i < analytics.methods.length; i++) {
-      var key = analytics.methods[i];
+    for (let i = 0; i < analytics.methods.length; i++) {
+      const key = analytics.methods[i];
       analytics[key] = analytics.factory(key);
     }
 
