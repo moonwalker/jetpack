@@ -5,10 +5,7 @@ const { BundleStatsWebpackPlugin } = require('bundle-stats');
 
 const { paths } = require('../defaults');
 
-const ARTIFACTS_REL_DIR = path.relative(
-  paths.output.path,
-  paths.artifacts.path
-);
+const ARTIFACTS_REL_DIR = path.relative(paths.output.path, paths.artifacts.path);
 
 const STATS = {
   context: paths.src,
@@ -19,7 +16,7 @@ const STATS = {
   timings: true,
   performance: false,
   children: false,
-  source: false,
+  source: false
 };
 
 module.exports = () => ({
@@ -32,10 +29,7 @@ module.exports = () => ({
       statsOptions: STATS
     }),
 
-    new StatsPlugin(
-      path.join(ARTIFACTS_REL_DIR, 'webpack-stats.json'),
-      STATS
-    ),
+    new StatsPlugin(path.join(ARTIFACTS_REL_DIR, 'webpack-stats.json'), STATS),
 
     new BundleStatsWebpackPlugin({
       outDir: ARTIFACTS_REL_DIR,

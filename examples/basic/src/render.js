@@ -2,9 +2,16 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router, matchPath } from 'react-router';
 
+import {
+  ApolloProvider,
+  fetchRoutes,
+  flushHead,
+  getDataFromTree,
+  initApollo,
+  store
+} from '@moonwalker/lifesupport';
 import { App } from './app';
-import { ApolloProvider, fetchRoutes, flushHead, getDataFromTree, initApollo, store } from '@moonwalker/lifesupport';
-import config from './config'
+import config from './config';
 import views from './views';
 
 export default async ({ route, assets }) => {
@@ -14,22 +21,26 @@ export default async ({ route, assets }) => {
     defaultLocale: route.market.defaultLanguage || config.defaultLocale,
     pathLocales: route.pathLocales || config.pathLocales,
     apiKeys: route.apiKeys || { webfontConfig: { google: { families: [`${config.webfonts}`] } } }
-  }
+  };
 
   // store
-  store.init(preState)
+  store.init(preState);
 
   // apollo
   const client = initApollo(preState);
 
-  //routes
-  const routes = await fetchRoutes(client, route.market.code, route.locale || route.market.defaultLanguage);
+  // routes
+  const routes = await fetchRoutes(
+    client,
+    route.market.code,
+    route.locale || route.market.defaultLanguage
+  );
   store.set('routes', routes);
 
   // render
   const context = {};
-  process.stdout.clearLine()
-  process.stdout.write(`>>> render: ${route.path}\r`)
+  process.stdout.clearLine();
+  process.stdout.write(`>>> render: ${route.path}\r`);
   const appMarkup = await renderToStringWithData(
     <ApolloProvider client={client}>
       <Router location={route.path} context={context}>
@@ -42,7 +53,7 @@ export default async ({ route, assets }) => {
   const initState = {
     [config.appStateKey]: store.state(), // app
     [config.apolloStateKey]: client.cache.extract() // apollo
-  }
+  };
 
   // head
   const head = flushHead();
@@ -62,34 +73,34 @@ export default async ({ route, assets }) => {
     initState,
     cssChunks
   });
-}
+};
 
 const renderToStringWithData = (component) => {
-  return getDataFromTree(component).then(() => renderToString(component))
-}
+  return getDataFromTree(component).then(() => renderToString(component));
+};
 
 const getRouteView = (routes, route) => {
-  for (let r of routes) {
+  for (const r of routes) {
     const match = matchPath(route.path, {
       path: r.path,
       exact: true
     });
     if (match) {
-      return r.view
+      return r.view;
     }
   }
-}
+};
 
 const getCssChunks = ({ assets, chunkName }) => {
   return Object.keys(assets).reduce((res, key) => {
     if (assets[key].css) {
       res[key] = {
         css: assets[key].css
-      }
+      };
     }
     return res;
   }, {});
-}
+};
 
 const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) => {
   return `
@@ -111,9 +122,19 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
         <link rel="preload" as="script" href="${assets.manifest.js}">
         <link rel="preload" as="script" href="${assets.vendor.js}">
         <link rel="preload" as="script" href="${assets.main.js}">
-        ${!assets[chunkName] ? '' : `<link rel="preload" as="script" href="${assets[chunkName].js}">`}
+        ${
+          !assets[chunkName]
+            ? ''
+            : `<link rel="preload" as="script" href="${assets[chunkName].js}">`
+        }
         <style id="main">${assets.main.style}</style>
-        ${!assets[chunkName] ? '' : assets[chunkName].style ? `<style id="${chunkName}.css">${assets[chunkName].style}</style>` : ''}
+        ${
+          !assets[chunkName]
+            ? ''
+            : assets[chunkName].style
+            ? `<style id="${chunkName}.css">${assets[chunkName].style}</style>`
+            : ''
+        }
       </head>
       <body>
         <div id="root">${appMarkup}</div>
@@ -131,8 +152,8 @@ const template = ({ head, assets, chunkName, appMarkup, initState, cssChunks }) 
         <script defer src="${assets.segment.js}"></script>
       </body>
     </html>`;
-}
+};
 
 const stringify = (value) => {
   return JSON.stringify(value).replace(/</g, '\\u003c');
-}
+};

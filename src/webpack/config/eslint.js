@@ -1,8 +1,5 @@
 module.exports = (options, env) => {
-  const {
-    include = [],
-    cache = true,
-  } = options;
+  const { include = [], cache = true } = options;
   const { NODE_ENV } = env;
 
   const isDevelopment = NODE_ENV === 'development';
@@ -21,9 +18,7 @@ module.exports = (options, env) => {
 
   return {
     module: {
-      rules: [
-        eslintRule
-      ]
+      rules: [eslintRule]
     }
   };
 };

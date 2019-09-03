@@ -4,10 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const {
-  context,
-  config
-} = require('./defaults');
+const { context, config } = require('./defaults');
 const { renderConfig, clientConfig } = require('./webpack.config.prd');
 const { debug } = require('../utils');
 
@@ -16,13 +13,15 @@ const printStats = (mode, stats) => {
   process.stdout.write(mode);
   process.stdout.write('\n');
 
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }));
+  process.stdout.write(
+    stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    })
+  );
 
   process.stdout.write('\n');
 };
@@ -41,14 +40,16 @@ const stage = () => {
   spawnWebPack('webpack.config.stg');
 };
 
-const compileWebpackConfig = webpackConfig => new Promise((resolve, reject) =>
-  webpack(webpackConfig).run((err, stats) => {
-    if (err) {
-      reject(err);
-    }
+const compileWebpackConfig = (webpackConfig) =>
+  new Promise((resolve, reject) =>
+    webpack(webpackConfig).run((err, stats) => {
+      if (err) {
+        reject(err);
+      }
 
-    resolve(stats);
-  }));
+      resolve(stats);
+    })
+  );
 
 const buildClient = () => {
   const log = debug('build:client');
@@ -56,7 +57,7 @@ const buildClient = () => {
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
 
-  return compileWebpackConfig(clientConfig).then(stats => printStats('Client', stats));
+  return compileWebpackConfig(clientConfig).then((stats) => printStats('Client', stats));
 };
 
 const buildRender = () => {
@@ -65,13 +66,12 @@ const buildRender = () => {
   log('ENV:', process.env.ENV);
   log('API:', config.queryApiUrl);
 
-  return compileWebpackConfig(renderConfig).then(renderStats => printStats('Render', renderStats));
+  return compileWebpackConfig(renderConfig).then((renderStats) =>
+    printStats('Render', renderStats)
+  );
 };
 
-const build = () => Promise.all([
-  buildClient(),
-  buildRender()
-]);
+const build = () => Promise.all([buildClient(), buildRender()]);
 
 module.exports = {
   start,

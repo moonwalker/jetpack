@@ -1,29 +1,34 @@
-const { execSync } = require('child_process')
-const debug = require('./debug')
-const perf = require('./perf')
+const { execSync } = require('child_process');
+const debug = require('./debug');
+const perf = require('./perf');
 
-const getCommitId = () => process.env.COMMIT || execSync('git rev-parse --short HEAD').toString().trim()
+const getCommitId = () =>
+  process.env.COMMIT ||
+  execSync('git rev-parse --short HEAD')
+    .toString()
+    .trim();
 
-const hasTrailingSlash = pathname => {
-  return pathname.length > 1 && pathname.substr(-1) == '/'
-}
+const hasTrailingSlash = (pathname) => {
+  return pathname.length > 1 && pathname.substr(-1) === '/';
+};
 
 const hasLocale = (path, localesRegex) => {
   return localesRegex.test(path);
-}
+};
 
-const stripUndefined = path => {
+const stripUndefined = (path) => {
   const ms = path.match(/^(.*)\/undefined\//i);
-  if (!!ms) return ms[1];
+  if (ms) return ms[1];
   return null;
-}
+};
 
-const stripTrailingSlash = pathname => {
-  if (hasTrailingSlash(pathname)) {
-    pathname = pathname.slice(0, -1)
+const stripTrailingSlash = (pathname) => {
+  if (!hasTrailingSlash(pathname)) {
+    return pathname;
   }
-  return pathname
-}
+
+  return pathname.slice(0, -1);
+};
 
 const getEnvMiddleware = () => (_, reply) => {
   const config = {
@@ -48,4 +53,4 @@ module.exports = {
   hasTrailingSlash,
   stripTrailingSlash,
   stripUndefined
-}
+};

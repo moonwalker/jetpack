@@ -5,21 +5,23 @@ const { debug } = require('../utils');
 
 const log = debug('fetch', 'routes');
 
-const getSitemapRoutes = (product) => {
-  return function (marketSitemap, cb) {
-    async.map(marketSitemap.routes, (route, rCb) => {
+const getSitemapRoutes = (product) => (marketSitemap, cb) => {
+  async.map(
+    marketSitemap.routes,
+    (route, rCb) => {
       rCb(null, {
         market: marketSitemap.market,
-        path: '/' + route.locale + route.path,
+        path: `/${route.locale}${route.path}`,
         locale: route.locale,
         alternates: route.alternates,
         canonical: route.canonical,
         apiKeys: JSON.parse(product.apiKeys)
       });
-    }, (_, routes) => {
+    },
+    (_, routes) => {
       cb(null, routes);
-    });
-  };
+    }
+  );
 };
 
 module.exports = ({ queryApiUrl, productName }) => {
@@ -55,9 +57,12 @@ module.exports = ({ queryApiUrl, productName }) => {
       log('ERR:', json);
       throw new Error('invalid response format');
     })
-    .then(sitemap => new Promise((resolve) => {
-      async.concat(sitemap.sitemaps, getSitemapRoutes(sitemap.product), (_, routes) => {
-        resolve(routes);
-      });
-    }));
+    .then(
+      (sitemap) =>
+        new Promise((resolve) => {
+          async.concat(sitemap.sitemaps, getSitemapRoutes(sitemap.product), (_, routes) => {
+            resolve(routes);
+          });
+        })
+    );
 };

@@ -12,34 +12,34 @@ module.exports = {
     }
 
     if (cmd === 'start') {
-      return require('./start').run();
+      return require('./start').run(); // eslint-disable-line global-require
     }
 
     if (cmd === 'build') {
-      return require('./build').run();
+      return require('./build').run(); // eslint-disable-line global-require;
     }
 
     if (cmd === 'build-client') {
-      return require('./build-client').run();
+      return require('./build-client').run(); // eslint-disable-line global-require;
     }
 
     if (cmd === 'build-render') {
-      return require('./build-render').run();
+      return require('./build-render').run(); // eslint-disable-line global-require
     }
 
     if (cmd === 'prerender') {
-      return require('./prerender').run();
+      return require('./prerender').run(); // eslint-disable-line global-require
     }
 
     if (cmd === 'serve') {
-      return require('./serve').run();
+      return require('./serve').run(); // eslint-disable-line global-require
     }
 
     if (cmd === 'create') {
-      return require('./create').run(process.argv[3], process.argv[4]);
+      return require('./create').run(process.argv[3], process.argv[4]); // eslint-disable-line global-require
     }
 
-    console.log(help());
+    return console.log(help());
   }
 };
 

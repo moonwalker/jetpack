@@ -41,9 +41,11 @@ const devConfig = {
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
-    new CopyWebpackPlugin([{
-      from: paths.public.root
-    }]),
+    new CopyWebpackPlugin([
+      {
+        from: paths.public.root
+      }
+    ]),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
@@ -65,26 +67,39 @@ const devConfig = {
   }
 };
 
-module.exports = mergeConfigs([
-  devConfig,
+module.exports = mergeConfigs(
+  [
+    devConfig,
 
-  createResolveConfig(),
-  createJavascriptConfig({
-    include: paths.src,
-    cache: true
-  }, env),
-  createCssConfig({
-    include: paths.src,
-    lint: true
-  }, env),
-  createStylusConfig({
-    include: paths.src,
-    root: paths.root
-  }),
-  createFileConfig({
-    context: paths.src
-  }, env),
-  createSvgConfig({
-    context: paths.src
-  })
-], settings, env);
+    createResolveConfig(),
+    createJavascriptConfig(
+      {
+        include: paths.src,
+        cache: true
+      },
+      env
+    ),
+    createCssConfig(
+      {
+        include: paths.src,
+        lint: true
+      },
+      env
+    ),
+    createStylusConfig({
+      include: paths.src,
+      root: paths.root
+    }),
+    createFileConfig(
+      {
+        context: paths.src
+      },
+      env
+    ),
+    createSvgConfig({
+      context: paths.src
+    })
+  ],
+  settings,
+  env
+);
