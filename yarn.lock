@@ -1341,10 +1341,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.2.tgz#ce919cb8652f3e9f793d15b293f67719fe95d4d4"
-  integrity sha512-WRgfOeyoVj1YLa2rCm6Do5gbz4PcM52nCCvVRq5cdWogYHzrvzgWk5Pq9bVL5zS2d64y0hS3y2A/Qmln8ZxQDQ==
+"@moonwalker/pre-flight-check@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.3.tgz#bfb036e6c447b16b86f26b9e9770d8aeea88117d"
+  integrity sha512-IT0Me8323nhmPbL93A6A9bBbeHHRblm8Jj3d6DJMHO7xR2hUzn/GT80UHn6ZrG/NsrWnKGtwPoZrPph2/0hasA==
   dependencies:
     babel-eslint "10.0.3"
     eslint "6.3.0"
@@ -1362,6 +1362,7 @@
     husky "3.0.5"
     lint-staged "9.2.5"
     prettier "1.18.2"
+    stylelint "^10.1.0"
     stylelint-config-css-modules "1.4.0"
     stylelint-config-recommended "2.2.0"
 
@@ -10451,7 +10452,7 @@ stylelint-config-recommended@2.2.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-2.2.0.tgz#46ab139db4a0e7151fd5f94af155512886c96d3f"
   integrity sha512-bZ+d4RiNEfmoR74KZtCKmsABdBJr4iXRiCso+6LtMJPw5rd/KnxUWTxht7TbafrTJK1YRjNgnN0iVZaJfc3xJA==
 
-stylelint@10.1.0:
+stylelint@10.1.0, stylelint@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-10.1.0.tgz#1bc4c4ce878107e7c396b19226d91ba28268911a"
   integrity sha512-OmlUXrgzEMLQYj1JPTpyZPR9G4bl0StidfHnGJEMpdiQ0JyTq0MPg1xkHk1/xVJ2rTPESyJCDWjG8Kbpoo7Kuw==
