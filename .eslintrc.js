@@ -1,7 +1,4 @@
 module.exports = {
-  extends: ['airbnb-base'],
-  rules: {
-    'comma-dangle': 0,
-    'semi': 0
-  }
-}
+  root: true,
+  extends: ['./node_modules/@moonwalker/pre-flight-check/eslint-base']
+};
