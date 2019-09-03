@@ -1,11 +1,5 @@
-module.exports = (options, env) => {
-  const {
-    include = [],
-    cache = false,
-  } = options;
-  const { NODE_ENV } = env;
-
-  const isDevelopment = NODE_ENV === 'development';
+module.exports = (options) => {
+  const { include = [], cache = false } = options;
   const test = /\.jsx?$/;
 
   const babelRule = {
@@ -19,9 +13,7 @@ module.exports = (options, env) => {
 
   return {
     module: {
-      rules: [
-        babelRule
-      ]
+      rules: [babelRule]
     }
   };
 };

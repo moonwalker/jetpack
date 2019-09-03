@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Remarkable from 'remarkable';
-import md from 'marked'
+import md from 'marked';
 
 // const md = new Remarkable({
 //     html: true,        // Enable HTML tags in source
@@ -19,21 +19,21 @@ import md from 'marked'
 // });
 
 md.setOptions({
-    //renderer: new marked.Renderer(),
-    //gfm: true,
-    //tables: true,
-    breaks: true,
-    //pedantic: false,
-    //sanitize: false,
-    //smartLists: true,
-    //smartypants: false
+  // renderer: new marked.Renderer(),
+  // gfm: true,
+  // tables: true,
+  breaks: true
+  // pedantic: false,
+  // sanitize: false,
+  // smartLists: true,
+  // smartypants: false
 });
 
 const parse = (markdown) => {
-    const text = md(markdown); //md.render(markdown)
-    return { __html: text };
-}
+  const text = md(markdown); // md.render(markdown)
+  return { __html: text };
+};
 
 export default (props) => {
-    return (<div dangerouslySetInnerHTML={parse(props.source || '')}></div>)
-}
+  return <div dangerouslySetInnerHTML={parse(props.source || '')}></div>;
+};

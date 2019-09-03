@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../src/cmd').run()
+require('../src/cmd').run();

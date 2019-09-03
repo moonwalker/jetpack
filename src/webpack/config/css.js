@@ -7,12 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { paths } = require('../defaults');
 
 module.exports = (options, env) => {
-  const {
-    include = [],
-    node = false,
-    lint = false,
-    filename = '[name].css',
-  } = options;
+  const { include = [], node = false, lint = false, filename = '[name].css' } = options;
 
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|styl)$/;
@@ -29,7 +24,7 @@ module.exports = (options, env) => {
           modules: {
             context: paths.src,
             localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
-          },
+          }
         }
       },
       {
@@ -39,12 +34,19 @@ module.exports = (options, env) => {
           plugins: [
             ...(lint ? [stylelint()] : []),
             autoprefixer(),
-            ...(isDevelopment ? [] : [cssnano({
-              // Avoid removing the relative (`./`) notation, webpack needs it
-              preset: ['default', {
-                normalizeUrl: false
-              }]
-            })]),
+            ...(isDevelopment
+              ? []
+              : [
+                  cssnano({
+                    // Avoid removing the relative (`./`) notation, webpack needs it
+                    preset: [
+                      'default',
+                      {
+                        normalizeUrl: false
+                      }
+                    ]
+                  })
+                ]),
             postcssReporter({
               clearAllMessages: true
             })
@@ -71,13 +73,8 @@ module.exports = (options, env) => {
 
   return {
     module: {
-      rules: [
-        deliveryExtractRule,
-        transformRule
-      ]
+      rules: [deliveryExtractRule, transformRule]
     },
-    plugins: [
-      new MiniCssExtractPlugin({ filename })
-    ]
+    plugins: [new MiniCssExtractPlugin({ filename })]
   };
 };
