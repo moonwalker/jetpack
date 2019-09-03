@@ -40,10 +40,7 @@ $ npm run build
 
 The idea is to automate the code formatting, while relying on Eslint to report code errors (undefined variables, not found modules, etc.). 
 
-#### How is working
-[lint-staged](https://www.npmjs.com/package/lint-staged) is running [Prettier](https://www.npmjs.com/package/prettier) and [Eslint](https://www.npmjs.com/package/eslint) before commiting. If there are eslint errors, the commit will stop.
-
-To skip the check entirely, you can use `git commit --no-verify`.
+[Read more about code formatting and linting](https://github.com/moonwalker/mrm-presets#pre-flight-check)
 
 #### Setup
 
@@ -78,4 +75,4 @@ yarn
 yarn bump
 ```
 
-`GITHUB_TOKEN` environmental variable is required (`.env`).
+[Read more about the release flow](https://github.com/moonwalker/mrm-presets#how-is-working)
