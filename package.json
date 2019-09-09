@@ -69,7 +69,7 @@
     "terser-webpack-plugin": "1.4.1",
     "webpack": "4.39.3",
     "webpack-bundle-analyzer": "3.4.1",
-    "webpack-cli": "3.3.7",
+    "webpack-cli": "3.3.8",
     "webpack-dev-server": "3.8.0",
     "webpack-merge": "4.2.2",
     "workbox-webpack-plugin": "4.3.1",
