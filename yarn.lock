@@ -1346,7 +1346,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@^1.0.3":
+"@moonwalker/pre-flight-check@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.3.tgz#bfb036e6c447b16b86f26b9e9770d8aeea88117d"
   integrity sha512-IT0Me8323nhmPbL93A6A9bBbeHHRblm8Jj3d6DJMHO7xR2hUzn/GT80UHn6ZrG/NsrWnKGtwPoZrPph2/0hasA==
@@ -1451,7 +1451,7 @@
     universal-user-agent "^3.0.0"
     url-template "^2.0.8"
 
-"@release-it/conventional-changelog@^1.1.0":
+"@release-it/conventional-changelog@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@release-it/conventional-changelog/-/conventional-changelog-1.1.0.tgz#42e33ceff37d6ae4ad1667b4a1b1586b75e58fca"
   integrity sha512-3uyHg2hgCEJMFjIbRTnGgqU//PK9u89dBlKRUmbSNALARCXiKN4XvJOWni54TsFeDSWmM3IUh9bgoGvj55ia4A==
@@ -4252,7 +4252,7 @@ dot-prop@^4.1.0, dot-prop@^4.1.1:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv@^8.1.0:
+dotenv@8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
   integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
@@ -10107,7 +10107,7 @@ relateurl@0.2.x, relateurl@^0.2.7:
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
-release-it@^12.2.1, release-it@^12.3.6:
+release-it@12.3.6, release-it@^12.2.1:
   version "12.3.6"
   resolved "https://registry.yarnpkg.com/release-it/-/release-it-12.3.6.tgz#687f7bd67036941bc0537464c2693a79b0951ab2"
   integrity sha512-XetAzfSlEUfIejrH11jsj0LvbUcau0pM3+2/p58sn8dKrR0+33G9rUGXILQDM2Cahl4AqKfByORQ7C7GIWJG6A==
