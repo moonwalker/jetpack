@@ -1379,20 +1379,19 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.3.tgz#bfb036e6c447b16b86f26b9e9770d8aeea88117d"
-  integrity sha512-IT0Me8323nhmPbL93A6A9bBbeHHRblm8Jj3d6DJMHO7xR2hUzn/GT80UHn6ZrG/NsrWnKGtwPoZrPph2/0hasA==
+"@moonwalker/pre-flight-check@1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.6.tgz#09dd8f05b05569d64ed007ecd1f34ede5bd3141e"
+  integrity sha512-HoQxcr6G4ihv5F4mT8KIj30pUSSpzq0zcxLa0RMWg5MciKtMQkezCJnfCvA1ubsyu85JI0J+uqoLURYVFNa7YQ==
   dependencies:
     babel-eslint "10.0.3"
     eslint "6.3.0"
     eslint-config-airbnb "18.0.1"
-    eslint-config-prettier "6.1.0"
+    eslint-config-prettier "6.3.0"
     eslint-import-resolver-node "0.3.2"
     eslint-import-resolver-webpack "0.11.1"
-    eslint-loader "3.0.0"
     eslint-plugin-import "2.18.2"
-    eslint-plugin-jest "22.16.0"
+    eslint-plugin-jest "22.17.0"
     eslint-plugin-jsx-a11y "6.2.3"
     eslint-plugin-prettier "3.1.0"
     eslint-plugin-react "7.14.3"
@@ -4527,10 +4526,10 @@ eslint-config-airbnb@18.0.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-prettier@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.1.0.tgz#e6f678ba367fbd1273998d5510f76f004e9dce7b"
-  integrity sha512-k9fny9sPjIBQ2ftFTesJV21Rg4R/7a7t7LCtZVrYQiHEp8Nnuk3EGaDmsKSAnsPj0BYcgB2zxzHa2NTkIxcOLg==
+eslint-config-prettier@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.3.0.tgz#e73b48e59dc49d950843f3eb96d519e2248286a3"
+  integrity sha512-EWaGjlDAZRzVFveh2Jsglcere2KK5CJBhkNSa1xs3KfMUGdRiT7lG089eqPdvlzWHpAqaekubOsOMu8W8Yk71A==
   dependencies:
     get-stdin "^6.0.0"
 
@@ -4558,16 +4557,6 @@ eslint-import-resolver-webpack@0.11.1:
     resolve "^1.10.0"
     semver "^5.3.0"
 
-eslint-loader@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-loader/-/eslint-loader-3.0.0.tgz#fb70bc2d552a674f43f07f5e6575083e565e790d"
-  integrity sha512-rdxyQ0i9VlhwVlR6oEzrIft8WNKYSD2/cOAJ1YVH/F76gAta7Zv1Dr5xJOUyx0fAsHB5cKNz9hwlUVLMFsQlPA==
-  dependencies:
-    loader-fs-cache "^1.0.2"
-    loader-utils "^1.2.3"
-    object-hash "^1.3.1"
-    schema-utils "^2.1.0"
-
 eslint-module-utils@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.4.0.tgz#8b93499e9b00eab80ccb6614e69f03678e84e09a"
@@ -4593,10 +4582,10 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@22.16.0:
-  version "22.16.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.16.0.tgz#30c4e0e9dc331beb2e7369b70dd1363690c1ce05"
-  integrity sha512-eBtSCDhO1k7g3sULX/fuRK+upFQ7s548rrBtxDyM1fSoY7dTWp/wICjrJcDZKVsW7tsFfH22SG+ZaxG5BZodIg==
+eslint-plugin-jest@22.17.0:
+  version "22.17.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.17.0.tgz#dc170ec8369cd1bff9c5dd8589344e3f73c88cf6"
+  integrity sha512-WT4DP4RoGBhIQjv+5D0FM20fAdAUstfYAf/mkufLNTojsfgzc5/IYW22cIg/Q4QBavAZsROQlqppiWDpFZDS8Q==
   dependencies:
     "@typescript-eslint/experimental-utils" "^1.13.0"
 
@@ -5206,14 +5195,6 @@ find-cache-dir@3.0.0, find-cache-dir@^3.0.0:
     commondir "^1.0.1"
     make-dir "^3.0.0"
     pkg-dir "^4.1.0"
-
-find-cache-dir@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-0.1.1.tgz#c8defae57c8a52a8a784f9e31c57c742e993a0b9"
-  dependencies:
-    commondir "^1.0.1"
-    mkdirp "^0.5.1"
-    pkg-dir "^1.0.0"
 
 find-cache-dir@^2.0.0:
   version "2.0.0"
@@ -7500,14 +7481,6 @@ load-json-file@^4.0.0:
     pify "^3.0.0"
     strip-bom "^3.0.0"
 
-loader-fs-cache@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/loader-fs-cache/-/loader-fs-cache-1.0.2.tgz#54cedf6b727e1779fd8f01205f05f6e88706f086"
-  integrity sha512-70IzT/0/L+M20jUlEqZhZyArTU6VKLRTYRDAYN26g4jfzpJqjipLL3/hgYpySqI9PwsVRHHFja0LfEmsx9X2Cw==
-  dependencies:
-    find-cache-dir "^0.1.1"
-    mkdirp "0.5.1"
-
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -8229,7 +8202,7 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
-mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1, mkdirp@~0.5.x:
+mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1, mkdirp@~0.5.x:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
@@ -8576,11 +8549,6 @@ object-copy@^0.1.0:
     copy-descriptor "^0.1.0"
     define-property "^0.2.5"
     kind-of "^3.0.3"
-
-object-hash@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-1.3.1.tgz#fde452098a951cb145f039bb7d455449ddc126df"
-  integrity sha512-OSuu/pU4ENM9kmREg0BdNrUDIl1heYa4mBZacJc+vVWz4GtAwu7jO8s4AIt2aGRUTqxykpWzI3Oqnsm13tTMDA==
 
 object-keys@^1.0.11, object-keys@^1.0.8:
   version "1.0.12"
@@ -9168,12 +9136,6 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.1.tgz#643a92caf894566f91b2b986d2c66950a8e2fb87"
   dependencies:
     node-modules-regexp "^1.0.0"
-
-pkg-dir@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-1.0.0.tgz#7a4b508a8d5bb2d629d447056ff4e9c9314cf3d4"
-  dependencies:
-    find-up "^1.0.0"
 
 pkg-dir@^2.0.0:
   version "2.0.0"
@@ -10596,7 +10558,7 @@ schema-utils@^2.0.0:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
 
-schema-utils@^2.0.1, schema-utils@^2.1.0:
+schema-utils@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.1.0.tgz#940363b6b1ec407800a22951bdcc23363c039393"
   integrity sha512-g6SViEZAfGNrToD82ZPUjq52KUPDYc+fN5+g6Euo5mLokl/9Yx14z0Cu4RR1m55HtBXejO0sBt+qw79axN+Fiw==
