@@ -67,7 +67,7 @@
     "stylus-loader": "3.0.2",
     "terser-webpack-plugin": "2.1.0",
     "webpack": "4.40.2",
-    "webpack-bundle-analyzer": "3.5.0",
+    "webpack-bundle-analyzer": "3.5.1",
     "webpack-cli": "3.3.9",
     "webpack-dev-server": "3.8.1",
     "webpack-merge": "4.2.2",
