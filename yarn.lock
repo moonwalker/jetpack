@@ -1384,10 +1384,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.7.tgz#78fc16f562ed8c48610f44a88b0e61672041af96"
-  integrity sha512-Nb/SH5jWri3Jk7tYam6TNW4hYQC1APqjE4zGM0KqbpL0RUk1oHDSQz+RjU3AT6W22VSo26SWpa8S/I8Ybh/sxQ==
+"@moonwalker/pre-flight-check@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.8.tgz#88a4dc6027ee86f385268703b597ab3a8572528a"
+  integrity sha512-8T65NPTsr7jXFnFrepVkUY95RAgh7vWRze1t/k5F7blRP1IFzn14kzmPTap8msPgbYPE1QBMtSEnfSS5ZPI70A==
   dependencies:
     babel-eslint "10.0.3"
     eslint "6.4.0"
@@ -1398,11 +1398,11 @@
     eslint-plugin-import "2.18.2"
     eslint-plugin-jest "22.17.0"
     eslint-plugin-jsx-a11y "6.2.3"
-    eslint-plugin-prettier "3.1.0"
+    eslint-plugin-prettier "3.1.1"
     eslint-plugin-react "7.14.3"
     eslint-plugin-react-hooks "2.0.1"
     husky "3.0.5"
-    lint-staged "9.2.5"
+    lint-staged "9.3.0"
     prettier "1.18.2"
     stylelint "^11.0.0"
     stylelint-config-css-modules "1.5.0"
@@ -4627,10 +4627,10 @@ eslint-plugin-jsx-a11y@6.2.3:
     has "^1.0.3"
     jsx-ast-utils "^2.2.1"
 
-eslint-plugin-prettier@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.0.tgz#8695188f95daa93b0dc54b249347ca3b79c4686d"
-  integrity sha512-XWX2yVuwVNLOUhQijAkXz+rMPPoCr7WFiAl8ig6I7Xn+pPVhDhzg4DxHpmbeb0iqjO9UronEA3Tb09ChnFVHHA==
+eslint-plugin-prettier@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.1.tgz#507b8562410d02a03f0ddc949c616f877852f2ba"
+  integrity sha512-A+TZuHZ0KU0cnn56/9mfR7/KjUJ9QNVXUhwvRFSR7PGPe0zQR6PTkmyqg1AtUUEOzTqeRsUwyKFh0oVZKVCrtA==
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
@@ -7421,10 +7421,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@9.2.5:
-  version "9.2.5"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.2.5.tgz#5a3e1e0a539a403bd7f88542bc3d34ce52efdbb3"
-  integrity sha512-d99gTBFMJ29159+9iRvaMEQstmNcPAbQbhHSYw6D/1FncvFdIj8lWHztaq3Uq+tbZPABHXQ/fyN7Rp1QwF8HIw==
+lint-staged@9.3.0:
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.3.0.tgz#522a79f166050ab5777887348f2cbdb03f71acac"
+  integrity sha512-OuL3xo6XpBErl16+3W9PdnFmgeGp12lM8I1Ii/B56S8Edy1kyrf4W8VD4IBn9v17QlutRQEWUJ54YF/VVQ7J2A==
   dependencies:
     chalk "^2.4.2"
     commander "^2.20.0"
