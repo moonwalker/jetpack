@@ -102,6 +102,10 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
       .header('Content-Type', 'text/html')
       .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
       .send(data);
+  }).catch((err) => {
+    reply
+      .code(500)
+      .send(err);
   });
 };
 
