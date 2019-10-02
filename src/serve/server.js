@@ -87,7 +87,9 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
     return permanentRedirect(`${u.pathname}/${u.search || ''}`)(req, reply);
   }
 
-  if (!hasLocale(u.pathname, localesRegex)) {
+  const locale = hasLocale(u.pathname, localesRegex);
+
+  if (!locale) {
     return permanentRedirect(`/${defaultLocale}${u.path}`)(req, reply);
   }
 
@@ -97,16 +99,16 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
-  return render({ path: u.pathname, assets }).then((data) => {
-    reply
-      .header('Content-Type', 'text/html')
-      .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
-      .send(data);
-  }).catch((err) => {
-    reply
-      .code(500)
-      .send(err);
-  });
+  return render({ path: u.pathname, assets })
+    .then((data) => {
+      reply
+        .header('Content-Type', 'text/html')
+        .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
+        .send(data);
+    })
+    .catch(() => {
+      reply.redirect(302, `/${locale}/500/`);
+    });
 };
 
 const getSpaceLocales = () => {

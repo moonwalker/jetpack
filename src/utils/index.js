@@ -13,7 +13,8 @@ const hasTrailingSlash = (pathname) => {
 };
 
 const hasLocale = (path, localesRegex) => {
-  return localesRegex.test(path);
+  const m = path.match(localesRegex);
+  return m && m.length && m[1];
 };
 
 const stripUndefined = (path) => {
