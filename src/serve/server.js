@@ -106,8 +106,8 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
         .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
         .send(data);
     })
-    .catch(() => {
-      reply.redirect(302, `/${locale}/500/`);
+    .catch((err) => {
+      reply.code(500).send(err);
     });
 };
 
