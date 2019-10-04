@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const fs = require('fs');
 const os = require('os');
 const url = require('url');
 const path = require('path');
@@ -32,6 +33,24 @@ const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
 
 const assets = processAssets(assetsFilepath);
 const render = require(renderFilepath).default; // eslint-disable-line import/no-dynamic-require
+
+let ERROR_MESSAGE = '';
+const errorHandler = (err, req, reply) => {
+  if (!ERROR_MESSAGE) {
+    try {
+      ERROR_MESSAGE = fs.readFileSync(path.join(paths.public.root, '500.html'), 'utf-8');
+    } catch (missingFileErr) {
+      ERROR_MESSAGE = 'Something went wrong, please try again!';
+    }
+  }
+
+  console.error(err.message); // eslint-disable-line no-console
+
+  reply
+    .code(500)
+    .type('text/html')
+    .send(ERROR_MESSAGE);
+};
 
 const sitemapHandler = () => (_, reply) => {
   request(`http://${CONTENT_SVC}/sitemap.xml`)
@@ -99,16 +118,12 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
-  return render({ path: u.pathname, assets })
-    .then((data) => {
-      reply
-        .header('Content-Type', 'text/html')
-        .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
-        .send(data);
-    })
-    .catch((err) => {
-      reply.code(500).send(err);
-    });
+  return render({ path: u.pathname, assets }).then((data) => {
+    reply
+      .header('Content-Type', 'text/html')
+      .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
+      .send(data);
+  });
 };
 
 const getSpaceLocales = () => {
@@ -168,6 +183,8 @@ module.exports.serve = async ({ worker }) => {
   server.get('/env.js', getEnvMiddleware());
   server.get('/', permanentRedirect(`/${defaultLocale}/`));
   server.get('*', renderRouteHandler(localesRegex, defaultLocale));
+
+  server.setErrorHandler(errorHandler);
 
   server.listen(PORT, HOST, (err) => {
     if (err) throw err;
