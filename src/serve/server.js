@@ -7,8 +7,15 @@ const path = require('path');
 const request = require('request');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
+const Sentry = require('@sentry/node');
 
-const { getEnvMiddleware, hasLocale, hasTrailingSlash, stripUndefined } = require('../utils');
+const {
+  debug,
+  getEnvMiddleware,
+  hasLocale,
+  hasTrailingSlash,
+  stripUndefined
+} = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
 const { paths } = require('../webpack/defaults');
 
@@ -25,6 +32,16 @@ const HEADER_CACHE_TAG = 'Cache-Tag';
 const CACHE_TAG_STATIC = 'static';
 const CACHE_TAG_STATIC_VERSIONED = 'static-versioned';
 const CACHE_TAG_CONTENT = 'content';
+
+const log = debug('render');
+
+const { SENTRY_RENDER_DSN } = process.env;
+if (SENTRY_RENDER_DSN) {
+  log('Sentry init');
+  Sentry.init({ dsn: SENTRY_RENDER_DSN });
+} else {
+  log('Sentry init skipped');
+}
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
   path.join(paths.assets.path, paths.assets.filename),
@@ -45,6 +62,11 @@ const errorHandler = (err, req, reply) => {
   }
 
   console.error(err.message); // eslint-disable-line no-console
+
+  Sentry.withScope((scope) => {
+    scope.addEventProcessor((event) => Sentry.Handlers.parseRequest(event, req));
+    Sentry.captureException(err);
+  });
 
   reply
     .code(500)
