@@ -2,7 +2,8 @@ require('dotenv').config();
 
 module.exports.PORT = parseInt(process.env.JETPACK_SERVER_PORT, 10) || 9002;
 module.exports.HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0';
-module.exports.SENTRY_RENDER_DSN = process.env.JETPACK_SENTRY_DSN;
+module.exports.SENTRY_DSN = process.env.JETPACK_SERVER_SENTRY;
+module.exports.ENV = process.env.NODE_ENV || 'development';
 
 module.exports.CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051';
 module.exports.SVCNAME = process.env.SVCNAME || 'jetpack-server';

@@ -25,20 +25,21 @@ const {
   CONTENT_SVC,
   DEFAULT_ERROR_MESSAGE,
   DEFAULT_LOCALES,
+  ENV,
   HEADER_CACHE_TAG,
   HOST,
-  JETPACK_SENTRY_DSN,
   NAMESPACE,
   PORT,
+  SENTRY_DSN,
   STATIC_FILE_PATTERN,
   SVCNAME
 } = require('./constants');
 
 const log = debug('render');
 
-if (JETPACK_SENTRY_DSN) {
+if (SENTRY_DSN) {
   log('Sentry init');
-  Sentry.init({ dsn: JETPACK_SENTRY_DSN });
+  Sentry.init({ dsn: SENTRY_DSN, release: COMMIT, environment: ENV });
 } else {
   log('Sentry skipped');
 }
@@ -64,7 +65,8 @@ const errorHandler = (err, req, reply) => {
   console.error(err.message); // eslint-disable-line no-console
 
   Sentry.withScope((scope) => {
-    scope.addEventProcessor((event) => Sentry.Handlers.parseRequest(event, req));
+    scope.addEventProcessor((event) => Sentry.Handlers.parseRequest(event, req.raw));
+    scope.setTag('namespace', NAMESPACE);
     Sentry.captureException(err);
   });
 
