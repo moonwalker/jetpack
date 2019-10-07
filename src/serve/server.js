@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const fs = require('fs');
 const os = require('os');
 const url = require('url');
@@ -18,29 +16,31 @@ const {
 } = require('../utils');
 const { checkBuildArtifacts, processAssets } = require('../prerender/run');
 const { paths } = require('../webpack/defaults');
-
-const PORT = parseInt(process.env.JETPACK_SERVER_PORT, 10) || 9002;
-const HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0';
-const CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051';
-
-const BUILD_DIR = 'build';
-const STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;
-
-const DEFAULT_LOCALES = ['en', 'sv', 'fi', 'no', 'de', 'en-gb', 'en-se', 'en-eu', 'en-ca', 'en-nz'];
-
-const HEADER_CACHE_TAG = 'Cache-Tag';
-const CACHE_TAG_STATIC = 'static';
-const CACHE_TAG_STATIC_VERSIONED = 'static-versioned';
-const CACHE_TAG_CONTENT = 'content';
+const {
+  BUILT,
+  CACHE_TAG_CONTENT,
+  CACHE_TAG_STATIC,
+  CACHE_TAG_STATIC_VERSIONED,
+  COMMIT,
+  CONTENT_SVC,
+  DEFAULT_ERROR_MESSAGE,
+  DEFAULT_LOCALES,
+  HEADER_CACHE_TAG,
+  HOST,
+  JETPACK_SENTRY_DSN,
+  NAMESPACE,
+  PORT,
+  STATIC_FILE_PATTERN,
+  SVCNAME
+} = require('./constants');
 
 const log = debug('render');
 
-const { SENTRY_RENDER_DSN } = process.env;
-if (SENTRY_RENDER_DSN) {
+if (JETPACK_SENTRY_DSN) {
   log('Sentry init');
-  Sentry.init({ dsn: SENTRY_RENDER_DSN });
+  Sentry.init({ dsn: JETPACK_SENTRY_DSN });
 } else {
-  log('Sentry init skipped');
+  log('Sentry skipped');
 }
 
 const [assetsFilepath, renderFilepath] = checkBuildArtifacts(
@@ -57,7 +57,7 @@ const errorHandler = (err, req, reply) => {
     try {
       ERROR_MESSAGE = fs.readFileSync(path.join(paths.public.root, '500.html'), 'utf-8');
     } catch (missingFileErr) {
-      ERROR_MESSAGE = 'Something went wrong, please try again!';
+      ERROR_MESSAGE = DEFAULT_ERROR_MESSAGE;
     }
   }
 
@@ -93,10 +93,10 @@ const sitemapMarketHandler = () => (req, reply) => {
 
 const healthzHandler = (worker, started) => {
   const data = {
-    service: process.env.SVCNAME || 'jetpack-server',
-    version: (process.env.COMMIT || 'dev').substring(0, 7),
-    built: process.env.BUILT || 'n/a',
-    namespace: process.env.NAMESPACE || 'default',
+    service: SVCNAME,
+    version: COMMIT,
+    built: BUILT,
+    namespace: NAMESPACE,
     runtime: `node${process.versions.node}`,
     platform: `${os.platform()}/${os.arch()}`,
     host: os.hostname(),
@@ -182,7 +182,7 @@ module.exports.serve = async ({ worker }) => {
   // Versioned static files
   server.use(
     '/static',
-    serveStatic(path.join(process.cwd(), BUILD_DIR, 'static'), {
+    serveStatic(path.join(paths.public.root, 'static'), {
       fallthrough: false,
       maxAge: '1y',
       setHeaders: (res) => {
@@ -192,7 +192,7 @@ module.exports.serve = async ({ worker }) => {
   );
   // Standard static files (favicons, etc)
   server.use(
-    serveStatic(path.join(process.cwd(), BUILD_DIR), {
+    serveStatic(paths.public.root, {
       setHeaders: (res) => {
         res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC);
       }
