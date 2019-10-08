@@ -56,7 +56,7 @@ let ERROR_MESSAGE = '';
 const errorHandler = (err, req, reply) => {
   if (!ERROR_MESSAGE) {
     try {
-      ERROR_MESSAGE = fs.readFileSync(path.join(paths.public.root, '500.html'), 'utf-8');
+      ERROR_MESSAGE = fs.readFileSync(path.join(paths.output.path, '500.html'), 'utf-8');
     } catch (missingFileErr) {
       ERROR_MESSAGE = DEFAULT_ERROR_MESSAGE;
     }
@@ -184,7 +184,7 @@ module.exports.serve = async ({ worker }) => {
   // Versioned static files
   server.use(
     '/static',
-    serveStatic(path.join(paths.public.root, 'static'), {
+    serveStatic(path.join(paths.output.path, 'static'), {
       fallthrough: false,
       maxAge: '1y',
       setHeaders: (res) => {
@@ -194,7 +194,7 @@ module.exports.serve = async ({ worker }) => {
   );
   // Standard static files (favicons, etc)
   server.use(
-    serveStatic(paths.public.root, {
+    serveStatic(paths.output.path, {
       setHeaders: (res) => {
         res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC);
       }
