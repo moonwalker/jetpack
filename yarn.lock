@@ -1167,15 +1167,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.10.1":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.10.1.tgz#6eca883eb0704d3773d3b809240f7a668db45db1"
-  integrity sha512-SvPf58TPcSLbS7DFRW+dQgD9Htba18Pl2D/diHnh2DSnSPEVVV9gY3dQ8qZSuerElWudXs/RS1iy6TSdFckWoQ==
+"@bundle-stats/html-templates@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.11.0.tgz#e700ec2c38dda10d632b59d9a627490573a0ff52"
+  integrity sha512-UNfb9M3TG64QIWmjt2Dmkv1Sju2TaxLE0zLDdKPCx6RH/j7iuu02gbbtjLweZcp93McIoKCTbLtsbLO6CWZgWA==
 
-"@bundle-stats/utils@^1.10.1":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.10.1.tgz#95f0748e6319d26ad1c070f5c1ffdfa8fed3ea3d"
-  integrity sha512-1T9tJDdE+qWIUnjujIvdbyTgBzSgiLf1TlY8g22baBYLZtF8g40T6reKY+MuajzyAjEBoEeyqPA5gue0Zt/weA==
+"@bundle-stats/utils@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.11.0.tgz#341bc33c807c07af463c05ff64655640d0d37451"
+  integrity sha512-W9FsDKH09JmYZmBaPb8hWUEa5OXfW6r5rAybFHwYNrX8xo1Ql6vxypIMEWjErpdK7w4FDHI1mWYOl8XCaTtQyQ==
   dependencies:
     convert-units "^2.3.4"
     core-js "^3.1.4"
@@ -2822,20 +2822,20 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.10.1.tgz#f0d6f0a2ad33f0d9b649afc23e27fbee15376efd"
-  integrity sha512-XCY4DVK/5H02aCN/5gZ8O67PNXg0ub6ETc7apsG+lIG+pR+EeXpEOll3ZJX84NmimjAWGIFglo5SABL7pRwNuQ==
+bundle-stats@1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.11.0.tgz#1345911051abf8ce56c67ab105eb431935537f48"
+  integrity sha512-+o6IJJ4tVfP4IBQSWVI51cMthbzVuJlOCylD9Zu3F897zbLHz2nGERBy5Vs3lnDPVPrNx9dxFJOMdojPayMF9Q==
   dependencies:
-    "@bundle-stats/html-templates" "^1.10.1"
-    "@bundle-stats/utils" "^1.10.1"
+    "@bundle-stats/html-templates" "^1.11.0"
+    "@bundle-stats/utils" "^1.11.0"
     core-js "^3.1.4"
     find-cache-dir "3.0.0"
     fs-extra "8.1.0"
     listr "^0.14.3"
     lodash "4.17.15"
     update-notifier "3.0.1"
-    yargs "14.0.0"
+    yargs "14.2.0"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -13012,6 +13012,14 @@ yargs-parser@^11.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
+yargs-parser@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-15.0.0.tgz#cdd7a97490ec836195f59f3f4dbe5ea9e8f75f08"
+  integrity sha512-xLTUnCMc4JhxrPEPUYD5IBR1mWCK/aT6+RJ/K29JY2y1vD+FhtgKK0AXRWvI262q3QSffAQuTouFIKUuHX89wQ==
+  dependencies:
+    camelcase "^5.0.0"
+    decamelize "^1.2.0"
+
 yargs@12.0.5:
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
@@ -13046,10 +13054,10 @@ yargs@13.2.4:
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
 
-yargs@14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.0.0.tgz#ba4cacc802b3c0b3e36a9e791723763d57a85066"
-  integrity sha512-ssa5JuRjMeZEUjg7bEL99AwpitxU/zWGAGpdj0di41pOEmJti8NR6kyUIJBkR78DTYNPZOU08luUo0GTHuB+ow==
+yargs@14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.0.tgz#f116a9242c4ed8668790b40759b4906c276e76c3"
+  integrity sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
   dependencies:
     cliui "^5.0.0"
     decamelize "^1.2.0"
@@ -13061,7 +13069,7 @@ yargs@14.0.0:
     string-width "^3.0.0"
     which-module "^2.0.0"
     y18n "^4.0.0"
-    yargs-parser "^13.1.1"
+    yargs-parser "^15.0.0"
 
 yargs@^13.3.0:
   version "13.3.0"
