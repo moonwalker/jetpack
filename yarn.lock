@@ -1394,10 +1394,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.10.tgz#f9000edf0b2ade51f25ce22c6881ca5b6ce75233"
-  integrity sha512-4v3yGbICMk27kLwvWAq5UFMTfY816yIJ1tVJ3jRqqXssx03UsWM0HB3UpnYhevO9xxpEgqTOUqJXCQEi6/njbQ==
+"@moonwalker/pre-flight-check@1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.11.tgz#e021903ef8fc91e7bb38d486ce3c725aea3b3234"
+  integrity sha512-9NhD3ytemt558SRfie9OM1CWDWhV/jfgtn7syCqgvZg5hgcLUtVbWbPFXtrUHlCieSUhORxDWmrzyvnaQbl1fQ==
   dependencies:
     babel-eslint "10.0.3"
     eslint "6.5.1"
@@ -1406,15 +1406,15 @@
     eslint-import-resolver-node "0.3.2"
     eslint-import-resolver-webpack "0.11.1"
     eslint-plugin-import "2.18.2"
-    eslint-plugin-jest "22.17.0"
+    eslint-plugin-jest "22.19.0"
     eslint-plugin-jsx-a11y "6.2.3"
     eslint-plugin-prettier "3.1.1"
     eslint-plugin-react "7.16.0"
     eslint-plugin-react-hooks "2.1.2"
-    husky "3.0.8"
+    husky "3.0.9"
     lint-staged "9.4.2"
     prettier "1.18.2"
-    stylelint "^11.0.0"
+    stylelint "11.1.1"
     stylelint-config-css-modules "1.5.0"
     stylelint-config-recommended "3.0.0"
 
@@ -4754,10 +4754,10 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@22.17.0:
-  version "22.17.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.17.0.tgz#dc170ec8369cd1bff9c5dd8589344e3f73c88cf6"
-  integrity sha512-WT4DP4RoGBhIQjv+5D0FM20fAdAUstfYAf/mkufLNTojsfgzc5/IYW22cIg/Q4QBavAZsROQlqppiWDpFZDS8Q==
+eslint-plugin-jest@22.19.0:
+  version "22.19.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.19.0.tgz#0cf90946a8c927d40a2c64458c89bb635d0f2a0b"
+  integrity sha512-4zUc3rh36ds0SXdl2LywT4YWA3zRe8sfLhz8bPp8qQPIKvynTTkNGwmSCMpl5d9QiZE2JxSinGF+WD8yU+O0Lg==
   dependencies:
     "@typescript-eslint/experimental-utils" "^1.13.0"
 
@@ -6273,20 +6273,20 @@ https-proxy-agent@^3.0.0:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-husky@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.8.tgz#8de3fed26ce9b43034ef51013c4ad368b6b74ea8"
-  integrity sha512-HFOsgcyrX3qe/rBuqyTt+P4Gxn5P0seJmr215LAZ/vnwK3jWB3r0ck7swbzGRUbufCf9w/lgHPVbF/YXQALgfQ==
+husky@3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.9.tgz#a2c3e9829bfd6b4957509a9500d2eef5dbfc8044"
+  integrity sha512-Yolhupm7le2/MqC1VYLk/cNmYxsSsqKkTyBhzQHhPK1jFnC89mmmNVuGtLNabjDI6Aj8UNIr0KpRNuBkiC4+sg==
   dependencies:
     chalk "^2.4.2"
+    ci-info "^2.0.0"
     cosmiconfig "^5.2.1"
     execa "^1.0.0"
     get-stdin "^7.0.0"
-    is-ci "^2.0.0"
     opencollective-postinstall "^2.0.2"
     pkg-dir "^4.2.0"
     please-upgrade-node "^3.2.0"
-    read-pkg "^5.1.1"
+    read-pkg "^5.2.0"
     run-node "^1.0.0"
     slash "^3.0.0"
 
@@ -7537,10 +7537,10 @@ kleur@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.1.tgz#4f5b313f5fa315432a400f19a24db78d451ede62"
 
-known-css-properties@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.15.0.tgz#5aa14a98b5a1652448aad44a1c67e867e4e7d88c"
-  integrity sha512-TS0RCcQfHYsA+59uIHhnsA71NBkpILbqi0W+hde4R5FtESdzur0tCJFoko/1Pbhx+8rmdUc0R1VE4ixnnD+9xw==
+known-css-properties@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.16.0.tgz#3f0597214db11a460df77cd44bcb39e263b9da6c"
+  integrity sha512-0g5vDDPvNnQk7WM/aE92dTDxXJoOE0biiIcUb3qkn/F6h/ZQZPlZIbE2XSXH2vFPfphkgCxuR2vH6HHnobEOaQ==
 
 latest-version@^5.0.0:
   version "5.1.0"
@@ -10219,7 +10219,7 @@ read-pkg@^3.0.0:
     normalize-package-data "^2.3.2"
     path-type "^3.0.0"
 
-read-pkg@^5.1.1:
+read-pkg@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-5.2.0.tgz#7bf295438ca5a33e56cd30e053b34ee7250c93cc"
   integrity sha512-Ug69mNOpfvKDAc2Q8DRpMjjzdtrnv9HcSMX+4VsZxD1aZ6ZzrIE7rlzXBtWTyhULSMKg076AW6WR5iZpD0JiOg==
@@ -11616,10 +11616,10 @@ stylelint-config-recommended@3.0.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-3.0.0.tgz#e0e547434016c5539fe2650afd58049a2fd1d657"
   integrity sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
 
-stylelint@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-11.0.0.tgz#1458d1e126d4f2fb9f41076197f852aa1fcae91d"
-  integrity sha512-esKkG7CUXI5yr4jgCNuwjiiV6NJ4BpodB0e47oFvUBaHgpiXXHRPOajpb0IXL7Ucpk+X3dcrlPxVHpmJ5XUDwg==
+stylelint@11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-11.1.1.tgz#6dbbb348036576ac6b033ddfedba72a877c1d6bb"
+  integrity sha512-Vx6TAJsxG6qksiFvxQTKriQhp1CqUWdpTDITEkAjTR+l+8Af7qNlvrUDXfpuFJgXh/ayF8xdMSKE+SstcsPmMA==
   dependencies:
     autoprefixer "^9.5.1"
     balanced-match "^1.0.0"
@@ -11636,7 +11636,7 @@ stylelint@^11.0.0:
     ignore "^5.0.6"
     import-lazy "^4.0.0"
     imurmurhash "^0.1.4"
-    known-css-properties "^0.15.0"
+    known-css-properties "^0.16.0"
     leven "^3.1.0"
     lodash "^4.17.14"
     log-symbols "^3.0.0"
