@@ -6,8 +6,12 @@ const { debug } = require('../utils');
 const USER_AGENT = 'node-fetch/1.0 (jetpack/prerender;+https://github.com/bitinn/node-fetch)';
 const DEBUG_PREFIX = ['prerender', 'route', 'fetch'];
 
-const loggedFetch = (url, options) => {
-  const body = JSON.parse(options.body);
+const loggedFetch = (url, options = {}) => {
+  let body = {};
+
+  try {
+    body = JSON.parse(options.body);
+  } catch (err) {} // eslint-disable-line no-empty
 
   global.workerFetchCount += 1;
 
@@ -27,7 +31,7 @@ const loggedFetch = (url, options) => {
       return res;
     })
     .catch((err) => {
-      console.error('Error on %s %O', url, body);
+      console.error('Error on %s %O', url, body); // eslint-disable-line no-console
       throw err;
     });
 };
