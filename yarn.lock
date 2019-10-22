@@ -1394,10 +1394,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@moonwalker/pre-flight-check@1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.11.tgz#e021903ef8fc91e7bb38d486ce3c725aea3b3234"
-  integrity sha512-9NhD3ytemt558SRfie9OM1CWDWhV/jfgtn7syCqgvZg5hgcLUtVbWbPFXtrUHlCieSUhORxDWmrzyvnaQbl1fQ==
+"@moonwalker/pre-flight-check@1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.12.tgz#e2e567d301cb79d7d284c7d40a51ecce7d390363"
+  integrity sha512-mubSXWYFHiKQKc0orItHqAZv2Pl4+Xa11VKuCdSPaRusi9ZNIQgslOauNsxI7tWgsoDSa58UlUSrpol9gkSZ6g==
   dependencies:
     babel-eslint "10.0.3"
     eslint "6.5.1"
@@ -1406,7 +1406,7 @@
     eslint-import-resolver-node "0.3.2"
     eslint-import-resolver-webpack "0.11.1"
     eslint-plugin-import "2.18.2"
-    eslint-plugin-jest "22.19.0"
+    eslint-plugin-jest "22.20.0"
     eslint-plugin-jsx-a11y "6.2.3"
     eslint-plugin-prettier "3.1.1"
     eslint-plugin-react "7.16.0"
@@ -4754,10 +4754,10 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@22.19.0:
-  version "22.19.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.19.0.tgz#0cf90946a8c927d40a2c64458c89bb635d0f2a0b"
-  integrity sha512-4zUc3rh36ds0SXdl2LywT4YWA3zRe8sfLhz8bPp8qQPIKvynTTkNGwmSCMpl5d9QiZE2JxSinGF+WD8yU+O0Lg==
+eslint-plugin-jest@22.20.0:
+  version "22.20.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.20.0.tgz#a3c3615c516fcbd20d50dbf395ea37361bd9e3b2"
+  integrity sha512-UwHGXaYprxwd84Wer8H7jZS+5C3LeEaU8VD7NqORY6NmPJrs+9Ugbq3wyjqO3vWtSsDaLar2sqEB8COmOZA4zw==
   dependencies:
     "@typescript-eslint/experimental-utils" "^1.13.0"
 
