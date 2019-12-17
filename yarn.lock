@@ -1327,15 +1327,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.15.0":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.15.0.tgz#713e2e5aed492667b69df4a896b1239c6fc76a8f"
-  integrity sha512-ZqEGTRSh6Gri3p7h7DilIOaPpU0tj90Y6psu2Zjj2rS8fgf5QJLYJGVPHtWEHi20+1cuIjExs/sDL/MqYoNOUQ==
+"@bundle-stats/html-templates@^1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.15.2.tgz#0b9472dba28c349751de5ee162263bc80499f84d"
+  integrity sha512-AZZLbWBvEO0TygHssHyCriDO9x8vU8VxVqGBuBsZ+NMgGaMTfWE/bU5kZovzzbBAn8OHw7tTJeYrPp01zvXfLA==
 
-"@bundle-stats/utils@^1.15.0":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.15.0.tgz#774a236e6f888ad96d0920e8eb0828d5cb79cdbb"
-  integrity sha512-VUeiSy6HnjgCiW0LZ1MBnhyFiErO/A1rs9ivFakXrWaAbUExKbE+6PqOTwB+zq90/MyLp/hZyxzLzpu3OLOcaQ==
+"@bundle-stats/utils@^1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-1.15.2.tgz#590faf52cbee7e2a26a9f4f6729506f562b2b98a"
+  integrity sha512-egAOXOyEMCf+uJ5bXes4+Y3u9bcDpi9cvb0y/jT4pEz+hi6MzHwVxDs3Cj+7ncSoYHvdTPVNHTHejG6Ok1JXIA==
   dependencies:
     convert-units "^2.3.4"
     core-js "^3.1.4"
@@ -3018,13 +3018,13 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.15.0.tgz#1cd538578d5cbba5727784bcb375db79b95efb0b"
-  integrity sha512-c1f1iJov9yRr+JjOFjwRyu9upm1Q5Vw5mfdc9Rr6K+k4VdCU+71kdOHf1+6a3kJY45oiF8KBc2Cqi+HmOgvAbA==
+bundle-stats@1.15.2:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.15.2.tgz#f7f9992a79c5c272cc521969612243f2d13804ec"
+  integrity sha512-P8Z4n6daV+K/kM1vW3ADoWZYUzi9/8xmlzwQJjc6K1BB+A83ULo+7tyuD7uYOb1+AyM4jQPlGuEfLg3TVGRSnA==
   dependencies:
-    "@bundle-stats/html-templates" "^1.15.0"
-    "@bundle-stats/utils" "^1.15.0"
+    "@bundle-stats/html-templates" "^1.15.2"
+    "@bundle-stats/utils" "^1.15.2"
     core-js "^3.1.4"
     find-cache-dir "3.1.0"
     fs-extra "8.1.0"
