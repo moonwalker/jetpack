@@ -25,7 +25,8 @@
     "lodash",
     "graphql-tag",
     "react-docgen",
-    "react-require"
+    "react-require",
+    "babel-plugin-transform-react-remove-prop-types"
   ],
   "env": {
     "test": {
