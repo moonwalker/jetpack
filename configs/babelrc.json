@@ -26,7 +26,8 @@
     "graphql-tag",
     "react-docgen",
     "react-require",
-    "babel-plugin-transform-react-remove-prop-types"
+    "babel-plugin-transform-react-remove-prop-types",
+    "react-hot-loader/babel"
   ],
   "env": {
     "test": {

@@ -27,7 +27,7 @@ const devConfig = {
   context: paths.src,
   devtool: 'cheap-module-eval-source-mapp',
   entry: {
-    main: paths.entry.main
+    main: ['react-hot-loader/patch', paths.entry.main]
   },
   output: {
     path: paths.output.path,
