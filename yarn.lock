@@ -1279,10 +1279,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bundle-stats/html-templates@^1.15.4":
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.15.4.tgz#4f37d4324eb375cc9d68db28c98c0bc3471dcc6e"
-  integrity sha512-B3JfCQ8yDrE7xviejMhqW9TyGaIC+mVljKlLqE8OcNm6fnfpT7RkkTPdTNh7oI6WpxsuNs5IKUVxNXjjcFsNeg==
+"@bundle-stats/html-templates@^1.15.5":
+  version "1.15.5"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-1.15.5.tgz#dd47607805675a958385c848e725f9e7d1279c47"
+  integrity sha512-vT+dNRLNzUytol7Rxos1Ume/zldGMuKpj0hkRZBMkwF7Ix4xzSLDWR7KbM0Hx7UY/NVd+s8DAd3EZir03en87Q==
 
 "@bundle-stats/utils@^1.15.4":
   version "1.15.4"
@@ -2994,12 +2994,12 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@1.15.4:
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.15.4.tgz#194dafc3ac068328862fd9637e2b6a5e9770e594"
-  integrity sha512-TF9tQtp62WJvtAr4yt63H76EIYuwkZ/R/8/PysVQBL0c9lSCT5pgTAHtp2vu0vEh1uPfLRlxuGSM1Yfjeaxmyw==
+bundle-stats@1.15.5:
+  version "1.15.5"
+  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-1.15.5.tgz#45d6ba38ee27e553b1d270637ae6bb9594b1f30d"
+  integrity sha512-wv+mutwtnBT0qBbwP4i/aVdk5Wh8JdasTeoSkZhlIHQuEZffrE/23isrKU3op4vyh7mQ5Z8BIoZWbxNVER4jiw==
   dependencies:
-    "@bundle-stats/html-templates" "^1.15.4"
+    "@bundle-stats/html-templates" "^1.15.5"
     "@bundle-stats/utils" "^1.15.4"
     core-js "^3.1.4"
     find-cache-dir "3.2.0"
