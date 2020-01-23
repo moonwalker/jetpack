@@ -24,7 +24,6 @@
     "@babel/plugin-syntax-import-meta",
     "lodash",
     "graphql-tag",
-    "react-docgen",
     "react-require",
     "babel-plugin-transform-react-remove-prop-types"
   ],
@@ -38,7 +37,6 @@
         "@babel/plugin-syntax-import-meta",
         "graphql-tag",
         "lodash",
-        "react-docgen",
         "react-require"
       ]
     }
