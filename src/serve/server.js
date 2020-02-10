@@ -119,7 +119,7 @@ const permanentRedirect = (to) => (_, reply) => {
     .redirect(301, to);
 };
 
-const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
+const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) => {
   const u = url.parse(req.raw.url);
 
   if (STATIC_FILE_PATTERN.test(u.pathname)) {
@@ -142,12 +142,18 @@ const renderRouteHandler = (localesRegex, defaultLocale) => (req, reply) => {
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
-  return render({ path: u.pathname, assets }).then((data) => {
-    reply
-      .header('Content-Type', 'text/html')
-      .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
-      .send(data);
-  });
+  let data;
+
+  try {
+    data = await render({ path: u.pathname, assets });
+  } catch (err) {
+    throw new Error(err);
+  }
+
+  return reply
+    .header('Content-Type', 'text/html')
+    .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
+    .send(data);
 };
 
 const getSpaceLocales = () => {
