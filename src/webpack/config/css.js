@@ -1,3 +1,4 @@
+const findCacheDir = require('find-cache-dir');
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const cssnano = require('cssnano');
@@ -14,7 +15,11 @@ module.exports = (options, env) => {
 
   const cssInJsRule = {
     test: /\.jsx?$/,
-    loader: 'linaria/loader'
+    loader: 'linaria/loader',
+    options: {
+      sourceMap: true,
+      cacheDirectory: findCacheDir({ name: 'linaria' })
+    }
   };
 
   const transformRule = {
