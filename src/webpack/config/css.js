@@ -12,6 +12,11 @@ module.exports = (options, env) => {
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|styl)$/;
 
+  const cssInJsRule = {
+    test: /\.jsx?$/,
+    loader: 'linaria/loader'
+  };
+
   const transformRule = {
     test,
     include,
@@ -66,14 +71,14 @@ module.exports = (options, env) => {
   if (node) {
     return {
       module: {
-        rules: [transformRule]
+        rules: [cssInJsRule, transformRule]
       }
     };
   }
 
   return {
     module: {
-      rules: [deliveryExtractRule, transformRule]
+      rules: [deliveryExtractRule, cssInJsRule, transformRule]
     },
     plugins: [new MiniCssExtractPlugin({ filename })]
   };
