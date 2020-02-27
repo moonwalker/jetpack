@@ -16,6 +16,7 @@ module.exports = (options, env) => {
   const cssInJsRule = {
     test: /\.jsx?$/,
     loader: 'linaria/loader',
+    include,
     options: {
       sourceMap: true,
       cacheDirectory: findCacheDir({ name: 'linaria' })
