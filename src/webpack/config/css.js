@@ -1,4 +1,3 @@
-const findCacheDir = require('find-cache-dir');
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const cssnano = require('cssnano');
@@ -12,16 +11,6 @@ module.exports = (options, env) => {
 
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|styl)$/;
-
-  const cssInJsRule = {
-    test: /\.jsx?$/,
-    loader: 'linaria/loader',
-    include,
-    options: {
-      sourceMap: true,
-      cacheDirectory: findCacheDir({ name: 'linaria' })
-    }
-  };
 
   const transformRule = {
     test,
@@ -77,14 +66,14 @@ module.exports = (options, env) => {
   if (node) {
     return {
       module: {
-        rules: [cssInJsRule, transformRule]
+        rules: [transformRule]
       }
     };
   }
 
   return {
     module: {
-      rules: [deliveryExtractRule, cssInJsRule, transformRule]
+      rules: [deliveryExtractRule, transformRule]
     },
     plugins: [new MiniCssExtractPlugin({ filename })]
   };
