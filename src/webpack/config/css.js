@@ -16,19 +16,6 @@ module.exports = (options, env) => {
     {
       test,
       include,
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-        onlyLocals: node,
-        modules: {
-          context: paths.src,
-          localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
-        }
-      }
-    },
-    {
-      test,
-      include,
       loader: 'postcss-loader',
       options: {
         sourceMap: true,
@@ -56,6 +43,19 @@ module.exports = (options, env) => {
             clearAllMessages: true
           })
         ]
+      }
+    },
+    {
+      test,
+      include,
+      loader: 'css-loader',
+      options: {
+        sourceMap: true,
+        onlyLocals: node,
+        modules: {
+          context: paths.src,
+          localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
+        }
       }
     }
   ];
