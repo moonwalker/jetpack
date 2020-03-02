@@ -12,49 +12,49 @@ module.exports = (options, env) => {
   const isDevelopment = env.NODE_ENV === 'development';
   const test = /\.(css|styl)$/;
 
-  const transformRule = {
-    test,
-    include,
-    use: [
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true,
-          onlyLocals: node,
-          modules: {
-            context: paths.src,
-            localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
-          }
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: [
-            ...(lint ? [stylelint()] : []),
-            autoprefixer(),
-            ...(isDevelopment
-              ? []
-              : [
-                  cssnano({
-                    // Avoid removing the relative (`./`) notation, webpack needs it
-                    preset: [
-                      'default',
-                      {
-                        normalizeUrl: false
-                      }
-                    ]
-                  })
-                ]),
-            postcssReporter({
-              clearAllMessages: true
-            })
-          ]
+  const transformRules = [
+    {
+      test,
+      include,
+      loader: 'css-loader',
+      options: {
+        sourceMap: true,
+        onlyLocals: node,
+        modules: {
+          context: paths.src,
+          localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
         }
       }
-    ]
-  };
+    },
+    {
+      test,
+      include,
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+        plugins: [
+          ...(lint ? [stylelint()] : []),
+          autoprefixer(),
+          ...(isDevelopment
+            ? []
+            : [
+                cssnano({
+                  // Avoid removing the relative (`./`) notation, webpack needs it
+                  preset: [
+                    'default',
+                    {
+                      normalizeUrl: false
+                    }
+                  ]
+                })
+              ]),
+          postcssReporter({
+            clearAllMessages: true
+          })
+        ]
+      }
+    }
+  ];
 
   const deliveryExtractRule = {
     test,
@@ -66,14 +66,14 @@ module.exports = (options, env) => {
   if (node) {
     return {
       module: {
-        rules: [transformRule]
+        rules: transformRules
       }
     };
   }
 
   return {
     module: {
-      rules: [deliveryExtractRule, transformRule]
+      rules: [...transformRules, deliveryExtractRule]
     },
     plugins: [new MiniCssExtractPlugin({ filename })]
   };
