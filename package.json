@@ -45,7 +45,7 @@
     "dotenv": "8.2.0",
     "fastify": "2.12.0",
     "fetch-cached": "2.0.3",
-    "file-loader": "5.0.2",
+    "file-loader": "6.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "8.1.0",
     "generate-json-webpack-plugin": "0.3.1",
