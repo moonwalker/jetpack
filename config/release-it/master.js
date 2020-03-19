@@ -9,5 +9,9 @@ module.exports = merge({}, config, {
   github: {
     release: true
   },
-  plugins: {}
+  plugins: {
+    // '@release-it/conventional-changelog': {
+    //   preset: 'eslint'
+    // }
+  }
 });
