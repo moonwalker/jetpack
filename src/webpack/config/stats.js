@@ -1,7 +1,7 @@
 const path = require('path');
 const StatsPlugin = require('stats-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { BundleStatsWebpackPlugin } = require('bundle-stats');
+const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
 const { paths } = require('../defaults');
 

@@ -3431,19 +3431,15 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bundle-stats@2.0.1:
+bundle-stats-webpack-plugin@2.0.1:
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/bundle-stats/-/bundle-stats-2.0.1.tgz#da1f99341cf086f990e0048b8e885fb17fe49d25"
-  integrity sha512-386r0fDWKGIhWdz9gb9W2QHpTwHmHL4yHb4b/j4NX7r9R3tPUu72XcxpKq+ChPEskIroqzNFn4ZIh/geQf8W3A==
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.0.1.tgz#a31b7ca0c408e01e18e230a64e4b85fb07598f7c"
+  integrity sha512-2Oe+gAN67T3LeWv6tJL7eWHILkceu4mFkf2czurThf9S5LOXDDeEKvB88fvRuhliDS0DdDjzWDQ14lIWbDFifA==
   dependencies:
     "@bundle-stats/cli-utils" "^2.0.1"
     "@bundle-stats/utils" "^2.0.0"
-    boxen "^4.2.0"
-    fs-extra "8.1.0"
-    listr "^0.14.3"
+    core-js "^3.1.4"
     lodash "4.17.15"
-    update-notifier "4.1.0"
-    yargs "15.2.0"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -14469,14 +14465,6 @@ yargs-parser@^16.1.0:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^17.1.0:
-  version "17.1.0"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-17.1.0.tgz#b95ff3201e98b89e86070f92bef636016a0b0766"
-  integrity sha512-67zLl4/kWtp9eyVuxX+fHZ2Ey4ySWh0awDJlk/EtT0vzspsXbzrFsh76WjYSP3L++zhSwHQRUE3MCBe754RuEg==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
-
 yargs@12.0.5:
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
@@ -14510,23 +14498,6 @@ yargs@13.2.4:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
-
-yargs@15.2.0:
-  version "15.2.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.2.0.tgz#cb9fc7f7ec429f7e9329b623f5c707a62dae506a"
-  integrity sha512-E+o8C37U+M7N15rBJVxr0MoInp+O7XNhMqveSGWA5uhddqs8qtkZ+uvT9FI32QML0SKidXdDONr40Xe3tDO9FA==
-  dependencies:
-    cliui "^6.0.0"
-    decamelize "^1.2.0"
-    find-up "^4.1.0"
-    get-caller-file "^2.0.1"
-    require-directory "^2.1.1"
-    require-main-filename "^2.0.0"
-    set-blocking "^2.0.0"
-    string-width "^4.2.0"
-    which-module "^2.0.0"
-    y18n "^4.0.0"
-    yargs-parser "^17.1.0"
 
 yargs@^15.0.0:
   version "15.1.0"
