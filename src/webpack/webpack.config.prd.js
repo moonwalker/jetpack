@@ -35,6 +35,7 @@ const clientConfig = mergeConfigs(
       context,
       devtool: 'source-map',
       entry: {
+        init: paths.entry.init,
         main: paths.entry.main
       },
       output: {
