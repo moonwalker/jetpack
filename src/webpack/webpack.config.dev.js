@@ -60,7 +60,10 @@ const devConfig = {
     },
     historyApiFallback: true,
     before: (app) => {
-      app.get('/env.js', getEnvMiddleware());
+      app.get('/env.js', {
+        ...getEnvMiddleware(),
+        ENV: 'development'
+      });
     }
   },
   optimization: {
