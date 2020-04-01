@@ -12,6 +12,7 @@ module.exports = {
     root: pwd(),
     src: pwd('src'),
     entry: {
+      init: pwd('src', 'init.js'),
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js')
     },
