@@ -31,9 +31,9 @@ const stripTrailingSlash = (pathname) => {
   return pathname.slice(0, -1);
 };
 
-const getEnvMiddleware = () => (_, reply) => {
+const getEnvMiddleware = (customEnv = '') => (_, reply) => {
   const config = {
-    ENV: process.env.ENV || process.env.env || '',
+    ENV: customEnv || process.env.ENV || process.env.env || '',
     NAMESPACE: process.env.NAMESPACE || 'default',
     RELEASE: process.env.COMMIT || ''
   };
