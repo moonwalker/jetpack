@@ -2,7 +2,6 @@ const path = require('path');
 const { getCommitId } = require('../utils');
 
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
-const lsp = (...p) => path.resolve(process.cwd(), 'node_modules', '@moonwalker', 'lifesupport', 'lib-esm', ...p);
 
 module.exports = {
   banner: `[filebase] @ ${getCommitId()}`,
@@ -13,7 +12,7 @@ module.exports = {
     root: pwd(),
     src: pwd('src'),
     entry: {
-      init: lsp('scripts', 'init.js'),
+      init: pwd('src', 'init.js'),
       main: pwd('src', 'client.js'),
       render: pwd('src', 'render.js')
     },
