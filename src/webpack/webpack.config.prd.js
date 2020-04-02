@@ -3,7 +3,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const SentryPlugin = require('@sentry/webpack-plugin');
 
+const { SERVER_RELEASE } = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
@@ -127,9 +129,13 @@ const renderConfig = mergeConfigs(
         }),
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1
+        }),
+        new SentryPlugin({
+          include: paths.render.path,
+          release: SERVER_RELEASE
         })
       ],
-      devtool: false,
+      devtool: 'source-map',
       optimization: {
         minimize: false
       }

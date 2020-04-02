@@ -31,6 +31,7 @@ const {
   NAMESPACE,
   PORT,
   SENTRY_DSN,
+  SERVER_RELEASE,
   STATIC_FILE_PATTERN,
   SVCNAME
 } = require('../constants');
@@ -39,7 +40,7 @@ const log = debug('render');
 
 if (SENTRY_DSN) {
   log('Sentry init');
-  Sentry.init({ dsn: SENTRY_DSN, release: COMMIT, environment: ENV });
+  Sentry.init({ dsn: SENTRY_DSN, release: SERVER_RELEASE, environment: ENV });
 } else {
   log('Sentry skipped');
 }
