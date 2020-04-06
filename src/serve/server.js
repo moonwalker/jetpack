@@ -55,6 +55,7 @@ const render = require(renderFilepath).default; // eslint-disable-line import/no
 
 let ERROR_MESSAGE = '';
 const errorHandler = (err, req, reply) => {
+  // Read 500.html on first error
   if (!ERROR_MESSAGE) {
     try {
       ERROR_MESSAGE = fs.readFileSync(path.join(paths.output.path, '500.html'), 'utf-8');
@@ -145,13 +146,7 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
-  let data;
-
-  try {
-    data = await render({ path: u.pathname, assets });
-  } catch (err) {
-    throw new Error(err);
-  }
+  const data = await render({ path: u.pathname, assets });
 
   return reply
     .header('Content-Type', 'text/html')
