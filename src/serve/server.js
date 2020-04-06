@@ -71,8 +71,10 @@ const errorHandler = (err, req, reply) => {
     Sentry.captureException(err);
   });
 
+  const statusCode = err.statusCode || 500;
+
   reply
-    .code(500)
+    .code(statusCode)
     .type('text/html')
     .send(ERROR_MESSAGE);
 };
