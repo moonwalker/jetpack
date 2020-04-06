@@ -148,9 +148,12 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
+  global.renderStatus = null;
   const data = await render({ path: u.pathname, assets });
+  const status = global.renderStatus || 200;
 
   return reply
+    .status(status)
     .header('Content-Type', 'text/html')
     .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
     .send(data);
