@@ -2,6 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const url = require('url');
 const path = require('path');
+const createError = require('http-erros');
 const request = require('request');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
@@ -123,11 +124,11 @@ const permanentRedirect = (to) => (_, reply) => {
     .redirect(301, to);
 };
 
-const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) => {
+const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply, next) => {
   const u = url.parse(req.raw.url);
 
   if (STATIC_FILE_PATTERN.test(u.pathname)) {
-    return reply.callNotFound();
+    return next(new createError.NotFound());
   }
 
   if (!hasTrailingSlash(u.pathname)) {
