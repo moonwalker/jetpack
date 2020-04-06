@@ -1,4 +1,6 @@
 const path = require('path');
+
+const { NODE_ENV } = require('../constants');
 const { getCommitId } = require('../utils');
 
 const pwd = (...p) => path.resolve(process.cwd(), ...p);
@@ -44,7 +46,7 @@ module.exports = {
     }
   },
   minimize: {
-    enabled: !!process.env.ENV,
+    enabled: NODE_ENV !== 'development',
     minifyOptions: {
       removeComments: true,
       collapseWhitespace: true,

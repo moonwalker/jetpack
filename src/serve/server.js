@@ -33,7 +33,7 @@ const {
   SENTRY_DSN,
   STATIC_FILE_PATTERN,
   SVCNAME
-} = require('./constants');
+} = require('../constants');
 
 const log = debug('render');
 
