@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const url = require('url');
 const path = require('path');
-const createError = require('http-erros');
+const createError = require('http-errors');
 const request = require('request');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
@@ -127,6 +127,7 @@ const permanentRedirect = (to) => (_, reply) => {
 const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply, next) => {
   const u = url.parse(req.raw.url);
 
+  // Avoid passing static file urls to the renderer
   if (STATIC_FILE_PATTERN.test(u.pathname)) {
     return next(new createError.NotFound());
   }
