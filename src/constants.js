@@ -1,15 +1,20 @@
 require('dotenv').config();
 
+module.exports.NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports.PORT = parseInt(process.env.JETPACK_SERVER_PORT, 10) || 9002;
 module.exports.HOST = process.env.JETPACK_SERVER_HOST || '0.0.0.0';
 module.exports.SENTRY_DSN = process.env.JETPACK_SERVER_SENTRY;
-module.exports.ENV = process.env.NODE_ENV || 'development';
+module.exports.ENV = process.env.ENV || process.env.env || '';
 
 module.exports.CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051';
 module.exports.SVCNAME = process.env.SVCNAME || 'jetpack-server';
 module.exports.COMMIT = (process.env.COMMIT || 'dev').substring(0, 7);
 module.exports.BUILT = process.env.BUILT || 'n/a';
 module.exports.NAMESPACE = process.env.NAMESPACE || 'default';
+
+// Env specific releases
+module.exports.SERVER_RELEASE = `S-${module.exports.COMMIT}`;
+module.exports.CLIENT_RELEASE = `C-${module.exports.COMMIT}`;
 
 // Static files
 module.exports.STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;

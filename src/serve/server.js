@@ -2,6 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const url = require('url');
 const path = require('path');
+const createError = require('http-errors');
 const request = require('request');
 const fastify = require('fastify');
 const serveStatic = require('serve-static');
@@ -31,15 +32,16 @@ const {
   NAMESPACE,
   PORT,
   SENTRY_DSN,
+  SERVER_RELEASE,
   STATIC_FILE_PATTERN,
   SVCNAME
-} = require('./constants');
+} = require('../constants');
 
 const log = debug('render');
 
 if (SENTRY_DSN) {
   log('Sentry init');
-  Sentry.init({ dsn: SENTRY_DSN, release: COMMIT, environment: ENV });
+  Sentry.init({ dsn: SENTRY_DSN, release: SERVER_RELEASE, environment: ENV });
 } else {
   log('Sentry skipped');
 }
@@ -54,6 +56,7 @@ const render = require(renderFilepath).default; // eslint-disable-line import/no
 
 let ERROR_MESSAGE = '';
 const errorHandler = (err, req, reply) => {
+  // Read 500.html on first error
   if (!ERROR_MESSAGE) {
     try {
       ERROR_MESSAGE = fs.readFileSync(path.join(paths.output.path, '500.html'), 'utf-8');
@@ -70,8 +73,10 @@ const errorHandler = (err, req, reply) => {
     Sentry.captureException(err);
   });
 
+  const statusCode = err.statusCode || 500;
+
   reply
-    .code(500)
+    .code(statusCode)
     .type('text/html')
     .send(ERROR_MESSAGE);
 };
@@ -122,8 +127,9 @@ const permanentRedirect = (to) => (_, reply) => {
 const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) => {
   const u = url.parse(req.raw.url);
 
+  // Skip passing static file urls to the renderer
   if (STATIC_FILE_PATTERN.test(u.pathname)) {
-    return reply.callNotFound();
+    throw new createError.NotFound();
   }
 
   if (!hasTrailingSlash(u.pathname)) {
@@ -142,13 +148,7 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
     return permanentRedirect(`${undef}/${u.search || ''}`)(req, reply);
   }
 
-  let data;
-
-  try {
-    data = await render({ path: u.pathname, assets });
-  } catch (err) {
-    throw new Error(err);
-  }
+  const data = await render({ path: u.pathname, assets });
 
   return reply
     .header('Content-Type', 'text/html')

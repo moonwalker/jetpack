@@ -1,6 +1,7 @@
 const async = require('async');
 const fetch = require('isomorphic-fetch');
 
+const { ENV } = require('../constants');
 const { debug } = require('../utils');
 
 const log = debug('fetch', 'routes');
@@ -38,7 +39,7 @@ module.exports = ({ queryApiUrl, productName }) => {
   };
 
   log('PRD:', productName);
-  log('ENV:', process.env.ENV || process.env.env || process.env.NODE_ENV || 'development');
+  log('ENV:', ENV);
   log('API:', queryApiUrl);
   log('REQ:', params.method, params.body);
 

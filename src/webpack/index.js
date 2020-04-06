@@ -4,9 +4,10 @@ const webpack = require('webpack');
 const path = require('path');
 const { spawn } = require('child_process');
 
+const { ENV } = require('../constants');
+const { debug } = require('../utils');
 const { context, config } = require('./defaults');
 const { renderConfig, clientConfig } = require('./webpack.config.prd');
-const { debug } = require('../utils');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -54,7 +55,7 @@ const compileWebpackConfig = (webpackConfig) =>
 const buildClient = () => {
   const log = debug('build:client');
   log('PRD:', config.productName);
-  log('ENV:', process.env.ENV);
+  log('ENV:', ENV);
   log('API:', config.queryApiUrl);
 
   return compileWebpackConfig(clientConfig).then((stats) => printStats('Client', stats));
@@ -63,7 +64,7 @@ const buildClient = () => {
 const buildRender = () => {
   const log = debug('build:render');
   log('PRD:', config.productName);
-  log('ENV:', process.env.ENV);
+  log('ENV:', ENV);
   log('API:', config.queryApiUrl);
 
   return compileWebpackConfig(renderConfig).then((renderStats) =>
