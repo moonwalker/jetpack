@@ -923,7 +923,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundle-stats/cli-utils@^2.0.1":
+"@bundle-stats/cli-utils@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-2.1.1.tgz#046f0b2e21e7189e512929cead5b79d089293671"
   integrity sha512-SQc6HdczwKl4RHDWxalf15ForzlbcprnTGPr65Tz5Vn0e1B8baaNN7ygLX9sh+XMmDIy+q3U7Kiy/UndNyAaLg==
@@ -940,7 +940,7 @@
   resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-2.1.1.tgz#7013b9c364aba8580502051262be97f43cb0b4a5"
   integrity sha512-d+Ve1pjYmLQUDiaytNUGX/fgZ9Wz6vSNg0iO8hBnmgcwk4R39/o+QWtc+UeEMpp0Cm9r2supJzHv9A3e8k+/mw==
 
-"@bundle-stats/utils@^2.0.0", "@bundle-stats/utils@^2.1.1":
+"@bundle-stats/utils@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-2.1.1.tgz#68fb3135b7cf0c87f0df0a574f3ed07f4737c6e9"
   integrity sha512-UpHVGYjGa3ce+7T31okZytUh/vC+JcyR8W5m7QrmiwFN12ETBljOEridN7ocvsDLv0mnhpuojucy67jNTSTl6A==
@@ -2841,13 +2841,13 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
-bundle-stats-webpack-plugin@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.0.1.tgz#a31b7ca0c408e01e18e230a64e4b85fb07598f7c"
-  integrity sha512-2Oe+gAN67T3LeWv6tJL7eWHILkceu4mFkf2czurThf9S5LOXDDeEKvB88fvRuhliDS0DdDjzWDQ14lIWbDFifA==
+bundle-stats-webpack-plugin@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.1.1.tgz#69d9aea97507729a7e02166d8a556fd71d6573cf"
+  integrity sha512-Q7zPxjeTy4lNyjCuU36UpACW2n5u+Btbo5KXay/sgN5pkEZZ3cGxUaQr53vHNPpxVqiTQMyVv4vCcoYtNjIaHA==
   dependencies:
-    "@bundle-stats/cli-utils" "^2.0.1"
-    "@bundle-stats/utils" "^2.0.0"
+    "@bundle-stats/cli-utils" "^2.1.1"
+    "@bundle-stats/utils" "^2.1.1"
     core-js "^3.1.4"
     lodash "4.17.15"
 
