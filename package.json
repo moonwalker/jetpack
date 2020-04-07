@@ -43,7 +43,7 @@
     "cssnano": "4.1.10",
     "debug": "4.1.1",
     "dotenv": "8.2.0",
-    "fastify": "2.12.1",
+    "fastify": "2.13.0",
     "fetch-cached": "2.0.3",
     "file-loader": "6.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
