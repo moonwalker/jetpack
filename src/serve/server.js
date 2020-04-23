@@ -75,10 +75,7 @@ const errorHandler = (err, req, reply) => {
 
   const statusCode = err.statusCode || 500;
 
-  reply
-    .code(statusCode)
-    .type('text/html')
-    .send(ERROR_MESSAGE);
+  reply.code(statusCode).type('text/html').send(ERROR_MESSAGE);
 };
 
 const sitemapHandler = () => (_, reply) => {
@@ -149,11 +146,13 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
   }
 
   const data = await render({ path: u.pathname, assets });
+  const res = typeof data === 'object' ? data : { body: data };
 
   return reply
+    .status(res?.status || 200)
     .header('Content-Type', 'text/html')
     .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
-    .send(data);
+    .send(res.body);
 };
 
 const getSpaceLocales = () => {
