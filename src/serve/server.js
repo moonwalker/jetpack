@@ -149,7 +149,7 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
   const res = typeof data === 'object' ? data : { body: data };
 
   return reply
-    .status(res?.status || 200)
+    .status(res.status || 200)
     .header('Content-Type', 'text/html')
     .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
     .send(res.body);
