@@ -11,6 +11,7 @@ module.exports.SVCNAME = process.env.SVCNAME || 'jetpack-server';
 module.exports.COMMIT = (process.env.COMMIT || 'dev').substring(0, 7);
 module.exports.BUILT = process.env.BUILT || 'n/a';
 module.exports.NAMESPACE = process.env.NAMESPACE || 'default';
+module.exports.API_HOST = process.env.API_HOST || 'http://127.0.0.1:50050';
 
 // Env specific releases
 module.exports.SERVER_RELEASE = `S-${module.exports.COMMIT}`;
