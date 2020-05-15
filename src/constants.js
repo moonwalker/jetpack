@@ -37,6 +37,8 @@ module.exports.HEADER_CACHE_TAG = 'Cache-Tag';
 module.exports.CACHE_TAG_STATIC = 'static';
 module.exports.CACHE_TAG_STATIC_VERSIONED = 'static-versioned';
 module.exports.CACHE_TAG_CONTENT = 'content';
+module.exports.HEADER_SURROGATE_CONTROL = 'Surrogate-Control';
+module.exports.HEADER_SURROGATE_CONTROL_VALUE = 'max-age=86400';
 
 // Others
 module.exports.DEFAULT_ERROR_MESSAGE = 'Something went wrong, please try again!';

@@ -28,6 +28,8 @@ const {
   DEFAULT_LOCALES,
   ENV,
   HEADER_CACHE_TAG,
+  HEADER_SURROGATE_CONTROL,
+  HEADER_SURROGATE_CONTROL_VALUE,
   HOST,
   NAMESPACE,
   PORT,
@@ -154,6 +156,7 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
     .status(res.status || 200)
     .header('Content-Type', 'text/html')
     .header(HEADER_CACHE_TAG, CACHE_TAG_CONTENT)
+    .header(HEADER_SURROGATE_CONTROL, HEADER_SURROGATE_CONTROL_VALUE)
     .send(res.body);
 };
 
@@ -196,6 +199,7 @@ module.exports.serve = async () => {
       maxAge: '1y',
       setHeaders: (res) => {
         res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC_VERSIONED);
+        res.setHeader(HEADER_SURROGATE_CONTROL, HEADER_SURROGATE_CONTROL_VALUE);
       }
     })
   );
@@ -205,6 +209,7 @@ module.exports.serve = async () => {
     serveStatic(paths.output.path, {
       setHeaders: (res) => {
         res.setHeader(HEADER_CACHE_TAG, CACHE_TAG_STATIC);
+        res.setHeader(HEADER_SURROGATE_CONTROL, HEADER_SURROGATE_CONTROL_VALUE);
       }
     })
   );
