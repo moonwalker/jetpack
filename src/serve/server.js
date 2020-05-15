@@ -150,6 +150,11 @@ const renderRouteHandler = (localesRegex, defaultLocale) => async (req, reply) =
   }
 
   const data = await render({ path: u.pathname, assets });
+
+  if (!data) {
+    throw new Error('No data available!');
+  }
+
   const res = typeof data === 'object' ? data : { body: data };
 
   return reply
