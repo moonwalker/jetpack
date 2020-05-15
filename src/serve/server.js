@@ -75,7 +75,10 @@ const errorHandler = (err, req, reply) => {
 
   const statusCode = err.statusCode || 500;
 
-  reply.code(statusCode).type('text/html').send(ERROR_MESSAGE);
+  reply
+    .code(statusCode)
+    .type('text/html')
+    .send(ERROR_MESSAGE);
 };
 
 const sitemapHandler = () => (_, reply) => {
@@ -95,7 +98,7 @@ const sitemapMarketHandler = () => (req, reply) => {
     .pipe(reply.res);
 };
 
-const healthzHandler = (worker, started) => {
+const healthzHandler = (started) => {
   const data = {
     service: SVCNAME,
     version: COMMIT,
@@ -105,8 +108,7 @@ const healthzHandler = (worker, started) => {
     platform: `${os.platform()}/${os.arch()}`,
     host: os.hostname(),
     status: 'healthy',
-    started,
-    worker
+    started
   };
 
   return (_, reply) => {
@@ -180,9 +182,9 @@ const getSpaceLocales = () => {
   });
 };
 
-module.exports.serve = async ({ worker }) => {
+module.exports.serve = async () => {
   const started = new Date().toISOString();
-  const server = fastify({ logger: true });
+  const server = fastify({ logger: false });
 
   const { localesRegex, defaultLocale } = await getSpaceLocales();
 
@@ -197,6 +199,7 @@ module.exports.serve = async ({ worker }) => {
       }
     })
   );
+
   // Standard static files (favicons, etc)
   server.use(
     serveStatic(paths.output.path, {
@@ -208,7 +211,7 @@ module.exports.serve = async ({ worker }) => {
 
   server.get('/sitemap.xml', sitemapHandler());
   server.get('/sitemap-:market([a-z]{2,3}).xml', sitemapMarketHandler());
-  server.get('/healthz', healthzHandler(worker, started));
+  server.get('/healthz', healthzHandler(started));
   server.get('/env.js', getEnvMiddleware());
   server.get('/', permanentRedirect(`/${defaultLocale}/`));
   server.get('*', renderRouteHandler(localesRegex, defaultLocale));
