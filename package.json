@@ -26,7 +26,7 @@
     "@babel/preset-react": "7.9.4",
     "@moonwalker/pre-flight-check": "1.0.24",
     "@sentry/node": "5.15.5",
-    "@sentry/webpack-plugin": "1.10.0",
+    "@sentry/webpack-plugin": "1.11.1",
     "assets-webpack-plugin": "3.9.12",
     "async": "3.2.0",
     "autoprefixer": "9.7.6",
