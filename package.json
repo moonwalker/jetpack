@@ -14,15 +14,15 @@
     "release": "./scripts/release.sh"
   },
   "dependencies": {
-    "@babel/core": "7.9.0",
+    "@babel/core": "7.9.6",
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/plugin-proposal-export-namespace-from": "7.8.3",
     "@babel/plugin-proposal-function-sent": "7.8.3",
     "@babel/plugin-proposal-throw-expressions": "7.8.3",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
     "@babel/plugin-syntax-import-meta": "7.8.3",
-    "@babel/plugin-transform-runtime": "7.9.0",
-    "@babel/preset-env": "7.9.5",
+    "@babel/plugin-transform-runtime": "7.9.6",
+    "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@moonwalker/pre-flight-check": "1.0.24",
     "@sentry/node": "5.15.5",
