@@ -78,7 +78,7 @@
     "webpack-merge": "4.2.2",
     "workbox-webpack-plugin": "4.3.1",
     "worker-farm": "1.7.0",
-    "xmlbuilder": "15.1.0"
+    "xmlbuilder": "15.1.1"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "1.1.4",
