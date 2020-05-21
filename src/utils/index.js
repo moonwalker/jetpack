@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 
-const { ENV, NAMESPACE, CLIENT_RELEASE, API_HOST } = require('../constants');
+const { ENV, NAMESPACE, CLIENT_RELEASE, API_HOST, TRACK_HOST } = require('../constants');
 const debug = require('./debug');
 const perf = require('./perf');
 
@@ -35,7 +35,7 @@ const stripTrailingSlash = (pathname) => {
 };
 
 const getEnvMiddleware = () => (_, reply) => {
-  const config = { ENV, NAMESPACE, RELEASE: CLIENT_RELEASE, API_HOST };
+  const config = { ENV, NAMESPACE, RELEASE: CLIENT_RELEASE, API_HOST, TRACK_HOST };
 
   reply
     .header('Cache-Control', 'no-store, no-cache, must-revalidate')
