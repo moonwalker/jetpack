@@ -1373,17 +1373,6 @@
     "@sentry/utils" "5.15.5"
     tslib "^1.9.3"
 
-"@sentry/cli@^1.52.3":
-  version "1.53.0"
-  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-1.53.0.tgz#f675d1b0955b94b0cb809d752ff272c4a341d306"
-  integrity sha512-FgVR+AqPd1elj/HGTCg4FcQDVmIGwKGtaHDzHi2ipph9EOVYm6Ce0xYcHxYgKZuVyQMyg+zD5ZK3yHrB1AYlnw==
-  dependencies:
-    https-proxy-agent "^5.0.0"
-    mkdirp "^0.5.5"
-    node-fetch "^2.6.0"
-    progress "^2.0.3"
-    proxy-from-env "^1.1.0"
-
 "@sentry/core@5.15.5":
   version "5.15.5"
   resolved "https://registry.yarnpkg.com/@sentry/core/-/core-5.15.5.tgz#40ea79bff5272d3fbbeeb4a98cdc59e1adbd2c92"
@@ -1440,13 +1429,6 @@
   dependencies:
     "@sentry/types" "5.15.5"
     tslib "^1.9.3"
-
-"@sentry/webpack-plugin@1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@sentry/webpack-plugin/-/webpack-plugin-1.11.1.tgz#ef14479b92e247777061e69404b1faed39944dc8"
-  integrity sha512-7uQiqHXK84GYy2mL/c+cW/QBtr/D8fNmf8U5nUDN4+44aNrQxSJ4vJmYJbxYg1zO6qN/xZyqJt3uKBlgA3FkZg==
-  dependencies:
-    "@sentry/cli" "^1.52.3"
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -1960,13 +1942,6 @@ agent-base@5:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-5.1.1.tgz#e8fb3f242959db44d63be665db7a8e739537a32c"
   integrity sha512-TMeqbNl2fMW0nMjTEPOwe3J/PRFP4vqeoNuQMG0HlMrtm5QxKqdvAkZ1pRBQ/ulIyDD5Yq0nJ7YbdD8ey0TO3g==
-
-agent-base@6:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.0.tgz#5d0101f19bbfaed39980b22ae866de153b93f09a"
-  integrity sha512-j1Q7cSCqN+AwrmDd+pzgqc0/NpC655x2bUf5ZjRIO77DcNBFmh+OgRNzF6OKdCC9RSCb19fGd99+bhXFdkRNqw==
-  dependencies:
-    debug "4"
 
 aggregate-error@^3.0.0:
   version "3.0.1"
@@ -6233,14 +6208,6 @@ https-proxy-agent@^4.0.0:
     agent-base "5"
     debug "4"
 
-https-proxy-agent@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.0.tgz#e2a90542abb68a762e0a0850f6c9edadfd8506b2"
-  integrity sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==
-  dependencies:
-    agent-base "6"
-    debug "4"
-
 human-signals@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
@@ -8459,7 +8426,7 @@ mkdirp@0.5.3:
   dependencies:
     minimist "^1.2.5"
 
-mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1, mkdirp@~0.5.x:
+mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@~0.5.1, mkdirp@~0.5.x:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
@@ -8597,7 +8564,7 @@ node-dir@^0.1.10:
   dependencies:
     minimatch "^3.0.2"
 
-node-fetch@2.6.0, node-fetch@^2.3.0, node-fetch@^2.6.0:
+node-fetch@2.6.0, node-fetch@^2.3.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
@@ -9909,7 +9876,7 @@ process@^0.11.10:
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
 
-progress@^2.0.0, progress@^2.0.3:
+progress@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
@@ -9956,11 +9923,6 @@ proxy-addr@^2.0.6, proxy-addr@~2.0.5:
   dependencies:
     forwarded "~0.1.2"
     ipaddr.js "1.9.1"
-
-proxy-from-env@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
-  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
 prr@~1.0.1:
   version "1.0.1"
