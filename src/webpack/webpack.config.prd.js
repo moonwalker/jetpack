@@ -27,6 +27,16 @@ const env = {
   NODE_ENV: 'production'
 };
 
+const CLIENT_ENV = {
+  ...env,
+  CLIENT: true
+};
+
+const SERVER_ENV = {
+  ...env,
+  SERVER: true
+};
+
 const { context, paths } = settings;
 
 const clientConfig = mergeConfigs(
@@ -49,7 +59,7 @@ const clientConfig = mergeConfigs(
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new webpack.EnvironmentPlugin(env),
+        new webpack.EnvironmentPlugin(CLIENT_ENV),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([
@@ -80,7 +90,7 @@ const clientConfig = mergeConfigs(
       {
         include: paths.src
       },
-      env
+      CLIENT_ENV
     ),
     createCssConfig(
       {
@@ -89,12 +99,12 @@ const clientConfig = mergeConfigs(
         extractChunks: true,
         filename: paths.output.cssFilename
       },
-      env
+      CLIENT_ENV
     ),
     createStylusConfig({
       include: paths.src
     }),
-    createFileConfig({ context: paths.src }, env),
+    createFileConfig({ context: paths.src }, CLIENT_ENV),
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
     createBuildInfo({
@@ -106,7 +116,7 @@ const clientConfig = mergeConfigs(
     })
   ],
   settings,
-  env
+  CLIENT_ENV
 );
 
 const renderConfig = mergeConfigs(
@@ -128,7 +138,7 @@ const renderConfig = mergeConfigs(
       plugins: [
         new CleanWebpackPlugin(),
         new webpack.EnvironmentPlugin({
-          ...env,
+          ...SERVER_ENV,
           CLIENT: false
         }),
         new webpack.optimize.LimitChunkCountPlugin({
@@ -149,14 +159,14 @@ const renderConfig = mergeConfigs(
       {
         include: paths.src
       },
-      env
+      SERVER_ENV
     ),
     createCssConfig(
       {
         include: paths.src,
         node: true
       },
-      env
+      SERVER_ENV
     ),
     createStylusConfig({
       include: paths.src
@@ -166,14 +176,14 @@ const renderConfig = mergeConfigs(
         context: paths.src,
         emitFile: false
       },
-      env
+      SERVER_ENV
     ),
     createSvgConfig({
       context: paths.src
     })
   ],
   settings,
-  env
+  SERVER_ENV
 );
 
 module.exports = { renderConfig, clientConfig };
