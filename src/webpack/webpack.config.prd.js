@@ -5,7 +5,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const SentryPlugin = require("@sentry/webpack-plugin");
 
-const { SERVER_RELEASE } = require('../constants');
+const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
@@ -22,7 +22,7 @@ const {
 } = require('./config');
 
 const env = {
-  CLIENT: true,
+  ...constants,
   ENV: 'production',
   NODE_ENV: 'production'
 };
