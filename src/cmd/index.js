@@ -21,7 +21,6 @@ Commands:
   build-client        Build app production bundle
   build-render        Build render bundle
   prerender           Generate static files
-  serve               Start web server
 
 Options:
   -v, --version   print version information`;
@@ -52,10 +51,6 @@ module.exports = {
 
     if (cmd === 'prerender') {
       return require('./prerender').run(); // eslint-disable-line global-require
-    }
-
-    if (cmd === 'serve') {
-      return require('./serve').run(); // eslint-disable-line global-require
     }
 
     if (cmd === 'create') {

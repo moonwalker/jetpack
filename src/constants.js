@@ -17,29 +17,3 @@ module.exports.TRACK_HOST = process.env.TRACK_HOST || 'http://127.0.0.1:50049';
 // Env specific releases
 module.exports.SERVER_RELEASE = `S-${module.exports.COMMIT}`;
 module.exports.CLIENT_RELEASE = `C-${module.exports.COMMIT}`;
-
-// Static files
-module.exports.STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;
-module.exports.DEFAULT_LOCALES = [
-  'en',
-  'sv',
-  'fi',
-  'no',
-  'de',
-  'en-gb',
-  'en-se',
-  'en-eu',
-  'en-ca',
-  'en-nz'
-];
-
-// Caching
-module.exports.HEADER_CACHE_TAG = 'Cache-Tag';
-module.exports.CACHE_TAG_STATIC = 'static';
-module.exports.CACHE_TAG_STATIC_VERSIONED = 'static-versioned';
-module.exports.CACHE_TAG_CONTENT = 'content';
-module.exports.HEADER_SURROGATE_CONTROL = 'Surrogate-Control';
-module.exports.HEADER_SURROGATE_CONTROL_VALUE = 'max-age=86400';
-
-// Others
-module.exports.DEFAULT_ERROR_MESSAGE = 'Something went wrong, please try again!';
