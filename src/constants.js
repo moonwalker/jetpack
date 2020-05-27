@@ -15,8 +15,7 @@ module.exports.API_HOST = process.env.API_HOST || 'http://127.0.0.1:50050';
 module.exports.TRACK_HOST = process.env.TRACK_HOST || 'http://127.0.0.1:50049';
 
 // Env specific releases
-module.exports.SERVER_RELEASE = `S-${module.exports.COMMIT}`;
-module.exports.CLIENT_RELEASE = `C-${module.exports.COMMIT}`;
+module.exports.RELEASE = module.exports.COMMIT;
 
 // Static files
 module.exports.STATIC_FILE_PATTERN = /\.(css|bmp|tif|ttf|docx|woff2|js|pict|tiff|eot|xlsx|jpg|csv|eps|woff|xls|jpeg|doc|ejs|otf|pptx|gif|pdf|swf|svg|ps|ico|pls|midi|svgz|class|png|ppt|mid|webp|jar|mp4|mp3)$/;

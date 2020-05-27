@@ -1,15 +1,12 @@
 const { execSync } = require('child_process');
 
-const { ENV, NAMESPACE, CLIENT_RELEASE, API_HOST, TRACK_HOST } = require('../constants');
+const { ENV, NAMESPACE, RELEASE, API_HOST, TRACK_HOST } = require('../constants');
 const debug = require('./debug');
 const perf = require('./perf');
 
 // @TODO use src/constants
 const getCommitId = () =>
-  process.env.COMMIT ||
-  execSync('git rev-parse --short HEAD')
-    .toString()
-    .trim();
+  process.env.COMMIT || execSync('git rev-parse --short HEAD').toString().trim();
 
 const hasTrailingSlash = (pathname) => {
   return pathname.length > 1 && pathname.substr(-1) === '/';
@@ -35,7 +32,7 @@ const stripTrailingSlash = (pathname) => {
 };
 
 const getEnvMiddleware = () => (_, reply) => {
-  const config = { ENV, NAMESPACE, RELEASE: CLIENT_RELEASE, API_HOST, TRACK_HOST };
+  const config = { ENV, NAMESPACE, RELEASE, API_HOST, TRACK_HOST };
 
   reply
     .header('Cache-Control', 'no-store, no-cache, must-revalidate')

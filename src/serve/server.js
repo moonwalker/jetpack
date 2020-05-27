@@ -33,8 +33,8 @@ const {
   HOST,
   NAMESPACE,
   PORT,
+  RELEASE,
   SENTRY_DSN,
-  SERVER_RELEASE,
   STATIC_FILE_PATTERN,
   SVCNAME
 } = require('../constants');
@@ -43,7 +43,7 @@ const log = debug('render');
 
 if (SENTRY_DSN) {
   log('Sentry init');
-  Sentry.init({ dsn: SENTRY_DSN, release: SERVER_RELEASE, environment: ENV });
+  Sentry.init({ dsn: SENTRY_DSN, release: RELEASE, environment: ENV });
 } else {
   log('Sentry skipped');
 }
@@ -77,10 +77,7 @@ const errorHandler = (err, req, reply) => {
 
   const statusCode = err.statusCode || 500;
 
-  reply
-    .code(statusCode)
-    .type('text/html')
-    .send(ERROR_MESSAGE);
+  reply.code(statusCode).type('text/html').send(ERROR_MESSAGE);
 };
 
 const sitemapHandler = () => (_, reply) => {
