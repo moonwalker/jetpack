@@ -3,9 +3,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const SentryPlugin = require("@sentry/webpack-plugin");
 
-const { SERVER_RELEASE } = require('../constants');
+const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
@@ -22,9 +21,19 @@ const {
 } = require('./config');
 
 const env = {
-  CLIENT: true,
+  ...constants,
   ENV: 'production',
   NODE_ENV: 'production'
+};
+
+const CLIENT_ENV = {
+  ...env,
+  CLIENT: true
+};
+
+const SERVER_ENV = {
+  ...env,
+  SERVER: true
 };
 
 const { context, paths } = settings;
@@ -49,7 +58,10 @@ const clientConfig = mergeConfigs(
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new webpack.EnvironmentPlugin(env),
+        new webpack.DefinePlugin({
+          __CLIENT__: JSON.stringify(true),
+          __SERVER__: JSON.stringify(false)
+        }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([
@@ -76,7 +88,7 @@ const clientConfig = mergeConfigs(
       {
         include: paths.src
       },
-      env
+      CLIENT_ENV
     ),
     createCssConfig(
       {
@@ -85,12 +97,12 @@ const clientConfig = mergeConfigs(
         extractChunks: true,
         filename: paths.output.cssFilename
       },
-      env
+      CLIENT_ENV
     ),
     createStylusConfig({
       include: paths.src
     }),
-    createFileConfig({ context: paths.src }, env),
+    createFileConfig({ context: paths.src }, CLIENT_ENV),
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
     createBuildInfo({
@@ -102,7 +114,7 @@ const clientConfig = mergeConfigs(
     })
   ],
   settings,
-  env
+  CLIENT_ENV
 );
 
 const renderConfig = mergeConfigs(
@@ -123,16 +135,12 @@ const renderConfig = mergeConfigs(
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new webpack.EnvironmentPlugin({
-          ...env,
-          CLIENT: false
+        new webpack.DefinePlugin({
+          __CLIENT__: JSON.stringify(false),
+          __SERVER__: JSON.stringify(true)
         }),
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1
-        }),
-        new SentryPlugin({
-          include: paths.render.path,
-          release: SERVER_RELEASE
         })
       ],
       devtool: 'source-map',
@@ -145,14 +153,14 @@ const renderConfig = mergeConfigs(
       {
         include: paths.src
       },
-      env
+      SERVER_ENV
     ),
     createCssConfig(
       {
         include: paths.src,
         node: true
       },
-      env
+      SERVER_ENV
     ),
     createStylusConfig({
       include: paths.src
@@ -162,14 +170,14 @@ const renderConfig = mergeConfigs(
         context: paths.src,
         emitFile: false
       },
-      env
+      SERVER_ENV
     ),
     createSvgConfig({
       context: paths.src
     })
   ],
   settings,
-  env
+  SERVER_ENV
 );
 
 module.exports = { renderConfig, clientConfig };
