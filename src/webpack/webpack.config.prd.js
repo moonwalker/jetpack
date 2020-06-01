@@ -58,7 +58,10 @@ const clientConfig = mergeConfigs(
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new webpack.DefinePlugin({ CLIENT: true, SERVER: true }),
+        new webpack.DefinePlugin({
+          CLIENT: JSON.stringify(true),
+          SERVER: JSON.stringify(false)
+        }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([
@@ -132,7 +135,10 @@ const renderConfig = mergeConfigs(
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new webpack.DefinePlugin({ CLIENT: false, SERVER: true }),
+        new webpack.DefinePlugin({
+          CLIENT: JSON.stringify(false),
+          SERVER: JSON.stringify(true)
+        }),
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1
         })
