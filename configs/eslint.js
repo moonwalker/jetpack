@@ -9,6 +9,8 @@ module.exports = {
   extends: extendConfigPath,
   globals: {
     __STORYBOOK__: true,
-    APP_CONFIG: true
+    APP_CONFIG: true,
+    CLIENT: true,
+    SERVER: true
   }
 };
