@@ -37,7 +37,10 @@ const devConfig = {
     publicPath: paths.output.publicPath
   },
   plugins: [
-    new webpack.EnvironmentPlugin(env),
+    new webpack.DefinePlugin({
+      __CLIENT__: JSON.stringify(true),
+      __SERVER__: JSON.stringify(false)
+    }),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template
