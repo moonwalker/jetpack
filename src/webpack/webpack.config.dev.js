@@ -38,8 +38,8 @@ const devConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      CLIENT: JSON.stringify(true),
-      SERVER: JSON.stringify(false)
+      __CLIENT__: JSON.stringify(true),
+      __SERVER__: JSON.stringify(false)
     }),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
