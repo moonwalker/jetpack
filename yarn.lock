@@ -1234,10 +1234,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@moonwalker/pre-flight-check@1.0.27":
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.27.tgz#3042f856f2efe4d4b1e8c7f6e159253630533a7f"
-  integrity sha512-mGcC20mVGJQ3QKkgcOtWOv40p+BUF6x3i+aXqXCrbJewz8aDPh5FYQvdRj/Oe9euvAHPoTxLlwoFV7Bpw8RzJA==
+"@moonwalker/pre-flight-check@1.0.28":
+  version "1.0.28"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.0.28.tgz#2ff2799231a3701269f7f35e0eaf7c9b653df7ab"
+  integrity sha512-IGlIXs56bb8n0rXA5IkpJ8PYqRTIm2++IzST2lLDgwf5hli+XczEElkHQdRFBzl53+l4yuv+dhVLpyhCC9DLsQ==
   dependencies:
     babel-eslint "10.1.0"
     eslint "7.0.0"
