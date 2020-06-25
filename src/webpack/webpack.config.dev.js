@@ -45,11 +45,13 @@ const devConfig = {
     new HtmlWebpackPlugin({
       template: paths.public.template
     }),
-    new CopyWebpackPlugin([
-      {
-        from: paths.public.root
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: paths.public.root
+        }
+      ]
+    }),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {

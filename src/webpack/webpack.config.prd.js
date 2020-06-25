@@ -64,11 +64,13 @@ const clientConfig = mergeConfigs(
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.HashedModuleIdsPlugin(),
-        new CopyWebpackPlugin([
-          {
-            from: paths.public.root
-          }
-        ]),
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: paths.public.root
+            }
+          ]
+        }),
         new AssetsPlugin({
           ...paths.assets
         })
