@@ -2476,20 +2476,7 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autoprefixer@9.8.0:
-  version "9.8.0"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.0.tgz#68e2d2bef7ba4c3a65436f662d0a56a741e56511"
-  integrity sha512-D96ZiIHXbDmU02dBaemyAg53ez+6F5yZmapmgKcjm35yEe1uVDYI8hGW3VYoGRaG290ZFf91YxHrR518vC0u/A==
-  dependencies:
-    browserslist "^4.12.0"
-    caniuse-lite "^1.0.30001061"
-    chalk "^2.4.2"
-    normalize-range "^0.1.2"
-    num2fraction "^1.2.2"
-    postcss "^7.0.30"
-    postcss-value-parser "^4.1.0"
-
-autoprefixer@^9.8.0:
+autoprefixer@9.8.4, autoprefixer@^9.8.0:
   version "9.8.4"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.4.tgz#736f1012673a70fa3464671d78d41abd54512863"
   integrity sha512-84aYfXlpUe45lvmS+HoAWKCkirI/sw4JK0/bTeeqgHYco3dcsOn0NqdejISjptsYwNji/21dnkDri9PsYKk89A==
@@ -3190,7 +3177,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001043, caniuse-lite@^1.0.30001061:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001043:
   version "1.0.30001062"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001062.tgz#d814b648338504b315222ace6f1a533d9a55e390"
   integrity sha512-ei9ZqeOnN7edDrb24QfJ0OZicpEbsWxv7WusOiQGz/f2SfvBgHHbOEwBJ8HKGVSyx8Z6ndPjxzR6m0NQq+0bfw==
@@ -9861,10 +9848,10 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.0.2, postcss-value-parser@^
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.30, postcss@^7.0.5, postcss@^7.0.6, postcss@^7.0.7:
-  version "7.0.31"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.31.tgz#332af45cb73e26c0ee2614d7c7fb02dfcc2bd6dd"
-  integrity sha512-a937VDHE1ftkjk+8/7nj/mrjtmkn69xxzJgRETXdAUU+IgOYPQNJF17haGWbeDxSyk++HA14UA98FurvPyBJOA==
+postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.27, postcss@^7.0.5, postcss@^7.0.6, postcss@^7.0.7:
+  version "7.0.30"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.30.tgz#cc9378beffe46a02cbc4506a0477d05fcea9a8e2"
+  integrity sha512-nu/0m+NtIzoubO+xdAlwZl/u5S5vi/y6BCsoL8D+8IxsD3XvBS8X4YEADNIVXKVuQvduiucnRv+vPIqj56EGMQ==
   dependencies:
     chalk "^2.4.2"
     source-map "^0.6.1"
