@@ -4,6 +4,8 @@ const cssnano = require('cssnano');
 const postcssReporter = require('postcss-reporter');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const { paths } = require('../defaults');
+
 module.exports = (options, env) => {
   const { include = [], node = false, lint = false, filename = '[name].css' } = options;
 
@@ -18,10 +20,10 @@ module.exports = (options, env) => {
         loader: 'css-loader',
         options: {
           sourceMap: true,
+          onlyLocals: node,
           modules: {
-            mode: 'local',
-            localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]',
-            exportOnlyLocals: node
+            context: paths.src,
+            localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
           }
         }
       },
