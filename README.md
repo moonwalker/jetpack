@@ -1,6 +1,7 @@
 # Jetpack
 
 [![renovatebot](https://badges.renovateapi.com/github/moonwalker/jetpack)](https://renovatebot.com/dashboard#github/moonwalker/jetpack)
+[![ci](https://github.com/moonwalker/jetpack/workflows/ci/badge.svg)](https://github.com/moonwalker/jetpack/actions?query=workflow%3Aci)
 
 Webpack for Moonwalkers.
 
