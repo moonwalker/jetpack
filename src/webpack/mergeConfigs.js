@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const PROJECT_CONFIG_DIR = 'jetpack';
 
@@ -24,7 +24,7 @@ module.exports = (webpackConfigs, settings, env) => {
 
   // Config mode
   if (typeof projectConfig === 'object') {
-    merge.smart(webpackConfig, projectConfig);
+    merge(webpackConfig, projectConfig);
   }
 
   return webpackConfig;
