@@ -10326,10 +10326,10 @@ postcss-reduce-transforms@^4.0.2:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
-postcss-reporter@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-reporter/-/postcss-reporter-7.0.0.tgz#78e4193350c82e11a4f9f642a36866acd633fb6a"
-  integrity sha512-TQ7aIDKgd7FFekFMHLRoDfl0aY3XmIAAhE4Bduyh5GvFi6uYPSVORWY4jkeC7qidFw7YtXwF5ejYQfUHOC73rQ==
+postcss-reporter@7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-reporter/-/postcss-reporter-7.0.1.tgz#463780d0d8d64f356403eba901fdeae71d988f2b"
+  integrity sha512-R9AK80KIqqMb+lwGRBcRkXS7r96VCTxrZvvrfibyA/dWjqctwx7leHMCC05A9HbW8PnChwOWwrmISwp5HQu5wg==
   dependencies:
     colorette "^1.2.1"
     lodash.difference "^4.5.0"
