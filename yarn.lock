@@ -3634,15 +3634,14 @@ assert@^1.1.1:
     object-assign "^4.1.1"
     util "0.10.3"
 
-assets-webpack-plugin@6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-6.0.1.tgz#d368eee96e1e6b99eedd59e2c7ee1858f4ce453e"
-  integrity sha512-0xDFRkYNVGsBIiXinBYn/Rauso62XjWOnoh42oA1RqVMatfWMZhkeKX4EcSTJ80ZnI0S6Eec2cLyWHkViEQu3Q==
+assets-webpack-plugin@6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-6.0.3.tgz#2a4962853aea07a9fade760ad63ff97bac63afe2"
+  integrity sha512-WiCV3odaOXehoM1pSaOuqWkGDEL2cF8SZ+iwwAUNm4X6G0lTuJHT2n1Lg3kemJLP/PBJGAzAIogQhLyOBOHWAQ==
   dependencies:
     camelcase "^6.0.0"
     escape-string-regexp "^4.0.0"
     lodash "^4.17.20"
-    mkdirp "^1.0.4"
 
 assign-symbols@^1.0.0:
   version "1.0.0"
