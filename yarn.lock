@@ -3614,10 +3614,10 @@ assert@^1.1.1:
     object-assign "^4.1.1"
     util "0.10.3"
 
-assets-webpack-plugin@5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-5.1.2.tgz#aad63438a7203d3b9d2013673d59ceaa1ff90cba"
-  integrity sha512-B8bOVw6Tj3jdQ6UesO7/XUCdRjXj5N4258WkaBInbGCY5Vuwnec0Tm/RGxQS8vCnbWAFS1OBx8aABDBtjkJ2bA==
+assets-webpack-plugin@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-6.0.1.tgz#d368eee96e1e6b99eedd59e2c7ee1858f4ce453e"
+  integrity sha512-0xDFRkYNVGsBIiXinBYn/Rauso62XjWOnoh42oA1RqVMatfWMZhkeKX4EcSTJ80ZnI0S6Eec2cLyWHkViEQu3Q==
   dependencies:
     camelcase "^6.0.0"
     escape-string-regexp "^4.0.0"
