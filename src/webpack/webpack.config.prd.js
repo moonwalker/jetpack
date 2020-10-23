@@ -61,8 +61,7 @@ const clientConfig = mergeConfigs(
         new CleanWebpackPlugin(),
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(true),
-          __SERVER__: JSON.stringify(false),
-          __SENTRY_CLIENT_DSN__: JSON.stringify(process.env.SENTRY_CLIENT_DSN)
+          __SERVER__: JSON.stringify(false)
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.HashedModuleIdsPlugin(),
@@ -142,8 +141,7 @@ const renderConfig = mergeConfigs(
         new CleanWebpackPlugin(),
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
-          __SERVER__: JSON.stringify(true),
-          __SENTRY_CLIENT_DSN__: JSON.stringify(process.env.SENTRY_CLIENT_DSN)
+          __SERVER__: JSON.stringify(true)
         }),
         new webpack.optimize.LimitChunkCountPlugin({
           maxChunks: 1
