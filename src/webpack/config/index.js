@@ -9,3 +9,4 @@ module.exports.createCommonChunks = require('./common-chunks');
 module.exports.createBuildInfo = require('./build-info');
 module.exports.createStatsConfig = require('./stats');
 module.exports.createSvgConfig = require('./svg');
+module.exports.createDefineConfig = require('./define');

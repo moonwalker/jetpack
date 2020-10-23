@@ -17,7 +17,8 @@ const {
   createServiceWorkerConfig,
   createBuildInfo,
   createStatsConfig,
-  createSvgConfig
+  createSvgConfig,
+  createDefineConfig
 } = require('./config');
 
 const env = {
@@ -114,7 +115,8 @@ const clientConfig = mergeConfigs(
     createStatsConfig(),
     createServiceWorkerConfig({
       swDest: paths.output.swDest
-    })
+    }),
+    createDefineConfig()
   ],
   settings,
   CLIENT_ENV
@@ -178,7 +180,8 @@ const renderConfig = mergeConfigs(
     ),
     createSvgConfig({
       context: paths.src
-    })
+    }),
+    createDefineConfig()
   ],
   settings,
   SERVER_ENV

@@ -10,7 +10,8 @@ const {
   createCssConfig,
   createStylusConfig,
   createFileConfig,
-  createSvgConfig
+  createSvgConfig,
+  createDefineConfig
 } = require('./config');
 const settings = require('./defaults');
 
@@ -105,7 +106,8 @@ module.exports = mergeConfigs(
     ),
     createSvgConfig({
       context: paths.src
-    })
+    }),
+    createDefineConfig()
   ],
   settings,
   env
