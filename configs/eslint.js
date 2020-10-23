@@ -11,6 +11,7 @@ module.exports = {
     __CLIENT__: true,
     __SERVER__: true,
     __STORYBOOK__: true,
+    __SENTRY_CLIENT_DSN__: true,
     APP_CONFIG: true
   }
 };

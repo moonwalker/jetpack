@@ -39,7 +39,8 @@ const devConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __CLIENT__: JSON.stringify(true),
-      __SERVER__: JSON.stringify(false)
+      __SERVER__: JSON.stringify(false),
+      __SENTRY_CLIENT_DSN__: JSON.stringify(process.env.SENTRY_CLIENT_DSN)
     }),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
