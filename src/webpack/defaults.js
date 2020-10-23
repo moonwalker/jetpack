@@ -30,7 +30,7 @@ module.exports = {
     },
     public: {
       root: pwd('public'),
-      template: pwd('src', 'template.html')
+      template: path.join(__dirname, 'template.html')
     },
     render: {
       path: pwd('node_modules', '.build'),
