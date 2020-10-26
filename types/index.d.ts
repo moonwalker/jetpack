@@ -8,3 +8,27 @@ export interface IAppConfig {
 }
 
 declare const APP_CONFIG: IAppConfig;
+
+// Env vars
+declare namespace NodeJS {
+  interface Process {
+    readonly browser: boolean
+  }
+
+  interface ProcessEnv {
+    readonly PRODUCT_NAME: string;
+    readonly STORYBOOK: boolean;
+    readonly SENTRY_CLIENT_DSN: string;
+  }
+}
+
+// Styles/CSS -> CSS-Modules
+declare module '*.styl' {
+  const content: { [className: string]: string };
+  export default content;
+}
+
+declare module '*.css' {
+  const content: { [className: string]: string };
+  export default content;
+}
