@@ -4,6 +4,7 @@
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": "bin/jetpack.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "start": "bin/jetpack.js",
     "incver": "npm version patch -m ':package: release %s'",
