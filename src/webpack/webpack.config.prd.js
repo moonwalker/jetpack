@@ -115,7 +115,7 @@ const clientConfig = mergeConfigs(
     createServiceWorkerConfig({
       swDest: paths.output.swDest
     }),
-    createDefineConfig()
+    createDefineConfig({ isClient: true })
   ],
   settings,
   CLIENT_ENV
@@ -179,7 +179,7 @@ const renderConfig = mergeConfigs(
     createSvgConfig({
       context: paths.src
     }),
-    createDefineConfig()
+    createDefineConfig({ isClient: false })
   ],
   settings,
   SERVER_ENV
