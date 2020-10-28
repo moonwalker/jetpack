@@ -8,3 +8,6 @@ PRODUCT_ID=${PRODUCT_ID:-"$REPO"}
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 COMMIT=$(git rev-parse --short=7 HEAD)
+
+SENTRY_ORG=${SENTRY_ORG:-"$ORG"}
+SENTRY_PROJECT=${SENTRY_PROJECT:-"$REPO"}

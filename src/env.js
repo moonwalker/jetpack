@@ -9,4 +9,7 @@ module.exports.showEnvVars = () => {
 
   console.log('BRANCH:', `"${process.env.BRANCH}"`);
   console.log('COMMIT:', `"${process.env.COMMIT}"`);
+
+  console.log('SENTRY_ORG:', `"${process.env.SENTRY_ORG}"`);
+  console.log('SENTRY_PROJECT:', `"${process.env.SENTRY_PROJECT}"`);
 };
