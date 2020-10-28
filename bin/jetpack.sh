@@ -4,7 +4,7 @@
 DIRNAME="node_modules/@moonwalker/jetpack/bin"
 
 # Load env vars
-source "${DIRNAME}/env.sh"
+. "${DIRNAME}/env.sh"
 
 # Run commands
 ORG=$ORG REPO=$REPO \
@@ -12,4 +12,6 @@ ORG=$ORG REPO=$REPO \
   PRODUCT_ID=$PRODUCT_ID \
   BRANCH=$BRANCH \
   COMMIT=$COMMIT \
+  SENTRY_ORG=$SENTRY_ORG \
+  SENTRY_PROJECT=$SENTRY_PROJECT \
   "${DIRNAME}/run.js" $@
