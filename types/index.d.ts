@@ -16,7 +16,7 @@ declare namespace NodeJS {
   }
 
   interface ProcessEnv {
-    readonly PRODUCT_NAME: string;
+    readonly PRODUCT: string;
     readonly STORYBOOK: boolean;
     readonly SENTRY_CLIENT_DSN: string;
   }
