@@ -9,7 +9,7 @@ module.exports = (options = {}) => {
         'process.browser': JSON.stringify(isClient),
         'process.env.STORYBOOK': JSON.stringify(isStorybook),
         'process.env.SENTRY_CLIENT_DSN': JSON.stringify(process.env.SENTRY_CLIENT_DSN),
-        'process.env.PRODUCT_NAME': JSON.stringify(process.env.PRODUCT_NAME)
+        'process.env.PRODUCT': JSON.stringify(process.env.PRODUCT)
       })
     ]
   };
