@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIRNAME=$(dirname $0)
+DIRNAME='node_modules/@moonwalker/jetpack/bin'
 
 # Load env vars
 source "${DIRNAME}/env.sh"
