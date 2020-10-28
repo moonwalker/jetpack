@@ -1,6 +1,7 @@
 #!/bin/sh
 
-DIRNAME='node_modules/@moonwalker/jetpack/bin'
+# Hardcode path to workaround npm bin symlink
+DIRNAME="node_modules/@moonwalker/jetpack/bin"
 
 # Load env vars
 source "${DIRNAME}/env.sh"
