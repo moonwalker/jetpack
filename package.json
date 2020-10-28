@@ -4,7 +4,7 @@
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": {
-    "jetpack": "bin/jetpack.js"
+    "jetpack": "bin/jetpack.sh"
   },
   "types": "types/index.d.ts",
   "scripts": {

@@ -21,6 +21,7 @@ Commands:
   build-client        Build app production bundle
   build-render        Build render bundle
   prerender           Generate static files
+  env                 Print environment variables
 
 Options:
   -v, --version   print version information`;
@@ -55,6 +56,10 @@ module.exports = {
 
     if (cmd === 'create') {
       return require('./create').run(process.argv[3], process.argv[4]); // eslint-disable-line global-require
+    }
+
+    if (cmd === 'env') {
+      return require('./env').run(); // eslint-disable-line global-require
     }
 
     return console.log(help());
