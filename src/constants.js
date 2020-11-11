@@ -16,3 +16,5 @@ module.exports.TRACK_HOST = process.env.TRACK_HOST || 'http://127.0.0.1:50049';
 
 // Env specific releases
 module.exports.RELEASE = module.exports.COMMIT;
+
+module.exports.DEV_PORT = parseInt(process.env.JETPACK_DEV_PORT, 10) || 9000;

@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { getEnvMiddleware } = require('../utils');
+const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const {
   createJavascriptConfig,
@@ -52,7 +53,7 @@ const devConfig = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    port: 9000,
+    port: constants.DEV_PORT,
     contentBase: paths.output.path,
     publicPath: paths.output.publicPath,
     hot: true,
