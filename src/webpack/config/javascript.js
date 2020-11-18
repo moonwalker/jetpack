@@ -18,12 +18,17 @@ module.exports = (options) => {
     }
   };
 
+  const stats = {
+    warningsFilter: [/Failed to parse source map/]
+  };
+
   return {
     module: {
       rules: [babelRule, sourceMapRule]
     },
-    stats: {
-      warningsFilter: [/Failed to parse source map/]
+    stats,
+    devServer: {
+      stats
     }
   };
 };
