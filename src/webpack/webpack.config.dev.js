@@ -64,6 +64,13 @@ const devConfig = {
     historyApiFallback: true,
     before: (app) => {
       app.get('/env.js', getEnvMiddleware());
+    },
+    stats: {
+      assets: false,
+      chunks: false,
+      entrypoints: false,
+      children: false,
+      modules: false
     }
   },
   optimization: {
