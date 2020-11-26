@@ -58,6 +58,7 @@ const devConfig = {
     publicPath: paths.output.publicPath,
     hot: true,
     watchContentBase: true,
+    disableHostCheck: true,
     watchOptions: {
       ignored: /node_modules/
     },
