@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -72,7 +74,15 @@ const devConfig = {
       entrypoints: false,
       children: false,
       modules: false
-    }
+    },
+    ...(constants.CERT_DIR && {
+      http2: true,
+      https: {
+        key: fs.readFileSync(path.join(constants.CERT_DIR, 'server.key')),
+        cert: fs.readFileSync(path.join(constants.CERT_DIR, 'server.cert')),
+        ca: fs.readFileSync(path.join(constants.CERT_DIR, 'cert.pem'))
+      }
+    })
   },
   optimization: {
     splitChunks: false
