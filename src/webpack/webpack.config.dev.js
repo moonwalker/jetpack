@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const { get } = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -41,7 +42,8 @@ const devConfig = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      template: paths.public.template
+      template: paths.public.template,
+      head: get(settings, 'config.additional.global.head')
     }),
     new CopyWebpackPlugin({
       patterns: [
