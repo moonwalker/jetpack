@@ -67,7 +67,7 @@
     "source-map-loader": "1.1.2",
     "stats-webpack-plugin": "0.7.0",
     "style-loader": "2.0.0",
-    "stylelint": "13.7.2",
+    "stylelint": "13.10.0",
     "stylus": "0.54.8",
     "stylus-loader": "4.1.1",
     "terser-webpack-plugin": "5.0.2",
