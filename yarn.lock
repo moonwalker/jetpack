@@ -3595,10 +3595,10 @@ assert@^1.1.1:
     object-assign "^4.1.1"
     util "0.10.3"
 
-assets-webpack-plugin@6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-6.0.3.tgz#2a4962853aea07a9fade760ad63ff97bac63afe2"
-  integrity sha512-WiCV3odaOXehoM1pSaOuqWkGDEL2cF8SZ+iwwAUNm4X6G0lTuJHT2n1Lg3kemJLP/PBJGAzAIogQhLyOBOHWAQ==
+assets-webpack-plugin@6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-6.1.2.tgz#9e5587bb866bc53826f34c527c240235007f9ea8"
+  integrity sha512-R2oKyexV4Da0eGGTIXHc1HElhZo3oxyZVrEX2O7anAgKfsbfAMBZKg8gehIFsZW4p3DB58LzPwRoT1bHYvKPAw==
   dependencies:
     camelcase "^6.0.0"
     escape-string-regexp "^4.0.0"
