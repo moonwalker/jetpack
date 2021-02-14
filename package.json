@@ -53,7 +53,7 @@
     "graphql": "15.5.0",
     "graphql-tag": "2.11.0",
     "html-minifier": "4.0.0",
-    "html-webpack-plugin": "4.5.0",
+    "html-webpack-plugin": "4.5.1",
     "isomorphic-fetch": "3.0.0",
     "jest": "26.6.1",
     "json-stringify-safe": "5.0.1",
