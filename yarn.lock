@@ -1946,25 +1946,25 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundle-stats/cli-utils@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-2.7.1.tgz#36ad4de119b00e8a63f596731b455bf6bd8968b5"
-  integrity sha512-mSe1smPcGtviia2CkIvyAwE7EMJfQE/VIfw8tUTsM4B6HAe8SmW4BXOAn2t1xnrLrREAFNspjgt1mpEkjG43lA==
+"@bundle-stats/cli-utils@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-2.7.2.tgz#9e37f4b4f8e8d7719dda084111f5e8c63e510aad"
+  integrity sha512-0avv9DOookws9Kl8o+wkTcl4hxeoGrXsJoLHR3JhO3iwUxK0FvpYOnAsMJYQYSLNodDc5rTFY/GE6o7Cskmurw==
   dependencies:
-    "@bundle-stats/html-templates" "^2.7.1"
-    "@bundle-stats/utils" "^2.7.0"
+    "@bundle-stats/html-templates" "^2.7.2"
+    "@bundle-stats/utils" "^2.7.2"
     core-js "^3.1.4"
     find-cache-dir "^3.1.0"
     fs-extra "^9.0.0"
     lodash "4.17.21"
 
-"@bundle-stats/html-templates@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-2.7.1.tgz#556cb4ee9ae720bd9d82ea708bf8385d4f9ac891"
-  integrity sha512-BhDBdPi9kfMqLFJqUfBek9DFJoWD7SBfU2xcyU6OVLw2V64vFSzbaoibkDRUJYXi3aDfafy4MkcLkpEOrTdqBw==
+"@bundle-stats/html-templates@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-2.7.2.tgz#a71ab0de5b798e7cd411d9d7fe6575e8b8ac9849"
+  integrity sha512-G3T7XI1/1ed315MtbiRyh4gAigUqx6QJH77mL3wRR8/GjDNbAcsn2g2XhCkKcNB83XQ4k+s635Ex+G5eXiEakA==
   dependencies:
-    "@bundle-stats/ui" "^2.7.1"
-    "@bundle-stats/utils" "^2.7.0"
+    "@bundle-stats/ui" "^2.7.2"
+    "@bundle-stats/utils" "^2.7.2"
     classnames "2.2.6"
     lodash "^4.17.11"
     preact "10.5.12"
@@ -1974,10 +1974,10 @@
     react-router-dom "^5.2.0"
     recompose "0.30.0"
 
-"@bundle-stats/ui@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-2.7.1.tgz#4f8a6dcb8ada77c7e4994467d3c3f274a85d65af"
-  integrity sha512-pqrtepjHJ+ym3vZ82fPkhtHMVEGCVf+PgdIWoJmGs9u7JePNUtg/hFaWmV7OGuG+bc6vkfZWvQRtu0k4UokmLw==
+"@bundle-stats/ui@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-2.7.2.tgz#65c2d3512c96ccbb5423b935f3b0c5435dbafcfc"
+  integrity sha512-y2NNcckqJG4Amcn3NI4xUUhVcr+pe0mw9GZQGwqJ6NuNX71tuJGQh0VvG9dsBaCIEInfeQjmzH+qA7qdcjRxEw==
   dependencies:
     date-fns "^2.6.0"
     query-string "^6.14.1"
@@ -1985,10 +1985,10 @@
     reakit "^1.3.3"
     use-query-params "^1.1.9"
 
-"@bundle-stats/utils@^2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-2.7.0.tgz#b11ec66ab07de6a0bc0e4b497f2aa6c5227109c7"
-  integrity sha512-+Pm33EFJ4lgWRCqRtq1Gkeyp3tPexkuKiH6fLv8fEffgBQb41egXpj/AP1iEwbMGv8BDq80PgbjGGFh5h4q3Ow==
+"@bundle-stats/utils@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-2.7.2.tgz#f2560d91dc606ba1fe4ea50a7a854f637ea040e8"
+  integrity sha512-0OCpWOPRvrx4nMxcyAL6tU+bI+Chu3DuH0o0wN2wGglrPM268/skWV7xYt0dTaThfBnEfoOQ0tUAzH4frpyboQ==
   dependencies:
     convert-units "^2.3.4"
     core-js "^3.1.4"
@@ -4063,13 +4063,13 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
-bundle-stats-webpack-plugin@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.7.1.tgz#1fbc9898b220212972a571ea3b46f75b5847ed1d"
-  integrity sha512-QYw+D97kKh+XoVpzmU5GgHWUi68z2/PsGZF0KBanz3HKuaYrWL/XBLzM90bzESK2588Pfo11VaJ47c2Kmzh4Rg==
+bundle-stats-webpack-plugin@2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.7.2.tgz#edd5ec74c5da173fdcb2fdfde889e1df08847a34"
+  integrity sha512-t00I+0acMqa2qwR3ZYMDkqV9FBwxkQkuJr32Pj1pnRbXxLeiAguQ26aZ0leDGdH+C+eNisju2Ex4WPOXhHJUAA==
   dependencies:
-    "@bundle-stats/cli-utils" "^2.7.1"
-    "@bundle-stats/utils" "^2.7.0"
+    "@bundle-stats/cli-utils" "^2.7.2"
+    "@bundle-stats/utils" "^2.7.2"
     core-js "^3.1.4"
     lodash "4.17.21"
 
