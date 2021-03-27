@@ -17,7 +17,7 @@
     "release": "./scripts/release.sh"
   },
   "dependencies": {
-    "@babel/core": "7.13.10",
+    "@babel/core": "7.13.13",
     "@babel/plugin-proposal-class-properties": "7.13.0",
     "@babel/plugin-proposal-export-namespace-from": "7.12.13",
     "@babel/plugin-proposal-function-sent": "7.12.13",
@@ -26,7 +26,7 @@
     "@babel/plugin-syntax-import-meta": "7.10.4",
     "@babel/plugin-transform-runtime": "7.13.10",
     "@babel/preset-env": "7.13.12",
-    "@babel/preset-react": "7.12.13",
+    "@babel/preset-react": "7.13.13",
     "@moonwalker/pre-flight-check": "1.1.11",
     "assets-webpack-plugin": "7.0.0",
     "async": "3.2.0",
