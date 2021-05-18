@@ -2192,26 +2192,26 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundle-stats/cli-utils@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-2.8.2.tgz#34541487aaaf55485c21c9a4d885597cb24315df"
-  integrity sha512-wjItp3MHzfqV3G0ENQCvcYYG4EBaFvhtKkPleZYTmPUgb9aNL0WpCRnh1x2uWslQS6J/tQ2A1gkEchV3AetM2g==
+"@bundle-stats/cli-utils@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-3.0.0.tgz#b4f592bbcc105a155e6c510f187290c24f957c78"
+  integrity sha512-rLsb5bnHfeaPB/2+9Wp+Dj8UTy5K2Xm49lE16d0Ws0qfWg0tAAnboGas1iNpHwhGsfTM0oGsBhZHon85P2MZ/A==
   dependencies:
-    "@bundle-stats/html-templates" "^2.8.2"
-    "@bundle-stats/utils" "^2.8.2"
-    core-js "^3.1.4"
+    "@bundle-stats/html-templates" "^3.0.0"
+    "@bundle-stats/utils" "^3.0.0"
+    core-js "^3.10.2"
     find-cache-dir "^3.1.0"
     fs-extra "^9.0.0"
     lodash "4.17.21"
 
-"@bundle-stats/html-templates@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-2.8.2.tgz#0112476efe39683d7784000f1c464c4f1c4af7d6"
-  integrity sha512-SSruIfpmCYJgMpPjV/+WwHABD9Fs8NHLZ6lewrYT06FvHQ2rH6byl0M7GCu2ITkeoPHXs9sk0R4t2lgdnbmOww==
+"@bundle-stats/html-templates@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-3.0.0.tgz#70792a24ddf22d44374aa4d035971cb458f28a3b"
+  integrity sha512-myyGIrgN4Mvzdzv8FnnQL9hgo8su7qEymgLgAM0b9mX33SncK0tgYzCxfdYMIMwMwIW6pVcR4hzmCy5WnqkdXw==
   dependencies:
-    "@bundle-stats/ui" "^2.8.2"
-    "@bundle-stats/utils" "^2.8.2"
-    classnames "2.2.6"
+    "@bundle-stats/ui" "^3.0.0"
+    "@bundle-stats/utils" "^3.0.0"
+    classnames "2.3.1"
     lodash "^4.17.11"
     preact "10.5.13"
     prop-types "15.7.2"
@@ -2220,24 +2220,24 @@
     react-router-dom "^5.2.0"
     recompose "0.30.0"
 
-"@bundle-stats/ui@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-2.8.2.tgz#0ea841d90b14fe01657d0204258c0462c017012d"
-  integrity sha512-0IYNKqAj2Anw7LZyrN9UJnN31rXXPPKadJuLwD+xfycr2Fr7h37dwFK7mGEJTmv8zIrM4wXEimcQyPVc2b/FyQ==
+"@bundle-stats/ui@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-3.0.0.tgz#4eee5280025b741be806be4e5f18ad7bf2dbdb09"
+  integrity sha512-qwMFtYnM4eNVpSkbjzIs1Tcaaz6570kEdjp9/LBbLpizPfvaRZ6rFzraJxxjwV1Sc6HoxadPqHAfy2fJfsz3nQ==
   dependencies:
     date-fns "^2.6.0"
-    query-string "^6.14.1"
+    query-string "^7.0.0"
     reakit "^1.3.6"
-    use-query-params "^1.1.9"
+    use-query-params "^1.2.2"
 
-"@bundle-stats/utils@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-2.8.2.tgz#0282fad2c00209e6f5429d2f3c1c9547d27a5756"
-  integrity sha512-SNnjxz7gSfMGMTzRaQCwP6PSIfLKJc+LKv6po7EYzQAK6vFfCvQYfPpYdzV/pqtnojNa3Su3Mysj+S5/YnA6rA==
+"@bundle-stats/utils@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-3.0.0.tgz#8578b957bbad3a71b6137ca6541f2ee81f1f176b"
+  integrity sha512-JnaatWw0HQ4rmjbQU5nrYy1EmWniYGMo/gqg0LNS09mymvM0k9MzNk7hoXd4AbYL8R23v8cx7Bjr5yMhvKE7BQ==
   dependencies:
     convert-units "^2.3.4"
-    query-string "^6.14.1"
-    serialize-query-params "^1.3.1"
+    query-string "^7.0.0"
+    serialize-query-params "^1.3.3"
     superstruct "^0.8.3"
 
 "@cnakazawa/watch@^1.0.3":
@@ -4200,14 +4200,14 @@ builtin-modules@^3.1.0:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.1.0.tgz#aad97c15131eb76b65b50ef208e7584cd76a7484"
   integrity sha512-k0KL0aWZuBt2lrxrcASWDfwOLMnodeQjodT/1SxEQAXsHANgo6ZC/VEaSEHCXt7aSTZ4/4H5LKa+tBXmW7Vtvw==
 
-bundle-stats-webpack-plugin@2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-2.8.2.tgz#7fbba877aa432786b07cbebdb3ae60f25a190852"
-  integrity sha512-GL91tqddblgp1rPuUSVDu24tVlPtZScP6Ng7KgSWhRM//JELZ1hqDyOkDAQOkk5N1MsXilbUXKCnT60POmIsqg==
+bundle-stats-webpack-plugin@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-3.0.0.tgz#06d1eb1a862c15ee9e9e4438de87f1ab65c1ece5"
+  integrity sha512-Bac99lazgCPmSH95S1mrIB0wi76qUeZZq/rLkEuMgPW178gFi429sOrJnoZ2xFXUOhqnw0zL9IHTbhAa1094Jw==
   dependencies:
-    "@bundle-stats/cli-utils" "^2.8.2"
-    "@bundle-stats/utils" "^2.8.2"
-    core-js "^3.1.4"
+    "@bundle-stats/cli-utils" "^3.0.0"
+    "@bundle-stats/utils" "^3.0.0"
+    core-js "^3.10.2"
     lodash "4.17.21"
 
 bytes@3.0.0:
@@ -4504,10 +4504,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
-  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+classnames@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 clean-css@^4.2.1, clean-css@^4.2.3:
   version "4.2.3"
@@ -5057,10 +5057,10 @@ core-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
-core-js@^3.1.4:
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
-  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
+core-js@^3.10.2:
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
+  integrity sha512-Ne9DKPHTObRuB09Dru5AjwKjY4cJHVGu+y5f7coGn1E9Grkc3p2iBwE9AI/nJzsE29mQF7oq+mhYYRqOMFN1Bw==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -11227,10 +11227,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-query-string@^6.14.1:
-  version "6.14.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
-  integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+query-string@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.0.tgz#aaad2c8d5c6a6d0c6afada877fecbd56af79e609"
+  integrity sha512-Iy7moLybliR5ZgrK/1R3vjrXq03S13Vz4Rbm5Jg3EFq1LUmQppto0qtXz4vqZ386MSRjZgnTSZ9QC+NZOSd/XA==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"
@@ -12176,15 +12176,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serialize-query-params@^1.2.3:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/serialize-query-params/-/serialize-query-params-1.3.0.tgz#7d56509df30dfb94b7728b1ef35dc11e52c57676"
-  integrity sha512-A4s3I1KT1+Rb1VTSQ5vF6Fs3aLMrGnhoGblj0YFiAFwnHGaW1tnhRT881yBFlesiqMiemK9msH8CWrZgIWDRoQ==
-
-serialize-query-params@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/serialize-query-params/-/serialize-query-params-1.3.1.tgz#f9353fbf397e27b12ff6a3232670972559e62172"
-  integrity sha512-oDMjBDqoutgbZIX+4xZxa+DD4gQ/q8C66ukPZbe27msutU21yML9UYsBz+jDKklQh6atdnGlTMHa6YBvjKZwhQ==
+serialize-query-params@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/serialize-query-params/-/serialize-query-params-1.3.3.tgz#a4bf0fc0ab9e80c92b93cdf9d84ec521d769ecbe"
+  integrity sha512-rJIIETRuGUVbLekC73IiXV3738ylEHbHK1kxaXAbhxbxfio0yvVXaRMF+OyLZOBMwdgDHYLaj6EMBAEiSf8C/g==
 
 serve-index@^1.9.1:
   version "1.9.1"
@@ -13690,12 +13685,12 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-query-params@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/use-query-params/-/use-query-params-1.1.9.tgz#4f1b91c5b338107efa7d90dd889c56039108f944"
-  integrity sha512-WAJ1GrKbFWv1TBn1RQpHqAwC7yyJsLaJjBhIfefrbY/h6mFSngzBQKirJndYwCS1ry77EwhpR/tQi5iovXWvuw==
+use-query-params@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/use-query-params/-/use-query-params-1.2.2.tgz#4c4b274133d699605301510b5aa01047f92b5ce0"
+  integrity sha512-Uyfe+/TECsNNzCSkgUM1MM24OEGxGE4aeWvZEf0a14iQFp/m43wiqI1HZ9oTlrRSZwD5yABeLc9rN+wtiB5B3Q==
   dependencies:
-    serialize-query-params "^1.2.3"
+    serialize-query-params "^1.3.3"
 
 use@^3.1.0:
   version "3.1.1"
