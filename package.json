@@ -40,7 +40,7 @@
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "bundle-stats-webpack-plugin": "3.0.0",
     "clean-webpack-plugin": "3.0.0",
-    "copy-webpack-plugin": "8.1.1",
+    "copy-webpack-plugin": "9.0.0",
     "css-loader": "5.2.5",
     "cssnano": "5.0.4",
     "debug": "4.3.1",
