@@ -64,7 +64,7 @@
     "postcss-reporter": "7.0.2",
     "promise-retry": "2.0.1",
     "react-svg-loader": "3.0.3",
-    "source-map-loader": "2.0.2",
+    "source-map-loader": "3.0.0",
     "stats-webpack-plugin": "0.7.0",
     "style-loader": "2.0.0",
     "stylelint": "13.13.1",
