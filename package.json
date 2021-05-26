@@ -30,7 +30,7 @@
     "@moonwalker/pre-flight-check": "1.1.12",
     "assets-webpack-plugin": "7.1.0",
     "async": "3.2.0",
-    "autoprefixer": "10.2.5",
+    "autoprefixer": "10.2.6",
     "babel-jest": "27.0.1",
     "babel-loader": "8.2.2",
     "babel-plugin-graphql-tag": "3.3.0",
