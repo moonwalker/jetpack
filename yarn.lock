@@ -2240,25 +2240,25 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundle-stats/cli-utils@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-3.0.0.tgz#b4f592bbcc105a155e6c510f187290c24f957c78"
-  integrity sha512-rLsb5bnHfeaPB/2+9Wp+Dj8UTy5K2Xm49lE16d0Ws0qfWg0tAAnboGas1iNpHwhGsfTM0oGsBhZHon85P2MZ/A==
+"@bundle-stats/cli-utils@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-3.0.1.tgz#f9c282c8d58478a5253636c247063230fda5c05b"
+  integrity sha512-NTTs6ktkRIpiOWJjlUOO0l58zO8PjnWZlWvYeJosuNgrXqm/U9p4XVoEIL6an/8VinHOJ5BwPOWDlflasaExGg==
   dependencies:
-    "@bundle-stats/html-templates" "^3.0.0"
-    "@bundle-stats/utils" "^3.0.0"
+    "@bundle-stats/html-templates" "^3.0.1"
+    "@bundle-stats/utils" "^3.0.1"
     core-js "^3.10.2"
     find-cache-dir "^3.1.0"
-    fs-extra "^9.0.0"
+    fs-extra "^10.0.0"
     lodash "4.17.21"
 
-"@bundle-stats/html-templates@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-3.0.0.tgz#70792a24ddf22d44374aa4d035971cb458f28a3b"
-  integrity sha512-myyGIrgN4Mvzdzv8FnnQL9hgo8su7qEymgLgAM0b9mX33SncK0tgYzCxfdYMIMwMwIW6pVcR4hzmCy5WnqkdXw==
+"@bundle-stats/html-templates@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-3.0.1.tgz#7479f2d9b1c9c2f11a79dcf5427806c069b6ead0"
+  integrity sha512-2Js7qUmpGkJMFIyzlbRcdWeqFJcBSQ5h6qdi5JML+bU5irvX480a1kB6E3Of+XmjbI03Qnf4jkaZqC6st1ZGEw==
   dependencies:
-    "@bundle-stats/ui" "^3.0.0"
-    "@bundle-stats/utils" "^3.0.0"
+    "@bundle-stats/ui" "^3.0.1"
+    "@bundle-stats/utils" "^3.0.1"
     classnames "2.3.1"
     lodash "^4.17.11"
     preact "10.5.13"
@@ -2268,20 +2268,20 @@
     react-router-dom "^5.2.0"
     recompose "0.30.0"
 
-"@bundle-stats/ui@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-3.0.0.tgz#4eee5280025b741be806be4e5f18ad7bf2dbdb09"
-  integrity sha512-qwMFtYnM4eNVpSkbjzIs1Tcaaz6570kEdjp9/LBbLpizPfvaRZ6rFzraJxxjwV1Sc6HoxadPqHAfy2fJfsz3nQ==
+"@bundle-stats/ui@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/ui/-/ui-3.0.1.tgz#64398ce10b579f44a019b88979a3fd182ee0dea6"
+  integrity sha512-fBWh2rV+RTm7FWDZMatuAwLvnPuzJXo+7ph4iF4Jjph8XEHH+FswwD8KxMb7W55IMBIbci/6M9Z4AHCw/NyPCA==
   dependencies:
     date-fns "^2.6.0"
     query-string "^7.0.0"
     reakit "^1.3.6"
     use-query-params "^1.2.2"
 
-"@bundle-stats/utils@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-3.0.0.tgz#8578b957bbad3a71b6137ca6541f2ee81f1f176b"
-  integrity sha512-JnaatWw0HQ4rmjbQU5nrYy1EmWniYGMo/gqg0LNS09mymvM0k9MzNk7hoXd4AbYL8R23v8cx7Bjr5yMhvKE7BQ==
+"@bundle-stats/utils@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-3.0.1.tgz#24edcecd5a8cb9aa811603d099f2852f17efcb39"
+  integrity sha512-FWGtsbEUyEpKpAN2hA7cZQIUqbH2I9WHClOcKmv7kdsNRhvNn2YPAho0eGz0ZMxjH2Goz3a17Y5BjIxDHJMDQA==
   dependencies:
     convert-units "^2.3.4"
     query-string "^7.0.0"
@@ -4242,13 +4242,13 @@ builtin-modules@^3.1.0:
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.1.0.tgz#aad97c15131eb76b65b50ef208e7584cd76a7484"
   integrity sha512-k0KL0aWZuBt2lrxrcASWDfwOLMnodeQjodT/1SxEQAXsHANgo6ZC/VEaSEHCXt7aSTZ4/4H5LKa+tBXmW7Vtvw==
 
-bundle-stats-webpack-plugin@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-3.0.0.tgz#06d1eb1a862c15ee9e9e4438de87f1ab65c1ece5"
-  integrity sha512-Bac99lazgCPmSH95S1mrIB0wi76qUeZZq/rLkEuMgPW178gFi429sOrJnoZ2xFXUOhqnw0zL9IHTbhAa1094Jw==
+bundle-stats-webpack-plugin@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-3.0.1.tgz#8ff334a6399c796d0c03558c1398224e5d139c16"
+  integrity sha512-mEcolMQ9eDzpg/VdVMUIbW4H3zkU2XY2mseZEBtgju8Ym0Lb2WkUOl3C3kG1CrFsL+TNK1y9ldt0MyvdjEgRHw==
   dependencies:
-    "@bundle-stats/cli-utils" "^3.0.0"
-    "@bundle-stats/utils" "^3.0.0"
+    "@bundle-stats/cli-utils" "^3.0.1"
+    "@bundle-stats/utils" "^3.0.1"
     core-js "^3.10.2"
     lodash "4.17.21"
 
@@ -6769,7 +6769,7 @@ friendly-errors-webpack-plugin@1.7.0:
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
-fs-extra@10.0.0:
+fs-extra@10.0.0, fs-extra@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
   integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
@@ -6777,16 +6777,6 @@ fs-extra@10.0.0:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
     universalify "^2.0.0"
-
-fs-extra@^9.0.0:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
-  integrity sha512-h2iAoN838FqAFJY2/qVpzFXy+EBxfVE220PalAqQLDVsFOHLJrZvut5puAbCdNv6WJk+B8ihI+k0c7JK5erwqQ==
-  dependencies:
-    at-least-node "^1.0.0"
-    graceful-fs "^4.2.0"
-    jsonfile "^6.0.1"
-    universalify "^1.0.0"
 
 fs-extra@^9.0.1:
   version "9.1.0"
