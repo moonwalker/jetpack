@@ -60,7 +60,7 @@
     "lodash": "4.17.21",
     "mini-css-extract-plugin": "1.6.0",
     "node-fetch": "2.6.1",
-    "postcss-loader": "5.3.0",
+    "postcss-loader": "6.1.0",
     "postcss-reporter": "7.0.2",
     "promise-retry": "2.0.1",
     "react-svg-loader": "3.0.3",
