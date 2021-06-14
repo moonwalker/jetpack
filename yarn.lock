@@ -2982,10 +2982,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz#f022195afdfc942e088ee2101285a1d31c7d727f"
   integrity sha512-cPqjjzuFWNK3BSKLm0abspP0sp/IGOli4p5I5fKFAzdS8fvjdOwDCfZqAaIiXd9lPkOWi3SUUfZof3hEb7J/uw==
 
-"@release-it/conventional-changelog@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@release-it/conventional-changelog/-/conventional-changelog-3.0.0.tgz#4c7ab37ecae93ac69a8c53e1a0b092712383abe4"
-  integrity sha512-8viDnZaCkImYTxnZqJeO/8BhCrXDfsPhhtUbTJx1ZX/TbcsmR49Zr+MoKIKWJKfeRTvXMa/NNyO//9FRQa2XbA==
+"@release-it/conventional-changelog@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@release-it/conventional-changelog/-/conventional-changelog-3.0.1.tgz#5dafe9b670d377bb1914a8691ae2531e71859fb9"
+  integrity sha512-yQZquSPkr5J2nj6bxvLbnvIdYOhyzYMbFbMeoFaWxmxBNXQdkJrFhjvn4VhKGpeOjklr+9oOJVwNofEZtbOPxg==
   dependencies:
     concat-stream "^2.0.0"
     conventional-changelog "^3.1.24"
