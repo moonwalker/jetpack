@@ -19,10 +19,9 @@ module.exports = (options, env) => {
       {
         loader: 'css-loader',
         options: {
-          sourceMap: true,
-          onlyLocals: node,
           modules: {
-            context: paths.src,
+            exportOnlyLocals: node,
+            localIdentContext: paths.src,
             localIdentName: isDevelopment ? '[path][name]__[local]' : '[hash:base64:5]'
           }
         }
