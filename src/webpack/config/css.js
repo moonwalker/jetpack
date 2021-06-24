@@ -29,27 +29,21 @@ module.exports = (options, env) => {
       {
         loader: 'postcss-loader',
         options: {
-          sourceMap: true,
-          plugins: [
-            ...(lint ? [stylelint()] : []),
-            autoprefixer(),
-            ...(isDevelopment
-              ? []
-              : [
-                  cssnano({
+          postcssOptions: {
+            plugins: [
+              ...(lint ? [stylelint()] : []),
+              autoprefixer(),
+              ...(isDevelopment
+                ? []
+                : [
                     // Avoid removing the relative (`./`) notation, webpack needs it
-                    preset: [
-                      'default',
-                      {
-                        normalizeUrl: false
-                      }
-                    ]
-                  })
-                ]),
-            postcssReporter({
-              clearAllMessages: true
-            })
-          ]
+                    cssnano({ preset: ['default', { normalizeUrl: false }] })
+                  ]),
+              postcssReporter({
+                clearAllMessages: true
+              })
+            ]
+          }
         }
       }
     ]
