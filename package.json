@@ -52,7 +52,6 @@
     "generate-json-webpack-plugin": "1.0.0",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "4.3.0",
-    "isomorphic-fetch": "2.2.1",
     "jest": "27.0.5",
     "json-stringify-safe": "5.0.1",
     "lodash": "4.17.21",
