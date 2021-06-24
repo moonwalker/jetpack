@@ -7,8 +7,9 @@ module.exports = (options = {}) => {
     enforce: 'pre',
     loader: 'stylus-loader',
     options: {
-      paths: include,
-      sourceMap: true
+      stylusOptions: {
+        paths: include
+      }
     }
   };
 
