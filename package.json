@@ -69,7 +69,7 @@
     "stylelint": "13.13.1",
     "stylus": "0.54.8",
     "stylus-loader": "3.0.2",
-    "terser-webpack-plugin": "4.2.3",
+    "terser-webpack-plugin": "5.1.4",
     "webpack": "4.44.1",
     "webpack-bundle-analyzer": "4.4.2",
     "webpack-cli": "4.7.2",
