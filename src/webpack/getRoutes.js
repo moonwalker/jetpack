@@ -1,5 +1,5 @@
 const async = require('async');
-const fetch = require('isomorphic-fetch');
+const fetch = require('node-fetch');
 
 const { ENV } = require('../constants');
 const { debug } = require('../utils');
