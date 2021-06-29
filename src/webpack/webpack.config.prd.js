@@ -64,7 +64,7 @@ const clientConfig = mergeConfigs(
           __SERVER__: JSON.stringify(false)
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.HashedModuleIdsPlugin(),
+        // new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin({
           patterns: [
             {

@@ -7,7 +7,6 @@ const { spawn } = require('child_process');
 const { ENV } = require('../constants');
 const { debug } = require('../utils');
 const { context, config } = require('./defaults');
-const { renderConfig, clientConfig } = require('./webpack.config.prd');
 
 const printStats = (mode, stats) => {
   process.stdout.write('\n');
@@ -54,6 +53,9 @@ const buildClient = () => {
   log('ENV:', ENV);
   log('API:', config.queryApiUrl);
 
+  // eslint-disable-next-line global-require
+  const { clientConfig } = require('./webpack.config.prd');
+
   return compileWebpackConfig(clientConfig).then((stats) => printStats('Client', stats));
 };
 
@@ -62,6 +64,9 @@ const buildRender = () => {
   log('PRD:', config.productName);
   log('ENV:', ENV);
   log('API:', config.queryApiUrl);
+
+  // eslint-disable-next-line global-require
+  const { renderConfig } = require('./webpack.config.prd');
 
   return compileWebpackConfig(renderConfig).then((renderStats) =>
     printStats('Render', renderStats)
