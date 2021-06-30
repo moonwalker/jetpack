@@ -39,13 +39,18 @@ const SERVER_ENV = {
 
 const { context, paths } = settings;
 
+const productionConfig = {
+  bail: true,
+  mode: 'production',
+  context,
+  devtool: 'source-map',
+  plugins: [new CleanWebpackPlugin()]
+};
+
 const clientConfig = mergeConfigs(
   [
+    productionConfig,
     {
-      bail: true,
-      mode: 'production',
-      context,
-      devtool: 'source-map',
       entry: {
         init: paths.entry.init,
         main: paths.entry.main
@@ -58,13 +63,10 @@ const clientConfig = mergeConfigs(
         hashDigestLength: 8
       },
       plugins: [
-        new CleanWebpackPlugin(),
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(true),
           __SERVER__: JSON.stringify(false)
         }),
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        // new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin({
           patterns: [
             {
@@ -72,27 +74,14 @@ const clientConfig = mergeConfigs(
             }
           ]
         }),
-        new AssetsPlugin({
-          ...paths.assets
-        })
+        new AssetsPlugin({ ...paths.assets })
       ],
       optimization: {
-        chunkIds: 'named',
-        minimizer: [
-          new TerserPlugin({
-            parallel: true,
-            sourceMap: true
-          })
-        ]
+        minimizer: [new TerserPlugin({ parallel: 4 })]
       }
     },
     createResolveConfig(),
-    createJavascriptConfig(
-      {
-        include: paths.src
-      },
-      CLIENT_ENV
-    ),
+    createJavascriptConfig({ include: paths.src }),
     createCssConfig(
       {
         include: paths.src,
@@ -102,19 +91,13 @@ const clientConfig = mergeConfigs(
       },
       CLIENT_ENV
     ),
-    createStylusConfig({
-      include: paths.src
-    }),
+    createStylusConfig({ include: paths.src }),
     createFileConfig({ context: paths.src }, CLIENT_ENV),
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
-    createBuildInfo({
-      output: paths.output.buildInfo
-    }),
+    createBuildInfo({ output: paths.output.buildInfo }),
     createStatsConfig(),
-    createServiceWorkerConfig({
-      swDest: paths.output.swDest
-    }),
+    createServiceWorkerConfig({ swDest: paths.output.swDest }),
     createDefineConfig({ isClient: true })
   ],
   settings,
@@ -123,11 +106,9 @@ const clientConfig = mergeConfigs(
 
 const renderConfig = mergeConfigs(
   [
+    productionConfig,
     {
-      bail: true,
-      mode: 'production',
-      context,
-      target: 'node',
+      externalsPresets: { node: true },
       entry: {
         render: paths.entry.render
       },
@@ -138,7 +119,6 @@ const renderConfig = mergeConfigs(
         publicPath: paths.output.publicPath
       },
       plugins: [
-        new CleanWebpackPlugin(),
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
           __SERVER__: JSON.stringify(true)
@@ -147,38 +127,16 @@ const renderConfig = mergeConfigs(
           maxChunks: 1
         })
       ],
-      devtool: 'source-map',
       optimization: {
         minimize: false
       }
     },
     createResolveConfig(),
-    createJavascriptConfig(
-      {
-        include: paths.src
-      },
-      SERVER_ENV
-    ),
-    createCssConfig(
-      {
-        include: paths.src,
-        node: true
-      },
-      SERVER_ENV
-    ),
-    createStylusConfig({
-      include: paths.src
-    }),
-    createFileConfig(
-      {
-        context: paths.src,
-        emitFile: false
-      },
-      SERVER_ENV
-    ),
-    createSvgConfig({
-      context: paths.src
-    }),
+    createJavascriptConfig({ include: paths.src }),
+    createCssConfig({ include: paths.src, node: true }, SERVER_ENV),
+    createStylusConfig({ include: paths.src }),
+    createFileConfig({ context: paths.src, emitFile: false }, SERVER_ENV),
+    createSvgConfig({ context: paths.src }),
     createDefineConfig({ isClient: false })
   ],
   settings,

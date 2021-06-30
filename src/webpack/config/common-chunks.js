@@ -8,7 +8,7 @@ module.exports = () => ({
 
     // Hashed module ids
     // https://webpack.js.org/configuration/optimization/#optimization-moduleids
-    moduleIds: 'hashed',
+    moduleIds: 'deterministic',
 
     // Code spllitting
     splitChunks: {
@@ -17,7 +17,7 @@ module.exports = () => ({
       // Using named chunks is causing cache invalidation when the chunk will
       // be used by another chunk. Keeping names for tracking & debugging.
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-      name: true,
+      // name: true,
       hidePathInfo: false,
 
       // Disable automatically chunking for async chunks
