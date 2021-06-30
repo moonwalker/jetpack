@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const { get } = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,7 +27,7 @@ const { paths } = settings;
 const devConfig = {
   mode: 'development',
   context: paths.src,
-  devtool: 'cheap-module-eval-source-mapp',
+  devtool: 'cheap-module-source-map',
   entry: {
     init: paths.entry.init,
     main: paths.entry.main
@@ -40,7 +39,6 @@ const devConfig = {
     publicPath: paths.output.publicPath
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template,
       head: get(settings, 'config.additional.global.head')
@@ -51,8 +49,7 @@ const devConfig = {
           from: paths.public.root
         }
       ]
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ],
   devServer: {
     port: constants.DEV_PORT,
@@ -69,15 +66,13 @@ const devConfig = {
       app.get('/env.js', getEnvMiddleware());
     },
     stats: {
+      errorDetails: true,
       assets: false,
       chunks: false,
       entrypoints: false,
       children: false,
       modules: false
     }
-  },
-  optimization: {
-    splitChunks: false
   }
 };
 
@@ -86,13 +81,7 @@ module.exports = mergeConfigs(
     devConfig,
 
     createResolveConfig(),
-    createJavascriptConfig(
-      {
-        include: paths.src,
-        cache: true
-      },
-      env
-    ),
+    createJavascriptConfig({ include: paths.src, cache: true }),
     createCssConfig(
       {
         include: paths.src,
