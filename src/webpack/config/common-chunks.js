@@ -8,7 +8,7 @@ module.exports = () => ({
 
     // Hashed module ids
     // https://webpack.js.org/configuration/optimization/#optimization-moduleids
-    moduleIds: 'hashed',
+    moduleIds: 'deterministic',
 
     // Code spllitting
     splitChunks: {

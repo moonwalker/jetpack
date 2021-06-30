@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
@@ -78,7 +79,7 @@ const clientConfig = mergeConfigs(
       ],
       optimization: {
         chunkIds: 'named',
-        minimizer: [new TerserPlugin()]
+        minimizer: [new TerserPlugin({ parallel: true })]
       }
     },
     createResolveConfig(),
@@ -123,6 +124,7 @@ const renderConfig = mergeConfigs(
       mode: 'production',
       context,
       target: 'node',
+      externals: [nodeExternals()],
       entry: {
         render: paths.entry.render
       },
