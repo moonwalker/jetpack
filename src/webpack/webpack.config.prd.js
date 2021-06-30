@@ -130,6 +130,9 @@ const renderConfig = mergeConfigs(
       ],
       optimization: {
         minimize: false
+      },
+      performance: {
+        hints: false
       }
     },
     createResolveConfig(),
