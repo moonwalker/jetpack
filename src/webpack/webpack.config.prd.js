@@ -50,6 +50,7 @@ const clientConfig = mergeConfigs(
         init: paths.entry.init,
         main: paths.entry.main
       },
+      target: 'web',
       output: {
         path: paths.output.path,
         filename: paths.output.filename,
