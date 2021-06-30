@@ -78,12 +78,7 @@ const clientConfig = mergeConfigs(
       ],
       optimization: {
         chunkIds: 'named',
-        minimizer: [
-          new TerserPlugin({
-            parallel: true,
-            sourceMap: true
-          })
-        ]
+        minimizer: [new TerserPlugin()]
       }
     },
     createResolveConfig(),
