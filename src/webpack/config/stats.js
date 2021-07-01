@@ -1,11 +1,8 @@
 const path = require('path');
 const StatsPlugin = require('stats-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
 const { paths } = require('../defaults');
-
-const ARTIFACTS_REL_DIR = path.relative(paths.output.path, paths.artifacts.path);
 
 const STATS = {
   context: paths.src,
@@ -19,21 +16,21 @@ const STATS = {
   source: false
 };
 
-module.exports = () => ({
-  plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: path.join(paths.artifacts.path, 'bundle-analysis.html'),
-      generateStatsFile: false,
-      statsOptions: STATS
-    }),
+module.exports = ({ outputDir, isClient = true }) => {
+  const artifactsRelDir = path.relative(outputDir, paths.artifacts.path);
+  const suffix = isClient ? 'client' : 'render';
 
-    new StatsPlugin(path.join(ARTIFACTS_REL_DIR, 'webpack-stats.json'), STATS),
+  return {
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        reportFilename: path.join(outputDir, `bundle-analysis--${suffix}.html`),
+        generateStatsFile: false,
+        statsOptions: STATS
+      }),
 
-    new BundleStatsWebpackPlugin({
-      outDir: ARTIFACTS_REL_DIR,
-      stats: STATS
-    })
-  ]
-});
+      new StatsPlugin(path.join(artifactsRelDir, `webpack-stats--${suffix}.json`), STATS)
+    ]
+  };
+};
