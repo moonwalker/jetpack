@@ -96,7 +96,7 @@ const clientConfig = mergeConfigs(
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
     createBuildInfo({ output: paths.output.buildInfo }),
-    createStatsConfig(),
+    createStatsConfig({ outputDir: paths.output.path, isClient: false }),
     createServiceWorkerConfig({ swDest: paths.output.swDest }),
     createDefineConfig({ isClient: true })
   ],
@@ -140,6 +140,7 @@ const renderConfig = mergeConfigs(
     createStylusConfig({ include: paths.src }),
     createFileConfig({ context: paths.src, emitFile: false }, SERVER_ENV),
     createSvgConfig({ context: paths.src }),
+    createStatsConfig({ outputDir: paths.render.path, isClient: false }),
     createDefineConfig({ isClient: false })
   ],
   settings,
