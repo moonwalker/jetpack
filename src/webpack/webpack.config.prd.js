@@ -108,7 +108,6 @@ const renderConfig = mergeConfigs(
   [
     productionConfig,
     {
-      target: 'node',
       externalsPresets: { node: true },
       entry: {
         render: paths.entry.render
