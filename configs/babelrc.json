@@ -21,10 +21,10 @@
     "@babel/plugin-proposal-throw-expressions",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-syntax-import-meta",
-    "lodash",
+    "babel-plugin-transform-react-remove-prop-types",
     "graphql-tag",
-    "react-require",
-    "babel-plugin-transform-react-remove-prop-types"
+    "lodash",
+    "react-require"
   ],
   "env": {
     "test": {
@@ -33,8 +33,19 @@
         "@babel/plugin-proposal-throw-expressions",
         "@babel/plugin-syntax-dynamic-import",
         "@babel/plugin-syntax-import-meta",
-        "graphql-tag",
-        "lodash",
+        "react-require"
+      ]
+    },
+    "render": {
+      "presets": [
+        ["@babel/preset-env", { "targets": { "node": "current" } }],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-throw-expressions",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "babel-plugin-transform-react-remove-prop-types",
         "react-require"
       ]
     }
