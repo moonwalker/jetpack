@@ -96,7 +96,7 @@ const clientConfig = mergeConfigs(
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
     createBuildInfo({ output: paths.output.buildInfo }),
-    createStatsConfig({ outputDir: paths.output.path, isClient: false }),
+    createStatsConfig({ outputDir: paths.output.path, isClient: true }),
     createServiceWorkerConfig({ swDest: paths.output.swDest }),
     createDefineConfig({ isClient: true })
   ],
