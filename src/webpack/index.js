@@ -37,10 +37,6 @@ const start = () => {
   spawnWebPack('webpack.config.dev', 'serve', ['--host', '0.0.0.0']);
 };
 
-const stage = () => {
-  spawnWebPack('webpack.config.stg');
-};
-
 const compileWebpackConfig = (webpackConfig) =>
   new Promise((resolve, reject) =>
     webpack(webpackConfig).run((err, stats) => {
@@ -76,7 +72,6 @@ const build = () => Promise.all([buildClient(), buildRender()]);
 
 module.exports = {
   start,
-  stage,
   build,
   buildClient,
   buildRender
