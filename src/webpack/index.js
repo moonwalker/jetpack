@@ -65,6 +65,8 @@ const buildRender = () => {
   log('ENV:', ENV);
   log('API:', config.queryApiUrl);
 
+  process.env.BABEL_ENV = 'render';
+
   // eslint-disable-next-line global-require
   const { renderConfig } = require('./webpack.config.prd');
 
