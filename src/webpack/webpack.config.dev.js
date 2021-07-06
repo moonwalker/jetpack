@@ -27,11 +27,12 @@ const { paths } = settings;
 const devConfig = {
   mode: 'development',
   context: paths.src,
-  devtool: 'cheap-module-source-map',
   entry: {
     init: paths.entry.init,
     main: paths.entry.main
   },
+  target: 'web',
+  devtool: 'cheap-module-source-map',
   output: {
     path: paths.output.path,
     filename: paths.output.filenameDev,
