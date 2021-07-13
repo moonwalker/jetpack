@@ -40,7 +40,7 @@
     "bundle-stats-webpack-plugin": "3.0.1",
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "6.4.0",
-    "css-loader": "5.2.6",
+    "css-loader": "5.2.7",
     "cssnano": "5.0.6",
     "debug": "4.3.2",
     "dotenv": "10.0.0",
