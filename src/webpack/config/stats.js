@@ -1,6 +1,5 @@
 const path = require('path');
 const StatsPlugin = require('stats-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const { paths } = require('../defaults');
 
@@ -21,16 +20,6 @@ module.exports = ({ outputDir, isClient = true }) => {
   const suffix = isClient ? 'client' : 'render';
 
   return {
-    plugins: [
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        openAnalyzer: false,
-        reportFilename: path.join(outputDir, `bundle-analysis--${suffix}.html`),
-        generateStatsFile: false,
-        statsOptions: STATS
-      }),
-
-      new StatsPlugin(path.join(artifactsRelDir, `webpack-stats--${suffix}.json`), STATS)
-    ]
+    plugins: [new StatsPlugin(path.join(artifactsRelDir, `webpack-stats--${suffix}.json`), STATS)]
   };
 };

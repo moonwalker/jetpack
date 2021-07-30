@@ -15,6 +15,7 @@ const {
   createDefineConfig
 } = require('./config');
 const settings = require('./defaults');
+const { speedMeasurePlugin } = require('./tools');
 
 const env = {
   CLIENT: true,
@@ -77,34 +78,36 @@ const devConfig = {
   }
 };
 
-module.exports = mergeConfigs(
-  [
-    devConfig,
+module.exports = speedMeasurePlugin.wrap(
+  mergeConfigs(
+    [
+      devConfig,
 
-    createResolveConfig(),
-    createJavascriptConfig({ include: paths.src, cache: true }),
-    createCssConfig(
-      {
+      createResolveConfig(),
+      createJavascriptConfig({ include: paths.src, cache: true }),
+      createCssConfig(
+        {
+          include: paths.src,
+          lint: true
+        },
+        env
+      ),
+      createStylusConfig({
         include: paths.src,
-        lint: true
-      },
-      env
-    ),
-    createStylusConfig({
-      include: paths.src,
-      root: paths.root
-    }),
-    createFileConfig(
-      {
+        root: paths.root
+      }),
+      createFileConfig(
+        {
+          context: paths.src
+        },
+        env
+      ),
+      createSvgConfig({
         context: paths.src
-      },
-      env
-    ),
-    createSvgConfig({
-      context: paths.src
-    }),
-    createDefineConfig({ isClient: true })
-  ],
-  settings,
-  env
+      }),
+      createDefineConfig({ isClient: true })
+    ],
+    settings,
+    env
+  )
 );
