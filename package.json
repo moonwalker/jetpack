@@ -72,7 +72,7 @@
     "webpack": "5.41.1",
     "webpack-bundle-analyzer": "4.4.2",
     "webpack-cli": "4.8.0",
-    "webpack-dev-server": "3.11.2",
+    "webpack-dev-server": "4.0.0",
     "webpack-merge": "4.2.2",
     "workbox-webpack-plugin": "4.3.1",
     "worker-farm": "1.7.0",
