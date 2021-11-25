@@ -55,7 +55,7 @@
     "jest": "27.0.5",
     "json-stringify-safe": "5.0.1",
     "lodash": "4.17.21",
-    "mini-css-extract-plugin": "1.6.2",
+    "mini-css-extract-plugin": "2.4.5",
     "node-fetch": "2.6.6",
     "postcss": "8.4.1",
     "postcss-loader": "6.1.0",
