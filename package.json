@@ -39,7 +39,7 @@
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "10.0.0",
-    "css-loader": "5.2.7",
+    "css-loader": "6.5.1",
     "cssnano": "5.0.11",
     "debug": "4.3.2",
     "dotenv": "10.0.0",
