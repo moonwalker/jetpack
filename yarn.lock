@@ -2952,14 +2952,14 @@ arrify@^1.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
 
-assets-webpack-plugin@7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-7.1.0.tgz#f8a8fe8ce4533201e1de20a2e43de8a955ff0701"
-  integrity sha512-qfwG0G+HFYPAZ1tc6y7KOx/kgZPD8IQxa54ddZMDVpWrutheXc9Pqjw6ukw4gtW1HvQUQVVUcfB4pdPRoVgLZA==
+assets-webpack-plugin@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/assets-webpack-plugin/-/assets-webpack-plugin-7.1.1.tgz#0b988bf904a1895cae5820957ad82aa402673894"
+  integrity sha512-HwsDcu9UR9kv7AtiyMpUO9fARn94SbrLzw5+aQ59RnOZJeet+EVHmOrMwXl8fZ8cZmdZ9Sbl1/l+fn7ymiyfMg==
   dependencies:
     camelcase "^6.0.0"
     escape-string-regexp "^4.0.0"
-    lodash "^4.17.20"
+    lodash "^4.17.21"
 
 ast-types-flow@^0.0.7:
   version "0.0.7"
