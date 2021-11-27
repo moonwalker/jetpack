@@ -58,7 +58,7 @@
     "mini-css-extract-plugin": "2.4.5",
     "node-fetch": "3.1.0",
     "postcss": "8.4.3",
-    "postcss-loader": "6.2.0",
+    "postcss-loader": "6.2.1",
     "postcss-reporter": "7.0.4",
     "promise-retry": "2.0.1",
     "react-svg-loader": "3.0.3",
