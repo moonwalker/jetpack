@@ -78,7 +78,7 @@
     "xmlbuilder": "15.1.1"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "2.0.1",
+    "@release-it/conventional-changelog": "4.0.0",
     "release-it": "14.12.1"
   }
 }
