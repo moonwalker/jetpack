@@ -41,7 +41,7 @@
     "copy-webpack-plugin": "10.2.4",
     "css-loader": "6.7.1",
     "cssnano": "5.1.4",
-    "debug": "4.3.3",
+    "debug": "4.3.4",
     "dotenv": "16.0.0",
     "fetch-cached": "2.0.3",
     "file-loader": "6.2.0",
