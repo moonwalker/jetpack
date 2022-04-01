@@ -40,7 +40,7 @@
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "10.2.4",
     "css-loader": "6.7.1",
-    "cssnano": "5.1.5",
+    "cssnano": "5.1.7",
     "debug": "4.3.4",
     "dotenv": "16.0.0",
     "fetch-cached": "2.0.3",
