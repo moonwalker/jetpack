@@ -8,6 +8,7 @@ module.exports.ENV = process.env.ENV || process.env.env || '';
 
 module.exports.CONTENT_SVC = process.env.CONTENT_SVC || '127.0.0.1:51051';
 module.exports.SVCNAME = process.env.SVCNAME || 'jetpack-server';
+module.exports.PRODUCT = process.env.PRODUCT || 'jetpack';
 module.exports.COMMIT = (process.env.COMMIT || 'dev').substring(0, 7);
 module.exports.BUILT = process.env.BUILT || 'n/a';
 module.exports.NAMESPACE = process.env.NAMESPACE || 'default';
