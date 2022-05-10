@@ -4,7 +4,6 @@ ORG=${ORG:-"$CIRCLE_PROJECT_USERNAME"}
 REPO=${REPO:-$(basename -s .git `git config --get remote.origin.url`)}
 
 PRODUCT=${PRODUCT:-"$REPO"}
-APP_PRODUCT=${APP_PRODUCT:-"$PRODUCT"}
 PRODUCT_ID=${PRODUCT_ID:-"$REPO"}
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)

@@ -8,7 +8,7 @@ DIRNAME="node_modules/@moonwalker/jetpack/bin"
 
 # Run commands
 ORG=$ORG REPO=$REPO \
-  PRODUCT=$APP_PRODUCT \
+  PRODUCT=$PRODUCT \
   PRODUCT_ID=$PRODUCT_ID \
   BRANCH=$BRANCH \
   COMMIT=$COMMIT \
