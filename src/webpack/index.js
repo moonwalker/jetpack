@@ -37,15 +37,15 @@ const start = () => {
 };
 
 const compileWebpackConfig = (webpackConfig) =>
-  new Promise((resolve, reject) =>
+  new Promise((resolve, reject) => {
     webpack(webpackConfig).run((err, stats) => {
       if (err) {
         reject(err);
       }
 
       resolve(stats);
-    })
-  );
+    });
+  });
 
 const buildClient = () => {
   const log = debug('build:client');
