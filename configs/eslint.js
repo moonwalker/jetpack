@@ -8,6 +8,8 @@ const extendConfigPath = path.join(
 module.exports = {
   extends: extendConfigPath,
   globals: {
-    APP_CONFIG: true
+    APP_CONFIG: true,
+    __CLIENT__: true,
+    __SERVER__: true
   }
 };
