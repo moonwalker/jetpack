@@ -1,8 +1,9 @@
-const { merge } = require('lodash');
 const config = require('./common');
 
-module.exports = merge({}, config, {
+module.exports = {
+  ...config,
   git: {
+    ...config.git,
     commit: false,
     push: false,
     tag: false,
@@ -10,6 +11,7 @@ module.exports = merge({}, config, {
     requireUpstream: false
   },
   npm: {
+    ...config.npm,
     publish: true
   }
-});
+};
