@@ -73,7 +73,7 @@
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.9.3",
     "webpack-merge": "4.2.2",
-    "workbox-webpack-plugin": "6.5.4",
+    "workbox-webpack-plugin": "4.3.1",
     "worker-farm": "1.7.0",
     "xmlbuilder": "15.1.1"
   },
