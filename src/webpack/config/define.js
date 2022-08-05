@@ -6,9 +6,10 @@ module.exports = (options = {}) => {
   return {
     plugins: [
       new webpack.DefinePlugin({
+        'process.env.ENV': JSON.stringify(process.env.ENV),
         'process.env.API_HOST_SSR': JSON.stringify(process.env.API_HOST_SSR),
-        'process.browser': JSON.stringify(isClient),
-        'process.env.STORYBOOK': JSON.stringify(isStorybook),
+        'process.browser': isClient,
+        'process.env.STORYBOOK': isStorybook || JSON.stringify(process.env.STORYBOOK),
         'process.env.SENTRY_CLIENT_DSN': JSON.stringify(process.env.SENTRY_CLIENT_DSN)
       })
     ]
