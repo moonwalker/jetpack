@@ -55,25 +55,24 @@ const devConfig = {
   ],
   devServer: {
     port: constants.DEV_PORT,
-    contentBase: paths.output.path,
-    publicPath: paths.output.publicPath,
     hot: true,
-    watchContentBase: true,
-    disableHostCheck: true,
-    watchOptions: {
-      ignored: /node_modules/
-    },
     historyApiFallback: true,
-    before: (app) => {
-      app.get('/env.js', getEnvMiddleware());
+    allowedHosts: 'all',
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer.app.get('/env.js', getEnvMiddleware());
+      return middlewares;
     },
-    stats: {
-      errorDetails: true,
-      assets: false,
-      chunks: false,
-      entrypoints: false,
-      children: false,
-      modules: false
+    client: {
+      logging: 'info',
+      progress: false,
+      overlay: {
+        errors: true,
+        warnings: false
+      }
+    },
+    static: {
+      directory: paths.public.root,
+      watch: true
     }
   }
 };
