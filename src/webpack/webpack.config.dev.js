@@ -58,8 +58,9 @@ const devConfig = {
     hot: true,
     historyApiFallback: true,
     allowedHosts: 'all',
-    onBeforeSetupMiddleware: ({ app }) => {
-      app.get('/env.js', getEnvMiddleware());
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer.app.get('/env.js', getEnvMiddleware());
+      return middlewares;
     },
     client: {
       logging: 'info',
