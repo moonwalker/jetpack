@@ -76,6 +76,9 @@ const devConfig = {
       directory: paths.public.root,
       watch: true
     }
+  },
+  optimization: {
+    runtimeChunk: 'single'
   }
 };
 
