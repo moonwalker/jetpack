@@ -1,6 +1,7 @@
 const { get } = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const { getEnvMiddleware } = require('../utils');
 const constants = require('../constants');
@@ -41,6 +42,7 @@ const devConfig = {
     publicPath: paths.output.publicPath
   },
   plugins: [
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template,
       head: get(settings, 'config.additional.global.head')
