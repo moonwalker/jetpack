@@ -78,7 +78,8 @@ const clientConfig = mergeConfigs(
         new AssetsPlugin({ ...paths.assets })
       ],
       optimization: {
-        minimizer: [new TerserPlugin({ parallel: 4 })]
+        minimizer: [new TerserPlugin({ parallel: 4 })],
+        runtimeChunk: 'single'
       }
     },
     createResolveConfig(),
