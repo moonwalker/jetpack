@@ -6,6 +6,7 @@
   "bin": {
     "jetpack": "bin/jetpack.sh"
   },
+  "main": "index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "start": "bin/jetpack.js",
