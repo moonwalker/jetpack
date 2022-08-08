@@ -66,8 +66,11 @@ const devConfig = {
     },
     client: {
       logging: 'info',
-      overlay: true,
-      progress: true
+      progress: false,
+      overlay: {
+        errors: true,
+        warnings: false
+      }
     },
     static: {
       directory: paths.public.root,
