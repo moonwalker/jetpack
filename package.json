@@ -44,9 +44,7 @@
     "cssnano": "5.1.12",
     "debug": "4.3.4",
     "dotenv": "16.0.1",
-    "fetch-cached": "2.0.3",
     "file-loader": "6.2.0",
-    "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "10.1.0",
     "generate-json-webpack-plugin": "2.0.0",
     "graphql": "16.5.0",
@@ -76,8 +74,7 @@
     "webpack-dev-server": "4.9.3",
     "webpack-merge": "4.2.2",
     "workbox-webpack-plugin": "4.3.1",
-    "worker-farm": "1.7.0",
-    "xmlbuilder": "15.1.1"
+    "worker-farm": "1.7.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "5.0.0",
