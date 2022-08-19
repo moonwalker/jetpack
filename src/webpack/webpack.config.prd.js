@@ -24,7 +24,7 @@ const {
 const env = {
   ...constants,
   ENV: 'production',
-  NODE_ENV: 'production'
+  NODE_ENV: 'development'
 };
 
 const CLIENT_ENV = {
@@ -39,9 +39,11 @@ const SERVER_ENV = {
 
 const { context, paths } = settings;
 
+console.log({ env, constants });
+
 const productionConfig = {
   bail: true,
-  mode: 'production',
+  mode: 'development',
   context,
   devtool: 'source-map',
   plugins: [new CleanWebpackPlugin()]
@@ -120,6 +122,7 @@ const renderConfig = mergeConfigs(
         libraryTarget: 'commonjs2',
         publicPath: paths.output.publicPath
       },
+      target: 'node',
       plugins: [
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
