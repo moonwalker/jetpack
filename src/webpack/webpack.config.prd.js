@@ -120,6 +120,7 @@ const renderConfig = mergeConfigs(
         libraryTarget: 'commonjs2',
         publicPath: paths.output.publicPath
       },
+      target: 'node',
       plugins: [
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
