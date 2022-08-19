@@ -123,6 +123,9 @@ const renderConfig = mergeConfigs(
         publicPath: paths.output.publicPath
       },
       target: 'node',
+      resolve: {
+        mainFields: ['main', 'module']
+      },
       plugins: [
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
