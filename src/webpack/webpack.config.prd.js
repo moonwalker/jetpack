@@ -24,7 +24,7 @@ const {
 const env = {
   ...constants,
   ENV: 'production',
-  NODE_ENV: 'development'
+  NODE_ENV: 'production'
 };
 
 const CLIENT_ENV = {
@@ -39,11 +39,9 @@ const SERVER_ENV = {
 
 const { context, paths } = settings;
 
-console.log({ env, constants });
-
 const productionConfig = {
   bail: true,
-  mode: 'development',
+  mode: 'production',
   context,
   devtool: 'source-map',
   plugins: [new CleanWebpackPlugin()]
