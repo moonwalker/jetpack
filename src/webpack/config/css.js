@@ -22,8 +22,9 @@ module.exports = (options, env) => {
           modules: {
             exportOnlyLocals: node,
             localIdentContext: paths.src,
-            localIdentName: isDevelopment ? '[path]__[name]__[local]__[hash]' : '[hash]',
-            localIdentHashDigestLength: 5
+            localIdentName: isDevelopment
+              ? '[path]__[name]__[local]__[hash:base64:5]'
+              : '[hash:base64:5]'
           }
         }
       },
