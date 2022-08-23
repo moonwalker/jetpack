@@ -8,10 +8,8 @@ const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
-  createJavascriptConfig,
   createResolveConfig,
   createFileConfig,
-  createCssConfig,
   createStylusConfig,
   createCommonChunks,
   createServiceWorkerConfig,
@@ -20,6 +18,9 @@ const {
   createSvgConfig,
   createDefineConfig
 } = require('./config');
+const createCssConfig = require('./presets/css');
+const createCssClientDeliveryConfig = require('./presets/css-client-delivery');
+const createJavascriptConfig = require('./presets/javascript');
 
 const env = {
   ...constants,
@@ -83,17 +84,24 @@ const clientConfig = mergeConfigs(
       }
     },
     createResolveConfig(),
-    createJavascriptConfig({ include: paths.src }),
-    createCssConfig(
-      {
-        include: paths.src,
-        minimize: true,
-        extractChunks: true,
-        filename: paths.output.cssFilename
-      },
-      CLIENT_ENV
-    ),
+    createJavascriptConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+
     createStylusConfig({ include: paths.src }),
+    createCssConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+    createCssClientDeliveryConfig({
+      miniCssExtractPluginOptions: {
+        filename: paths.output.cssFilename
+      }
+    }),
+
     createFileConfig({ context: paths.src }, CLIENT_ENV),
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
@@ -141,8 +149,17 @@ const renderConfig = mergeConfigs(
       }
     },
     createResolveConfig(),
-    createJavascriptConfig({ include: paths.src }),
-    createCssConfig({ include: paths.src, node: true }, SERVER_ENV),
+    createJavascriptConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+    createCssConfig({
+      isNode: true,
+      rule: {
+        include: paths.src
+      }
+    }),
     createStylusConfig({ include: paths.src }),
     createFileConfig({ context: paths.src, emitFile: false }, SERVER_ENV),
     createSvgConfig({ context: paths.src }),

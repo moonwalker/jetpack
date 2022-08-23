@@ -7,14 +7,15 @@ const { getEnvMiddleware } = require('../utils');
 const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const {
-  createJavascriptConfig,
   createResolveConfig,
-  createCssConfig,
   createStylusConfig,
   createFileConfig,
   createSvgConfig,
   createDefineConfig
 } = require('./config');
+const createCssConfig = require('./presets/css');
+const createCssDeliveryConfig = require('./presets/css-client-delivery');
+const createJavascriptConfig = require('./presets/javascript');
 const settings = require('./defaults');
 const { speedMeasurePlugin } = require('./tools');
 
@@ -88,18 +89,28 @@ module.exports = speedMeasurePlugin.wrap(
       devConfig,
 
       createResolveConfig(),
-      createJavascriptConfig({ include: paths.src, cache: true }),
-      createCssConfig(
-        {
-          include: paths.src,
-          lint: true
-        },
-        env
-      ),
+      createJavascriptConfig({
+        isDevelopment: true,
+        rule: {
+          include: paths.src
+        }
+      }),
+
       createStylusConfig({
         include: paths.src,
         root: paths.root
       }),
+      createCssConfig({
+        isDevelopment: true,
+        rule: {
+          lint: true,
+          include: paths.src
+        }
+      }),
+      createCssDeliveryConfig({
+        isDevelopment: true
+      }),
+
       createFileConfig(
         {
           context: paths.src
