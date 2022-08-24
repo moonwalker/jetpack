@@ -90,7 +90,7 @@ const clientConfig = mergeConfigs(
       }
     }),
 
-    createStylusConfig({ include: paths.src }),
+    // createStylusConfig({ include: paths.src }),
     createCssConfig({
       rule: {
         include: paths.src
@@ -160,7 +160,7 @@ const renderConfig = mergeConfigs(
         include: paths.src
       }
     }),
-    createStylusConfig({ include: paths.src }),
+    // createStylusConfig({ include: paths.src }),
     createFileConfig({ context: paths.src, emitFile: false }, SERVER_ENV),
     createSvgConfig({ context: paths.src }),
     createStatsConfig({ outputDir: paths.render.path, isClient: false }),

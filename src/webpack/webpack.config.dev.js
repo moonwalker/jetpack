@@ -96,14 +96,14 @@ module.exports = speedMeasurePlugin.wrap(
         }
       }),
 
-      createStylusConfig({
-        include: paths.src,
-        root: paths.root
-      }),
+      // createStylusConfig({
+      //   include: paths.src,
+      //   root: paths.root
+      // }),
       createCssConfig({
         isDevelopment: true,
+        lint: true,
         rule: {
-          lint: true,
           include: paths.src
         }
       }),
