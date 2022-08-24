@@ -107,7 +107,10 @@ module.exports = speedMeasurePlugin.wrap(
         }
       }),
       createCssDeliveryConfig({
-        isDevelopment: true
+        isDevelopment: true,
+        rule: {
+          include: paths.src
+        }
       }),
 
       createFileConfig(

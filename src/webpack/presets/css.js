@@ -24,7 +24,7 @@ module.exports = (options = {}) => {
   const defaultCssLoaderOptions = {
     esModule: false,
     modules: {
-      auto: false,
+      mode: 'local',
       exportOnlyLocals: isNode,
       localIdentName: isDevelopment ? '[path]__[name]__[local]' : '[hash]',
       localIdentHashDigestLength: 5

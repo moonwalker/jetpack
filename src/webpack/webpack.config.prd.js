@@ -96,6 +96,9 @@ const clientConfig = mergeConfigs(
       }
     }),
     createCssClientDeliveryConfig({
+      rule: {
+        include: paths.src
+      },
       miniCssExtractPluginOptions: {
         filename: paths.output.cssFilename
       }

@@ -43,9 +43,13 @@ module.exports = (options = {}) => {
       ]
     },
     plugins: [
-      new MiniCssExtractPlugin(
-        merge(defaultMiniCssExtractPluginOptions, miniCssExtractPluginOptions)
-      )
+      ...(!isDevelopment
+        ? [
+            new MiniCssExtractPlugin(
+              merge(defaultMiniCssExtractPluginOptions, miniCssExtractPluginOptions)
+            )
+          ]
+        : [])
     ]
   };
 };
