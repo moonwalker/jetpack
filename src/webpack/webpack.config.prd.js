@@ -10,7 +10,6 @@ const settings = require('./defaults');
 const {
   createResolveConfig,
   createFileConfig,
-  createStylusConfig,
   createCommonChunks,
   createServiceWorkerConfig,
   createBuildInfo,

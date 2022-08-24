@@ -8,7 +8,6 @@ const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const {
   createResolveConfig,
-  createStylusConfig,
   createFileConfig,
   createSvgConfig,
   createDefineConfig
