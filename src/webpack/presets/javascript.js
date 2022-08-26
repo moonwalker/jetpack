@@ -17,12 +17,14 @@ module.exports = function createJavascriptConfig(options = {}) {
   return {
     module: {
       rules: [
-        {
-          test: /\.(js|ts)x?$/,
-          loader: require.resolve('babel-loader'),
-          ...rule,
-          options: merge(defaultBabelOptions, babelLoaderOptions)
-        }
+        merge(
+          {
+            test: /\.(js|ts)x?$/,
+            loader: require.resolve('babel-loader'),
+            options: merge(defaultBabelOptions, babelLoaderOptions)
+          },
+          rule
+        )
       ]
     },
     ignoreWarnings: [/Failed to parse source map/]
