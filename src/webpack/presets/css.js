@@ -59,11 +59,11 @@ module.exports = (options = {}) => {
           ...rule,
           use: [
             {
-              loader: 'css-loader',
+              loader: require.resolve('css-loader'),
               options: merge(defaultCssLoaderOptions, cssLoaderOptions)
             },
             {
-              loader: 'postcss-loader',
+              loader: require.resolve('postcss-loader'),
               options: merge(defaultPostcssLoaderOptions, postcssLoaderOptions)
             }
           ]

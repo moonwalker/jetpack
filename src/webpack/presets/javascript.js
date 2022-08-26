@@ -19,7 +19,7 @@ module.exports = function createJavascriptConfig(options = {}) {
       rules: [
         {
           test: /\.(js|ts)x?$/,
-          loader: 'babel-loader',
+          loader: require.resolve('babel-loader'),
           ...rule,
           options: merge(defaultBabelOptions, babelLoaderOptions)
         }
