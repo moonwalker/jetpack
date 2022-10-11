@@ -8,11 +8,8 @@ const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const settings = require('./defaults');
 const {
-  createJavascriptConfig,
   createResolveConfig,
   createFileConfig,
-  createCssConfig,
-  createStylusConfig,
   createCommonChunks,
   createServiceWorkerConfig,
   createBuildInfo,
@@ -20,6 +17,9 @@ const {
   createSvgConfig,
   createDefineConfig
 } = require('./config');
+const createCssConfig = require('./presets/css');
+const createCssClientDeliveryConfig = require('./presets/css-client-delivery');
+const createJavascriptConfig = require('./presets/javascript');
 
 const env = {
   ...constants,
@@ -78,21 +78,32 @@ const clientConfig = mergeConfigs(
         new AssetsPlugin({ ...paths.assets })
       ],
       optimization: {
-        minimizer: [new TerserPlugin({ parallel: 4 })]
+        minimizer: [new TerserPlugin({ parallel: 4 })],
+        runtimeChunk: 'single'
       }
     },
     createResolveConfig(),
-    createJavascriptConfig({ include: paths.src }),
-    createCssConfig(
-      {
-        include: paths.src,
-        minimize: true,
-        extractChunks: true,
-        filename: paths.output.cssFilename
+    createJavascriptConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+
+    // createStylusConfig({ include: paths.src }),
+    createCssConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+    createCssClientDeliveryConfig({
+      rule: {
+        include: paths.src
       },
-      CLIENT_ENV
-    ),
-    createStylusConfig({ include: paths.src }),
+      miniCssExtractPluginOptions: {
+        filename: paths.output.cssFilename
+      }
+    }),
+
     createFileConfig({ context: paths.src }, CLIENT_ENV),
     createSvgConfig({ context: paths.src }),
     createCommonChunks(),
@@ -119,6 +130,10 @@ const renderConfig = mergeConfigs(
         libraryTarget: 'commonjs2',
         publicPath: paths.output.publicPath
       },
+      target: 'node',
+      resolve: {
+        mainFields: ['main', 'module']
+      },
       plugins: [
         new webpack.DefinePlugin({
           __CLIENT__: JSON.stringify(false),
@@ -136,9 +151,18 @@ const renderConfig = mergeConfigs(
       }
     },
     createResolveConfig(),
-    createJavascriptConfig({ include: paths.src }),
-    createCssConfig({ include: paths.src, node: true }, SERVER_ENV),
-    createStylusConfig({ include: paths.src }),
+    createJavascriptConfig({
+      rule: {
+        include: paths.src
+      }
+    }),
+    createCssConfig({
+      isNode: true,
+      rule: {
+        include: paths.src
+      }
+    }),
+    // createStylusConfig({ include: paths.src }),
     createFileConfig({ context: paths.src, emitFile: false }, SERVER_ENV),
     createSvgConfig({ context: paths.src }),
     createStatsConfig({ outputDir: paths.render.path, isClient: false }),

@@ -1,19 +1,20 @@
 const { get } = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const { getEnvMiddleware } = require('../utils');
 const constants = require('../constants');
 const mergeConfigs = require('./mergeConfigs');
 const {
-  createJavascriptConfig,
   createResolveConfig,
-  createCssConfig,
-  createStylusConfig,
   createFileConfig,
   createSvgConfig,
   createDefineConfig
 } = require('./config');
+const createCssConfig = require('./presets/css');
+const createCssDeliveryConfig = require('./presets/css-client-delivery');
+const createJavascriptConfig = require('./presets/javascript');
 const settings = require('./defaults');
 const { speedMeasurePlugin } = require('./tools');
 
@@ -41,6 +42,7 @@ const devConfig = {
     publicPath: paths.output.publicPath
   },
   plugins: [
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: paths.public.template,
       head: get(settings, 'config.additional.global.head')
@@ -55,26 +57,28 @@ const devConfig = {
   ],
   devServer: {
     port: constants.DEV_PORT,
-    contentBase: paths.output.path,
-    publicPath: paths.output.publicPath,
     hot: true,
-    watchContentBase: true,
-    disableHostCheck: true,
-    watchOptions: {
-      ignored: /node_modules/
-    },
     historyApiFallback: true,
-    before: (app) => {
-      app.get('/env.js', getEnvMiddleware());
+    allowedHosts: 'all',
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer.app.get('/env.js', getEnvMiddleware());
+      return middlewares;
     },
-    stats: {
-      errorDetails: true,
-      assets: false,
-      chunks: false,
-      entrypoints: false,
-      children: false,
-      modules: false
+    client: {
+      logging: 'info',
+      progress: false,
+      overlay: {
+        errors: true,
+        warnings: false
+      }
+    },
+    static: {
+      directory: paths.public.root,
+      watch: true
     }
+  },
+  optimization: {
+    runtimeChunk: 'single'
   }
 };
 
@@ -84,18 +88,31 @@ module.exports = speedMeasurePlugin.wrap(
       devConfig,
 
       createResolveConfig(),
-      createJavascriptConfig({ include: paths.src, cache: true }),
-      createCssConfig(
-        {
-          include: paths.src,
-          lint: true
-        },
-        env
-      ),
-      createStylusConfig({
-        include: paths.src,
-        root: paths.root
+      createJavascriptConfig({
+        isDevelopment: true,
+        rule: {
+          include: paths.src
+        }
       }),
+
+      // createStylusConfig({
+      //   include: paths.src,
+      //   root: paths.root
+      // }),
+      createCssConfig({
+        isDevelopment: true,
+        lint: true,
+        rule: {
+          include: paths.src
+        }
+      }),
+      createCssDeliveryConfig({
+        isDevelopment: true,
+        rule: {
+          include: paths.src
+        }
+      }),
+
       createFileConfig(
         {
           context: paths.src
