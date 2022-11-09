@@ -12544,12 +12544,12 @@ stylelint@14.14.1:
     v8-compile-cache "^2.3.0"
     write-file-atomic "^4.0.2"
 
-stylus-loader@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/stylus-loader/-/stylus-loader-7.0.0.tgz#31fb929cd3a7c447a07a0b0148b48480eb2c3f4a"
-  integrity sha512-WTbtLrNfOfLgzTaR9Lj/BPhQroKk/LC1hfTXSUbrxmxgfUo3Y3LpmKRVA2R1XbjvTAvOfaian9vOyfv1z99E+A==
+stylus-loader@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/stylus-loader/-/stylus-loader-7.1.0.tgz#19e09a98b19075c246e6e3f65e38b8cb89d2d6fb"
+  integrity sha512-gNUEjjozR+oZ8cuC/Fx4LVXqZOgDKvpW9t2hpXHcxjfPYqSjQftaGwZUK+wL9B0QJ26uS6p1EmoWHmvld1dF7g==
   dependencies:
-    fast-glob "^3.2.11"
+    fast-glob "^3.2.12"
     klona "^2.0.5"
     normalize-path "^3.0.0"
 
