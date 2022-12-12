@@ -2198,10 +2198,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@moonwalker/pre-flight-check@1.5.0-beta.1":
-  version "1.5.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.5.0-beta.1.tgz#bd67ac44b25c97c76c93f821a5dc75c02c3134b2"
-  integrity sha512-6DLM2wYkAe+wXTgyg1GaBtaXad31Pde38p7K7u54bVuPIJEUnjyOcMrdd/1BJfM4BfgUvf/tTUCwQDMG4SLSww==
+"@moonwalker/pre-flight-check@^1.5.0-beta.2":
+  version "1.5.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.5.0-beta.2.tgz#454a7770038ad3225b2a975fb499472242a254d5"
+  integrity sha512-IUu+4mNPvWLE0tERJ001GVQsHKopVO0ota8/C6FyDwHXzS5LUfp/Ex24ZtTOhLIdKaZZitHplGDk2Y1KHTtFYQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.46.0"
     "@typescript-eslint/parser" "5.46.0"
