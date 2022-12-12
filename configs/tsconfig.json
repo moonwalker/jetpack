@@ -1,4 +1,5 @@
 {
+  "outDir": "./build",
   "compilerOptions": {
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
@@ -11,5 +12,7 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "baseUrl": "./",
-  }
+  },
+  "exclude": ["node_modules", "build"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
