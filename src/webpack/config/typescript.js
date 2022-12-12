@@ -5,7 +5,14 @@ module.exports = (srcDir) => ({
         test: /\.tsx?$/,
         include: srcDir,
         enforce: 'pre',
-        loader: 'ts-loader'
+        loader: 'ts-loader',
+        options: {
+          compilerOptions: {
+            // Disable JS files check during webpack compilation, by default(tsconfig.json) is set
+            // to true
+            checkJs: false
+          }
+        }
       }
     ]
   }
