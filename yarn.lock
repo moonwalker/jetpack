@@ -3107,10 +3107,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@moonwalker/pre-flight-check@1.5.0-beta.2":
-  version "1.5.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.5.0-beta.2.tgz#454a7770038ad3225b2a975fb499472242a254d5"
-  integrity sha512-IUu+4mNPvWLE0tERJ001GVQsHKopVO0ota8/C6FyDwHXzS5LUfp/Ex24ZtTOhLIdKaZZitHplGDk2Y1KHTtFYQ==
+"@moonwalker/pre-flight-check@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.5.0.tgz#28f63e7e22277129988875af63d337974012b9c2"
+  integrity sha512-LxurI9KIL0DAkdntc8byFIYFYBK88t7QjsK/+9cSLoXHzNIxB9xTeXEBLDs0XBp5BetZK7iuk/acrN64IO+UFw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.46.0"
     "@typescript-eslint/parser" "5.46.0"
