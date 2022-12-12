@@ -13,7 +13,8 @@ const {
   createStylusConfig,
   createFileConfig,
   createSvgConfig,
-  createDefineConfig
+  createDefineConfig,
+  createTypescriptConfig
 } = require('./config');
 const settings = require('./defaults');
 
@@ -86,6 +87,7 @@ module.exports = mergeConfigs(
     devConfig,
 
     createResolveConfig(),
+    createTypescriptConfig(paths.src),
     createJavascriptConfig(
       {
         include: paths.src,

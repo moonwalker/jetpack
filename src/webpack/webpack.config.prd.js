@@ -18,7 +18,8 @@ const {
   createBuildInfo,
   createStatsConfig,
   createSvgConfig,
-  createDefineConfig
+  createDefineConfig,
+  createTypescriptConfig
 } = require('./config');
 
 const env = {
@@ -87,6 +88,7 @@ const clientConfig = mergeConfigs(
       }
     },
     createResolveConfig(),
+    createTypescriptConfig(paths.src),
     createJavascriptConfig(
       {
         include: paths.src
@@ -153,6 +155,7 @@ const renderConfig = mergeConfigs(
       }
     },
     createResolveConfig(),
+    createTypescriptConfig(paths.src),
     createJavascriptConfig(
       {
         include: paths.src
