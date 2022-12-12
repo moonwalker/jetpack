@@ -12,7 +12,8 @@ const {
   createStylusConfig,
   createFileConfig,
   createSvgConfig,
-  createDefineConfig
+  createDefineConfig,
+  createTypescriptConfig
 } = require('./config');
 const settings = require('./defaults');
 const { speedMeasurePlugin } = require('./tools');
@@ -84,6 +85,7 @@ module.exports = speedMeasurePlugin.wrap(
       devConfig,
 
       createResolveConfig(),
+      createTypescriptConfig(paths.src),
       createJavascriptConfig({ include: paths.src, cache: true }),
       createCssConfig(
         {

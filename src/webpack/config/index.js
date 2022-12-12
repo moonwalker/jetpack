@@ -10,3 +10,4 @@ module.exports.createBuildInfo = require('./build-info');
 module.exports.createStatsConfig = require('./stats');
 module.exports.createSvgConfig = require('./svg');
 module.exports.createDefineConfig = require('./define');
+module.exports.createTypescriptConfig = require('./typescript');
