@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./build",
-    "baseUrl": "./",
+    "outDir": "build",
+    "baseUrl": ".",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
