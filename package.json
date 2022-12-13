@@ -81,6 +81,7 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "5.0.0",
-    "release-it": "15.2.0"
+    "release-it": "15.2.0",
+    "typescript-plugin-css-modules": "^4.1.1"
   }
 }
