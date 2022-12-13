@@ -83,6 +83,7 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "2.0.1",
+    "css-modules-typescript-loader": "^4.0.1",
     "release-it": "14.6.2"
   }
 }

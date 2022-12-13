@@ -17,6 +17,12 @@ module.exports = (options, env) => {
     include,
     use: [
       {
+        loader: 'css-modules-typescript-loader',
+        options: {
+          mode: node ? 'verify' : 'emit'
+        }
+      },
+      {
         loader: 'css-loader',
         options: {
           modules: {
