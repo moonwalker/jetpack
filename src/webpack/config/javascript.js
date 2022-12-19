@@ -1,16 +1,18 @@
+const TEST = /\.(j|t)sx?$/;
+const TEST_JS = /\.jsx?$/;
+
 module.exports = (options) => {
   const { include = [], cache = false } = options;
-  const test = /\.jsx?$/;
 
   const sourceMapRule = {
-    test,
+    test: TEST_JS, //
     enforce: 'pre',
     include: () => true, // process source-maps across all folders - works when linked
     loader: 'source-map-loader'
   };
 
   const babelRule = {
-    test,
+    test: TEST,
     include,
     loader: 'babel-loader',
     options: {
