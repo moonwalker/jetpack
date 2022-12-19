@@ -1,4 +1,4 @@
-const TEST = /\.(j|t)sx?$/;
+const TEST = /\.(js|ts)x?$/;
 
 module.exports = (options) => {
   const { include = [], cache = false } = options;
