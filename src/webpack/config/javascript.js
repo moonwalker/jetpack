@@ -1,9 +1,10 @@
+const TEST = /\.(j|t)sx?$/;
+
 module.exports = (options) => {
   const { include = [], cache = false } = options;
-  const test = /\.jsx?$/;
 
   const babelRule = {
-    test,
+    test: TEST,
     include,
     loader: 'babel-loader',
     options: {
