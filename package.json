@@ -57,7 +57,7 @@
     "lodash": "4.17.21",
     "mini-css-extract-plugin": "2.7.2",
     "node-fetch": "3.3.0",
-    "postcss": "8.4.20",
+    "postcss": "8.4.21",
     "postcss-loader": "7.0.2",
     "postcss-reporter": "7.0.5",
     "promise-retry": "2.0.1",
