@@ -79,6 +79,6 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "5.1.1",
-    "release-it": "15.8.0"
+    "release-it": "15.10.1"
   }
 }
