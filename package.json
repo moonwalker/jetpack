@@ -70,7 +70,7 @@
     "stylus-loader": "7.1.0",
     "terser-webpack-plugin": "5.3.7",
     "webpack": "5.76.1",
-    "webpack-cli": "5.0.1",
+    "webpack-cli": "5.0.2",
     "webpack-dev-server": "4.13.3",
     "webpack-merge": "5.8.0",
     "workbox-webpack-plugin": "6.5.4",
