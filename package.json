@@ -14,6 +14,7 @@
     "lint": "eslint . --ext js,jsx",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"**/*.{js,jsx}\"",
+    "test": "echo \"No tests\" && exit 0",
     "release": "./scripts/release.sh"
   },
   "dependencies": {
