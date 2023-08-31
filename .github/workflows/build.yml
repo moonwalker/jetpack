@@ -5,9 +5,6 @@ on: push
 jobs:
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
 
@@ -16,7 +13,7 @@ jobs:
         with:
           always-auth: true
           registry-url: 'https://registry.npmjs.org'
-          node-version: ${{matrix.node-version}}
+          node-version-file: '.nvmrc'
           scope: '@moonwalker'
 
       # Cache yarn dependencies
@@ -45,9 +42,6 @@ jobs:
     if: contains(github.ref, 'refs/tags/v')
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -57,7 +51,7 @@ jobs:
         with:
           always-auth: true
           registry-url: 'https://registry.npmjs.org'
-          node-version: ${{matrix.node-version}}
+          node-version-file: '.nvmrc'
           scope: '@moonwalker'
 
       # Cache yarn dependencies
