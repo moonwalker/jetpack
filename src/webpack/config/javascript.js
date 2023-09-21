@@ -1,5 +1,5 @@
-const TEST = /\.(js|ts|mjs)x?$/;
-const TEST_JS = /\.(js|mjs)x?$/;
+const TEST = /\.(js|ts)x?$/;
+const TEST_JS = /\.jsx?$/;
 
 module.exports = (options) => {
   const { include = [], cache = false } = options;
