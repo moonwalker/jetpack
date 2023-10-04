@@ -17,7 +17,7 @@
     "release": "./scripts/release.sh"
   },
   "dependencies": {
-    "@babel/core": "7.22.20",
+    "@babel/core": "7.23.0",
     "@babel/plugin-proposal-export-namespace-from": "7.18.9",
     "@babel/plugin-proposal-function-sent": "7.22.5",
     "@babel/plugin-proposal-throw-expressions": "7.22.5",
