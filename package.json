@@ -58,7 +58,7 @@
     "json-stringify-safe": "5.0.1",
     "lodash": "4.17.21",
     "mini-css-extract-plugin": "1.6.2",
-    "node-fetch": "2.6.7",
+    "node-fetch": "2.7.0",
     "postcss": "8.4.32",
     "postcss-loader": "4.3.0",
     "postcss-reporter": "7.0.5",
