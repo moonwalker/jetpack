@@ -3108,10 +3108,10 @@ babel-plugin-react-docgen@4.2.1:
     lodash "^4.17.15"
     react-docgen "^5.0.0"
 
-babel-plugin-react-require@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-require/-/babel-plugin-react-require-4.0.0.tgz#cb632c5309c3deb0e6e3eaa0720b32ec7bef55d1"
-  integrity sha512-ozQYb02Svu4iz/uB1gJ7yJwAIpYIFjRHoRgn6dUPPIZd774G1QPge/YljDt7M83eTKWxakdmKCaTYnrPV3Gaog==
+babel-plugin-react-require@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-require/-/babel-plugin-react-require-4.0.2.tgz#cc387627efd90dd67e19628f0867887d26e3f497"
+  integrity sha512-gIq6yj9TkPeEfhzhi5kHXuE4q6Z2lvizktnES+G0AP2aPDmrPLcPkjK2cSM89UPnxfJHubEZv12evOKjocD10w==
 
 babel-plugin-react-svg@^3.0.3:
   version "3.0.3"
