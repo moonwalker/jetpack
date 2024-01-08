@@ -7,11 +7,12 @@ module.exports = merge({}, config, {
     commitMessage: ':package: release ${version}'
   },
   github: {
+    ...config.github,
     release: true
   },
   plugins: {
-    // '@release-it/conventional-changelog': {
-    //   preset: 'eslint'
-    // }
+    '@release-it/conventional-changelog': {
+      preset: 'angular'
+    }
   }
 });
