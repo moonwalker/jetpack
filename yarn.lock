@@ -1690,10 +1690,10 @@
   dependencies:
     call-bind "^1.0.2"
 
-"@moonwalker/pre-flight-check@1.5.12":
-  version "1.5.12"
-  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.5.12.tgz#5cf476e962811cf70748f2312dc3f50dc16e7f30"
-  integrity sha512-Ej1a90NKSGIxNf4xJlV/A1gLECs3HxqInBL0V5qfo9w/lFqCPHqgX8Q0qrDrRZ5w5gq8zuppVtJrQQnabM5MqA==
+"@moonwalker/pre-flight-check@1.6.4":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@moonwalker/pre-flight-check/-/pre-flight-check-1.6.4.tgz#bb10100a0b686084ddac0e2c24c0e117284e2578"
+  integrity sha512-W2ruaNwYoqlzRBAOJvOBQlqaFFdZdcn7tIzHNjr1OPUv1ZgFeYcaDtBLjGDmjZKmM1w6I6Pjm6wxl2hTh2AHOQ==
   dependencies:
     "@babel/core" "7.23.6"
     "@babel/eslint-parser" "7.23.3"
