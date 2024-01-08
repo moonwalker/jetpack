@@ -1,6 +1,6 @@
 {
   "name": "@moonwalker/jetpack",
-  "version": "3.3.26",
+  "version": "3.3.27",
   "description": "Webpack for Moonwalkers",
   "license": "MIT",
   "bin": {
