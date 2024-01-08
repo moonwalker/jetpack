@@ -28,7 +28,7 @@
     "@babel/preset-env": "7.23.7",
     "@babel/preset-react": "7.23.3",
     "@moonwalker/pre-flight-check": "1.5.12",
-    "assets-webpack-plugin": "5.1.2",
+    "assets-webpack-plugin": "7.1.1",
     "async": "3.2.5",
     "autoprefixer": "10.4.16",
     "babel-jest": "27.5.1",
