@@ -38,7 +38,7 @@
     "babel-plugin-react-docgen": "4.2.1",
     "babel-plugin-react-require": "4.0.2",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
-    "bundle-stats-webpack-plugin": "4.9.1",
+    "bundle-stats-webpack-plugin": "4.12.0",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "12.0.2",
     "css-loader": "5.2.7",
