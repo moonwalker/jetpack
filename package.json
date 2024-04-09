@@ -66,7 +66,7 @@
     "react-svg-loader": "3.0.3",
     "source-map-loader": "5.0.0",
     "stats-webpack-plugin": "0.7.0",
-    "style-loader": "2.0.0",
+    "style-loader": "4.0.0",
     "stylelint": "16.3.1",
     "stylus": "0.63.0",
     "stylus-loader": "8.1.0",
