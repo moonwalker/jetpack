@@ -72,7 +72,7 @@
     "stylus-loader": "8.1.2",
     "terser-webpack-plugin": "4.2.3",
     "ts-loader": "9.5.4",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "typescript-plugin-css-modules": "5.2.0",
     "webpack": "5.102.0",
     "webpack-bundle-analyzer": "4.10.2",
