@@ -1865,47 +1865,47 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundle-stats/cli-utils@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-4.21.9.tgz#376ac7c20b7ee5cbfaa94b3cbefeb6eacb485f4b"
-  integrity sha512-GoqrDT04PyVoVsUkY5m+c+t9nPiFLfiZAinMsGBpUog5NzerH4jSQ4bgUWjAA+HUlIQQ9wbjQVkPx7vAEO+D+Q==
+"@bundle-stats/cli-utils@^4.21.10":
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/cli-utils/-/cli-utils-4.21.10.tgz#46a12a09100150be746b9e870ede9351bb86f69f"
+  integrity sha512-x+wJvQFLU+82hLyIfzo3IR3oj7Ba+OaBF2Jhkg7i11bUkxR+KjTtdguwKcI5COI1ZT5dnPgngySEiNXd+vTuXA==
   dependencies:
-    "@bundle-stats/html-templates" "^4.21.9"
-    "@bundle-stats/plugin-webpack-filter" "^4.21.9"
-    "@bundle-stats/utils" "^4.21.9"
+    "@bundle-stats/html-templates" "^4.21.10"
+    "@bundle-stats/plugin-webpack-filter" "^4.21.10"
+    "@bundle-stats/utils" "^4.21.10"
     find-cache-dir "^3.1.0"
     lodash "^4.17.21"
     stream-chain "^3.0.1"
     stream-json "^1.8.0"
 
-"@bundle-stats/html-templates@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-4.21.9.tgz#2f9b2cbea2f2205ae4e285f47b0453e9bc138fb5"
-  integrity sha512-tWZdeKDuGe9sL6q0GZyTpvRTjnBX++8PQCrnU/nGpEZLCK4YLdm1LGgZbemx7egGWDoTYEhAaB/6vcqx0+dWvQ==
+"@bundle-stats/html-templates@^4.21.10":
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/html-templates/-/html-templates-4.21.10.tgz#7a4a74cf72ba4dc13ad964b9ea58bb9df29de76b"
+  integrity sha512-PKOlrbsU7pOE2meid8Pudbi+CriH5nO/CQtVjVxtktgw+kDOMt2fZoasWaZ+pP6Zk07r6chX/F9ntBP9FjYVYg==
 
-"@bundle-stats/plugin-webpack-filter@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/plugin-webpack-filter/-/plugin-webpack-filter-4.21.9.tgz#e8e738dcfcf9fb8b811e227620f5d6d9e8365bdf"
-  integrity sha512-xC9tC1R6Epa1RpKnxBRT0N2FJqAwPxfYIfG3GuhjWBg+CaUWo0Y8VHpRLZeCLwXhGa4wPXIZwIKUGzKu0157ww==
+"@bundle-stats/plugin-webpack-filter@^4.21.10":
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/plugin-webpack-filter/-/plugin-webpack-filter-4.21.10.tgz#0ecf2379a7a8bbcb34f96b22d04620cabf2cff34"
+  integrity sha512-r32p1Y4xNkXPP2vZIJBiKhynog8P2AJDbgw9lxROp3IBe/7M7i+wkxATSGHkuWaYisJDBj7/28acjl7YJYDuzA==
   dependencies:
     tslib "2.8.1"
 
-"@bundle-stats/plugin-webpack-validate@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/plugin-webpack-validate/-/plugin-webpack-validate-4.21.9.tgz#0e991fe103e98741ac33f933d3175b3a80a99247"
-  integrity sha512-PJSd1eQT4OoKK8mdIF8otXtaDIc/9JdCpES2UpM+44q5tQrUOgeJTjeKxsffOSl1/+S/SQM/J3+93nLGYJZw6Q==
+"@bundle-stats/plugin-webpack-validate@^4.21.10":
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/plugin-webpack-validate/-/plugin-webpack-validate-4.21.10.tgz#e6af1fb1143c7e81756fd4b53e34f81ef5719e40"
+  integrity sha512-izQrd6Bbjcuh+HzYhvcS2STdPRbtnKYQ1yTj1itxm09piVS9UEtbXqzfRsMkiKZ8lXr9IauKOWK7ZOSCIlcgkg==
   dependencies:
     lodash "4.17.23"
     superstruct "2.0.2"
     tslib "2.8.1"
 
-"@bundle-stats/utils@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-4.21.9.tgz#c4ca805e9049895795c9309c6cb1c5f518371c45"
-  integrity sha512-N2tqUknPYQoVFXyCyzJ7jdNACXCu2WvCPU4oJpSi6BRMVdzBESgviPhX8FgaOslswEi3vmDEiv9GLQpJtkNkhg==
+"@bundle-stats/utils@^4.21.10":
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/@bundle-stats/utils/-/utils-4.21.10.tgz#1b686f5169befcaeaf87129df858f37e8fe88036"
+  integrity sha512-eKsrvf+/nP4l1NaJXv7dsot0iSDuadsefBE4oL3+fCsir+kaMYVqknN9oh4EEaDb3ycxxWglE/50xDqFXTWEwg==
   dependencies:
-    "@bundle-stats/plugin-webpack-filter" "^4.21.9"
-    "@bundle-stats/plugin-webpack-validate" "^4.21.9"
+    "@bundle-stats/plugin-webpack-filter" "^4.21.10"
+    "@bundle-stats/plugin-webpack-validate" "^4.21.10"
     serialize-query-params "2.0.4"
 
 "@cacheable/memory@^2.0.5":
@@ -4602,13 +4602,13 @@ bundle-name@^4.1.0:
   dependencies:
     run-applescript "^7.0.0"
 
-bundle-stats-webpack-plugin@4.21.9:
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-4.21.9.tgz#cd66de9c8fc052f0c40db8dab4a14befa0fd67f7"
-  integrity sha512-3gO32p8aHIFY+zZnrE2Wx81Ulhp33euE7dTo4gPmRmctAYeocyBpR32FDkJMQ4GIezmUyY1ulZhXVwfQT979MQ==
+bundle-stats-webpack-plugin@4.21.10:
+  version "4.21.10"
+  resolved "https://registry.yarnpkg.com/bundle-stats-webpack-plugin/-/bundle-stats-webpack-plugin-4.21.10.tgz#b5815d945b8b7921727e350db62847be95670331"
+  integrity sha512-64/sNCNZp3BDESg+nAUbXGRXFuzXkRB5g6+TJ3L0BuffOaszKRj7WrufOHpikLE4gERdJyrRBsgv6OxLU8TSmw==
   dependencies:
-    "@bundle-stats/cli-utils" "^4.21.9"
-    "@bundle-stats/plugin-webpack-validate" "^4.21.9"
+    "@bundle-stats/cli-utils" "^4.21.10"
+    "@bundle-stats/plugin-webpack-validate" "^4.21.10"
     core-js "^3.21.0"
     lodash "^4.17.0"
 
