@@ -85,6 +85,6 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "10.0.6",
-    "release-it": "20.0.0"
+    "release-it": "20.0.1"
   }
 }
