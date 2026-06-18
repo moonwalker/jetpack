@@ -51,7 +51,7 @@
     "fs-extra": "11.3.5",
     "generate-json-webpack-plugin": "1.0.0",
     "graphql": "17.0.1",
-    "graphql-tag": "2.12.6",
+    "graphql-tag": "2.12.7",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "4.5.2",
     "jest": "30.4.2",
