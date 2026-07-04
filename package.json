@@ -50,7 +50,7 @@
     "friendly-errors-webpack-plugin": "1.7.0",
     "fs-extra": "11.3.6",
     "generate-json-webpack-plugin": "1.0.0",
-    "graphql": "17.0.1",
+    "graphql": "17.0.2",
     "graphql-tag": "2.12.7",
     "html-minifier": "4.0.0",
     "html-webpack-plugin": "4.5.2",
